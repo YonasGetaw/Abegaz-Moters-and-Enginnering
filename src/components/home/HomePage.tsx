@@ -117,23 +117,23 @@ export const HomePage: React.FC = () => {
 
             {/* Right Column: Hero Visual & Quick Booking Card */}
             <div className="lg:col-span-5 relative">
-              <div className="relative rounded-banner overflow-hidden shadow-2xl border border-slate-700 bg-navy">
+              <div className="relative rounded-banner overflow-hidden shadow-2xl border-2 border-slate-700 bg-white p-2 sm:p-3">
                 <img
-                  src="/hero-signboard.jpg"
-                  alt="አበጋዝ ሞተርስ ኢንጂነሪንግ - Abegaz Motors Engineering Workshop Signboard"
-                  className="w-full h-80 sm:h-96 object-cover object-center"
+                  src="/hero-banner.png"
+                  alt="አበጋዝ ሞተርስ ኢንጂነሪንግ - Abegaz Motors Engineering Official Signboard"
+                  className="w-full h-auto object-contain rounded-xl"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/20 to-transparent" />
                 
-                <div className="absolute bottom-4 left-4 right-4 bg-navy/90 backdrop-blur-md p-4 rounded-card border border-slate-700 text-white">
-                  <p className="text-xs text-orange-signal font-bold uppercase tracking-wider">
-                    {locale === 'am' ? 'ትክክለኛ ወርክሾፕ · ነፋስ ስልክ-ላፍቶ' : 'Official Workshop · Nefas Silk-Lafto'}
-                  </p>
-                  <p className="text-sm font-semibold mt-1">
-                    {locale === 'am' 
-                      ? 'አበጋዝ ሞተርስ ኢንጂነሪንግ — ሜካኒካል፣ ኤሌክትሪክ፣ ቦዲና ቀለም እንዲሁም የ EV/Hybrid ጥገና።'
-                      : 'Abegaz Motors Engineering — Mechanical, Electrical, Body & Paint, and EV & Hybrid Maintenance.'}
-                  </p>
+                <div className="mt-2.5 bg-navy/95 p-3 rounded-lg border border-slate-700 text-white flex items-center justify-between gap-2">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+                    <p className="text-xs font-bold text-slate-200">
+                      {locale === 'am' ? 'ኦፊሴላዊ የምህንድስና ወርክሾፕ' : 'Official Engineering Bay'}
+                    </p>
+                  </div>
+                  <span className="text-[11px] font-bold text-orange-signal bg-slate-800 px-2 py-0.5 rounded">
+                    Advanced Care. Absolute Trust.
+                  </span>
                 </div>
               </div>
 
