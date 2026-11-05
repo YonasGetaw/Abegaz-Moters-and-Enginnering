@@ -27,23 +27,6 @@ import {
 import { Button } from '../common/Button';
 import { WORKSHOP_INFO } from '../../lib/constants';
 
-interface SymptomShortcut {
-  id: string;
-  labelAm: string;
-  labelEn: string;
-  targetCategory: string;
-  query: string;
-  icon: string;
-}
-
-const QUICK_SYMPTOMS: SymptomShortcut[] = [
-  { id: 'sym-1', labelAm: 'የሞተር ማስጠንቀቂያ መብራት (Check Engine)', labelEn: 'Check Engine Light', targetCategory: 'diagnostics', query: 'engine light', icon: '🚨' },
-  { id: 'sym-2', labelAm: 'የብሬክ ጩኸት / መንቀጥቀጥ', labelEn: 'Brake Squeak / Vibration', targetCategory: 'brakes', query: 'brake', icon: '🛑' },
-  { id: 'sym-3', labelAm: 'ኤሲ አያቀዘቅዝም', labelEn: 'AC Blowing Warm Air', targetCategory: 'electric', query: 'ac', icon: '❄️' },
-  { id: 'sym-4', labelAm: 'ዘይትና ፊልተር ቅየራ', labelEn: 'Oil & Filter Service', targetCategory: 'maintenance', query: 'oil', icon: '🛢️' },
-  { id: 'sym-5', labelAm: 'ባትሪ / ለመነሳት መቸገር', labelEn: 'Battery / Starting Trouble', targetCategory: 'electric', query: 'battery', icon: '⚡' },
-  { id: 'sym-6', labelAm: 'መኪና ከመግዛት በፊት ፍተሻ', labelEn: 'Pre-Purchase Inspection', targetCategory: 'diagnostics', query: 'purchase', icon: '🔍' },
-];
 
 export const ServicesPage: React.FC = () => {
   const { locale, setCurrentView, setSelectedServiceSlug, services } = useApp();
@@ -111,16 +94,6 @@ export const ServicesPage: React.FC = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleSymptomClick = (symptom: SymptomShortcut) => {
-    setSelectedCategory(symptom.targetCategory);
-    setSearchQuery(symptom.query);
-    // Smooth scroll to results
-    const resultsElement = document.getElementById('services-grid-section');
-    if (resultsElement) {
-      resultsElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  };
-
   const handleResetFilters = () => {
     setSelectedCategory('all');
     setSearchQuery('');
@@ -128,14 +101,14 @@ export const ServicesPage: React.FC = () => {
 
   return (
     <div className="bg-mist min-h-screen pb-24">
-      {/* 1. HERO & SMART SYMPTOM SEARCH SECTION */}
-      <section className="bg-navy text-white bg-blueprint-dark relative overflow-hidden pt-12 pb-16 sm:py-20 border-b border-slate-800">
+      {/* 1. HERO SECTION */}
+      <section className="bg-navy text-white bg-blueprint-dark relative overflow-hidden pt-12 pb-14 sm:py-16 border-b border-slate-800">
         <div className="absolute inset-0 bg-radial-gradient opacity-60 pointer-events-none" />
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-3xl mx-auto text-center space-y-4">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-800/90 text-orange-signal text-xs font-bold border border-slate-700 shadow-sm backdrop-blur-sm">
-              <Compass className="w-3.5 h-3.5 animate-spin-slow" />
+              <Compass className="w-3.5 h-3.5" />
               <span>{locale === 'am' ? 'ትክክለኛ የምህንድስና ደረጃዎች' : 'Precision Engineering Standards'}</span>
             </div>
 
@@ -147,14 +120,8 @@ export const ServicesPage: React.FC = () => {
               )}
             </h1>
 
-            <p className="text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
-              {locale === 'am'
-                ? 'በዘመናዊ OEM ኮምፒውተር ዲያግኖስቲክስ፣ በሰለጠኑ ማስተር መካኒኮች እና በግልጽ ዋጋ የሚሰጡ የተሟላ የመኪና ጥገናዎች።'
-                : 'Computerized diagnostics, factory-certified master technicians, and transparent pricing at Nefas Silk-Lafto, Addis Ababa.'}
-            </p>
-
             {/* Smart Search Input */}
-            <div className="pt-3 max-w-xl mx-auto">
+            <div className="pt-2 max-w-xl mx-auto">
               <div className="relative flex items-center shadow-lg rounded-2xl bg-white text-navy overflow-hidden border-2 border-white/20 focus-within:border-orange-signal transition-all">
                 <Search className="w-5 h-5 text-slate-400 ml-4 shrink-0" />
                 <input
@@ -163,8 +130,8 @@ export const ServicesPage: React.FC = () => {
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder={
                     locale === 'am'
-                      ? 'መኪናዎ ምን እያደረገ ነው? (ለምሳሌ፡ ብሬክ፣ ቼክ ኢንጅን፣ ኤሲ፣ ዘይት...)'
-                      : 'Search by symptom or service (e.g. check engine, brakes, AC, oil change)...'
+                      ? 'አገልግሎት ይፈልጉ (ለምሳሌ፡ ብሬክ፣ ምርመራ፣ ኤሲ፣ ዘይት...)'
+                      : 'Search services (e.g. brakes, diagnostics, AC, engine overhaul)...'
                   }
                   className="w-full px-3 py-3.5 text-sm sm:text-base text-navy placeholder:text-slate-400 focus:outline-none bg-transparent"
                 />
@@ -177,25 +144,6 @@ export const ServicesPage: React.FC = () => {
                     <X className="w-4 h-4" />
                   </button>
                 )}
-              </div>
-            </div>
-
-            {/* Quick Symptom Chips ("መኪናዎ ላይ የሚታየው ችግር ምንድነው?") */}
-            <div className="pt-4 text-left">
-              <p className="text-xs font-semibold text-slate-300 text-center mb-2.5">
-                {locale === 'am' ? '💡 ፈጣን ፍተሻ፦ መኪናዎ ላይ የሚታየውን ምልክት ይምረጡ፡' : '💡 Common symptoms — Click to diagnose quickly:'}
-              </p>
-              <div className="flex flex-wrap items-center justify-center gap-2 max-w-4xl mx-auto">
-                {QUICK_SYMPTOMS.map((sym) => (
-                  <button
-                    key={sym.id}
-                    onClick={() => handleSymptomClick(sym)}
-                    className="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-slate-800/80 hover:bg-orange-signal hover:text-navy text-slate-200 border border-slate-700/80 transition-all hover:scale-105 active:scale-95 shadow-xs"
-                  >
-                    <span>{sym.icon}</span>
-                    <span>{locale === 'am' ? sym.labelAm : sym.labelEn}</span>
-                  </button>
-                ))}
               </div>
             </div>
           </div>
