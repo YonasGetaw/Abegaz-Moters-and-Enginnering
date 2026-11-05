@@ -4,10 +4,10 @@ import { Phone, Send, Mail, MapPin, Clock, Copy, Navigation, ExternalLink } from
 import { isWorkshopOpenNow } from '../../lib/ethiopianCalendar';
 import { WORKSHOP_INFO } from '../../lib/constants';
 import { Button } from '../common/Button';
+import { LeafletMap } from './LeafletMap';
 
 export const ContactPage: React.FC = () => {
   const { locale, workingHours, showToast } = useApp();
-  const [mapLoaded, setMapLoaded] = useState(false);
   const statusInfo = isWorkshopOpenNow();
 
   const copyToClipboard = (text: string, label: string) => {
@@ -167,36 +167,18 @@ export const ContactPage: React.FC = () => {
 
           {/* Right: Map Facade & Hours Table */}
           <div className="lg:col-span-7 space-y-6">
-            {/* Google Maps Facade (PRD 12.3: loads iframe only on user click to save mobile data) */}
-            <div className="bg-white rounded-banner overflow-hidden border border-line shadow-sm">
-              <div className="relative h-80 sm:h-96 bg-slate-100 flex items-center justify-center">
-                {mapLoaded ? (
-                  <iframe
-                    title="Abegaz Motors Engineering Location"
-                    src={WORKSHOP_INFO.googleMapsEmbedUrl}
-                    className="w-full h-full border-0"
-                    loading="lazy"
-                  />
-                ) : (
-                  <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center bg-mist">
-                    <MapPin className="w-12 h-12 text-orange-deep mb-3 animate-bounce" />
-                    <p className="text-sm font-bold text-navy mb-1">
-                      {locale === 'am' ? 'የአበጋዝ ሞተርስ መገኛ ካርታ' : 'Abegaz Motors Workshop Map'}
-                    </p>
-                    <p className="text-xs text-muted mb-4 max-w-xs">
-                      {locale === 'am' ? 'የሞባይል ዳታ ለመቆጠብ ካርታው ሲጫኑ ብቻ ይከፈታል።' : 'Click to load interactive Google Maps.'}
-                    </p>
-                    <Button
-                      variant="primary"
-                      size="sm"
-                      onClick={() => setMapLoaded(true)}
-                    >
-                      <MapPin className="w-4 h-4 mr-1.5" />
-                      <span>{locale === 'am' ? 'ካርታውን ክፈት' : 'Load Interactive Map'}</span>
-                    </Button>
-                  </div>
-                )}
+            {/* Interactive Leaflet Map */}
+            <div className="space-y-2">
+              <div className="flex items-center justify-between px-1">
+                <span className="text-xs font-bold text-navy flex items-center gap-1.5">
+                  <MapPin className="w-3.5 h-3.5 text-orange-signal" />
+                  <span>{locale === 'am' ? 'የቀጥታ ካርታ (Leaflet Map)' : 'Live Interactive Map (Leaflet)'}</span>
+                </span>
+                <span className="text-[11px] text-muted font-mono">
+                  {WORKSHOP_INFO.plusCode}
+                </span>
               </div>
+              <LeafletMap locale={locale} />
             </div>
 
             {/* Business Hours Table */}
