@@ -31,7 +31,6 @@ import { WORKSHOP_INFO } from '../../lib/constants';
 export const ServicesPage: React.FC = () => {
   const { locale, setCurrentView, setSelectedServiceSlug, services } = useApp();
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
-  const [searchQuery, setSearchQuery] = useState<string>('');
   const [activeDrawerService, setActiveDrawerService] = useState<Service | null>(null);
 
   const categories = [
@@ -64,25 +63,12 @@ export const ServicesPage: React.FC = () => {
     }
   };
 
-  // Filter services by category and search query
+  // Filter services by category
   const filteredServices = useMemo(() => {
-    return services.filter(svc => {
-      const matchCat = selectedCategory === 'all' || svc.category === selectedCategory;
-      if (!matchCat) return false;
-
-      if (!searchQuery.trim()) return true;
-
-      const q = searchQuery.toLowerCase();
-      const matchNameAm = svc.nameAm.toLowerCase().includes(q);
-      const matchNameEn = svc.nameEn.toLowerCase().includes(q);
-      const matchDescAm = svc.descriptionAm.toLowerCase().includes(q);
-      const matchDescEn = svc.descriptionEn.toLowerCase().includes(q);
-      const matchSignsAm = svc.warningSignsAm.some(s => s.toLowerCase().includes(q));
-      const matchSignsEn = svc.warningSignsEn.some(s => s.toLowerCase().includes(q));
-
-      return matchNameAm || matchNameEn || matchDescAm || matchDescEn || matchSignsAm || matchSignsEn;
-    });
-  }, [services, selectedCategory, searchQuery]);
+    return selectedCategory === 'all'
+      ? services
+      : services.filter(svc => svc.category === selectedCategory);
+  }, [services, selectedCategory]);
 
   const openServiceDrawer = (svc: Service) => {
     setActiveDrawerService(svc);
@@ -92,11 +78,6 @@ export const ServicesPage: React.FC = () => {
     setSelectedServiceSlug(slug);
     setCurrentView('book');
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const handleResetFilters = () => {
-    setSelectedCategory('all');
-    setSearchQuery('');
   };
 
   return (
@@ -119,33 +100,6 @@ export const ServicesPage: React.FC = () => {
                 <>Expert Automotive <span className="text-orange-signal">Repairs & Care</span></>
               )}
             </h1>
-
-            {/* Smart Search Input */}
-            <div className="pt-2 max-w-xl mx-auto">
-              <div className="relative flex items-center shadow-lg rounded-2xl bg-white text-navy overflow-hidden border-2 border-white/20 focus-within:border-orange-signal transition-all">
-                <Search className="w-5 h-5 text-slate-400 ml-4 shrink-0" />
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder={
-                    locale === 'am'
-                      ? 'አገልግሎት ይፈልጉ (ለምሳሌ፡ ብሬክ፣ ምርመራ፣ ኤሲ፣ ዘይት...)'
-                      : 'Search services (e.g. brakes, diagnostics, AC, engine overhaul)...'
-                  }
-                  className="w-full px-3 py-3.5 text-sm sm:text-base text-navy placeholder:text-slate-400 focus:outline-none bg-transparent"
-                />
-                {searchQuery && (
-                  <button
-                    onClick={() => setSearchQuery('')}
-                    className="p-2 text-slate-400 hover:text-navy mr-2"
-                    title="Clear search"
-                  >
-                    <X className="w-4 h-4" />
-                  </button>
-                )}
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -238,13 +192,13 @@ export const ServicesPage: React.FC = () => {
             })}
           </div>
 
-          {(searchQuery || selectedCategory !== 'all') && (
+          {selectedCategory !== 'all' && (
             <button
-              onClick={handleResetFilters}
+              onClick={() => setSelectedCategory('all')}
               className="text-xs font-semibold text-orange-deep hover:underline inline-flex items-center gap-1 shrink-0 ml-auto"
             >
               <RotateCcw className="w-3.5 h-3.5" />
-              <span>{locale === 'am' ? 'ሁሉንም አሳይ (Reset)' : 'Reset Filters'}</span>
+              <span>{locale === 'am' ? 'ሁሉንም አሳይ (Show All)' : 'Show All'}</span>
             </button>
           )}
         </div>
@@ -266,27 +220,15 @@ export const ServicesPage: React.FC = () => {
         {filteredServices.length === 0 && (
           <div className="bg-white rounded-2xl border border-line p-12 text-center max-w-lg mx-auto shadow-xs space-y-4 my-8">
             <div className="w-16 h-16 rounded-full bg-orange-tint text-orange-deep flex items-center justify-center mx-auto">
-              <Search className="w-8 h-8" />
+              <SlidersHorizontal className="w-8 h-8" />
             </div>
             <h3 className="text-lg font-bold text-navy">
-              {locale === 'am' ? 'የተፈለገው አገልግሎት አልተገኘም' : 'No matching services found'}
+              {locale === 'am' ? 'በዚህ ምድብ አገልግሎት አልተገኘም' : 'No services in this category'}
             </h3>
-            <p className="text-xs sm:text-sm text-muted">
-              {locale === 'am'
-                ? `"${searchQuery}" ጋር የሚዛመድ አገልግሎት የለም። እባክዎ ሌላ ቃል ይፈልጉ ወይም በቀጥታ ደውለው ያማክሩን።`
-                : `No services match "${searchQuery}". Try a different keyword or call us directly.`}
-            </p>
             <div className="flex items-center justify-center gap-3 pt-2">
-              <Button size="sm" variant="secondary" onClick={handleResetFilters}>
-                {locale === 'am' ? 'ሁሉንም አገልግሎቶች አሳይ' : 'Clear Search'}
+              <Button size="sm" variant="secondary" onClick={() => setSelectedCategory('all')}>
+                {locale === 'am' ? 'ሁሉንም አገልግሎቶች አሳይ' : 'Show All Services'}
               </Button>
-              <a
-                href={`tel:${WORKSHOP_INFO.phoneRaw}`}
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-navy text-white text-xs font-bold hover:bg-slate-800 transition-colors"
-              >
-                <PhoneCall className="w-3.5 h-3.5 text-orange-signal" />
-                <span>{WORKSHOP_INFO.phone}</span>
-              </a>
             </div>
           </div>
         )}
