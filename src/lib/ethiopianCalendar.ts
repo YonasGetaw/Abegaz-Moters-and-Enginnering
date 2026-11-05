@@ -69,16 +69,31 @@ export function isWorkshopOpenNow(): { isOpen: boolean; nextStatusAm: string; ne
   const utcDay = now.getUTCDay();
   const eatHours = (utcHours + 3) % 24;
   
-  // Monday (1) to Saturday (6): 8:00 to 18:00 (6:00 PM)
+  // Monday (1) to Saturday (6)
   const isWorkDay = utcDay >= 1 && utcDay <= 6;
-  const isOpenHours = eatHours >= 8 && eatHours < 18;
   
-  if (isWorkDay && isOpenHours) {
-    return {
-      isOpen: true,
-      nextStatusAm: 'አሁን ክፍት ነው (እስከ 12:00 ሰዓት)',
-      nextStatusEn: 'Open now (until 6:00 PM)'
-    };
+  if (isWorkDay) {
+    if (eatHours >= 8 && eatHours < 12) {
+      return {
+        isOpen: true,
+        nextStatusAm: 'ክፍት ነው · 12:00 PM ይዘጋል · 1:00 PM ይከፈታል',
+        nextStatusEn: 'Open · Closes 12 PM · Reopens 1 PM'
+      };
+    }
+    if (eatHours >= 12 && eatHours < 13) {
+      return {
+        isOpen: false,
+        nextStatusAm: 'የምሳ ዕረፍት · 1:00 PM ይከፈታል',
+        nextStatusEn: 'Lunch break · Reopens 1:00 PM'
+      };
+    }
+    if (eatHours >= 13 && eatHours < 18) {
+      return {
+        isOpen: true,
+        nextStatusAm: 'አሁን ክፍት ነው (እስከ 12:00 ሰዓት / 6:00 PM)',
+        nextStatusEn: 'Open now (until 6:00 PM)'
+      };
+    }
   }
   
   return {

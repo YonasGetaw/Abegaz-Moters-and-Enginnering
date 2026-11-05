@@ -707,11 +707,11 @@ export const HomePage: React.FC = () => {
             </a>
 
             <a
-              href="tel:+251911234567"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 h-13 px-6 rounded-btn border-2 border-slate-700 text-slate-200 font-bold hover:bg-slate-800 transition-all"
+              href="tel:+251114651553"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 h-13 px-6 rounded-btn border-2 border-slate-700 text-slate-200 font-bold hover:bg-slate-800 transition-all font-mono"
             >
               <Phone className="w-4 h-4 text-orange-signal" />
-              <span>+251 911 234 567</span>
+              <span>011 465 1553</span>
             </a>
           </div>
         </div>

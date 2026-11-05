@@ -713,11 +713,11 @@ export const BookingWizard: React.FC = () => {
               </span>
               <div className="flex items-center justify-between text-slate-700 font-bold">
                 <a
-                  href="tel:+251911234567"
+                  href="tel:+251114651553"
                   className="text-orange-deep hover:underline flex items-center gap-1.5"
                 >
                   <Phone className="w-3.5 h-3.5" />
-                  <span>0911 234 567</span>
+                  <span>011 465 1553</span>
                 </a>
                 <span className="text-slate-300">·</span>
                 <a

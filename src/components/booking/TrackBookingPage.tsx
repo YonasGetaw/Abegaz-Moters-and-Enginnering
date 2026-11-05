@@ -21,6 +21,7 @@ import {
 } from 'lucide-react';
 import { Button } from '../common/Button';
 import { Appointment } from '../../types';
+import { WORKSHOP_INFO } from '../../lib/constants';
 
 export const TrackBookingPage: React.FC = () => {
   const { locale, appointments, setCurrentView, showToast, connectTelegram } = useApp();
@@ -273,10 +274,11 @@ export const TrackBookingPage: React.FC = () => {
               <div className="mt-6 pt-4 border-t border-line flex flex-wrap items-center justify-between gap-3">
                 <div className="flex items-center gap-2">
                   <a
-                    href="https://maps.google.com"
+                    href={WORKSHOP_INFO.googleMapsUrl}
                     target="_blank"
                     rel="noreferrer"
                     className="px-4 py-2 rounded-btn bg-orange-signal text-navy font-extrabold text-xs flex items-center gap-1.5 shadow-sm hover:bg-orange-400"
+                    title={WORKSHOP_INFO.addressEn}
                   >
                     <MapPin className="w-3.5 h-3.5" />
                     <span>{locale === 'am' ? 'አቅጣጫ በካርታ' : 'Get Directions'}</span>
@@ -293,8 +295,9 @@ export const TrackBookingPage: React.FC = () => {
 
                 <div className="flex items-center gap-2">
                   <a
-                    href="tel:+251911234567"
+                    href={`tel:${WORKSHOP_INFO.phoneRaw}`}
                     className="px-3.5 py-2 rounded-btn bg-mist hover:bg-slate-200 text-navy font-bold text-xs flex items-center gap-1.5 border border-line"
+                    title={`Call ${WORKSHOP_INFO.phone}`}
                   >
                     <Phone className="w-3.5 h-3.5 text-emerald-600" />
                     <span>{locale === 'am' ? 'ወርክሾፕ ደውል' : 'Call Workshop'}</span>

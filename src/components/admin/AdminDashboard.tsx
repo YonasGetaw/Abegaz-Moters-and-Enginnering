@@ -3567,7 +3567,7 @@ export const AdminDashboard: React.FC = () => {
                         </label>
                         <input
                           type="text"
-                          defaultValue="+251 911 234 567"
+                          defaultValue="011 465 1553"
                           className="w-full px-3 py-2 rounded-btn border border-line font-mono text-xs"
                         />
                       </div>
@@ -3998,11 +3998,11 @@ export const AdminDashboard: React.FC = () => {
                 </div>
                 <div>
                   <label className="font-bold text-slate-700 block mb-1">Workshop Hotline</label>
-                  <input type="text" defaultValue="+251 911 234 567" className="w-full px-3 py-2 rounded-btn border border-line font-mono font-bold" />
+                  <input type="text" defaultValue="011 465 1553" className="w-full px-3 py-2 rounded-btn border border-line font-mono font-bold" />
                 </div>
                 <div className="sm:col-span-2">
                   <label className="font-bold text-slate-700 block mb-1">Workshop Bay Address</label>
-                  <input type="text" defaultValue="አዲስ አበባ፣ ቃሊቲ ክላስተር (ከቶታል ማደያ ፊት ለፊት)" className="w-full px-3 py-2 rounded-btn border border-line" />
+                  <input type="text" defaultValue="Alexander Pushkin St, Addis Ababa (XPPW+7H)" className="w-full px-3 py-2 rounded-btn border border-line" />
                 </div>
               </div>
 

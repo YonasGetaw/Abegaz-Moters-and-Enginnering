@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 import { Phone, Send, Mail, MapPin, Clock, Copy, Navigation, ExternalLink } from 'lucide-react';
 import { isWorkshopOpenNow } from '../../lib/ethiopianCalendar';
+import { WORKSHOP_INFO } from '../../lib/constants';
 import { Button } from '../common/Button';
 
 export const ContactPage: React.FC = () => {
@@ -55,14 +56,16 @@ export const ContactPage: React.FC = () => {
                 </div>
                 <div>
                   <p className="text-xs text-muted font-bold uppercase">{locale === 'am' ? 'ስልክ ቁጥር' : 'Direct Call'}</p>
-                  <a href="tel:+251911234567" className="text-lg font-extrabold text-navy hover:text-orange-deep transition-colors">
-                    +251 911 234 567
+                  <a href={`tel:${WORKSHOP_INFO.phoneRaw}`} className="text-lg font-extrabold text-navy hover:text-orange-deep transition-colors">
+                    {WORKSHOP_INFO.phone}
                   </a>
-                  <p className="text-[11px] text-slate-500 mt-0.5">ሰኞ – ቅዳሜ: 08:00 – 18:00</p>
+                  <p className="text-[11px] text-slate-500 mt-0.5">
+                    {locale === 'am' ? WORKSHOP_INFO.hoursScheduleAm : WORKSHOP_INFO.hoursScheduleEn}
+                  </p>
                 </div>
               </div>
               <button
-                onClick={() => copyToClipboard('+251911234567', 'ስልክ ቁጥር')}
+                onClick={() => copyToClipboard(WORKSHOP_INFO.phone, 'ስልክ ቁጥር')}
                 className="text-muted hover:text-navy p-1"
                 title="Copy phone"
               >
@@ -107,14 +110,14 @@ export const ContactPage: React.FC = () => {
                 </div>
                 <div>
                   <p className="text-xs text-muted font-bold uppercase">{locale === 'am' ? 'ኢሜይል' : 'Email Desk'}</p>
-                  <a href="mailto:info@abegazmotors.et" className="text-sm sm:text-base font-bold text-navy hover:text-orange-deep">
-                    info@abegazmotors.et
+                  <a href={`mailto:${WORKSHOP_INFO.email}`} className="text-sm sm:text-base font-bold text-navy hover:text-orange-deep">
+                    {WORKSHOP_INFO.email}
                   </a>
                   <p className="text-[11px] text-slate-500 mt-0.5">Official Inquiries & Fleet</p>
                 </div>
               </div>
               <button
-                onClick={() => copyToClipboard('info@abegazmotors.et', 'ኢሜይል')}
+                onClick={() => copyToClipboard(WORKSHOP_INFO.email, 'ኢሜይል')}
                 className="text-muted hover:text-navy p-1"
                 title="Copy email"
               >
@@ -131,31 +134,32 @@ export const ContactPage: React.FC = () => {
                 <div>
                   <p className="text-xs text-muted font-bold uppercase">{locale === 'am' ? 'አድራሻና የመለያ ምልክት' : 'Workshop Landmark'}</p>
                   <h4 className="text-base font-extrabold text-navy">
-                    {locale === 'am' ? 'አዲስ አበባ፣ ቃሊቲ ክፍለ ከተማ' : 'Addis Ababa, Akaki-Kality'}
+                    {locale === 'am' ? WORKSHOP_INFO.addressAm : WORKSHOP_INFO.addressEn}
                   </h4>
                   <p className="text-xs text-slate-600 mt-1 leading-relaxed">
-                    {locale === 'am' 
-                      ? 'ዋናው መንገድ፣ ከመብራት ኃይል ዲስትሪክት ቢሮ 200 ሜትር አለፍ ብሎ በስተቀኝ በኩል።'
-                      : 'Main Debre Zeit road, 200m past Electric Power district office on the right.'}
+                    <span className="font-semibold text-orange-deep">Plus Code:</span> {WORKSHOP_INFO.plusCode}
+                  </p>
+                  <p className="text-[11px] text-slate-500 mt-0.5">
+                    {locale === 'am' ? WORKSHOP_INFO.hoursScheduleAm : WORKSHOP_INFO.hoursScheduleEn}
                   </p>
                 </div>
               </div>
               <div className="pt-2 flex items-center gap-2">
                 <button
-                  onClick={() => copyToClipboard('አዲስ አበባ፣ ቃሊቲ ከመብራት ኃይል አጠገብ', 'አድራሻ')}
+                  onClick={() => copyToClipboard(`${WORKSHOP_INFO.addressEn} (${WORKSHOP_INFO.plusCode})`, 'አድራሻ')}
                   className="px-3 py-1.5 rounded-lg border border-line text-xs font-semibold text-navy hover:bg-mist flex items-center gap-1.5"
                 >
                   <Copy className="w-3.5 h-3.5" />
                   <span>{locale === 'am' ? 'አድራሻ ቅዳ' : 'Copy Address'}</span>
                 </button>
                 <a
-                  href="https://maps.google.com/?q=Akaki+Kality+Addis+Ababa"
+                  href={WORKSHOP_INFO.googleMapsUrl}
                   target="_blank"
                   rel="noreferrer"
                   className="px-3 py-1.5 rounded-lg bg-orange-signal text-navy text-xs font-bold flex items-center gap-1.5 hover:bg-[#EA580C]"
                 >
                   <Navigation className="w-3.5 h-3.5" />
-                  <span>{locale === 'am' ? 'አቅጣጫ ያግኙ (Maps)' : 'Get Directions'}</span>
+                  <span>{locale === 'am' ? 'አቅጣጫ በ Google Maps' : 'Google Maps Directions'}</span>
                 </a>
               </div>
             </div>
@@ -168,8 +172,8 @@ export const ContactPage: React.FC = () => {
               <div className="relative h-80 sm:h-96 bg-slate-100 flex items-center justify-center">
                 {mapLoaded ? (
                   <iframe
-                    title="Abegaz Motors Location"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63056.88371360144!2d38.7423!3d8.9056!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x164b85040e34c9c1%3A0xa6182c16f272a08d!2sAkaki%20Kality%2C%20Addis%20Ababa!5e0!3m2!1sen!2set!4v1700000000000"
+                    title="Abegaz Motors Engineering Location"
+                    src={WORKSHOP_INFO.googleMapsEmbedUrl}
                     className="w-full h-full border-0"
                     loading="lazy"
                   />
@@ -212,6 +216,10 @@ export const ContactPage: React.FC = () => {
                     </span>
                   </div>
                 ))}
+              </div>
+              <div className="mt-4 pt-3 border-t border-line text-xs text-muted flex items-center justify-between">
+                <span>{locale === 'am' ? 'የምሳ ዕረፍት ሰዓት፡' : 'Daily Lunch Break:'}</span>
+                <span className="font-semibold text-orange-deep">12:00 PM – 1:00 PM ({locale === 'am' ? 'Closes 12 PM · Reopens 1 PM' : 'Closes 12 PM · Reopens 1 PM'})</span>
               </div>
             </div>
           </div>

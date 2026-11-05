@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 import { Send, Mail, X, CheckCircle2, QrCode, Smartphone, Sparkles, RefreshCw } from 'lucide-react';
 import { Button } from '../common/Button';
+import { WORKSHOP_INFO } from '../../lib/constants';
 
 export const NotificationSimulatorModal: React.FC = () => {
   const { 
@@ -114,8 +115,8 @@ export const NotificationSimulatorModal: React.FC = () => {
                     <p className="font-bold text-green-400 text-sm">✅ ደስ የሚል ዜና — ቀጠሮዎ ጸድቋል!</p>
                     <p>🔖 <strong>ቁጥር፦</strong> <span className="font-mono text-green-400">{apt.ref}</span></p>
                     <p>📅 <strong>የተረጋገጠ ሰዓት፦</strong> {apt.requestedDate} · {apt.requestedSlot}</p>
-                    <p>📍 <strong>አድራሻ፦</strong> አዲስ አበባ፣ ቃሊቲ (ከመብራት ኃይል አጠገብ)</p>
-                    <p className="text-slate-300">እባክዎ በሰዓቱ ይምጡ። ለውጥ ካለ በስልክ +251 911 234 567 ያነጋግሩን። 🙏</p>
+                    <p>📍 <strong>አድራሻ፦</strong> {WORKSHOP_INFO.addressAm} ({WORKSHOP_INFO.plusCode})</p>
+                    <p className="text-slate-300">እባክዎ በሰዓቱ ይምጡ። ለውጥ ካለ በስልክ {WORKSHOP_INFO.phone} ያነጋግሩን። 🙏</p>
                   </>
                 )}
 
@@ -133,9 +134,14 @@ export const NotificationSimulatorModal: React.FC = () => {
                     🔍 ቀጠሮዬን በድረ-ገጽ ይመልከቱ
                   </button>
                   {apt?.status === 'approved' && (
-                    <button className="w-full py-2 bg-[#2B5278] hover:bg-[#34628E] text-white font-bold rounded-lg text-[11px] transition-colors">
+                    <a
+                      href={WORKSHOP_INFO.googleMapsUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="w-full py-2 bg-[#2B5278] hover:bg-[#34628E] text-white font-bold rounded-lg text-[11px] transition-colors block text-center"
+                    >
                       🗺 አቅጣጫ አሳይ (Google Maps)
-                    </button>
+                    </a>
                   )}
                 </div>
               </div>
@@ -195,7 +201,7 @@ export const NotificationSimulatorModal: React.FC = () => {
                 </div>
 
                 <div className="pt-4 border-t border-line text-[10px] text-muted text-center">
-                  አዲስ አበባ፣ ቃሊቲ (ከመብራት ኃይል አጠገብ) · +251 911 234 567<br />
+                  {WORKSHOP_INFO.addressAm} ({WORKSHOP_INFO.plusCode}) · {WORKSHOP_INFO.phone}<br />
                   ይህ መልእክት በራስ-ሰር የተላከ ነው።
                 </div>
               </div>

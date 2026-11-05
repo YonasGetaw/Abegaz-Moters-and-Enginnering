@@ -14,7 +14,7 @@ export const MobileActionBar: React.FC = () => {
     <div className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-line shadow-lg px-4 py-2.5 pb-safe flex items-center gap-2">
       {/* Tap to Call */}
       <a
-        href="tel:+251911234567"
+        href="tel:+251114651553"
         className="flex-1 h-11 rounded-btn bg-mist border border-line text-navy flex items-center justify-center gap-1.5 text-xs font-semibold hover:bg-slate-200 transition-colors"
       >
         <Phone className="w-4 h-4 text-orange-deep" />

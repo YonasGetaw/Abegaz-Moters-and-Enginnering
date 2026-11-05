@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 import { Phone, Clock, MapPin, Globe, Menu, X, User as UserIcon, Calendar, Bell } from 'lucide-react';
+import { WORKSHOP_INFO } from '../../lib/constants';
 import { Button } from '../common/Button';
 
 export const Header: React.FC = () => {
@@ -40,18 +41,24 @@ export const Header: React.FC = () => {
       <div className="hidden lg:block bg-navy text-slate-300 text-xs py-2 px-6 border-b border-slate-800">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className="flex items-center gap-6">
-            <span className="flex items-center gap-1.5 hover:text-white transition-colors">
+            <a href={`tel:${WORKSHOP_INFO.phoneRaw}`} className="flex items-center gap-1.5 hover:text-white transition-colors">
               <Phone className="w-3.5 h-3.5 text-orange-signal" />
-              <span>+251 911 234 567</span>
-            </span>
+              <span>{WORKSHOP_INFO.phone}</span>
+            </a>
             <span className="flex items-center gap-1.5 hover:text-white transition-colors">
               <Clock className="w-3.5 h-3.5 text-orange-signal" />
-              <span>ሰኞ – ቅዳሜ: 08:00 – 18:00 (2:00 – 12:00 ሰዓት)</span>
+              <span>{locale === 'am' ? WORKSHOP_INFO.hoursScheduleAm : WORKSHOP_INFO.hoursScheduleEn}</span>
             </span>
-            <span className="flex items-center gap-1.5 hover:text-white transition-colors">
-              <MapPin className="w-3.5 h-3.5 text-orange-signal" />
-              <span>አዲስ አበባ፣ ቃሊቲ (ከመብራት ኃይል አጠገብ)</span>
-            </span>
+            <a 
+              href={WORKSHOP_INFO.googleMapsUrl} 
+              target="_blank" 
+              rel="noreferrer" 
+              className="flex items-center gap-1.5 hover:text-white transition-colors group"
+              title="Open Google Maps"
+            >
+              <MapPin className="w-3.5 h-3.5 text-orange-signal group-hover:animate-bounce" />
+              <span>{locale === 'am' ? WORKSHOP_INFO.addressAm : WORKSHOP_INFO.addressEn} ({WORKSHOP_INFO.plusCode})</span>
+            </a>
           </div>
 
           <div className="flex items-center gap-4">

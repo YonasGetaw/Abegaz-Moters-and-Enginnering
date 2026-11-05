@@ -1,6 +1,7 @@
 import React from 'react';
 import { useApp } from '../../context/AppContext';
 import { Phone, MapPin, Send, Mail, Clock, ArrowRight } from 'lucide-react';
+import { WORKSHOP_INFO } from '../../lib/constants';
 
 export const Footer: React.FC = () => {
   const { locale, setCurrentView } = useApp();
@@ -45,9 +46,9 @@ export const Footer: React.FC = () => {
                 <Send className="w-4 h-4" />
               </a>
               <a 
-                href="tel:+251911234567"
+                href={`tel:${WORKSHOP_INFO.phoneRaw}`}
                 className="w-9 h-9 rounded-full bg-slate-800 hover:bg-orange-signal hover:text-navy text-slate-300 flex items-center justify-center transition-all"
-                title="Phone"
+                title={`Call ${WORKSHOP_INFO.phone}`}
               >
                 <Phone className="w-4 h-4" />
               </a>
@@ -121,21 +122,35 @@ export const Footer: React.FC = () => {
               {locale === 'am' ? 'የስራ ሰዓትና አድራሻ' : 'Working Hours & Location'}
             </h4>
             <div className="space-y-3 text-sm text-slate-400">
-              <div className="flex items-start gap-2.5">
-                <MapPin className="w-4 h-4 text-orange-signal shrink-0 mt-1" />
-                <span>አዲስ አበባ፣ ቃሊቲ (ዋናው መንገድ፣ ከመብራት ኃይል አጠገብ)</span>
-              </div>
+              <a 
+                href={WORKSHOP_INFO.googleMapsUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-start gap-2.5 hover:text-white transition-colors group"
+                title="Open Google Maps"
+              >
+                <MapPin className="w-4 h-4 text-orange-signal shrink-0 mt-1 group-hover:animate-bounce" />
+                <span className="leading-snug">
+                  {locale === 'am' ? WORKSHOP_INFO.addressAm : WORKSHOP_INFO.addressEn} ({WORKSHOP_INFO.plusCode})
+                </span>
+              </a>
               <div className="flex items-start gap-2.5">
                 <Clock className="w-4 h-4 text-orange-signal shrink-0 mt-1" />
                 <div>
                   <p className="text-slate-200 font-medium">ሰኞ – ቅዳሜ: 08:00 – 18:00</p>
-                  <p className="text-xs text-slate-500">እሁድ: ዝግ ነው</p>
+                  <p className="text-xs text-orange-signal font-semibold">
+                    {locale === 'am' ? WORKSHOP_INFO.hoursScheduleAm : WORKSHOP_INFO.hoursScheduleEn}
+                  </p>
+                  <p className="text-xs text-slate-500">እሁድ: ዝግ ነው (Sunday: Closed)</p>
                 </div>
               </div>
-              <div className="flex items-center gap-2.5">
+              <a 
+                href={`tel:${WORKSHOP_INFO.phoneRaw}`} 
+                className="flex items-center gap-2.5 hover:text-white transition-colors"
+              >
                 <Phone className="w-4 h-4 text-orange-signal shrink-0" />
-                <span className="text-slate-200">+251 911 234 567</span>
-              </div>
+                <span className="text-slate-200 font-mono font-bold">{WORKSHOP_INFO.phone}</span>
+              </a>
             </div>
           </div>
         </div>

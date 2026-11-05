@@ -162,12 +162,12 @@ export const EmailPreviewModal: React.FC = () => {
               </div>
               <div className="flex justify-between py-1">
                 <span className="text-muted">Workshop Location:</span>
-                <span className="font-semibold text-navy text-right">Bole, Addis Ababa — near Electric Power district</span>
+                <span className="font-semibold text-navy text-right">Alexander Pushkin St, Addis Ababa (XPPW+7H)</span>
               </div>
             </div>
 
             <p className="text-xs text-slate-600 bg-amber-50 p-3 rounded-lg border border-amber-200">
-              Please arrive on time. If anything changes, contact us on Telegram <strong>@AbegazMotors</strong> or call <strong>+251 911 234 567</strong>.
+              Please arrive on time. If anything changes, contact us on Telegram <strong>@AbegazMotors</strong> or call <strong>011 465 1553</strong>.
             </p>
 
             <div className="pt-2">
@@ -177,7 +177,7 @@ export const EmailPreviewModal: React.FC = () => {
             </div>
 
             <div className="pt-6 border-t border-line text-[11px] text-muted text-center space-y-1">
-              <p>Abegaz Motors Engineering · Akaki-Kality / Bole Road, Addis Ababa</p>
+              <p>Abegaz Motors Engineering · Alexander Pushkin St, Addis Ababa</p>
               <p className="text-slate-400">This message was sent automatically. Please do not reply directly to this email.</p>
             </div>
           </div>
@@ -237,12 +237,17 @@ export const TelegramPreviewModal: React.FC = () => {
             <p className="font-bold text-green-400 text-sm">✅ Your appointment is approved!</p>
             <p>🔖 <span className="font-mono text-green-400 font-bold">ABG-2026-0042</span></p>
             <p>📅 Thu 12 Nov · 10:00 AM</p>
-            <p>📍 Bole, Addis Ababa</p>
+            <p>📍 Alexander Pushkin St, Addis Ababa (XPPW+7H)</p>
             <p className="text-slate-200">Please arrive on time. 🙏</p>
             <div className="pt-2 grid grid-cols-2 gap-2">
-              <button className="py-2 bg-[#2B5278] hover:bg-[#34628E] text-white font-bold rounded-lg text-xs">
+              <a
+                href="https://www.google.com/maps/place/Abegaz+motors+Engineering/@8.9856945,38.7438395,17z/data=!3m1!4b1!4m6!3m5!1s0x164b85612d984561:0xf92ab90908ae0a8!8m2!3d8.9856892!4d38.7464144!16s%2Fg%2F11h11xkg4b!5m1!1e1?entry=ttu&g_ep=EgoyMDI2MTEwMi4wIKXMDSoASAFQAw%3D%3D"
+                target="_blank"
+                rel="noreferrer"
+                className="py-2 bg-[#2B5278] hover:bg-[#34628E] text-white font-bold rounded-lg text-xs text-center inline-block"
+              >
                 🗺 Directions
-              </button>
+              </a>
               <button className="py-2 bg-[#2B5278] hover:bg-[#34628E] text-white font-bold rounded-lg text-xs">
                 🔍 Details
               </button>

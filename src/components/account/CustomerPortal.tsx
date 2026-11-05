@@ -32,6 +32,7 @@ import {
 } from 'lucide-react';
 import { Button } from '../common/Button';
 import { Appointment } from '../../types';
+import { WORKSHOP_INFO } from '../../lib/constants';
 
 export const CustomerPortal: React.FC = () => {
   const { 
@@ -160,11 +161,11 @@ export const CustomerPortal: React.FC = () => {
             </p>
             <div className="flex flex-col gap-1.5">
               <a
-                href="tel:+251911234567"
+                href={`tel:${WORKSHOP_INFO.phoneRaw}`}
                 className="w-full py-1.5 px-2.5 rounded-btn bg-white hover:bg-slate-100 text-navy border border-line font-bold flex items-center justify-center gap-1.5 text-[11px] transition-colors"
               >
                 <Phone className="w-3.5 h-3.5 text-orange-deep" />
-                <span>+251 911 234 567</span>
+                <span>{WORKSHOP_INFO.phone}</span>
               </a>
               <a
                 href="https://t.me/AbegazMotors"
@@ -359,10 +360,11 @@ export const CustomerPortal: React.FC = () => {
               {/* Action Buttons: "Directions" (orange) and "Calendar" (outlined) */}
               <div className="flex items-center gap-2.5">
                 <a
-                  href="https://maps.google.com"
+                  href={WORKSHOP_INFO.googleMapsUrl}
                   target="_blank"
                   rel="noreferrer"
                   className="px-4 py-2.5 rounded-btn bg-orange-signal text-navy font-extrabold text-xs hover:bg-orange-400 transition-all flex items-center gap-1.5 shadow-md active:scale-98"
+                  title={WORKSHOP_INFO.addressEn}
                 >
                   <MapPin className="w-3.5 h-3.5" />
                   <span>{locale === 'am' ? 'አቅጣጫ (Directions)' : 'Directions'}</span>
@@ -540,7 +542,7 @@ export const CustomerPortal: React.FC = () => {
 
               {/* Call */}
               <a
-                href="tel:+251911234567"
+                href={`tel:${WORKSHOP_INFO.phoneRaw}`}
                 className="p-3.5 rounded-card bg-white border border-line text-navy font-bold text-left hover:border-orange-signal transition-all shadow-2xs active:scale-98 flex flex-col justify-between h-24"
               >
                 <Phone className="w-5 h-5 text-emerald-600" />
@@ -548,8 +550,8 @@ export const CustomerPortal: React.FC = () => {
                   <span className="text-xs font-black block">
                     {locale === 'am' ? 'በስልክ ደውል' : 'Direct Call'}
                   </span>
-                  <span className="text-[10px] text-muted">
-                    +251 911 234 567
+                  <span className="text-[10px] text-muted font-mono">
+                    {WORKSHOP_INFO.phone}
                   </span>
                 </div>
               </a>

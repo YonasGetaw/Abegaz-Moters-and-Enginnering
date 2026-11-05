@@ -145,11 +145,11 @@ export const FAQPage: React.FC = () => {
               <span>Telegram @AbegazMotors</span>
             </a>
             <a
-              href="tel:+251911234567"
-              className="inline-flex items-center gap-2 h-11 px-5 rounded-btn bg-slate-800 text-slate-200 border border-slate-700 font-bold text-xs sm:text-sm hover:bg-slate-700"
+              href="tel:+251114651553"
+              className="inline-flex items-center gap-2 h-11 px-5 rounded-btn bg-slate-800 text-slate-200 border border-slate-700 font-bold text-xs sm:text-sm hover:bg-slate-700 font-mono"
             >
               <Phone className="w-4 h-4 text-orange-signal" />
-              <span>+251 911 234 567</span>
+              <span>011 465 1553</span>
             </a>
           </div>
         </div>

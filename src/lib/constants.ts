@@ -537,8 +537,8 @@ export const INITIAL_FAQS: FAQItem[] = [
     id: 'faq-4',
     questionAm: 'ቀጠሮዬን መቀየር ወይም መሰረዝ እችላለሁ?',
     questionEn: 'Can I change or cancel my appointment?',
-    answerAm: 'አዎ፣ የቀጠሮውን ሰዓት ለመቀየር ወይም ለመሰረዝ በቴሌግራማችን @AbegazMotors ወይም በስልክ ቁጥራችን +251 911 234 567 በመደወል ማስተካከል ይችላሉ።',
-    answerEn: 'Yes. Contact us on Telegram @AbegazMotors or by direct phone call.',
+    answerAm: 'አዎ፣ የቀጠሮውን ሰዓት ለመቀየር ወይም ለመሰረዝ በቴሌግራማችን @AbegazMotors ወይም በስልክ ቁጥራችን 011 465 1553 በመደወል ማስተካከል ይችላሉ።',
+    answerEn: 'Yes. Contact us on Telegram @AbegazMotors or by direct phone call (011 465 1553).',
     category: 'booking',
     confirmed: true,
   },
@@ -740,12 +740,12 @@ export const INITIAL_TESTIMONIALS: Testimonial[] = [
 ];
 
 export const INITIAL_WORKING_HOURS: WorkingHour[] = [
-  { dayIndex: 1, dayNameAm: 'ሰኞ', dayNameEn: 'Monday', isOpen: true, openTime: '08:00', closeTime: '18:00', breakStart: '12:30', breakEnd: '14:00', slotLength: 60, capacity: 2 },
-  { dayIndex: 2, dayNameAm: 'ማክሰኞ', dayNameEn: 'Tuesday', isOpen: true, openTime: '08:00', closeTime: '18:00', breakStart: '12:30', breakEnd: '14:00', slotLength: 60, capacity: 2 },
-  { dayIndex: 3, dayNameAm: 'ረቡዕ', dayNameEn: 'Wednesday', isOpen: true, openTime: '08:00', closeTime: '18:00', breakStart: '12:30', breakEnd: '14:00', slotLength: 60, capacity: 2 },
-  { dayIndex: 4, dayNameAm: 'ሐሙስ', dayNameEn: 'Thursday', isOpen: true, openTime: '08:00', closeTime: '18:00', breakStart: '12:30', breakEnd: '14:00', slotLength: 60, capacity: 2 },
-  { dayIndex: 5, dayNameAm: 'አርብ', dayNameEn: 'Friday', isOpen: true, openTime: '08:00', closeTime: '18:00', breakStart: '12:30', breakEnd: '14:00', slotLength: 60, capacity: 2 },
-  { dayIndex: 6, dayNameAm: 'ቅዳሜ', dayNameEn: 'Saturday', isOpen: true, openTime: '08:00', closeTime: '16:00', breakStart: '12:30', breakEnd: '13:30', slotLength: 60, capacity: 2 },
+  { dayIndex: 1, dayNameAm: 'ሰኞ', dayNameEn: 'Monday', isOpen: true, openTime: '08:00', closeTime: '18:00', breakStart: '12:00', breakEnd: '13:00', slotLength: 60, capacity: 2 },
+  { dayIndex: 2, dayNameAm: 'ማክሰኞ', dayNameEn: 'Tuesday', isOpen: true, openTime: '08:00', closeTime: '18:00', breakStart: '12:00', breakEnd: '13:00', slotLength: 60, capacity: 2 },
+  { dayIndex: 3, dayNameAm: 'ረቡዕ', dayNameEn: 'Wednesday', isOpen: true, openTime: '08:00', closeTime: '18:00', breakStart: '12:00', breakEnd: '13:00', slotLength: 60, capacity: 2 },
+  { dayIndex: 4, dayNameAm: 'ሐሙስ', dayNameEn: 'Thursday', isOpen: true, openTime: '08:00', closeTime: '18:00', breakStart: '12:00', breakEnd: '13:00', slotLength: 60, capacity: 2 },
+  { dayIndex: 5, dayNameAm: 'አርብ', dayNameEn: 'Friday', isOpen: true, openTime: '08:00', closeTime: '18:00', breakStart: '12:00', breakEnd: '13:00', slotLength: 60, capacity: 2 },
+  { dayIndex: 6, dayNameAm: 'ቅዳሜ', dayNameEn: 'Saturday', isOpen: true, openTime: '08:00', closeTime: '16:00', breakStart: '12:00', breakEnd: '13:00', slotLength: 60, capacity: 2 },
   { dayIndex: 0, dayNameAm: 'እሁድ', dayNameEn: 'Sunday', isOpen: false, openTime: '00:00', closeTime: '00:00', slotLength: 60, capacity: 0 },
 ];
 
@@ -756,3 +756,22 @@ export const INITIAL_CLOSED_DATES: ClosedDate[] = [
   { id: 'cd-4', date: '2027-01-19', reasonAm: 'ጥምቀት በዓል', reasonEn: 'Timkat (Epiphany)', isHoliday: true },
   { id: 'cd-5', date: '2027-03-02', reasonAm: 'የአድዋ ድል በዓል', reasonEn: 'Victory of Adwa', isHoliday: true },
 ];
+
+export const WORKSHOP_INFO = {
+  nameAm: 'አበጋዝ ሞተርስ ኢንጂነሪንግ',
+  nameEn: 'Abegaz Motors Engineering',
+  phone: '011 465 1553',
+  phoneInternational: '+251 11 465 1553',
+  phoneRaw: '+251114651553',
+  addressAm: 'አሌክሳንደር ፑሽኪን መንገድ፣ አዲስ አበባ',
+  addressEn: 'Alexander Pushkin St, Addis Ababa',
+  plusCode: 'XPPW+7H Addis Ababa',
+  hoursScheduleAm: 'ክፍት ነው · 12:00 PM ይዘጋል · 1:00 PM ይከፈታል',
+  hoursScheduleEn: 'Open · Closes 12 PM · Reopens 1 PM',
+  googleMapsUrl: 'https://www.google.com/maps/place/Abegaz+motors+Engineering/@8.9856945,38.7438395,17z/data=!3m1!4b1!4m6!3m5!1s0x164b85612d984561:0xf92ab90908ae0a8!8m2!3d8.9856892!4d38.7464144!16s%2Fg%2F11h11xkg4b!5m1!1e1?entry=ttu&g_ep=EgoyMDI2MTEwMi4wIKXMDSoASAFQAw%3D%3D',
+  googleMapsEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3940.551608670868!2d38.7438395!3d8.9856945!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x164b85612d984561%3A0xf92ab90908ae0a8!2sAbegaz%20motors%20Engineering!5e0!3m2!1sen!2set!4v1700000000000',
+  telegram: '@AbegazMotors',
+  telegramUrl: 'https://t.me/AbegazMotors',
+  email: 'info@abegazmotors.et',
+};
+
