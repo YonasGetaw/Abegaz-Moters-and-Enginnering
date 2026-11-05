@@ -117,22 +117,22 @@ export const HomePage: React.FC = () => {
 
             {/* Right Column: Hero Visual & Quick Booking Card */}
             <div className="lg:col-span-5 relative">
-              <div className="relative rounded-banner overflow-hidden shadow-2xl border border-slate-700">
+              <div className="relative rounded-banner overflow-hidden shadow-2xl border border-slate-700 bg-navy">
                 <img
-                  src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1000&q=80"
-                  alt="Abegaz Motors Workshop"
-                  className="w-full h-80 sm:h-96 object-cover"
+                  src="/hero-signboard.jpg"
+                  alt="አበጋዝ ሞተርስ ኢንጂነሪንግ - Abegaz Motors Engineering Workshop Signboard"
+                  className="w-full h-80 sm:h-96 object-cover object-center"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/30 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/20 to-transparent" />
                 
                 <div className="absolute bottom-4 left-4 right-4 bg-navy/90 backdrop-blur-md p-4 rounded-card border border-slate-700 text-white">
                   <p className="text-xs text-orange-signal font-bold uppercase tracking-wider">
-                    {locale === 'am' ? 'የጥራት ማረጋገጫ' : 'Engineering Standard'}
+                    {locale === 'am' ? 'ትክክለኛ ወርክሾፕ · ነፋስ ስልክ-ላፍቶ' : 'Official Workshop · Nefas Silk-Lafto'}
                   </p>
                   <p className="text-sm font-semibold mt-1">
                     {locale === 'am' 
-                      ? 'እያንዳንዱ መኪና ከመሰጠቱ በፊት የ 35 ነጥብ ጥብቅ ፍተሻ ያልፋል።'
-                      : 'Every repaired vehicle passes our rigorous 35-point safety inspection.'}
+                      ? 'አበጋዝ ሞተርስ ኢንጂነሪንግ — ሜካኒካል፣ ኤሌክትሪክ፣ ቦዲና ቀለም እንዲሁም የ EV/Hybrid ጥገና።'
+                      : 'Abegaz Motors Engineering — Mechanical, Electrical, Body & Paint, and EV & Hybrid Maintenance.'}
                   </p>
                 </div>
               </div>
