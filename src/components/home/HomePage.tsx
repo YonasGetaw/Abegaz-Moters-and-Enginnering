@@ -14,11 +14,13 @@ import {
   Send, 
   Phone,
   ChevronRight,
-  Star
+  ChevronDown,
+  Star,
+  HelpCircle
 } from 'lucide-react';
 import { Button } from '../common/Button';
 import { BeforeAfterSlider } from '../common/BeforeAfterSlider';
-import { INITIAL_TESTIMONIALS } from '../../lib/constants';
+import { INITIAL_TESTIMONIALS, INITIAL_FAQS } from '../../lib/constants';
 
 export const HomePage: React.FC = () => {
   const { locale, setCurrentView, setSelectedServiceSlug, services, packages } = useApp();
@@ -36,6 +38,15 @@ export const HomePage: React.FC = () => {
     setSelectedServiceSlug(quickService);
     setCurrentView('book');
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // FAQ Accordion State
+  const [openFaqIds, setOpenFaqIds] = useState<string[]>(['faq-1', 'faq-2']);
+
+  const toggleFaq = (id: string) => {
+    setOpenFaqIds(prev => 
+      prev.includes(id) ? prev.filter(item => item !== id) : [...prev, id]
+    );
   };
 
   const featuredServices = services.filter(s => s.featured).slice(0, 6);
@@ -667,7 +678,73 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* 7.9 FINAL CTA BAND - Precision Garage Master Theme */}
+      {/* 7.9 FAQ SECTION (Integrated in HomePage with #faq anchor) */}
+      <section id="faq" className="py-16 md:py-24 bg-mist border-b border-line">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-10">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-tint text-orange-deep text-xs font-bold mb-3">
+              <HelpCircle className="w-3.5 h-3.5" />
+              <span>{locale === 'am' ? 'ተደጋጋሚ ጥያቄዎች' : 'Help & Answers'}</span>
+            </div>
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-navy tracking-tight">
+              {locale === 'am' ? 'የተለመዱ ጥያቄዎችና መልሶቻቸው (FAQ)' : 'Frequently Asked Questions'}
+            </h2>
+            <p className="text-muted text-xs sm:text-sm mt-2">
+              {locale === 'am'
+                ? 'ስለ ቀጠሮ አያያዝ፣ ክፍያ፣ አገልግሎቶችና አድራሻችን የተለመዱ ጥያቄዎች'
+                : 'Clear answers about booking, pricing, and our workshop services.'}
+            </p>
+          </div>
+
+          <div className="space-y-3">
+            {INITIAL_FAQS.slice(0, 6).map((faq) => {
+              const isOpen = openFaqIds.includes(faq.id);
+              return (
+                <div
+                  key={faq.id}
+                  className="bg-white rounded-2xl border border-line shadow-xs overflow-hidden transition-all duration-200"
+                >
+                  <button
+                    type="button"
+                    onClick={() => toggleFaq(faq.id)}
+                    className="w-full p-5 text-left flex items-center justify-between gap-4 select-none hover:bg-slate-50 transition-colors"
+                  >
+                    <span className="font-extrabold text-navy text-sm sm:text-base">
+                      {locale === 'am' ? faq.questionAm : faq.questionEn}
+                    </span>
+                    <span className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 transition-transform ${
+                      isOpen ? 'bg-orange-signal text-navy rotate-180' : 'bg-mist text-slate-600'
+                    }`}>
+                      <ChevronDown className="w-4 h-4" />
+                    </span>
+                  </button>
+
+                  {isOpen && (
+                    <div className="px-5 pb-5 pt-1 text-slate-600 text-xs sm:text-sm leading-relaxed border-t border-line/60 bg-slate-50/50">
+                      {locale === 'am' ? faq.answerAm : faq.answerEn}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="mt-8 text-center">
+            <p className="text-xs text-muted mb-3">
+              {locale === 'am' ? 'ተጨማሪ ጥያቄ አለዎት? በቀጥታ በስልክ ያማክሩን፡' : 'Have a different question? Speak with us directly:'}
+            </p>
+            <a
+              href="tel:+251114651553"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-navy text-white text-xs font-bold hover:bg-slate-800 transition-colors"
+            >
+              <Phone className="w-3.5 h-3.5 text-orange-signal" />
+              <span>011 465 1553</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* 7.10 FINAL CTA BAND - Precision Garage Master Theme */}
       <section className="bg-navy text-white py-16 border-t border-slate-800 bg-blueprint-dark relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6 relative z-10">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800 text-orange-signal text-xs font-bold border border-slate-700">

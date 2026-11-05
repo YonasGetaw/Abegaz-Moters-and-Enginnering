@@ -30,6 +30,20 @@ export const Header: React.FC = () => {
   ];
 
   const handleNavClick = (viewId: string) => {
+    if (viewId === 'faq') {
+      setCurrentView('home');
+      setMobileMenuOpen(false);
+      setTimeout(() => {
+        const el = document.getElementById('faq');
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else {
+          window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        }
+      }, 100);
+      return;
+    }
+
     setCurrentView(viewId);
     setMobileMenuOpen(false);
     window.scrollTo({ top: 0, behavior: 'smooth' });

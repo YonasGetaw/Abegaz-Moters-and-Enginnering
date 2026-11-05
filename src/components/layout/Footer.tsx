@@ -7,6 +7,18 @@ export const Footer: React.FC = () => {
   const { locale, setCurrentView } = useApp();
 
   const handleNav = (v: string) => {
+    if (v === 'faq') {
+      setCurrentView('home');
+      setTimeout(() => {
+        const el = document.getElementById('faq');
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else {
+          window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        }
+      }, 100);
+      return;
+    }
     setCurrentView(v);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
