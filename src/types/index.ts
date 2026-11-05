@@ -37,7 +37,7 @@ export interface Service {
   slug: string;
   nameAm: string;
   nameEn: string;
-  category: 'motor' | 'electric' | 'brakes' | 'body' | 'diagnostics' | 'maintenance';
+  category: 'mechanical' | 'electrical' | 'body' | 'ev_hybrid' | 'motor' | 'electric' | 'brakes' | 'diagnostics' | 'maintenance';
   icon: string;
   durationMin: number;
   durationText?: string;
