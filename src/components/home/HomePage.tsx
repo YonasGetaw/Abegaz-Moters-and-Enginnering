@@ -547,7 +547,7 @@ export const HomePage: React.FC = () => {
                   </span>
                 </div>
                 <span className="text-[11px] font-semibold text-orange-deep bg-orange-tint px-2 py-0.5 rounded-full">
-                  {locale === 'am' ? 'ቃሊቲ ወርክሾፕ' : 'Kality Bay'}
+                  {locale === 'am' ? 'ነፋስ ስልክ-ላፍቶ ወርክሾፕ' : 'Nefas Silk-Lafto'}
                 </span>
               </div>
 
@@ -671,7 +671,7 @@ export const HomePage: React.FC = () => {
       <section className="bg-navy text-white py-16 border-t border-slate-800 bg-blueprint-dark relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6 relative z-10">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800 text-orange-signal text-xs font-bold border border-slate-700">
-            <span>🇪🇹 አዲስ አበባ · ቃሊቲ ወርክሾፕ</span>
+            <span>🇪🇹 አዲስ አበባ · ነፋስ ስልክ-ላፍቶ · ኬራ</span>
           </div>
 
           <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-white">

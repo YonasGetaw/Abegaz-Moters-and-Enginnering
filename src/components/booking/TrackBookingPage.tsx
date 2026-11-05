@@ -243,8 +243,8 @@ export const TrackBookingPage: React.FC = () => {
                   </div>
                   <div>
                     <span className="text-muted block font-semibold">{locale === 'am' ? 'የወርክሾፕ ቤይ:' : 'Workshop Bay:'}</span>
-                    <strong className="text-navy">ቃሊቲ ወርክሾፕ (Bay #2)</strong>
-                    <span className="block text-[11px] text-slate-500 mt-0.5">ቃሊቲ ክላስተር፣ ከቶታል ማደያ ፊት ለፊት</span>
+                    <strong className="text-navy">ነፋስ ስልክ-ላፍቶ ወርክሾፕ</strong>
+                    <span className="block text-[11px] text-slate-500 mt-0.5">ከአሌክሳንደር ፑሽኪን መንገድ፣ ኬራ አካባቢ</span>
                   </div>
                 </div>
 

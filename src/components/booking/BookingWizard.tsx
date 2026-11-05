@@ -175,7 +175,7 @@ export const BookingWizard: React.FC = () => {
         customerType: 'individual',
         customerName: fullName.trim(),
         customerPhone: phoneNumber.trim(),
-        customerEmail: 'customer@abegazmotors.et',
+        customerEmail: 'abiyme@gmail.com',
         vehicleMake: vehicleMakeModel.trim() || 'Unspecified',
         vehicleModel: vehicleMakeModel.trim() || 'Vehicle',
         vehiclePlate: licensePlate.trim().toUpperCase() || 'AA-ET',

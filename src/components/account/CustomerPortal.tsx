@@ -426,10 +426,10 @@ export const CustomerPortal: React.FC = () => {
                     {locale === 'am' ? 'የወርክሾፕ አድራሻ' : 'Workshop Location'}
                   </span>
                   <span className="font-extrabold text-white text-sm">
-                    ቃሊቲ ወርክሾፕ (Bay #2)
+                    ነፋስ ስልክ-ላፍቶ ወርክሾፕ
                   </span>
                   <p className="text-[11px] text-slate-300 mt-0.5">
-                    ቃሊቲ ክላስተር፣ ከቶታል ማደያ ፊት ለፊት
+                    ከአሌክሳንደር ፑሽኪን መንገድ፣ ኬራ አካባቢ
                   </p>
                 </div>
               </div>

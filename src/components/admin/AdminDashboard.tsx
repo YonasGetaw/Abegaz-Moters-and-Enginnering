@@ -3024,7 +3024,7 @@ export const AdminDashboard: React.FC = () => {
                             type="email"
                             value={newAdminEmailInput}
                             onChange={(e) => setNewAdminEmailInput(e.target.value)}
-                            placeholder="e.g. manager@abegaz.com"
+                            placeholder="e.g. abiyme@gmail.com"
                             className="flex-1 px-3 py-1.5 rounded-lg border border-line text-xs font-mono"
                           />
                           <button

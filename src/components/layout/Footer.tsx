@@ -53,7 +53,7 @@ export const Footer: React.FC = () => {
                 <Phone className="w-4 h-4" />
               </a>
               <a 
-                href="mailto:contact@abegazmotors.et"
+                href="mailto:abiyme@gmail.com"
                 className="w-9 h-9 rounded-full bg-slate-800 hover:bg-orange-signal hover:text-navy text-slate-300 flex items-center justify-center transition-all"
                 title="Email"
               >

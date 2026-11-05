@@ -31,7 +31,7 @@ export const AdminLogin: React.FC = () => {
   };
 
   const handleFillStaff = () => {
-    setEmail('mekdes@abegazmotors.et');
+    setEmail('abiyme@gmail.com');
     setPassword('staff');
   };
 

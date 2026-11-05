@@ -219,7 +219,7 @@ export const StaffDashboard: React.FC = () => {
               {locale === 'am' ? 'ሰላም፣ ሳሙኤል (Samuel B.)' : 'Hello, Samuel'}
             </h1>
             <p className="text-xs text-muted">
-              {locale === 'am' ? 'ሐሙስ ህዳር 3 ቀን 2019 ዓ.ም. · ቃሊቲ ወርክሾፕ' : 'Thu 12 Nov 2026 · Bay #2 (Kality)'}
+              {locale === 'am' ? 'ሐሙስ ህዳር 3 ቀን 2019 ዓ.ም. · ነፋስ ስልክ-ላፍቶ ወርክሾፕ' : 'Thu 12 Nov 2026 · Nefas Silk-Lafto Workshop'}
             </p>
           </div>
 
@@ -773,8 +773,8 @@ export const StaffDashboard: React.FC = () => {
                 </div>
                 <div>
                   <h4 className="text-lg font-extrabold text-navy">ሳሙኤል በቀለ (Samuel B.)</h4>
-                  <p className="text-xs text-muted">Lead Master Technician • Bay #2 (Kality)</p>
-                  <p className="text-xs text-slate-500 font-mono mt-0.5">samuel@abegazmotors.et</p>
+                  <p className="text-xs text-muted">Lead Master Technician • Nefas Silk-Lafto</p>
+                  <p className="text-xs text-slate-500 font-mono mt-0.5">abiyme@gmail.com</p>
                 </div>
               </div>
             </div>
