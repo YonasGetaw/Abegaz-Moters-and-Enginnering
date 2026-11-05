@@ -95,50 +95,50 @@ export const GalleryPage: React.FC = () => {
         
         {/* Minimal Hero Header - Clean & direct, no zbaznke */}
         <div className="text-center max-w-3xl mx-auto mb-8">
-          <h1 className="text-3xl sm:text-5xl font-black text-navy tracking-tight">
+          <h1 className="text-3xl sm:text-5xl font-black text-blue-900 tracking-tight">
             {locale === 'am' ? 'የተሰሩ ስራዎች ማህደር' : 'Work Showcase & Gallery'}
           </h1>
-          <p className="text-muted text-sm sm:text-base mt-2">
+          <p className="text-slate-600 text-sm sm:text-base mt-2">
             {locale === 'am' 
               ? 'ከመጠገኑ በፊት እና በኋላ የተሰሩ ስራዎች፣ ቪዲዮዎችና የዎርክሾፕ ምስሎች'
               : 'Before & After transformations, workshop videos, and project photos.'}
           </p>
 
           {/* Simple Tab Switcher: Before & After | Videos | Photos */}
-          <div className="mt-6 inline-flex p-1.5 bg-white rounded-2xl border border-line shadow-xs gap-1.5">
+          <div className="mt-6 inline-flex p-1.5 bg-white rounded-2xl border-2 border-slate-200 shadow-xs gap-1.5">
             <button
               onClick={() => setActiveTab('beforeAfter')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all ${
+              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold transition-all ${
                 activeTab === 'beforeAfter'
-                  ? 'bg-navy text-white shadow-sm'
-                  : 'text-slate-600 hover:text-navy hover:bg-mist'
+                  ? 'bg-red-600 text-white shadow-sm'
+                  : 'text-blue-700 hover:text-red-600 hover:bg-blue-50'
               }`}
             >
-              <SlidersHorizontal className="w-4 h-4 text-orange-signal" />
+              <SlidersHorizontal className={`w-4 h-4 ${activeTab === 'beforeAfter' ? 'text-white' : 'text-red-600'}`} />
               <span>{locale === 'am' ? 'ከመጠገኑ በፊትና በኋላ (Before & After)' : 'Before & After'}</span>
             </button>
 
             <button
               onClick={() => setActiveTab('videos')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all ${
+              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold transition-all ${
                 activeTab === 'videos'
-                  ? 'bg-navy text-white shadow-sm'
-                  : 'text-slate-600 hover:text-navy hover:bg-mist'
+                  ? 'bg-red-600 text-white shadow-sm'
+                  : 'text-blue-700 hover:text-red-600 hover:bg-blue-50'
               }`}
             >
-              <Film className="w-4 h-4 text-orange-signal" />
+              <Film className={`w-4 h-4 ${activeTab === 'videos' ? 'text-white' : 'text-red-600'}`} />
               <span>{locale === 'am' ? 'ቪዲዮዎች (Videos)' : 'Videos'}</span>
             </button>
 
             <button
               onClick={() => setActiveTab('photos')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all ${
+              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold transition-all ${
                 activeTab === 'photos'
-                  ? 'bg-navy text-white shadow-sm'
-                  : 'text-slate-600 hover:text-navy hover:bg-mist'
+                  ? 'bg-red-600 text-white shadow-sm'
+                  : 'text-blue-700 hover:text-red-600 hover:bg-blue-50'
               }`}
             >
-              <ImageIcon className="w-4 h-4 text-orange-signal" />
+              <ImageIcon className={`w-4 h-4 ${activeTab === 'photos' ? 'text-white' : 'text-red-600'}`} />
               <span>{locale === 'am' ? 'ፎቶዎች (Photos)' : 'Photos'}</span>
             </button>
           </div>

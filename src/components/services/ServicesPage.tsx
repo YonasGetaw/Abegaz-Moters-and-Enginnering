@@ -170,25 +170,23 @@ export const ServicesPage: React.FC = () => {
 
   return (
     <div className="bg-mist min-h-screen pb-24">
-      {/* 1. HERO SECTION - CLEAN, BOLD & DIRECT */}
-      <section className="bg-navy text-white bg-blueprint-dark relative overflow-hidden pt-12 pb-14 sm:py-16 border-b border-slate-800">
-        <div className="absolute inset-0 bg-radial-gradient opacity-60 pointer-events-none" />
-        
+      {/* 1. HERO SECTION - CLEAN, BOLD & DIRECT (White background, Royal Blue text, Brand Red accents) */}
+      <section className="bg-gradient-to-b from-blue-50/70 via-white to-white text-slate-800 relative overflow-hidden pt-12 pb-16 sm:py-20 border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-800/90 text-orange-signal text-xs font-bold border border-slate-700 shadow-sm backdrop-blur-sm">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-red-50 text-red-600 text-xs font-bold border border-red-200 shadow-xs">
             <Compass className="w-3.5 h-3.5" />
             <span>{locale === 'am' ? 'አበጋዝ ሞተርስ ኢንጂነሪንግ' : 'Abegaz Motors Engineering'}</span>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight max-w-4xl mx-auto">
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-blue-900 tracking-tight leading-tight max-w-4xl mx-auto">
             {locale === 'am' ? (
-              <>የምንሰጣቸው <span className="text-orange-signal">ዋና ዋና አገልግሎቶች</span></>
+              <>የምንሰጣቸው <span className="text-red-600">ዋና ዋና አገልግሎቶች</span></>
             ) : (
-              <>Our Core <span className="text-orange-signal">Automotive Services</span></>
+              <>Our Core <span className="text-red-600">Automotive Services</span></>
             )}
           </h1>
 
-          <p className="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+          <p className="text-slate-700 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
             {locale === 'am'
               ? 'በወርክሾፓችን ሳይንቦርድ ላይ የተዘረዘሩት 4ቱ ዋና የምህንድስና ዘርፎች፦ ሜካኒካል፣ ኤሌክትሪክ፣ ቦዲና ቀለም እንዲሁም የ EV/Hybrid ጥገና።'
               : 'The 4 pillars of engineering care from our workshop signboard: Mechanical, Electrical, Body & Paint, and EV & Hybrid maintenance.'}
@@ -197,7 +195,7 @@ export const ServicesPage: React.FC = () => {
       </section>
 
       {/* 2. THE 4 OFFICIAL SIGNBOARD PILLARS (INTERACTIVE TABS) */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 relative z-20">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-20">
         <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
           {signboardPillars.map((pillar) => {
             const IconComp = pillar.icon;
@@ -207,21 +205,21 @@ export const ServicesPage: React.FC = () => {
               <button
                 key={pillar.id}
                 onClick={() => setSelectedCategory(pillar.id)}
-                className={`p-4 rounded-2xl border text-left transition-all duration-200 flex flex-col justify-between ${
+                className={`p-4 rounded-2xl border-2 text-left transition-all duration-200 flex flex-col justify-between ${
                   isSelected
-                    ? 'bg-navy text-white border-navy shadow-lg ring-2 ring-orange-signal scale-[1.02]'
-                    : 'bg-white text-navy border-line hover:border-slate-300 hover:shadow-md'
+                    ? 'bg-blue-900 text-white border-blue-900 shadow-lg ring-2 ring-red-600 scale-[1.02]'
+                    : 'bg-white text-blue-900 border-slate-200 hover:border-blue-600 hover:shadow-md'
                 } ${pillar.id === 'all' ? 'col-span-2 md:col-span-1' : ''}`}
               >
                 <div className="flex items-center justify-between mb-3">
                   <div className={`w-9 h-9 rounded-xl flex items-center justify-center ${
-                    isSelected ? 'bg-orange-signal text-navy' : 'bg-mist text-slate-700'
+                    isSelected ? 'bg-red-600 text-white shadow-xs' : 'bg-blue-50 text-blue-700'
                   }`}>
                     <IconComp className="w-5 h-5" />
                   </div>
                   {pillar.number !== '0' && (
                     <span className={`text-[11px] font-black font-mono px-2 py-0.5 rounded-full ${
-                      isSelected ? 'bg-slate-800 text-orange-signal' : 'bg-mist text-muted'
+                      isSelected ? 'bg-blue-800 text-red-300' : 'bg-slate-100 text-slate-600'
                     }`}>
                       #{pillar.number}
                     </span>
@@ -229,10 +227,10 @@ export const ServicesPage: React.FC = () => {
                 </div>
 
                 <div>
-                  <h3 className={`text-xs sm:text-sm font-extrabold ${isSelected ? 'text-white' : 'text-navy'}`}>
+                  <h3 className={`text-xs sm:text-sm font-extrabold ${isSelected ? 'text-white' : 'text-blue-900'}`}>
                     {locale === 'am' ? pillar.labelAm : pillar.labelEn}
                   </h3>
-                  <p className={`text-[11px] mt-1 line-clamp-1 ${isSelected ? 'text-slate-300' : 'text-muted'}`}>
+                  <p className={`text-[11px] mt-1 line-clamp-1 ${isSelected ? 'text-blue-100' : 'text-slate-500'}`}>
                     {locale === 'am' ? pillar.descAm : pillar.descEn}
                   </p>
                 </div>

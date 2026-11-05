@@ -8,25 +8,27 @@ export default {
     extend: {
       colors: {
         navy: {
-          DEFAULT: '#0F172A',
-          dark: '#090D16',
-          slate: '#1E293B',
-          card: '#162238',
-          deep: '#060A12',
+          DEFAULT: '#1E3A8A',
+          dark: '#172554',
+          slate: '#1E40AF',
+          card: '#1E3A8A',
+          deep: '#0F172A',
         },
-        slate: {
-          850: '#151F30',
-          900: '#0F172A',
+        brand: {
+          blue: '#1D4ED8',
+          blueDark: '#1E3A8A',
+          red: '#DC2626',
+          redDark: '#B91C1C',
         },
         orange: {
-          signal: '#F97316',
-          deep: '#C2410C',
-          tint: '#FFF7ED',
-          light: '#FED7AA',
+          signal: '#DC2626',
+          deep: '#B91C1C',
+          tint: '#FEF2F2',
+          light: '#FECACA',
         },
         mist: '#F8FAFC',
         line: '#E2E8F0',
-        muted: '#64748B',
+        muted: '#475569',
       },
       fontFamily: {
         sans: ['Inter', 'Noto Sans Ethiopic', 'Nyala', 'system-ui', 'sans-serif'],

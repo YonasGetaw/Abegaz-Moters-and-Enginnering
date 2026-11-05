@@ -27,14 +27,14 @@ export const Button: React.FC<ButtonProps> = ({
   };
 
   const variantStyles = {
-    primary: "bg-orange-signal text-navy hover:bg-[#EA580C] focus:ring-orange-signal shadow-sm font-black",
-    brand: "bg-orange-signal text-navy hover:bg-[#EA580C] focus:ring-orange-signal shadow-sm font-black",
-    orange: "bg-orange-signal text-navy hover:bg-[#EA580C] focus:ring-orange-signal shadow-sm font-black",
-    secondary: "bg-mist text-navy hover:bg-line border border-line focus:ring-navy",
-    outline: "bg-transparent text-navy border-2 border-line hover:border-navy hover:bg-mist focus:ring-navy",
-    'outline-white': "bg-transparent text-white border-2 border-white/80 hover:bg-white/10 focus:ring-white",
-    telegram: "bg-[#229ED9] text-white hover:bg-[#1D8BC0] focus:ring-[#229ED9] shadow-sm",
-    danger: "bg-red-600 text-white hover:bg-red-700 focus:ring-red-500",
+    primary: "bg-red-600 text-white hover:bg-red-700 focus:ring-red-500 shadow-sm font-black",
+    brand: "bg-red-600 text-white hover:bg-red-700 focus:ring-red-500 shadow-sm font-black",
+    orange: "bg-red-600 text-white hover:bg-red-700 focus:ring-red-500 shadow-sm font-black",
+    secondary: "bg-white text-blue-700 hover:bg-blue-50 border-2 border-blue-600 focus:ring-blue-500 font-extrabold",
+    outline: "bg-transparent text-blue-700 border-2 border-blue-600 hover:bg-blue-50 focus:ring-blue-500 font-extrabold",
+    'outline-white': "bg-transparent text-white border-2 border-white hover:bg-white/10 focus:ring-white font-extrabold",
+    telegram: "bg-[#229ED9] text-white hover:bg-[#1D8BC0] focus:ring-[#229ED9] shadow-sm font-extrabold",
+    danger: "bg-red-600 text-white hover:bg-red-700 focus:ring-red-500 font-black",
   };
 
   const widthStyle = fullWidth ? "w-full" : "";

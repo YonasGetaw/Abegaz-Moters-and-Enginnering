@@ -27,13 +27,13 @@ export const PackagesPage: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-10">
-          <span className="text-orange-deep text-xs font-bold uppercase tracking-wider">
+          <span className="text-red-600 text-xs font-black uppercase tracking-wider bg-red-50 border border-red-200 px-3 py-1 rounded-full">
             {locale === 'am' ? 'የጥገና ጥቅሎች' : 'Service Packages'}
           </span>
-          <h1 className="text-3xl sm:text-5xl font-extrabold text-navy mt-1 tracking-tight">
+          <h1 className="text-3xl sm:text-5xl font-black text-blue-900 mt-3 tracking-tight">
             {locale === 'am' ? 'የተሟሉ የሰርቪስ ጥቅሎች' : 'Comprehensive Care Packages'}
           </h1>
-          <p className="text-muted text-xs sm:text-sm mt-3">
+          <p className="text-slate-600 text-xs sm:text-sm mt-3">
             {locale === 'am'
               ? 'ለግል ተሽከርካሪዎ ወይም ለድርጅትዎ የሚስማማውን ጥቅል ይምረጡ። ዋጋዎች እንደ መኪናው ሁኔታ ሊለያዩ ይችላሉ።'
               : 'Pick the optimal maintenance tier. Transparent pricing with verified engineering standards.'}
@@ -43,16 +43,16 @@ export const PackagesPage: React.FC = () => {
           <div className="mt-6 inline-flex p-1 bg-white rounded-btn border border-line shadow-sm">
             <button
               onClick={() => setClientType('individual')}
-              className={`px-6 py-2 rounded-lg text-xs font-bold transition-all ${
-                clientType === 'individual' ? 'bg-orange-signal text-navy' : 'text-muted hover:text-navy'
+              className={`px-6 py-2 rounded-lg text-xs font-black transition-all ${
+                clientType === 'individual' ? 'bg-red-600 text-white shadow-xs' : 'text-blue-700 hover:text-red-600'
               }`}
             >
               {locale === 'am' ? 'የግል መኪና' : 'Individual'}
             </button>
             <button
               onClick={() => setClientType('corporate')}
-              className={`px-6 py-2 rounded-lg text-xs font-bold transition-all ${
-                clientType === 'corporate' ? 'bg-orange-signal text-navy' : 'text-muted hover:text-navy'
+              className={`px-6 py-2 rounded-lg text-xs font-black transition-all ${
+                clientType === 'corporate' ? 'bg-red-600 text-white shadow-xs' : 'text-blue-700 hover:text-red-600'
               }`}
             >
               {locale === 'am' ? 'ድርጅት / ፍሊት' : 'Corporate / Fleet'}
@@ -176,11 +176,11 @@ export const PackagesPage: React.FC = () => {
         </div>
 
         {/* CTA */}
-        <div className="bg-navy text-white rounded-banner p-8 text-center space-y-4">
-          <h3 className="text-xl sm:text-2xl font-bold">
+        <div className="bg-gradient-to-b from-blue-50/70 to-blue-100/50 text-slate-800 rounded-banner p-8 border-2 border-blue-200 text-center space-y-4 shadow-sm">
+          <h3 className="text-xl sm:text-2xl font-black text-blue-900">
             {locale === 'am' ? 'የሚስማማዎትን ጥቅል አልለዩም?' : 'Need guidance choosing the right package?'}
           </h3>
-          <p className="text-xs sm:text-sm text-slate-300 max-w-lg mx-auto">
+          <p className="text-xs sm:text-sm text-slate-600 max-w-lg mx-auto">
             {locale === 'am' ? 'በቴሌግራም አጭር መልእክት ይላኩልን፤ ባለሙያችን በቀጥታ ይመክራችኋል።' : 'Consult our engineering desk on Telegram for an accurate tailored assessment.'}
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3 pt-2">

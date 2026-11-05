@@ -53,36 +53,79 @@ export const HomePage: React.FC = () => {
 
   return (
     <div className="flex flex-col min-h-screen">
-      {/* 7.1 HERO SECTION - Precision Garage Master Theme */}
-      <section className="relative bg-navy text-white bg-blueprint-dark overflow-hidden py-14 md:py-24 border-b border-slate-800">
+      {/* 7.1 HERO SECTION - Precision Garage Master Theme (White background, Royal Blue text, Brand Red accents & Modern Square Grid) */}
+      <section className="relative bg-gradient-to-b from-blue-50/70 via-white to-white text-slate-800 overflow-hidden py-12 md:py-20 border-b border-slate-200">
+        
+        {/* Aesthetic Background Grid Squares (clean squares for visual beauty & engineering depth) */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <svg
+            className="absolute inset-0 h-full w-full stroke-blue-700/12 [mask-image:radial-gradient(100%_100%_at_top_right,white_40%,transparent_100%)]"
+            aria-hidden="true"
+          >
+            <defs>
+              <pattern
+                id="hero-grid-pattern"
+                width="44"
+                height="44"
+                x="50%"
+                y="-1"
+                patternUnits="userSpaceOnUse"
+              >
+                <path d="M.5 44V.5H44" fill="none" strokeWidth="1" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" strokeWidth="0" fill="url(#hero-grid-pattern)" />
+            
+            {/* Elegant Accent Square Highlights */}
+            <svg x="50%" y="-1" className="overflow-visible fill-blue-600/10 stroke-blue-600/25">
+              <path d="M-88 0h44v44h-44z" strokeWidth="1" />
+              <path d="M132 88h44v44h-44z" strokeWidth="1" />
+              <path d="M-176 132h44v44h-44z" strokeWidth="1" />
+              <path d="M264 44h44v44h-44z" strokeWidth="1" />
+              <path d="M44 176h44v44h-44z" strokeWidth="1" />
+              <path d="M-44 264h44v44h-44z" strokeWidth="1" />
+            </svg>
+            <svg x="50%" y="-1" className="overflow-visible fill-red-500/10 stroke-red-500/25">
+              <path d="M0 44h44v44h-44z" strokeWidth="1" />
+              <path d="M-132 88h44v44h-44z" strokeWidth="1" />
+              <path d="M176 176h44v44h-44z" strokeWidth="1" />
+              <path d="M-88 220h44v44h-44z" strokeWidth="1" />
+            </svg>
+          </svg>
+
+          {/* Ambient Lighting Gradients */}
+          <div className="absolute -top-24 -right-24 w-96 h-96 bg-red-100/50 rounded-full blur-3xl" />
+          <div className="absolute top-32 -left-24 w-80 h-80 bg-blue-100/60 rounded-full blur-3xl" />
+        </div>
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             {/* Left Column: Headlines & CTAs */}
             <div className="lg:col-span-7 space-y-6">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-800/90 border border-slate-700 text-orange-signal text-xs font-bold shadow-xs">
-                <span className="w-2 h-2 rounded-full bg-orange-signal animate-pulse" />
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-red-50 border border-red-200 text-red-600 text-xs font-bold shadow-xs">
+                <span className="w-2 h-2 rounded-full bg-red-600 animate-pulse" />
                 <span>{locale === 'am' ? 'ትክክለኛ ምህንድስና · ንጹህ ወርክሾፕ' : 'Precision Automotive Engineering · Clean Bay'}</span>
               </div>
 
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.12]">
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-blue-900 tracking-tight leading-[1.12]">
                 {locale === 'am' ? (
                   <>
                     መኪናዎ በባለሙያ እጅ — <br className="hidden sm:inline" />
-                    <span className="text-orange-signal">
+                    <span className="text-red-600">
                       በትክክለኛ ምህንድስና።
                     </span>
                   </>
                 ) : (
                   <>
                     Expert car care, <br />
-                    <span className="text-orange-signal">
+                    <span className="text-red-600">
                       engineered for peace of mind.
                     </span>
                   </>
                 )}
               </h1>
 
-              <p className="text-base sm:text-lg text-slate-300 max-w-2xl leading-relaxed">
+              <p className="text-base sm:text-lg text-slate-700 max-w-2xl leading-relaxed">
                 {locale === 'am' 
                   ? 'ቀጠሮዎን በኦንላይን በ 2 ደቂቃ ይያዙ። ጥያቄዎ እንደጸደቀ በኢሜይል ወይም በቴሌግራም ፈጣን ማረጋገጫ ይደርስዎታል።'
                   : 'Book your workshop service online in 2 minutes. Receive real-time approval notifications via Telegram and Email.'}
@@ -101,7 +144,7 @@ export const HomePage: React.FC = () => {
 
                 <Button
                   size="lg"
-                  variant="outline-white"
+                  variant="secondary"
                   onClick={() => setCurrentView('services')}
                 >
                   <span>{locale === 'am' ? 'አገልግሎቶችን ይመልከቱ' : 'Explore Services'}</span>
@@ -110,17 +153,17 @@ export const HomePage: React.FC = () => {
               </div>
 
               {/* 3 Trust Chips */}
-              <div className="pt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs sm:text-sm text-slate-400">
-                <span className="flex items-center gap-1.5 text-slate-200">
-                  <CheckCircle2 className="w-4 h-4 text-orange-signal" />
+              <div className="pt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs sm:text-sm">
+                <span className="flex items-center gap-1.5 text-blue-900 font-bold">
+                  <CheckCircle2 className="w-4 h-4 text-red-600" />
                   <span>{locale === 'am' ? 'ልምድ ያላቸው መሃንዲሶች' : 'Certified Engineers'}</span>
                 </span>
-                <span className="flex items-center gap-1.5 text-slate-200">
-                  <CheckCircle2 className="w-4 h-4 text-orange-signal" />
+                <span className="flex items-center gap-1.5 text-blue-900 font-bold">
+                  <CheckCircle2 className="w-4 h-4 text-red-600" />
                   <span>{locale === 'am' ? 'ግልጽ ሂደትና ዋጋ' : 'Transparent Pricing'}</span>
                 </span>
-                <span className="flex items-center gap-1.5 text-slate-200">
-                  <CheckCircle2 className="w-4 h-4 text-orange-signal" />
+                <span className="flex items-center gap-1.5 text-blue-900 font-bold">
+                  <CheckCircle2 className="w-4 h-4 text-red-600" />
                   <span>{locale === 'am' ? 'ፈጣን ማሳወቂያ' : 'Instant Updates'}</span>
                 </span>
               </div>
@@ -128,21 +171,21 @@ export const HomePage: React.FC = () => {
 
             {/* Right Column: Hero Visual & Quick Booking Card */}
             <div className="lg:col-span-5 relative">
-              <div className="relative rounded-banner overflow-hidden shadow-2xl border-2 border-slate-700 bg-white p-2 sm:p-3">
+              <div className="relative rounded-banner overflow-hidden shadow-xl border-2 border-slate-200 bg-white p-2 sm:p-3">
                 <img
                   src="/hero-banner.png"
                   alt="አበጋዝ ሞተርስ ኢንጂነሪንግ - Abegaz Motors Engineering Official Signboard"
                   className="w-full h-auto object-contain rounded-xl"
                 />
                 
-                <div className="mt-2.5 bg-navy/95 p-3 rounded-lg border border-slate-700 text-white flex items-center justify-between gap-2">
+                <div className="mt-2.5 bg-blue-900 p-3 rounded-lg border border-blue-800 text-white flex items-center justify-between gap-2 shadow-sm">
                   <div className="flex items-center gap-2">
-                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
-                    <p className="text-xs font-bold text-slate-200">
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+                    <p className="text-xs font-bold text-white">
                       {locale === 'am' ? 'ኦፊሴላዊ የምህንድስና ወርክሾፕ' : 'Official Engineering Bay'}
                     </p>
                   </div>
-                  <span className="text-[11px] font-bold text-orange-signal bg-slate-800 px-2 py-0.5 rounded">
+                  <span className="text-[11px] font-black text-white bg-red-600 px-2 py-0.5 rounded shadow-xs">
                     Advanced Care. Absolute Trust.
                   </span>
                 </div>
@@ -379,13 +422,13 @@ export const HomePage: React.FC = () => {
       </section>
 
       {/* 7.5 HOW BOOKING WORKS (ቀጠሮ እንዴት ይሰራል?) */}
-      <section className="py-16 md:py-20 bg-navy text-white bg-blueprint-dark">
+      <section className="py-16 md:py-20 bg-slate-50 border-y border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-12">
-            <span className="text-orange-signal text-xs font-bold uppercase tracking-wider">
+            <span className="text-red-600 text-xs font-black uppercase tracking-wider bg-red-50 border border-red-200 px-3 py-1 rounded-full">
               {locale === 'am' ? 'ቀላል 4 ደረጃዎች' : 'Simple 4-Step Process'}
             </span>
-            <h2 className="text-2xl sm:text-4xl font-extrabold text-white mt-2">
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-blue-900 mt-3">
               {locale === 'am' ? 'ቀጠሮ እንዴት ይሰራል?' : 'How Appointment Booking Works'}
             </h2>
           </div>
@@ -421,14 +464,14 @@ export const HomePage: React.FC = () => {
                 descEn: 'Receive real-time confirmation via Telegram and Email.'
               }
             ].map((s, idx) => (
-              <div key={idx} className="bg-slate-800/80 p-6 rounded-card border border-slate-700 relative">
-                <div className="text-3xl font-extrabold text-orange-signal mb-3 font-mono">
+              <div key={idx} className="bg-white p-6 rounded-card border-2 border-slate-200 hover:border-blue-600 shadow-sm transition-all relative">
+                <div className="text-3xl font-black text-red-600 mb-3 font-mono">
                   {s.step}
                 </div>
-                <h4 className="text-lg font-bold text-white mb-2">
+                <h4 className="text-lg font-bold text-blue-900 mb-2">
                   {locale === 'am' ? s.titleAm : s.titleEn}
                 </h4>
-                <p className="text-xs text-slate-300 leading-relaxed">
+                <p className="text-xs text-slate-600 leading-relaxed">
                   {locale === 'am' ? s.descAm : s.descEn}
                 </p>
               </div>
@@ -744,19 +787,19 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* 7.10 FINAL CTA BAND - Precision Garage Master Theme */}
-      <section className="bg-navy text-white py-16 border-t border-slate-800 bg-blueprint-dark relative overflow-hidden">
+      {/* 7.10 FINAL CTA BAND - White & Royal Blue Theme */}
+      <section className="bg-gradient-to-b from-white via-blue-50/50 to-blue-100/60 text-slate-800 py-16 border-t-2 border-slate-200 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6 relative z-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800 text-orange-signal text-xs font-bold border border-slate-700">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-red-50 text-red-600 text-xs font-bold border border-red-200 shadow-xs">
             <span>🇪🇹 አዲስ አበባ · ነፋስ ስልክ-ላፍቶ · ኬራ</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-white">
+          <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-blue-900">
             {locale === 'am' 
               ? 'መኪናዎ ዛሬ ባለሙያ ይፈልጋል?' 
               : 'Does your vehicle need expert care today?'}
           </h2>
-          <p className="text-slate-300 max-w-xl mx-auto text-sm sm:text-base leading-relaxed">
+          <p className="text-slate-700 max-w-xl mx-auto text-sm sm:text-base leading-relaxed">
             {locale === 'am'
               ? 'ቀጠሮዎን አሁኑኑ በኦንላይን ይያዙ፤ ወይም በቀጥታ በቴሌግራም ባለሙያዎቻችንን ያማክሩ።'
               : 'Secure your verified bay appointment online now or consult our engineers directly on Telegram.'}
@@ -777,7 +820,7 @@ export const HomePage: React.FC = () => {
               href="https://t.me/AbegazMotors"
               target="_blank"
               rel="noreferrer"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 h-13 px-6 rounded-btn bg-[#229ED9] text-white font-bold hover:bg-[#1D8BC0] shadow-sm transition-all"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 h-13 px-6 rounded-btn bg-[#229ED9] text-white font-black hover:bg-[#1D8BC0] shadow-sm transition-all"
             >
               <Send className="w-4 h-4" />
               <span>Telegram @AbegazMotors</span>
@@ -785,9 +828,9 @@ export const HomePage: React.FC = () => {
 
             <a
               href="tel:+251114651553"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 h-13 px-6 rounded-btn border-2 border-slate-700 text-slate-200 font-bold hover:bg-slate-800 transition-all font-mono"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 h-13 px-6 rounded-btn border-2 border-blue-600 bg-white text-blue-700 font-extrabold hover:bg-blue-50 transition-all font-mono shadow-xs"
             >
-              <Phone className="w-4 h-4 text-orange-signal" />
+              <Phone className="w-4 h-4 text-red-600" />
               <span>011 465 1553</span>
             </a>
           </div>

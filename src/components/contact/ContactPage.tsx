@@ -53,25 +53,23 @@ export const ContactPage: React.FC = () => {
 
   return (
     <div className="bg-mist min-h-screen pb-24">
-      {/* 1. HERO HEADER */}
-      <section className="bg-navy text-white bg-blueprint-dark relative overflow-hidden pt-12 pb-14 sm:py-16 border-b border-slate-800">
-        <div className="absolute inset-0 bg-radial-gradient opacity-60 pointer-events-none" />
-        
+      {/* 1. HERO HEADER - White background, Royal Blue text, Brand Red accents */}
+      <section className="bg-gradient-to-b from-blue-50/70 via-white to-white text-slate-800 relative overflow-hidden pt-12 pb-16 sm:py-20 border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-800/90 text-orange-signal text-xs font-bold border border-slate-700 shadow-sm backdrop-blur-sm">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-red-50 text-red-600 text-xs font-bold border border-red-200 shadow-xs">
             <Compass className="w-3.5 h-3.5" />
             <span>{locale === 'am' ? 'አበጋዝ ሞተርስ ኢንጂነሪንግ' : 'Abegaz Motors Engineering'}</span>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight">
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-blue-900 tracking-tight leading-tight">
             {locale === 'am' ? (
-              <>አድራሻና <span className="text-orange-signal">ቀጥታ መገናኛዎች</span></>
+              <>አድራሻና <span className="text-red-600">ቀጥታ መገናኛዎች</span></>
             ) : (
-              <>Contact & <span className="text-orange-signal">Workshop Directions</span></>
+              <>Contact & <span className="text-red-600">Workshop Directions</span></>
             )}
           </h1>
 
-          <p className="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+          <p className="text-slate-700 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
             {locale === 'am'
               ? 'በአካል ለመምጣት፣ በስልክ ለመደወል ወይም በቴሌግራም ፈጣን መልእክት ለመላክ የተሟላ የወርክሾፓችን መረጃ።'
               : 'Direct hotlines, instant Telegram desk, live interactive map, and workshop bay hours.'}
@@ -79,12 +77,12 @@ export const ContactPage: React.FC = () => {
 
           {/* Live Open / Closed Banner */}
           <div className="pt-2">
-            <div className={`inline-flex items-center gap-2.5 px-4 py-2 rounded-full text-xs font-black shadow-md border ${
+            <div className={`inline-flex items-center gap-2.5 px-4 py-2 rounded-full text-xs font-black shadow-xs border ${
               statusInfo.isOpen
-                ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/50 backdrop-blur-sm'
-                : 'bg-red-500/20 text-red-300 border-red-500/50 backdrop-blur-sm'
+                ? 'bg-emerald-50 text-emerald-700 border-emerald-300'
+                : 'bg-red-50 text-red-700 border-red-300'
             }`}>
-              <span className={`w-2.5 h-2.5 rounded-full animate-ping ${statusInfo.isOpen ? 'bg-emerald-400' : 'bg-red-400'}`} />
+              <span className={`w-2.5 h-2.5 rounded-full animate-ping ${statusInfo.isOpen ? 'bg-emerald-500' : 'bg-red-500'}`} />
               <span>{locale === 'am' ? statusInfo.nextStatusAm : statusInfo.nextStatusEn}</span>
             </div>
           </div>
