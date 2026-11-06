@@ -149,14 +149,14 @@ export const Header: React.FC = () => {
       </div>
 
       {/* 2. Main Navigation Bar */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-2 sm:gap-4">
         
         {/* Brand Logo & Name */}
         <div 
           onClick={() => handleNavClick('home')}
-          className="cursor-pointer flex items-center gap-2.5 sm:gap-3 select-none group"
+          className="cursor-pointer flex items-center gap-2 sm:gap-2.5 select-none group shrink-0"
         >
-          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white flex items-center justify-center p-1 shadow-md border-2 border-red-500 group-hover:border-blue-700 transition-colors overflow-hidden shrink-0">
+          <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-white flex items-center justify-center p-1 shadow-xs border-2 border-red-500 group-hover:border-blue-700 transition-colors overflow-hidden shrink-0">
             <img 
               src="/logo.png" 
               alt="Abegaz Motors Logo" 
@@ -166,13 +166,13 @@ export const Header: React.FC = () => {
               }}
             />
           </div>
-          <div>
-            <div className={`font-black text-base sm:text-xl tracking-tight leading-none group-hover:text-red-500 transition-colors ${
+          <div className="shrink-0">
+            <div className={`font-black text-sm sm:text-base xl:text-lg tracking-tight leading-none group-hover:text-red-500 transition-colors whitespace-nowrap ${
               isTransparent ? 'text-white drop-shadow-md' : 'text-blue-950'
             }`}>
               አበጋዝ ሞተርስ ኢንጂነሪንግ
             </div>
-            <div className={`text-[9px] sm:text-xs font-black tracking-wider uppercase mt-0.5 ${
+            <div className={`text-[8px] sm:text-[10px] font-black tracking-wider uppercase mt-0.5 whitespace-nowrap ${
               isTransparent ? 'text-red-400 drop-shadow-sm' : 'text-red-600'
             }`}>
               Abegaz Motors Engineering
@@ -180,17 +180,17 @@ export const Header: React.FC = () => {
           </div>
         </div>
 
-        {/* Desktop Nav Links */}
-        <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
+        {/* Desktop Nav Links - Slightly reduced text size and strictly one-line for "About us" */}
+        <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1.5 shrink-0">
           {navLinks.map((link) => {
             const isActive = currentView === link.id;
             return (
               <button
                 key={link.id}
                 onClick={() => handleNavClick(link.id)}
-                className={`px-3 py-2 rounded-xl text-sm font-extrabold transition-all duration-200 ${
+                className={`px-2.5 py-1.5 xl:px-3 xl:py-2 rounded-xl text-xs xl:text-[13px] font-bold whitespace-nowrap transition-all duration-200 ${
                   isActive 
-                    ? (isTransparent ? 'text-white bg-red-600 shadow-md' : 'text-red-600 bg-red-50 border border-red-200 shadow-2xs')
+                    ? (isTransparent ? 'text-white bg-red-600 shadow-md font-extrabold' : 'text-red-600 bg-red-50 border border-red-200 shadow-2xs font-extrabold')
                     : (isTransparent ? 'text-white/90 hover:text-white hover:bg-white/15' : 'text-blue-950 hover:text-red-600 hover:bg-blue-50/70')
                 }`}
               >
@@ -201,25 +201,25 @@ export const Header: React.FC = () => {
         </nav>
 
         {/* Right CTA Actions */}
-        <div className="flex items-center gap-2 sm:gap-3">
+        <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
           {/* Language Switcher Pill */}
           <button
             onClick={() => setLocale(locale === 'am' ? 'en' : 'am')}
-            className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl border text-xs font-black transition-all shadow-2xs ${
+            className={`flex items-center gap-1 px-2 sm:px-2.5 py-1.5 rounded-xl border text-xs font-black whitespace-nowrap transition-all shadow-2xs ${
               isTransparent
                 ? 'border-white/25 text-white bg-white/15 hover:bg-white/25'
                 : 'border-slate-300 hover:border-red-500 text-blue-900 bg-white hover:text-red-600'
             }`}
             title="ቋንቋ ይቀይሩ / Switch Language"
           >
-            <Globe className="w-3.5 h-3.5 text-red-500" />
+            <Globe className="w-3.5 h-3.5 text-red-500 shrink-0" />
             <span>{locale === 'am' ? 'EN' : 'አማ'}</span>
           </button>
 
           {/* Account Icon */}
           <button
             onClick={() => handleNavClick('account')}
-            className={`p-2 sm:p-2.5 rounded-xl border transition-all shadow-2xs ${
+            className={`p-2 rounded-xl border transition-all shadow-2xs ${
               isTransparent
                 ? 'border-white/25 text-white bg-white/15 hover:bg-white/25'
                 : (currentView === 'account' ? 'bg-red-50 border-red-500 text-red-600' : 'border-slate-300 hover:border-red-500 text-blue-900 bg-white hover:text-red-600 hover:bg-red-50')
@@ -229,12 +229,12 @@ export const Header: React.FC = () => {
             <UserIcon className="w-4 h-4" />
           </button>
 
-          {/* Book Appointment CTA Button */}
+          {/* Book Appointment CTA Button - Adjusted compact & responsive */}
           <button
             onClick={() => handleNavClick('book')}
-            className="hidden sm:inline-flex items-center gap-2 h-11 px-5 rounded-xl bg-red-600 hover:bg-red-700 text-white font-black text-sm shadow-md hover:shadow-lg transition-all active:scale-98"
+            className="hidden sm:inline-flex items-center gap-1.5 h-10 px-3.5 xl:px-4 rounded-xl bg-red-600 hover:bg-red-700 text-white font-black text-xs xl:text-sm whitespace-nowrap shadow-md hover:shadow-lg transition-all active:scale-98"
           >
-            <Calendar className="w-4 h-4 text-white" />
+            <Calendar className="w-4 h-4 text-white shrink-0" />
             <span>{locale === 'am' ? 'ቀጠሮ ይያዙ' : 'Book Appointment'}</span>
           </button>
 
