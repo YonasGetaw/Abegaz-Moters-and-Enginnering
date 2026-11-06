@@ -244,7 +244,7 @@ export const TrackBookingPage: React.FC = () => {
                   <div>
                     <span className="text-muted block font-semibold">{locale === 'am' ? 'የወርክሾፕ ቤይ:' : 'Workshop Bay:'}</span>
                     <strong className="text-navy">ነፋስ ስልክ-ላፍቶ ወርክሾፕ</strong>
-                    <span className="block text-[11px] text-slate-500 mt-0.5">ከአሌክሳንደር ፑሽኪን መንገድ፣ ኬራ አካባቢ</span>
+                    <span className="block text-[11px] text-slate-500 mt-0.5">ከአሌክሳንደር ፑሽኪን መንገድ፣ ቄራ አካባቢ</span>
                   </div>
                 </div>
 

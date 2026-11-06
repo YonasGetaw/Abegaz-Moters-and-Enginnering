@@ -16,7 +16,10 @@ import {
   ChevronRight,
   ChevronDown,
   Star,
-  HelpCircle
+  HelpCircle,
+  Play,
+  Film,
+  X
 } from 'lucide-react';
 import { Button } from '../common/Button';
 import { BeforeAfterSlider } from '../common/BeforeAfterSlider';
@@ -24,6 +27,10 @@ import { INITIAL_TESTIMONIALS, INITIAL_FAQS } from '../../lib/constants';
 
 export const HomePage: React.FC = () => {
   const { locale, setCurrentView, setSelectedServiceSlug, services, packages } = useApp();
+
+  // Hero Visual Mode & Video Modal
+  const [heroVisualMode, setHeroVisualMode] = useState<'signboard' | 'video'>('signboard');
+  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
 
   // Quick Booking Form State on Hero
   const [quickService, setQuickService] = useState('computer-diagnostics');
@@ -142,12 +149,25 @@ export const HomePage: React.FC = () => {
                   <span>{locale === 'am' ? 'ቀጠሮ ይያዙ' : 'Book Appointment'}</span>
                 </Button>
 
+                {/* Watch Workshop Video Trigger */}
+                <button
+                  type="button"
+                  onClick={() => setIsVideoModalOpen(true)}
+                  className="inline-flex items-center justify-center gap-2 h-12 px-5 rounded-xl bg-white hover:bg-red-50 text-blue-900 hover:text-red-600 border-2 border-red-500 font-black text-sm shadow-sm transition-all group"
+                  title="Watch Live Company Video"
+                >
+                  <span className="w-7 h-7 rounded-full bg-red-600 group-hover:bg-red-700 text-white flex items-center justify-center shadow-xs">
+                    <Play className="w-3.5 h-3.5 fill-white ml-0.5" />
+                  </span>
+                  <span>{locale === 'am' ? 'የወርክሾፕ ቪዲዮ ይመልከቱ' : 'Watch Workshop Video'}</span>
+                </button>
+
                 <Button
                   size="lg"
                   variant="secondary"
                   onClick={() => setCurrentView('services')}
                 >
-                  <span>{locale === 'am' ? 'አገልግሎቶችን ይመልከቱ' : 'Explore Services'}</span>
+                  <span>{locale === 'am' ? 'አገልግሎቶች' : 'Services'}</span>
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
               </div>
@@ -169,14 +189,78 @@ export const HomePage: React.FC = () => {
               </div>
             </div>
 
-            {/* Right Column: Hero Visual & Quick Booking Card */}
+            {/* Right Column: Hero Visual (Signboard vs Workshop Video Switcher) */}
             <div className="lg:col-span-5 relative">
               <div className="relative rounded-banner overflow-hidden shadow-xl border-2 border-slate-200 bg-white p-2 sm:p-3">
-                <img
-                  src="/hero-banner.png"
-                  alt="አበጋዝ ሞተርስ ኢንጂነሪንግ - Abegaz Motors Engineering Official Signboard"
-                  className="w-full h-auto object-contain rounded-xl"
-                />
+                {/* Switcher: Signboard vs Live Workshop Video */}
+                <div className="flex items-center justify-between gap-2 mb-2 px-1">
+                  <div className="inline-flex p-1 bg-slate-100 rounded-xl text-xs font-bold">
+                    <button
+                      type="button"
+                      onClick={() => setHeroVisualMode('signboard')}
+                      className={`px-3 py-1 rounded-lg transition-all ${
+                        heroVisualMode === 'signboard' 
+                          ? 'bg-white text-blue-900 shadow-xs font-black' 
+                          : 'text-slate-600 hover:text-blue-900'
+                      }`}
+                    >
+                      {locale === 'am' ? '📷 ኦፊሴላዊ ሳይንቦርድ' : '📷 Signboard'}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setHeroVisualMode('video')}
+                      className={`flex items-center gap-1.5 px-3 py-1 rounded-lg transition-all ${
+                        heroVisualMode === 'video' 
+                          ? 'bg-red-600 text-white shadow-xs font-black' 
+                          : 'text-slate-600 hover:text-red-600'
+                      }`}
+                    >
+                      <Film className="w-3.5 h-3.5" />
+                      <span>{locale === 'am' ? '🎥 የወርክሾፕ ቪዲዮ' : '🎥 Workshop Video'}</span>
+                    </button>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => setIsVideoModalOpen(true)}
+                    className="text-[11px] font-black text-red-600 hover:underline flex items-center gap-1"
+                  >
+                    <Play className="w-3 h-3 fill-red-600" />
+                    <span>{locale === 'am' ? 'ሙሉ ቪዲዮ' : 'Play Video'}</span>
+                  </button>
+                </div>
+
+                {heroVisualMode === 'signboard' ? (
+                  <img
+                    src="/hero-banner.png"
+                    alt="አበጋዝ ሞተርስ ኢንጂነሪንግ - Abegaz Motors Engineering Official Signboard"
+                    className="w-full h-auto object-contain rounded-xl"
+                  />
+                ) : (
+                  <div className="relative rounded-xl overflow-hidden aspect-[16/10] bg-slate-900 shadow-inner group">
+                    <video
+                      src="https://assets.mixkit.co/videos/preview/mixkit-car-mechanic-working-in-a-garage-43285-large.mp4"
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-end justify-between p-3.5">
+                      <div>
+                        <p className="text-white text-xs font-black drop-shadow-xs">አበጋዝ ሞተርስ ኢንጂነሪንግ</p>
+                        <p className="text-[10px] text-red-300 font-semibold">Live Precision Engineering Bay</p>
+                      </div>
+                      <button
+                        onClick={() => setIsVideoModalOpen(true)}
+                        className="px-3 py-1.5 rounded-lg bg-red-600 hover:bg-red-700 text-white text-xs font-black flex items-center gap-1.5 shadow-md transition-all active:scale-95"
+                      >
+                        <Play className="w-3.5 h-3.5 fill-white" />
+                        <span>{locale === 'am' ? 'ቪዲዮ አጉላ' : 'Expand'}</span>
+                      </button>
+                    </div>
+                  </div>
+                )}
                 
                 <div className="mt-2.5 bg-blue-900 p-3 rounded-lg border border-blue-800 text-white flex items-center justify-between gap-2 shadow-sm">
                   <div className="flex items-center gap-2">
@@ -791,7 +875,7 @@ export const HomePage: React.FC = () => {
       <section className="bg-gradient-to-b from-white via-blue-50/50 to-blue-100/60 text-slate-800 py-16 border-t-2 border-slate-200 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6 relative z-10">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-red-50 text-red-600 text-xs font-bold border border-red-200 shadow-xs">
-            <span>🇪🇹 አዲስ አበባ · ነፋስ ስልክ-ላፍቶ · ኬራ</span>
+            <span>🇪🇹 አዲስ አበባ · ነፋስ ስልክ-ላፍቶ · ቄራ</span>
           </div>
 
           <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-blue-900">
@@ -827,15 +911,70 @@ export const HomePage: React.FC = () => {
             </a>
 
             <a
-              href="tel:+251114651553"
+              href="tel:+251975480808"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 h-13 px-6 rounded-btn border-2 border-blue-600 bg-white text-blue-700 font-extrabold hover:bg-blue-50 transition-all font-mono shadow-xs"
             >
               <Phone className="w-4 h-4 text-red-600" />
-              <span>011 465 1553</span>
+              <span>0975 48 08 08 / 011 465 1553</span>
             </a>
           </div>
         </div>
       </section>
+
+      {/* Workshop Video Modal */}
+      {isVideoModalOpen && (
+        <div 
+          onClick={() => setIsVideoModalOpen(false)}
+          className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 cursor-pointer"
+        >
+          <div 
+            onClick={(e) => e.stopPropagation()} 
+            className="relative max-w-4xl w-full bg-slate-900 rounded-3xl overflow-hidden border-2 border-slate-700 shadow-2xl"
+          >
+            <div className="p-4 bg-slate-800 flex items-center justify-between text-white border-b border-slate-700">
+              <div className="flex items-center gap-2.5">
+                <span className="w-3 h-3 rounded-full bg-red-600 animate-pulse shrink-0" />
+                <h3 className="text-sm sm:text-base font-black text-white">
+                  {locale === 'am' ? 'አበጋዝ ሞተርስ ኢንጂነሪንግ — የወርክሾፕ ቪዲዮ' : 'Abegaz Motors Engineering — Workshop Bay Live Video'}
+                </h3>
+              </div>
+              <button 
+                onClick={() => setIsVideoModalOpen(false)}
+                className="p-1.5 rounded-lg bg-slate-700 hover:bg-red-600 text-white transition-colors"
+                title="Close"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="relative aspect-video bg-black flex items-center justify-center">
+              <video
+                src="https://assets.mixkit.co/videos/preview/mixkit-car-mechanic-working-in-a-garage-43285-large.mp4"
+                controls
+                autoPlay
+                className="w-full h-full object-contain"
+              />
+            </div>
+
+            <div className="p-4 bg-slate-800/90 flex flex-col sm:flex-row items-center justify-between gap-3">
+              <p className="text-xs text-slate-300 font-medium">
+                {locale === 'am' ? 'ትክክለኛ ምህንድስና · ዘመናዊ መሣሪያዎች · ቄራ፣ አዲስ አበባ' : 'Precision Engineering · Modern Bay · Kera, Addis Ababa'}
+              </p>
+              <Button
+                variant="primary"
+                size="sm"
+                onClick={() => {
+                  setIsVideoModalOpen(false);
+                  setCurrentView('book');
+                }}
+              >
+                <Calendar className="w-4 h-4 mr-1.5" />
+                <span>{locale === 'am' ? 'ቀጠሮ ይያዙ' : 'Book Appointment'}</span>
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

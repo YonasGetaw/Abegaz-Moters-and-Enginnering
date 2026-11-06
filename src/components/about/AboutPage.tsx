@@ -75,27 +75,25 @@ export const AboutPage: React.FC = () => {
   const leadership = [
     {
       name: 'አቢይ አበጋዝ (Abiy Abegaz)',
-      roleAm: 'ዋና ስራ አስኪያጅና መሃንዲስ (Workshop Manager & Lead)',
-      roleEn: 'Managing Director & Lead Engineer',
-      bioAm: 'በአውቶሞቲቭ ኢንጂነሪንግና በወርክሾፕ አስተዳደር ከ 15+ ዓመታት በላይ የካበተ ልምድ።',
-      bioEn: 'Over 15+ years spearheading precision automotive engineering and modern workshop operations.',
-      badge: 'Lead'
+      roleAm: 'ዋና ስራ አስፈፃሚ እና ዋና ስራ አስኪያጅ (CEO & General Manager)',
+      roleEn: 'CEO & General Manager',
+      phone: '091 120 7549',
+      phoneRaw: '+251911207549',
+      bioAm: 'በአውቶሞቲቭ ኢንጂነሪንግና በወርክሾፕ ከፍተኛ አመራር ከ 15+ ዓመታት በላይ የካበተ ልምድ ያካበቱ መሃንዲስ።',
+      bioEn: 'Over 15+ years spearheading precision automotive engineering and executive workshop operations.',
+      badge: 'CEO & GM',
+      initials: 'AA'
     },
     {
-      name: 'ሳሙኤል በቀለ (Samuel B.)',
-      roleAm: 'ዋና ማስተር ቴክኒሻን (Master Technician)',
-      roleEn: 'Master Mechanical Technician',
-      bioAm: 'በከባድና ቀላል ተሽከርካሪዎች የሞተርና የሻሲ እድሳት የተካኑ ከፍተኛ ባለሙያ።',
-      bioEn: 'Specialist in heavy powertrain rebuilding and precision mechanical calibration.',
-      badge: 'Master'
-    },
-    {
-      name: 'መቅደስ አስፋው (Mekdes A.)',
-      roleAm: 'የደንበኞች አገልግሎትና የቀጠሮ ዴስክ (Service Advisor)',
-      roleEn: 'Client Relations & Intake Coordinator',
-      bioAm: 'የደንበኞችን ጥያቄዎችና የቀጠሮ ሂደቶችን በቅልጥፍና የሚያስተባብሩ።',
-      bioEn: 'Dedicated to streamlined booking schedules, clear estimates, and timely handovers.',
-      badge: 'Operations'
+      name: 'ሚኪያስ ፀጋዬ (Mikiyas Tsegaye)',
+      roleAm: 'ዋና ስራ አስኪያጅ (General Manager)',
+      roleEn: 'General Manager',
+      phone: '091 141 4570',
+      phoneRaw: '+251911414570',
+      bioAm: 'የወርክሾፕ ስራዎችን፣ የቴክኒክ ጥራት ቁጥጥርና የደንበኞች አያያዝን በላቀ ብቃት የሚመሩ።',
+      bioEn: 'Directing daily workshop operations, engineering quality assurance, and seamless service delivery.',
+      badge: 'General Manager',
+      initials: 'MT'
     }
   ];
 
@@ -119,7 +117,7 @@ export const AboutPage: React.FC = () => {
 
           <p className="text-slate-700 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
             {locale === 'am'
-              ? 'በአዲስ አበባ፣ ነፋስ ስልክ-ላፍቶ (ኬራ አካባቢ) የሚገኝ ዘመናዊ የምህንድስና ደረጃዎችን የጠበቀ አስተማማኝ የመኪና ጥገና ማዕከል ነው።'
+              ? 'በአዲስ አበባ፣ ነፋስ ስልክ-ላፍቶ (ቄራ አካባቢ) የሚገኝ ዘመናዊ የምህንድስና ደረጃዎችን የጠበቀ አስተማማኝ የመኪና ጥገና ማዕከል ነው።'
               : 'Addis Ababa’s benchmark automotive engineering center located at Nefas Silk-Lafto, Alexander Pushkin Street near Kera.'}
           </p>
 
@@ -130,7 +128,7 @@ export const AboutPage: React.FC = () => {
             </span>
             <span className="flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-full border border-slate-200 shadow-2xs">
               <PhoneCall className="w-4 h-4 text-red-600" />
-              <span>{WORKSHOP_INFO.phone}</span>
+              <span>{WORKSHOP_INFO.customerServicePhoneMobile} / {WORKSHOP_INFO.customerServicePhoneOffice}</span>
             </span>
           </div>
         </div>
@@ -282,29 +280,41 @@ export const AboutPage: React.FC = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           {leadership.map((leader, idx) => (
             <div 
               key={idx}
-              className="bg-white rounded-2xl p-6 border border-line shadow-sm hover:shadow-lg transition-all text-center space-y-4"
+              className="bg-white rounded-3xl p-8 border-2 border-slate-200 hover:border-blue-600 shadow-sm hover:shadow-xl transition-all text-center space-y-4 flex flex-col justify-between"
             >
-              <div className="w-20 h-20 rounded-full bg-navy text-orange-signal mx-auto flex items-center justify-center font-black text-xl border-2 border-orange-signal shadow-md">
-                {leader.badge === 'Lead' ? 'AA' : leader.badge === 'Master' ? 'SB' : 'MA'}
+              <div className="space-y-4">
+                <div className="w-24 h-24 rounded-full bg-blue-900 text-white mx-auto flex items-center justify-center font-black text-2xl border-4 border-red-600 shadow-lg">
+                  {leader.initials}
+                </div>
+
+                <div>
+                  <span className="text-[11px] font-black uppercase tracking-wider bg-red-50 text-red-600 border border-red-200 px-3 py-1 rounded-full">
+                    {leader.badge}
+                  </span>
+                  <h3 className="text-xl font-black text-blue-900 mt-3">
+                    {leader.name}
+                  </h3>
+                  <p className="text-xs font-bold text-red-600 mt-1">
+                    {locale === 'am' ? leader.roleAm : leader.roleEn}
+                  </p>
+                  <p className="text-xs text-slate-600 mt-3 leading-relaxed">
+                    {locale === 'am' ? leader.bioAm : leader.bioEn}
+                  </p>
+                </div>
               </div>
 
-              <div>
-                <span className="text-[10px] font-bold uppercase tracking-wider bg-orange-tint text-orange-deep px-2.5 py-0.5 rounded-full">
-                  {leader.badge}
-                </span>
-                <h3 className="text-lg font-black text-navy mt-2">
-                  {leader.name}
-                </h3>
-                <p className="text-xs font-bold text-slate-500 mt-0.5">
-                  {locale === 'am' ? leader.roleAm : leader.roleEn}
-                </p>
-                <p className="text-xs text-slate-600 mt-2 leading-relaxed">
-                  {locale === 'am' ? leader.bioAm : leader.bioEn}
-                </p>
+              <div className="pt-4 border-t border-slate-100 flex items-center justify-center">
+                <a
+                  href={`tel:${leader.phoneRaw}`}
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-50 hover:bg-red-50 text-blue-800 hover:text-red-600 border border-blue-200 hover:border-red-300 text-xs font-black transition-all font-mono shadow-xs"
+                >
+                  <PhoneCall className="w-4 h-4 text-red-600" />
+                  <span>{leader.phone}</span>
+                </a>
               </div>
             </div>
           ))}
@@ -389,10 +399,10 @@ export const AboutPage: React.FC = () => {
             {locale === 'am' ? 'ለመኪናዎ ዛሬውኑ አስተማማኝ እንክብካቤ ያግኙ' : 'Experience Precision Automotive Engineering'}
           </h3>
 
-          <p className="text-xs sm:text-sm text-muted max-w-lg mx-auto leading-relaxed">
+          <p className="text-xs sm:text-sm text-slate-600 max-w-lg mx-auto leading-relaxed">
             {locale === 'am'
-              ? 'በድረ-ገጻችን በቀጥታ ቀጠሮ ይያዙ ወይም በስልክ ቁጥራችን 011 465 1553 ደውለው ያማክሩን።'
-              : 'Reserve your verified bay appointment online or reach our service desk directly at 011 465 1553.'}
+              ? 'በድረ-ገጻችን በቀጥታ ቀጠሮ ይያዙ ወይም በደንበኞች አገልግሎት ስልኮቻችን 0975 48 08 08 / 011 465 1553 ደውለው ያማክሩን።'
+              : 'Reserve your verified bay appointment online or reach our customer service desk at 0975 48 08 08 / 011 465 1553.'}
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
@@ -410,10 +420,10 @@ export const AboutPage: React.FC = () => {
 
             <a
               href={`tel:${WORKSHOP_INFO.phoneRaw}`}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-button font-bold text-sm bg-slate-100 hover:bg-slate-200 text-navy transition-colors font-mono"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-black text-sm bg-blue-50 hover:bg-blue-100 text-blue-900 border border-blue-200 transition-colors font-mono"
             >
-              <PhoneCall className="w-4 h-4 text-orange-deep" />
-              <span>{WORKSHOP_INFO.phone}</span>
+              <PhoneCall className="w-4 h-4 text-red-600" />
+              <span>0975 48 08 08 / 011 465 1553</span>
             </a>
           </div>
         </div>

@@ -769,9 +769,29 @@ export const INITIAL_CLOSED_DATES: ClosedDate[] = [
 export const WORKSHOP_INFO = {
   nameAm: 'አበጋዝ ሞተርስ ኢንጂነሪንግ',
   nameEn: 'Abegaz Motors Engineering',
-  phone: '011 465 1553',
-  phoneInternational: '+251 11 465 1553',
-  phoneRaw: '+251114651553',
+  phone: '0975 48 08 08',
+  phoneOffice: '011 465 1553',
+  phoneInternational: '+251 975 48 08 08',
+  phoneRaw: '+251975480808',
+  phoneOfficeRaw: '+251114651553',
+  customerServicePhoneMobile: '0975 48 08 08',
+  customerServicePhoneOffice: '011 465 1553',
+  
+  // Leadership & Management Direct Contact Numbers
+  ceoManager: 'Abiy Abegaz',
+  ceoManagerAm: 'አቢይ አበጋዝ',
+  ceoManagerTitleAm: 'ዋና ስራ አስፈፃሚ እና ዋና ስራ አስኪያጅ (CEO & General Manager)',
+  ceoManagerTitleEn: 'CEO & General Manager',
+  ceoPhone: '091 120 7549',
+  ceoPhoneRaw: '+251911207549',
+
+  generalManager: 'Mikiyas Tsegaye',
+  generalManagerAm: 'ሚኪያስ ፀጋዬ',
+  generalManagerTitleAm: 'ዋና ስራ አስኪያጅ (General Manager)',
+  generalManagerTitleEn: 'General Manager',
+  generalManagerPhone: '091 141 4570',
+  generalManagerPhoneRaw: '+251911414570',
+
   addressAm: 'አሌክሳንደር ፑሽኪን መንገድ፣ አዲስ አበባ',
   addressEn: 'Alexander Pushkin St, Addis Ababa',
   plusCode: 'XPPW+7H Addis Ababa',
@@ -787,6 +807,6 @@ export const WORKSHOP_INFO = {
   subCity: 'Nefas Silk-Lafto',
   subCityAm: 'ነፋስ ስልክ-ላፍቶ',
   areaDescription: 'Near Alexander Pushkin Street and the Kera area',
-  areaDescriptionAm: 'ከአሌክሳንደር ፑሽኪን መንገድ እና ከኬራ አካባቢ',
+  areaDescriptionAm: 'ከአሌክሳንደር ፑሽኪን መንገድ እና ከቄራ አካባቢ',
 };
 

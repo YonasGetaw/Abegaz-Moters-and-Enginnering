@@ -429,7 +429,7 @@ export const CustomerPortal: React.FC = () => {
                     ነፋስ ስልክ-ላፍቶ ወርክሾፕ
                   </span>
                   <p className="text-[11px] text-slate-300 mt-0.5">
-                    ከአሌክሳንደር ፑሽኪን መንገድ፣ ኬራ አካባቢ
+                    ከአሌክሳንደር ፑሽኪን መንገድ፣ ቄራ አካባቢ
                   </p>
                 </div>
               </div>

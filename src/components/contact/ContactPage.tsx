@@ -92,22 +92,25 @@ export const ContactPage: React.FC = () => {
       {/* 2. 4 QUICK ACTION TILES */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-7 relative z-20">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {/* Phone Tile */}
-          <div className="bg-white p-5 rounded-2xl border border-line shadow-sm hover:shadow-md transition-all flex items-center justify-between">
+          {/* Customer Service Phone Tile */}
+          <div className="bg-white p-5 rounded-2xl border-2 border-slate-200 shadow-sm hover:shadow-md transition-all flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-11 h-11 rounded-xl bg-orange-tint text-orange-deep flex items-center justify-center shrink-0">
+              <div className="w-11 h-11 rounded-xl bg-red-50 text-red-600 flex items-center justify-center shrink-0">
                 <Phone className="w-5 h-5" />
               </div>
               <div>
-                <p className="text-[11px] font-bold text-muted uppercase">{locale === 'am' ? 'የስልክ ጥሪ' : 'Direct Call'}</p>
-                <a href={`tel:${WORKSHOP_INFO.phoneRaw}`} className="text-sm font-extrabold text-navy hover:text-orange-deep font-mono">
-                  {WORKSHOP_INFO.phone}
+                <p className="text-[10px] font-black text-red-600 uppercase tracking-wider">{locale === 'am' ? 'የደንበኞች አገልግሎት' : 'Customer Service'}</p>
+                <a href={`tel:${WORKSHOP_INFO.phoneRaw}`} className="text-xs sm:text-sm font-black text-blue-900 hover:text-red-600 font-mono block">
+                  {WORKSHOP_INFO.customerServicePhoneMobile}
                 </a>
+                <span className="text-[11px] font-bold text-slate-500 font-mono block">
+                  Office: {WORKSHOP_INFO.customerServicePhoneOffice}
+                </span>
               </div>
             </div>
             <button
-              onClick={() => copyToClipboard(WORKSHOP_INFO.phone, 'ስልክ')}
-              className="p-1.5 rounded-lg text-slate-400 hover:text-navy hover:bg-mist"
+              onClick={() => copyToClipboard(WORKSHOP_INFO.customerServicePhoneMobile, 'የደንበኞች አገልግሎት ስልክ')}
+              className="p-1.5 rounded-lg text-slate-400 hover:text-blue-900 hover:bg-slate-100"
               title="Copy"
             >
               <Copy className="w-4 h-4" />
@@ -115,16 +118,19 @@ export const ContactPage: React.FC = () => {
           </div>
 
           {/* Telegram Tile */}
-          <div className="bg-white p-5 rounded-2xl border border-line shadow-sm hover:shadow-md transition-all flex items-center justify-between">
+          <div className="bg-white p-5 rounded-2xl border-2 border-slate-200 shadow-sm hover:shadow-md transition-all flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="w-11 h-11 rounded-xl bg-[#229ED9]/10 text-[#229ED9] flex items-center justify-center shrink-0">
                 <Send className="w-5 h-5" />
               </div>
               <div>
-                <p className="text-[11px] font-bold text-muted uppercase">Telegram Desk</p>
+                <p className="text-[10px] font-black text-blue-700 uppercase tracking-wider">Telegram Desk</p>
                 <a href="https://t.me/AbegazMotors" target="_blank" rel="noreferrer" className="text-sm font-extrabold text-[#0088cc] hover:underline">
                   @AbegazMotors
                 </a>
+                <span className="text-[11px] text-slate-500 block">
+                  {locale === 'am' ? 'ፈጣን ምላሽ' : 'Instant Reply'}
+                </span>
               </div>
             </div>
             <a
@@ -132,28 +138,29 @@ export const ContactPage: React.FC = () => {
               target="_blank"
               rel="noreferrer"
               className="p-1.5 rounded-lg bg-[#229ED9] text-white hover:bg-[#1D8BC0]"
-              title="Open"
+              title="Open Telegram"
             >
               <ExternalLink className="w-3.5 h-3.5" />
             </a>
           </div>
 
           {/* Email Tile */}
-          <div className="bg-white p-5 rounded-2xl border border-line shadow-sm hover:shadow-md transition-all flex items-center justify-between">
+          <div className="bg-white p-5 rounded-2xl border-2 border-slate-200 shadow-sm hover:shadow-md transition-all flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-11 h-11 rounded-xl bg-mist text-navy flex items-center justify-center shrink-0">
+              <div className="w-11 h-11 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center shrink-0">
                 <Mail className="w-5 h-5" />
               </div>
               <div>
-                <p className="text-[11px] font-bold text-muted uppercase">{locale === 'am' ? 'ኢሜይል' : 'Email'}</p>
-                <a href={`mailto:${WORKSHOP_INFO.email}`} className="text-xs sm:text-sm font-extrabold text-navy hover:text-orange-deep truncate block max-w-[130px]">
+                <p className="text-[10px] font-black text-blue-700 uppercase tracking-wider">{locale === 'am' ? 'ኦፊሴላዊ ኢሜይል' : 'Email'}</p>
+                <a href={`mailto:${WORKSHOP_INFO.email}`} className="text-xs sm:text-sm font-extrabold text-blue-900 hover:text-red-600 truncate block max-w-[130px]">
                   {WORKSHOP_INFO.email}
                 </a>
+                <span className="text-[11px] text-slate-500 block">Manager Desk</span>
               </div>
             </div>
             <button
               onClick={() => copyToClipboard(WORKSHOP_INFO.email, 'ኢሜይል')}
-              className="p-1.5 rounded-lg text-slate-400 hover:text-navy hover:bg-mist"
+              className="p-1.5 rounded-lg text-slate-400 hover:text-blue-900 hover:bg-slate-100"
               title="Copy"
             >
               <Copy className="w-4 h-4" />
@@ -161,23 +168,26 @@ export const ContactPage: React.FC = () => {
           </div>
 
           {/* Location Tile */}
-          <div className="bg-white p-5 rounded-2xl border border-line shadow-sm hover:shadow-md transition-all flex items-center justify-between">
+          <div className="bg-white p-5 rounded-2xl border-2 border-slate-200 shadow-sm hover:shadow-md transition-all flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-11 h-11 rounded-xl bg-orange-tint text-orange-deep flex items-center justify-center shrink-0">
+              <div className="w-11 h-11 rounded-xl bg-red-50 text-red-600 flex items-center justify-center shrink-0">
                 <MapPin className="w-5 h-5" />
               </div>
               <div>
-                <p className="text-[11px] font-bold text-muted uppercase">Addis Ababa</p>
-                <p className="text-xs font-extrabold text-navy truncate max-w-[130px]">
+                <p className="text-[10px] font-black text-red-600 uppercase tracking-wider">Addis Ababa · ቄራ</p>
+                <p className="text-xs font-black text-blue-900 truncate max-w-[130px]">
                   {WORKSHOP_INFO.plusCode}
                 </p>
+                <span className="text-[11px] text-slate-500 block truncate">
+                  {WORKSHOP_INFO.subCityAm}
+                </span>
               </div>
             </div>
             <a
               href={WORKSHOP_INFO.googleMapsUrl}
               target="_blank"
               rel="noreferrer"
-              className="p-1.5 rounded-lg bg-orange-signal text-navy font-bold hover:bg-[#EA580C]"
+              className="p-1.5 rounded-lg bg-red-600 text-white font-bold hover:bg-red-700 shadow-xs"
               title="Directions"
             >
               <Navigation className="w-3.5 h-3.5" />
@@ -212,18 +222,56 @@ export const ContactPage: React.FC = () => {
                 </div>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-mist/80 border border-line/70 space-y-1.5 text-xs">
-                <div className="flex items-center justify-between">
-                  <span className="text-muted font-semibold">{locale === 'am' ? 'አካባቢ፡' : 'Sub-City & Area:'}</span>
-                  <span className="font-extrabold text-navy">ነፋስ ስልክ-ላፍቶ · ኬራ አካባቢ</span>
+              <div className="p-4 rounded-2xl bg-blue-50/50 border border-blue-100 space-y-2.5 text-xs">
+                <div className="flex items-center justify-between pb-2 border-b border-blue-100">
+                  <span className="text-slate-600 font-bold">{locale === 'am' ? 'አካባቢ፡' : 'Sub-City & Area:'}</span>
+                  <span className="font-black text-blue-900">ነፋስ ስልክ-ላፍቶ · ቄራ አካባቢ</span>
                 </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-muted font-semibold">Plus Code:</span>
-                  <span className="font-mono font-bold text-orange-deep">{WORKSHOP_INFO.plusCode}</span>
+                <div className="flex items-center justify-between pb-2 border-b border-blue-100">
+                  <span className="text-slate-600 font-bold">Plus Code:</span>
+                  <span className="font-mono font-black text-red-600">{WORKSHOP_INFO.plusCode}</span>
                 </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-muted font-semibold">{locale === 'am' ? 'ዋና ኃላፊ፡' : 'Manager / Lead:'}</span>
-                  <span className="font-extrabold text-navy">አቢይ አበጋዝ (Abiy Abegaz)</span>
+                
+                {/* Management Contacts */}
+                <div className="pt-1 space-y-2">
+                  <p className="text-[10px] font-black uppercase tracking-wider text-red-600">
+                    {locale === 'am' ? 'የአመራር ቀጥታ ስልክ ቁጥሮች' : 'Executive Leadership Contacts'}
+                  </p>
+                  
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <span className="font-black text-blue-950 block">{WORKSHOP_INFO.ceoManagerAm}</span>
+                      <span className="text-[10px] text-slate-500 block">CEO & Manager</span>
+                    </div>
+                    <a href={`tel:${WORKSHOP_INFO.ceoPhoneRaw}`} className="font-mono font-black text-blue-800 hover:text-red-600 bg-white px-2.5 py-1 rounded-lg border border-slate-200 shadow-2xs">
+                      {WORKSHOP_INFO.ceoPhone}
+                    </a>
+                  </div>
+
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <span className="font-black text-blue-950 block">{WORKSHOP_INFO.generalManagerAm}</span>
+                      <span className="text-[10px] text-slate-500 block">General Manager</span>
+                    </div>
+                    <a href={`tel:${WORKSHOP_INFO.generalManagerPhoneRaw}`} className="font-mono font-black text-blue-800 hover:text-red-600 bg-white px-2.5 py-1 rounded-lg border border-slate-200 shadow-2xs">
+                      {WORKSHOP_INFO.generalManagerPhone}
+                    </a>
+                  </div>
+                </div>
+
+                {/* Customer Service Contacts */}
+                <div className="pt-2 border-t border-blue-100 space-y-1.5">
+                  <p className="text-[10px] font-black uppercase tracking-wider text-blue-700">
+                    {locale === 'am' ? 'የደንበኞች አገልግሎት (Customer Care)' : 'Customer Service Desk'}
+                  </p>
+                  <div className="flex items-center justify-between text-xs font-mono">
+                    <span className="text-slate-600">ሞባይል (Mobile):</span>
+                    <a href="tel:+251975480808" className="font-black text-blue-900 hover:text-red-600">0975 48 08 08</a>
+                  </div>
+                  <div className="flex items-center justify-between text-xs font-mono">
+                    <span className="text-slate-600">ቢሮ (Office):</span>
+                    <a href="tel:+251114651553" className="font-black text-blue-900 hover:text-red-600">011 465 1553</a>
+                  </div>
                 </div>
               </div>
 

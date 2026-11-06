@@ -144,7 +144,7 @@ export const Footer: React.FC = () => {
               >
                 <MapPin className="w-4 h-4 text-red-500 shrink-0 mt-1 group-hover:animate-bounce" />
                 <span className="leading-snug">
-                  {locale === 'am' ? WORKSHOP_INFO.addressAm : WORKSHOP_INFO.addressEn} ({WORKSHOP_INFO.plusCode})
+                  {locale === 'am' ? 'አሌክሳንደር ፑሽኪን መንገድ፣ ቄራ፣ አዲስ አበባ' : WORKSHOP_INFO.addressEn} ({WORKSHOP_INFO.plusCode})
                 </span>
               </a>
               <div className="flex items-start gap-2.5">
@@ -157,13 +157,19 @@ export const Footer: React.FC = () => {
                   <p className="text-xs text-slate-400">እሁድ: ዝግ ነው (Sunday: Closed)</p>
                 </div>
               </div>
-              <a 
-                href={`tel:${WORKSHOP_INFO.phoneRaw}`} 
-                className="flex items-center gap-2.5 hover:text-white transition-colors"
-              >
-                <Phone className="w-4 h-4 text-red-500 shrink-0" />
-                <span className="text-white font-mono font-bold">{WORKSHOP_INFO.phone}</span>
-              </a>
+              <div className="space-y-1 pt-1">
+                <p className="text-[11px] font-bold text-red-400 uppercase tracking-wider">የደንበኞች አገልግሎት (Customer Care):</p>
+                <div className="flex flex-col gap-1 font-mono text-xs">
+                  <a href="tel:+251975480808" className="flex items-center gap-2 hover:text-white transition-colors">
+                    <Phone className="w-3.5 h-3.5 text-red-500 shrink-0" />
+                    <span className="text-white font-bold">0975 48 08 08 (ሞባይል)</span>
+                  </a>
+                  <a href="tel:+251114651553" className="flex items-center gap-2 hover:text-white transition-colors">
+                    <Phone className="w-3.5 h-3.5 text-red-500 shrink-0" />
+                    <span className="text-white font-bold">011 465 1553 (ቢሮ)</span>
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>

@@ -36,7 +36,7 @@ const AppContent: React.FC = () => {
       {/* Main Routed Page Content */}
       <main className="flex-grow">
         {currentView === 'home' && <HomePage />}
-        {currentView === 'about' && <AboutPage />}
+        {currentView === 'about' && <AboutPage />}      
         {currentView === 'services' && <ServicesPage />}
         {currentView === 'packages' && <PackagesPage />}
         
