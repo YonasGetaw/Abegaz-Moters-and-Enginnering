@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
-import { Phone, Clock, MapPin, Globe, Menu, X, User as UserIcon, Calendar, Bell, Film, Play } from 'lucide-react';
+import { Phone, Clock, MapPin, Globe, Menu, X, User as UserIcon, Calendar, Bell } from 'lucide-react';
 import { WORKSHOP_INFO } from '../../lib/constants';
 import { Button } from '../common/Button';
 
@@ -51,7 +51,7 @@ export const Header: React.FC = () => {
   };
 
   return (
-    <header className="sticky top-0 z-40 bg-white border-b-2 border-slate-100 shadow-sm">
+    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b-2 border-slate-100 shadow-sm">
       {/* 1. Top Info Bar - Clean Pure White with Red & Blue accents for maximum readability */}
       <div className="hidden lg:block bg-slate-50 text-slate-700 text-xs py-2 px-6 border-b border-slate-200">
         <div className="max-w-7xl mx-auto flex justify-between items-center font-medium">
@@ -77,16 +77,6 @@ export const Header: React.FC = () => {
           </div>
 
           <div className="flex items-center gap-3">
-            {/* Watch Workshop Video Trigger */}
-            <button
-              onClick={() => handleNavClick('gallery')}
-              className="flex items-center gap-1.5 bg-blue-50 hover:bg-red-50 text-blue-800 hover:text-red-600 px-2.5 py-0.5 rounded text-[11px] font-black border border-blue-200 hover:border-red-300 transition-colors shadow-2xs"
-              title="Watch Workshop Video"
-            >
-              <Film className="w-3 h-3 text-red-600" />
-              <span>{locale === 'am' ? 'የወርክሾፕ ቪዲዮ' : 'Workshop Video'}</span>
-            </button>
-            <span className="text-slate-300">|</span>
             <button 
               onClick={() => handleNavClick('admin')}
               className={`hover:text-red-600 font-bold transition-colors flex items-center gap-1 ${currentView === 'admin' ? 'text-red-600' : 'text-blue-700'}`}
