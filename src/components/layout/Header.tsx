@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { useApp } from '../../context/AppContext';
 import { Phone, Clock, MapPin, Globe, Menu, X, User as UserIcon, Calendar, Bell } from 'lucide-react';
 import { WORKSHOP_INFO } from '../../lib/constants';
@@ -15,8 +16,19 @@ export const Header: React.FC = () => {
   } = useApp();
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 30);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const pendingCount = appointments.filter(a => a.status === 'pending').length;
+  const isTransparent = currentView === 'home' && !isScrolled;
 
   // Exact Order: Home -> About -> Services -> Packages -> Gallery -> Track -> FAQ -> Contact
   const navLinks = [
@@ -51,30 +63,42 @@ export const Header: React.FC = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200/80 shadow-xs transition-colors duration-200">
-      {/* 1. Top Info Bar - Clean Translucent White with Red & Blue accents */}
-      <div className="hidden lg:block text-xs py-2 px-6 border-b border-slate-200/60 bg-slate-50/80 backdrop-blur-md text-slate-700 transition-colors">
+    <header className={`transition-all duration-300 ${
+      isTransparent
+        ? 'fixed top-0 inset-x-0 z-40 bg-gradient-to-b from-black/70 via-black/25 to-transparent border-b border-white/10 text-white'
+        : 'sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b-2 border-slate-200 shadow-md text-slate-800'
+    }`}>
+      {/* 1. Top Info Bar */}
+      <div className={`hidden lg:block text-xs py-2 px-6 border-b transition-colors ${
+        isTransparent
+          ? 'bg-black/30 backdrop-blur-xs text-white/90 border-white/10'
+          : 'bg-slate-50 text-slate-700 border-slate-200'
+      }`}>
         <div className="max-w-7xl mx-auto flex justify-between items-center font-medium">
           <div className="flex items-center gap-6">
             <a 
               href="tel:+251975480808" 
-              className="flex items-center gap-1.5 font-bold font-mono text-blue-900 hover:text-red-600 transition-colors"
+              className={`flex items-center gap-1.5 font-bold font-mono transition-colors ${
+                isTransparent ? 'text-white hover:text-red-400' : 'text-blue-900 hover:text-red-600'
+              }`}
             >
-              <Phone className="w-3.5 h-3.5 text-red-600" />
+              <Phone className="w-3.5 h-3.5 text-red-500" />
               <span>0975 48 08 08 / 011 465 1553</span>
             </a>
-            <span className="flex items-center gap-1.5 text-slate-600">
-              <Clock className="w-3.5 h-3.5 text-blue-700" />
+            <span className={`flex items-center gap-1.5 ${isTransparent ? 'text-white/80' : 'text-slate-600'}`}>
+              <Clock className={`w-3.5 h-3.5 ${isTransparent ? 'text-red-400' : 'text-blue-700'}`} />
               <span>{locale === 'am' ? WORKSHOP_INFO.hoursScheduleAm : WORKSHOP_INFO.hoursScheduleEn}</span>
             </span>
             <a 
               href={WORKSHOP_INFO.googleMapsUrl} 
               target="_blank" 
               rel="noreferrer" 
-              className="flex items-center gap-1.5 text-slate-700 hover:text-blue-900 transition-colors group"
+              className={`flex items-center gap-1.5 transition-colors group ${
+                isTransparent ? 'text-white/80 hover:text-white' : 'text-slate-700 hover:text-blue-900'
+              }`}
               title="Open Google Maps"
             >
-              <MapPin className="w-3.5 h-3.5 text-red-600 group-hover:animate-bounce" />
+              <MapPin className="w-3.5 h-3.5 text-red-500 group-hover:animate-bounce" />
               <span>{locale === 'am' ? 'አሌክሳንደር ፑሽኪን መንገድ፣ ቄራ፣ አዲስ አበባ' : WORKSHOP_INFO.addressEn} ({WORKSHOP_INFO.plusCode})</span>
             </a>
           </div>
@@ -84,8 +108,8 @@ export const Header: React.FC = () => {
               onClick={() => handleNavClick('admin')}
               className={`font-bold transition-colors flex items-center gap-1 ${
                 currentView === 'admin' 
-                  ? 'text-red-600' 
-                  : 'text-blue-900 hover:text-red-600'
+                  ? 'text-red-500' 
+                  : (isTransparent ? 'text-white hover:text-red-400' : 'text-blue-900 hover:text-red-600')
               }`}
             >
               <span>Admin Portal</span>
@@ -95,32 +119,36 @@ export const Header: React.FC = () => {
                 </span>
               )}
             </button>
-            <span className="text-slate-300">|</span>
+            <span className={isTransparent ? 'text-white/30' : 'text-slate-300'}>|</span>
             <button 
               onClick={() => handleNavClick('staff')}
               className={`font-bold transition-colors ${
                 currentView === 'staff' 
-                  ? 'text-red-600' 
-                  : 'text-blue-900 hover:text-red-600'
+                  ? 'text-red-500' 
+                  : (isTransparent ? 'text-white hover:text-red-400' : 'text-blue-900 hover:text-red-600')
               }`}
             >
               Staff Portal
             </button>
-            <span className="text-slate-300">|</span>
+            <span className={isTransparent ? 'text-white/30' : 'text-slate-300'}>|</span>
             {/* Live Notification Simulator Trigger */}
             <button
               onClick={toggleNotificationSimulator}
-              className="flex items-center gap-1.5 bg-red-50 hover:bg-red-100 text-red-600 px-2 py-0.5 rounded text-[11px] font-bold border border-red-200 transition-colors"
+              className={`flex items-center gap-1.5 px-2 py-0.5 rounded text-[11px] font-bold border transition-colors ${
+                isTransparent
+                  ? 'bg-red-600/30 text-white border-red-500/40 hover:bg-red-600/50'
+                  : 'bg-red-50 hover:bg-red-100 text-red-600 border-red-200'
+              }`}
               title="Open Live Telegram & Email Simulator"
             >
-              <Bell className="w-3 h-3 text-red-600 animate-pulse" />
+              <Bell className="w-3 h-3 text-red-500 animate-pulse" />
               <span>Demo Simulator</span>
             </button>
           </div>
         </div>
       </div>
 
-      {/* 2. Main Navigation Bar - Frosted Translucent White */}
+      {/* 2. Main Navigation Bar */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
         
         {/* Brand Logo & Name */}
@@ -128,7 +156,7 @@ export const Header: React.FC = () => {
           onClick={() => handleNavClick('home')}
           className="cursor-pointer flex items-center gap-2.5 sm:gap-3 select-none group"
         >
-          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white flex items-center justify-center p-1 shadow-xs border-2 border-red-500 group-hover:border-blue-700 transition-colors overflow-hidden shrink-0">
+          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white flex items-center justify-center p-1 shadow-md border-2 border-red-500 group-hover:border-blue-700 transition-colors overflow-hidden shrink-0">
             <img 
               src="/logo.png" 
               alt="Abegaz Motors Logo" 
@@ -139,10 +167,14 @@ export const Header: React.FC = () => {
             />
           </div>
           <div>
-            <div className="font-black text-base sm:text-xl text-blue-950 tracking-tight leading-none group-hover:text-red-600 transition-colors">
+            <div className={`font-black text-base sm:text-xl tracking-tight leading-none group-hover:text-red-500 transition-colors ${
+              isTransparent ? 'text-white drop-shadow-md' : 'text-blue-950'
+            }`}>
               አበጋዝ ሞተርስ ኢንጂነሪንግ
             </div>
-            <div className="text-[9px] sm:text-xs font-black text-red-600 tracking-wider uppercase mt-0.5">
+            <div className={`text-[9px] sm:text-xs font-black tracking-wider uppercase mt-0.5 ${
+              isTransparent ? 'text-red-400 drop-shadow-sm' : 'text-red-600'
+            }`}>
               Abegaz Motors Engineering
             </div>
           </div>
@@ -158,8 +190,8 @@ export const Header: React.FC = () => {
                 onClick={() => handleNavClick(link.id)}
                 className={`px-3 py-2 rounded-xl text-sm font-extrabold transition-all duration-200 ${
                   isActive 
-                    ? 'text-red-600 bg-red-50 border border-red-200 shadow-2xs'
-                    : 'text-blue-900 hover:text-red-600 hover:bg-blue-50/70'
+                    ? (isTransparent ? 'text-white bg-red-600 shadow-md' : 'text-red-600 bg-red-50 border border-red-200 shadow-2xs')
+                    : (isTransparent ? 'text-white/90 hover:text-white hover:bg-white/15' : 'text-blue-950 hover:text-red-600 hover:bg-blue-50/70')
                 }`}
               >
                 {locale === 'am' ? link.labelAm : link.labelEn}
@@ -173,10 +205,14 @@ export const Header: React.FC = () => {
           {/* Language Switcher Pill */}
           <button
             onClick={() => setLocale(locale === 'am' ? 'en' : 'am')}
-            className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl border border-slate-300 hover:border-red-500 text-xs font-black text-blue-900 bg-white/90 hover:text-red-600 transition-all shadow-2xs"
+            className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl border text-xs font-black transition-all shadow-2xs ${
+              isTransparent
+                ? 'border-white/25 text-white bg-white/15 hover:bg-white/25'
+                : 'border-slate-300 hover:border-red-500 text-blue-900 bg-white hover:text-red-600'
+            }`}
             title="ቋንቋ ይቀይሩ / Switch Language"
           >
-            <Globe className="w-3.5 h-3.5 text-red-600" />
+            <Globe className="w-3.5 h-3.5 text-red-500" />
             <span>{locale === 'am' ? 'EN' : 'አማ'}</span>
           </button>
 
@@ -184,9 +220,9 @@ export const Header: React.FC = () => {
           <button
             onClick={() => handleNavClick('account')}
             className={`p-2 sm:p-2.5 rounded-xl border transition-all shadow-2xs ${
-              currentView === 'account' 
-                ? 'bg-red-50 border-red-500 text-red-600' 
-                : 'border-slate-300 hover:border-red-500 text-blue-900 bg-white/90 hover:text-red-600 hover:bg-red-50'
+              isTransparent
+                ? 'border-white/25 text-white bg-white/15 hover:bg-white/25'
+                : (currentView === 'account' ? 'bg-red-50 border-red-500 text-red-600' : 'border-slate-300 hover:border-red-500 text-blue-900 bg-white hover:text-red-600 hover:bg-red-50')
             }`}
             title="የደንበኛ መለያ / Customer Account"
           >
@@ -202,79 +238,117 @@ export const Header: React.FC = () => {
             <span>{locale === 'am' ? 'ቀጠሮ ይያዙ' : 'Book Appointment'}</span>
           </button>
 
-          {/* Mobile Hamburger Button - High visibility 3-line icon */}
+          {/* Mobile Hamburger Button */}
           <button
             type="button"
             onClick={() => setMobileMenuOpen(prev => !prev)}
-            className="lg:hidden p-2 rounded-xl bg-white border-2 border-slate-300 text-blue-900 hover:text-red-600 hover:border-red-500 shadow-xs transition-all active:scale-95"
+            className={`lg:hidden p-2 rounded-xl border-2 transition-all active:scale-95 ${
+              isTransparent
+                ? 'bg-white/20 border-white/40 text-white hover:bg-white/30'
+                : 'bg-white border-slate-300 text-blue-950 hover:text-red-600 hover:border-red-500 shadow-xs'
+            }`}
             aria-label={mobileMenuOpen ? 'Close Menu' : 'Open Menu'}
           >
             {mobileMenuOpen ? (
-              <X className="w-6 h-6 text-red-600 stroke-[2.5]" />
+              <X className="w-6 h-6 text-red-500 stroke-[2.5]" />
             ) : (
-              <Menu className="w-6 h-6 text-blue-950 stroke-[2.5]" />
+              <Menu className="w-6 h-6 stroke-[2.5]" />
             )}
           </button>
         </div>
       </div>
 
-      {/* Mobile Full-Screen Menu Drawer - positioned directly below the navbar */}
-      {mobileMenuOpen && (
-        <div className="lg:hidden fixed inset-x-0 top-16 sm:top-20 bottom-0 bg-white z-50 flex flex-col p-6 overflow-y-auto border-t-2 border-red-500 shadow-2xl animate-fade-in">
-          <div className="flex flex-col gap-2">
-            {navLinks.map((link) => (
+      {/* Mobile Menu Portal: rendered at document.body with z-[9999] so NOTHING can overlap or cover it */}
+      {mobileMenuOpen && typeof document !== 'undefined' && createPortal(
+        <div 
+          className="lg:hidden fixed inset-0 z-[9999] bg-slate-950/60 backdrop-blur-sm animate-fade-in flex flex-col justify-start"
+          onClick={() => setMobileMenuOpen(false)}
+        >
+          <div 
+            className="w-full bg-white max-h-[90vh] overflow-y-auto shadow-2xl border-b-4 border-red-600 p-5 sm:p-6 flex flex-col"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Header row in mobile drawer */}
+            <div className="flex items-center justify-between pb-4 mb-4 border-b border-slate-200">
+              <div className="flex items-center gap-2.5">
+                <div className="w-9 h-9 rounded-xl bg-white flex items-center justify-center p-1 border-2 border-red-500 overflow-hidden shadow-xs">
+                  <img src="/logo.png" alt="Logo" className="w-full h-full object-contain" />
+                </div>
+                <div>
+                  <div className="font-black text-sm text-blue-950 leading-none">አበጋዝ ሞተርስ ኢንጂነሪንግ</div>
+                  <div className="text-[9px] font-black text-red-600 uppercase mt-0.5">Abegaz Motors</div>
+                </div>
+              </div>
               <button
-                key={link.id}
-                onClick={() => handleNavClick(link.id)}
-                className={`h-13 px-4 rounded-xl flex items-center justify-between text-base font-extrabold border transition-all ${
-                  currentView === link.id
-                    ? 'bg-red-50 text-red-600 border-red-300 shadow-xs'
-                    : 'bg-white text-blue-900 border-slate-200 hover:bg-blue-50'
-                }`}
+                type="button"
+                onClick={() => setMobileMenuOpen(false)}
+                className="p-2 rounded-xl bg-slate-100 hover:bg-red-50 text-slate-700 hover:text-red-600 transition-colors"
+                aria-label="Close menu"
               >
-                <span>{locale === 'am' ? link.labelAm : link.labelEn}</span>
-                <span className="text-red-500 text-lg font-bold">›</span>
+                <X className="w-6 h-6 text-red-600 stroke-[2.5]" />
               </button>
-            ))}
+            </div>
+
+            {/* Nav list */}
+            <div className="flex flex-col gap-2">
+              {navLinks.map((link) => (
+                <button
+                  key={link.id}
+                  onClick={() => handleNavClick(link.id)}
+                  className={`h-13 px-4 rounded-xl flex items-center justify-between text-base font-extrabold border transition-all ${
+                    currentView === link.id
+                      ? 'bg-red-50 text-red-600 border-red-300 shadow-xs'
+                      : 'bg-white text-blue-950 border-slate-200 hover:bg-blue-50'
+                  }`}
+                >
+                  <span>{locale === 'am' ? link.labelAm : link.labelEn}</span>
+                  <span className="text-red-500 text-lg font-bold">›</span>
+                </button>
+              ))}
+            </div>
+
+            {/* Account & portals */}
+            <div className="mt-5 pt-5 border-t border-slate-200 space-y-2.5">
+              <button
+                onClick={() => handleNavClick('account')}
+                className="w-full h-12 rounded-xl bg-blue-50 border border-blue-200 text-blue-900 font-bold flex items-center justify-center gap-2 hover:bg-blue-100 transition-colors"
+              >
+                <UserIcon className="w-4 h-4 text-red-600" />
+                <span>{locale === 'am' ? 'የኔ ቀጠሮዎች / መለያ' : 'My Account & Bookings'}</span>
+              </button>
+
+              <div className="grid grid-cols-2 gap-2">
+                <button
+                  onClick={() => handleNavClick('admin')}
+                  className="h-11 rounded-xl bg-slate-900 text-white font-bold text-xs flex items-center justify-center gap-1.5"
+                >
+                  <span>Admin Dashboard</span>
+                  {pendingCount > 0 && (
+                    <span className="bg-red-600 text-white text-[10px] px-1.5 py-0.2 rounded-full font-black">
+                      {pendingCount}
+                    </span>
+                  )}
+                </button>
+
+                <button
+                  onClick={() => handleNavClick('staff')}
+                  className="h-11 rounded-xl bg-slate-800 text-slate-200 font-bold text-xs flex items-center justify-center"
+                >
+                  <span>Staff Portal</span>
+                </button>
+              </div>
+
+              <button
+                onClick={() => handleNavClick('book')}
+                className="w-full h-13 rounded-xl bg-red-600 hover:bg-red-700 text-white font-black text-base shadow-lg flex items-center justify-center gap-2 mt-1"
+              >
+                <Calendar className="w-5 h-5 text-white" />
+                <span>{locale === 'am' ? 'ቀጠሮ ይያዙ' : 'Book Appointment'}</span>
+              </button>
+            </div>
           </div>
-
-          <div className="mt-6 pt-6 border-t border-slate-200 space-y-3">
-            <button
-              onClick={() => handleNavClick('account')}
-              className="w-full h-12 rounded-xl bg-blue-50 border border-blue-200 text-blue-900 font-bold flex items-center justify-center gap-2 hover:bg-blue-100 transition-colors"
-            >
-              <UserIcon className="w-4 h-4 text-red-600" />
-              <span>{locale === 'am' ? 'የኔ ቀጠሮዎች / መለያ' : 'My Account & Bookings'}</span>
-            </button>
-
-            <button
-              onClick={() => handleNavClick('admin')}
-              className="w-full h-12 rounded-xl bg-slate-900 text-white font-bold flex items-center justify-center gap-2 hover:bg-slate-800 transition-colors"
-            >
-              <span>Admin Dashboard</span>
-              {pendingCount > 0 && (
-                <span className="bg-red-600 text-white text-xs px-2 py-0.5 rounded-full font-black">
-                  {pendingCount}
-                </span>
-              )}
-            </button>
-
-            <button
-              onClick={() => handleNavClick('staff')}
-              className="w-full h-12 rounded-xl bg-slate-800 text-slate-200 font-bold flex items-center justify-center gap-2 hover:bg-slate-700 transition-colors"
-            >
-              <span>Staff Workshop Portal</span>
-            </button>
-
-            <button
-              onClick={() => handleNavClick('book')}
-              className="w-full h-13 rounded-xl bg-red-600 hover:bg-red-700 text-white font-black text-base shadow-lg flex items-center justify-center gap-2 mt-2"
-            >
-              <Calendar className="w-5 h-5 text-white" />
-              <span>{locale === 'am' ? 'ቀጠሮ ይያዙ' : 'Book Appointment'}</span>
-            </button>
-          </div>
-        </div>
+        </div>,
+        document.body
       )}
     </header>
   );
