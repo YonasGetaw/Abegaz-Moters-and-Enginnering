@@ -53,10 +53,10 @@ export const HomePage: React.FC = () => {
 
   return (
     <div className="flex flex-col min-h-screen">
-      {/* 7.1 HERO SECTION - Full Cinematic Video Background covering Topbar, Navbar & Hero */}
-      <section className="relative overflow-hidden -mt-[72px] lg:-mt-[112px] pt-32 sm:pt-40 lg:pt-44 pb-20 sm:pb-28 border-b border-slate-900 bg-slate-950 text-white min-h-[85vh] flex items-center">
+      {/* 7.1 HERO SECTION - Clean White-Translucent Video Background (No squares, 100% clear car video) */}
+      <section className="relative overflow-hidden -mt-[64px] sm:-mt-[80px] pt-28 sm:pt-36 lg:pt-40 pb-20 sm:pb-28 border-b border-slate-200 bg-slate-100 min-h-[85vh] flex items-center">
         
-        {/* Ambient 15s High-Clarity Video Background Layer */}
+        {/* Ambient 15s High-Clarity Video Background Layer - Crisp and Unobstructed */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <video
             autoPlay
@@ -65,69 +65,31 @@ export const HomePage: React.FC = () => {
             playsInline
             className="w-full h-full object-cover object-center scale-105"
           >
-            <source src="/mechanic-work.webm" type="video/webm" />
             <source src="/workshop-bg.mp4" type="video/mp4" />
+            <source src="/mechanic-work.webm" type="video/webm" />
           </video>
-          {/* Subtle cinematic overlay - video is clear & crisp ("trt blo yitay") while text has 100% contrast */}
-          <div className="absolute inset-0 bg-black/45" />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/30 to-slate-950/90" />
-          <div className="absolute inset-0 bg-radial-at-c from-transparent via-black/20 to-black/70" />
-        </div>
-
-        {/* Aesthetic Background Grid Squares */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <svg
-            className="absolute inset-0 h-full w-full stroke-white/10 [mask-image:radial-gradient(100%_100%_at_top,white_40%,transparent_100%)]"
-            aria-hidden="true"
-          >
-            <defs>
-              <pattern
-                id="hero-grid-pattern"
-                width="44"
-                height="44"
-                x="50%"
-                y="-1"
-                patternUnits="userSpaceOnUse"
-              >
-                <path d="M.5 44V.5H44" fill="none" strokeWidth="1" />
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" strokeWidth="0" fill="url(#hero-grid-pattern)" />
-            
-            {/* Elegant Accent Square Highlights */}
-            <svg x="50%" y="-1" className="overflow-visible fill-red-500/15 stroke-red-500/30">
-              <path d="M-88 0h44v44h-44z" strokeWidth="1" />
-              <path d="M132 88h44v44h-44z" strokeWidth="1" />
-              <path d="M264 44h44v44h-44z" strokeWidth="1" />
-              <path d="M-44 264h44v44h-44z" strokeWidth="1" />
-            </svg>
-            <svg x="50%" y="-1" className="overflow-visible fill-blue-500/15 stroke-blue-500/30">
-              <path d="M0 44h44v44h-44z" strokeWidth="1" />
-              <path d="M176 176h44v44h-44z" strokeWidth="1" />
-            </svg>
-          </svg>
-
-          {/* Ambient Lighting Glows */}
-          <div className="absolute -top-24 -right-24 w-96 h-96 bg-red-600/20 rounded-full blur-3xl" />
-          <div className="absolute top-32 -left-24 w-80 h-80 bg-blue-600/20 rounded-full blur-3xl" />
+          {/* Translucent white wash - lets the car video shine through clearly while matching the rest of the site */}
+          <div className="absolute inset-0 bg-white/40 backdrop-blur-[0.5px]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-white/75 via-white/20 to-white/90" />
+          <div className="absolute inset-0 bg-radial-at-c from-transparent via-white/10 to-white/50" />
         </div>
 
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full text-center">
           {/* Engineering Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-600/25 border border-red-500/40 text-red-300 text-xs sm:text-sm font-bold shadow-lg backdrop-blur-md mb-6">
-            <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/90 border border-red-200 text-red-600 text-xs sm:text-sm font-bold shadow-xs backdrop-blur-md mb-6">
+            <span className="w-2 h-2 rounded-full bg-red-600 animate-pulse" />
             <span>
               {locale === 'am' ? 'ትክክለኛ አውቶሞቲቭ ምህንድስና · ቄራ፣ አዲስ አበባ' : 'Precision Automotive Engineering · Kera, Addis Ababa'}
             </span>
           </div>
 
           {/* Short Title as requested by user */}
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black text-white tracking-tight leading-[1.1] drop-shadow-xl mb-4">
+          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black text-blue-950 tracking-tight leading-[1.1] drop-shadow-xs mb-4">
             {locale === 'am' ? 'አበጋዝ ሞተርስ ኢንጂነሪንግ' : 'Abegaz Motors Engineering'}
           </h1>
 
           {/* Short Tagline as requested by user */}
-          <p className="text-xl sm:text-2xl md:text-3xl text-red-400 font-extrabold tracking-wide drop-shadow-md mb-8">
+          <p className="text-xl sm:text-2xl md:text-3xl text-red-600 font-extrabold tracking-wide drop-shadow-xs mb-8">
             {locale === 'am' ? 'ሊተማመኑበት የሚችሉት ጥራት ያለው አገልግሎት' : 'Quality service you can trust'}
           </p>
 
@@ -137,7 +99,7 @@ export const HomePage: React.FC = () => {
               size="lg"
               variant="primary"
               onClick={() => setCurrentView('book')}
-              className="w-full sm:w-auto h-14 px-8 text-base font-black shadow-xl shadow-red-600/40 hover:shadow-red-600/60"
+              className="w-full sm:w-auto h-14 px-8 text-base font-black shadow-xl shadow-red-600/30 hover:shadow-red-600/50"
             >
               <Calendar className="w-5 h-5 mr-2" />
               <span>{locale === 'am' ? 'ቀጠሮ ይያዙ' : 'Book Appointment'}</span>
@@ -146,7 +108,7 @@ export const HomePage: React.FC = () => {
             <button
               type="button"
               onClick={() => setCurrentView('services')}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 h-14 px-8 rounded-btn bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border-2 border-white/40 hover:border-white font-extrabold text-base shadow-lg transition-all active:scale-98"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 h-14 px-8 rounded-btn bg-white/95 hover:bg-blue-50 text-blue-900 border-2 border-blue-900 font-extrabold text-base shadow-md transition-all active:scale-98"
             >
               <span>{locale === 'am' ? 'አገልግሎቶች' : 'Services'}</span>
               <ArrowRight className="w-5 h-5" />
@@ -154,23 +116,23 @@ export const HomePage: React.FC = () => {
           </div>
 
           {/* 3 Trust Chips */}
-          <div className="pt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-xs sm:text-sm text-white/90">
-            <span className="flex items-center gap-2 font-bold drop-shadow">
-              <CheckCircle2 className="w-4 h-4 text-red-500" />
+          <div className="pt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-xs sm:text-sm text-blue-950">
+            <span className="flex items-center gap-2 font-black">
+              <CheckCircle2 className="w-4 h-4 text-red-600" />
               <span>{locale === 'am' ? 'ልምድ ያላቸው መሃንዲሶች' : 'Certified Engineers'}</span>
             </span>
-            <span className="flex items-center gap-2 font-bold drop-shadow">
-              <CheckCircle2 className="w-4 h-4 text-red-500" />
+            <span className="flex items-center gap-2 font-black">
+              <CheckCircle2 className="w-4 h-4 text-red-600" />
               <span>{locale === 'am' ? 'ግልጽ ሂደትና ዋጋ' : 'Transparent Pricing'}</span>
             </span>
-            <span className="flex items-center gap-2 font-bold drop-shadow">
-              <CheckCircle2 className="w-4 h-4 text-red-500" />
+            <span className="flex items-center gap-2 font-black">
+              <CheckCircle2 className="w-4 h-4 text-red-600" />
               <span>{locale === 'am' ? 'ፈጣን ማሳወቂያ' : 'Instant Updates'}</span>
             </span>
           </div>
 
           {/* Floating Quick Booking Widget */}
-          <div className="mt-10 max-w-3xl mx-auto w-full bg-white/95 backdrop-blur-md text-slate-800 p-5 sm:p-6 rounded-2xl shadow-2xl border border-white/50 text-left">
+          <div className="mt-10 max-w-3xl mx-auto w-full bg-white/95 backdrop-blur-md text-slate-800 p-5 sm:p-6 rounded-2xl shadow-xl border border-slate-200 text-left">
             <form onSubmit={handleQuickBook} className="grid grid-cols-1 sm:grid-cols-3 gap-3 items-end">
               <div>
                 <label className="block text-xs font-bold text-slate-600 mb-1">

@@ -17,7 +17,6 @@ export const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const pendingCount = appointments.filter(a => a.status === 'pending').length;
-  const isHome = currentView === 'home';
 
   // Exact Order: Home -> About -> Services -> Packages -> Gallery -> Track -> FAQ -> Contact
   const navLinks = [
@@ -52,42 +51,30 @@ export const Header: React.FC = () => {
   };
 
   return (
-    <header className={`sticky top-0 z-50 transition-colors duration-200 ${
-      isHome 
-        ? 'bg-black/35 backdrop-blur-md border-b border-white/10 shadow-lg' 
-        : 'bg-white/95 backdrop-blur-md border-b-2 border-slate-100 shadow-sm'
-    }`}>
-      {/* 1. Top Info Bar - Transparent on Hero, crisp light on other pages */}
-      <div className={`hidden lg:block text-xs py-2 px-6 border-b transition-colors ${
-        isHome 
-          ? 'bg-black/40 text-white/90 border-white/10' 
-          : 'bg-slate-50 text-slate-700 border-slate-200'
-      }`}>
+    <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200/80 shadow-xs transition-colors duration-200">
+      {/* 1. Top Info Bar - Clean Translucent White with Red & Blue accents */}
+      <div className="hidden lg:block text-xs py-2 px-6 border-b border-slate-200/60 bg-slate-50/80 backdrop-blur-md text-slate-700 transition-colors">
         <div className="max-w-7xl mx-auto flex justify-between items-center font-medium">
           <div className="flex items-center gap-6">
             <a 
               href="tel:+251975480808" 
-              className={`flex items-center gap-1.5 font-bold font-mono transition-colors ${
-                isHome ? 'text-white hover:text-red-400' : 'text-blue-800 hover:text-red-600'
-              }`}
+              className="flex items-center gap-1.5 font-bold font-mono text-blue-900 hover:text-red-600 transition-colors"
             >
-              <Phone className="w-3.5 h-3.5 text-red-500" />
+              <Phone className="w-3.5 h-3.5 text-red-600" />
               <span>0975 48 08 08 / 011 465 1553</span>
             </a>
-            <span className={`flex items-center gap-1.5 ${isHome ? 'text-white/80' : 'text-slate-600'}`}>
-              <Clock className={`w-3.5 h-3.5 ${isHome ? 'text-red-400' : 'text-blue-700'}`} />
+            <span className="flex items-center gap-1.5 text-slate-600">
+              <Clock className="w-3.5 h-3.5 text-blue-700" />
               <span>{locale === 'am' ? WORKSHOP_INFO.hoursScheduleAm : WORKSHOP_INFO.hoursScheduleEn}</span>
             </span>
             <a 
               href={WORKSHOP_INFO.googleMapsUrl} 
               target="_blank" 
               rel="noreferrer" 
-              className={`flex items-center gap-1.5 transition-colors group ${
-                isHome ? 'text-white/80 hover:text-white' : 'text-slate-700 hover:text-blue-700'
-              }`}
+              className="flex items-center gap-1.5 text-slate-700 hover:text-blue-900 transition-colors group"
               title="Open Google Maps"
             >
-              <MapPin className="w-3.5 h-3.5 text-red-500 group-hover:animate-bounce" />
+              <MapPin className="w-3.5 h-3.5 text-red-600 group-hover:animate-bounce" />
               <span>{locale === 'am' ? 'አሌክሳንደር ፑሽኪን መንገድ፣ ቄራ፣ አዲስ አበባ' : WORKSHOP_INFO.addressEn} ({WORKSHOP_INFO.plusCode})</span>
             </a>
           </div>
@@ -97,8 +84,8 @@ export const Header: React.FC = () => {
               onClick={() => handleNavClick('admin')}
               className={`font-bold transition-colors flex items-center gap-1 ${
                 currentView === 'admin' 
-                  ? 'text-red-500' 
-                  : (isHome ? 'text-white hover:text-red-400' : 'text-blue-700 hover:text-red-600')
+                  ? 'text-red-600' 
+                  : 'text-blue-900 hover:text-red-600'
               }`}
             >
               <span>Admin Portal</span>
@@ -108,46 +95,40 @@ export const Header: React.FC = () => {
                 </span>
               )}
             </button>
-            <span className={isHome ? 'text-white/30' : 'text-slate-300'}>|</span>
+            <span className="text-slate-300">|</span>
             <button 
               onClick={() => handleNavClick('staff')}
               className={`font-bold transition-colors ${
                 currentView === 'staff' 
-                  ? 'text-red-500' 
-                  : (isHome ? 'text-white hover:text-red-400' : 'text-blue-700 hover:text-red-600')
+                  ? 'text-red-600' 
+                  : 'text-blue-900 hover:text-red-600'
               }`}
             >
               Staff Portal
             </button>
-            <span className={isHome ? 'text-white/30' : 'text-slate-300'}>|</span>
+            <span className="text-slate-300">|</span>
             {/* Live Notification Simulator Trigger */}
             <button
               onClick={toggleNotificationSimulator}
-              className={`flex items-center gap-1.5 px-2 py-0.5 rounded text-[11px] font-bold border transition-colors ${
-                isHome 
-                  ? 'bg-red-600/30 text-white border-red-500/40 hover:bg-red-600/50' 
-                  : 'bg-red-50 hover:bg-red-100 text-red-600 border-red-200'
-              }`}
+              className="flex items-center gap-1.5 bg-red-50 hover:bg-red-100 text-red-600 px-2 py-0.5 rounded text-[11px] font-bold border border-red-200 transition-colors"
               title="Open Live Telegram & Email Simulator"
             >
-              <Bell className="w-3 h-3 text-red-500 animate-pulse" />
+              <Bell className="w-3 h-3 text-red-600 animate-pulse" />
               <span>Demo Simulator</span>
             </button>
           </div>
         </div>
       </div>
 
-      {/* 2. Main Navigation Bar - Transparent over Hero video */}
-      <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 lg:h-20 flex items-center justify-between transition-colors ${
-        isHome ? 'bg-transparent' : 'bg-white'
-      }`}>
+      {/* 2. Main Navigation Bar - Frosted Translucent White */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
         
         {/* Brand Logo & Name */}
         <div 
           onClick={() => handleNavClick('home')}
-          className="cursor-pointer flex items-center gap-3 select-none group"
+          className="cursor-pointer flex items-center gap-2.5 sm:gap-3 select-none group"
         >
-          <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-white flex items-center justify-center p-1 shadow-sm border-2 border-red-500 group-hover:border-blue-700 transition-colors overflow-hidden">
+          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white flex items-center justify-center p-1 shadow-xs border-2 border-red-500 group-hover:border-blue-700 transition-colors overflow-hidden shrink-0">
             <img 
               src="/logo.png" 
               alt="Abegaz Motors Logo" 
@@ -158,14 +139,10 @@ export const Header: React.FC = () => {
             />
           </div>
           <div>
-            <div className={`font-black text-lg sm:text-xl tracking-tight leading-none group-hover:text-red-500 transition-colors ${
-              isHome ? 'text-white drop-shadow-md' : 'text-blue-900'
-            }`}>
+            <div className="font-black text-base sm:text-xl text-blue-950 tracking-tight leading-none group-hover:text-red-600 transition-colors">
               አበጋዝ ሞተርስ ኢንጂነሪንግ
             </div>
-            <div className={`text-[10px] sm:text-xs font-black tracking-wider uppercase mt-0.5 ${
-              isHome ? 'text-red-400' : 'text-red-600'
-            }`}>
+            <div className="text-[9px] sm:text-xs font-black text-red-600 tracking-wider uppercase mt-0.5">
               Abegaz Motors Engineering
             </div>
           </div>
@@ -181,8 +158,8 @@ export const Header: React.FC = () => {
                 onClick={() => handleNavClick(link.id)}
                 className={`px-3 py-2 rounded-xl text-sm font-extrabold transition-all duration-200 ${
                   isActive 
-                    ? (isHome ? 'text-white bg-red-600 shadow-md' : 'text-red-600 bg-red-50 border border-red-200 shadow-2xs')
-                    : (isHome ? 'text-white/90 hover:text-white hover:bg-white/15' : 'text-blue-700 hover:text-red-600 hover:bg-blue-50/60')
+                    ? 'text-red-600 bg-red-50 border border-red-200 shadow-2xs'
+                    : 'text-blue-900 hover:text-red-600 hover:bg-blue-50/70'
                 }`}
               >
                 {locale === 'am' ? link.labelAm : link.labelEn}
@@ -196,24 +173,20 @@ export const Header: React.FC = () => {
           {/* Language Switcher Pill */}
           <button
             onClick={() => setLocale(locale === 'am' ? 'en' : 'am')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-xs font-black transition-all shadow-2xs ${
-              isHome 
-                ? 'border-white/25 text-white bg-white/10 hover:bg-white/20 hover:text-white' 
-                : 'border-slate-300 hover:border-red-500 text-blue-700 bg-white hover:text-red-600'
-            }`}
+            className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl border border-slate-300 hover:border-red-500 text-xs font-black text-blue-900 bg-white/90 hover:text-red-600 transition-all shadow-2xs"
             title="ቋንቋ ይቀይሩ / Switch Language"
           >
-            <Globe className="w-3.5 h-3.5 text-red-500" />
+            <Globe className="w-3.5 h-3.5 text-red-600" />
             <span>{locale === 'am' ? 'EN' : 'አማ'}</span>
           </button>
 
           {/* Account Icon */}
           <button
             onClick={() => handleNavClick('account')}
-            className={`p-2.5 rounded-xl border transition-all shadow-2xs ${
-              isHome 
-                ? 'border-white/25 text-white bg-white/10 hover:bg-white/20'
-                : (currentView === 'account' ? 'bg-red-50 border-red-500 text-red-600' : 'border-slate-300 hover:border-red-500 text-blue-700 bg-white hover:text-red-600 hover:bg-red-50')
+            className={`p-2 sm:p-2.5 rounded-xl border transition-all shadow-2xs ${
+              currentView === 'account' 
+                ? 'bg-red-50 border-red-500 text-red-600' 
+                : 'border-slate-300 hover:border-red-500 text-blue-900 bg-white/90 hover:text-red-600 hover:bg-red-50'
             }`}
             title="የደንበኛ መለያ / Customer Account"
           >
@@ -229,37 +202,38 @@ export const Header: React.FC = () => {
             <span>{locale === 'am' ? 'ቀጠሮ ይያዙ' : 'Book Appointment'}</span>
           </button>
 
-          {/* Mobile Hamburger Button */}
+          {/* Mobile Hamburger Button - High visibility 3-line icon */}
           <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className={`lg:hidden p-2 rounded-xl border transition-colors ${
-              isHome 
-                ? 'text-white hover:text-red-400 bg-white/10 border-white/20' 
-                : 'text-blue-700 hover:text-red-600 hover:bg-blue-50 border-slate-300'
-            }`}
-            aria-label="Menu"
+            type="button"
+            onClick={() => setMobileMenuOpen(prev => !prev)}
+            className="lg:hidden p-2 rounded-xl bg-white border-2 border-slate-300 text-blue-900 hover:text-red-600 hover:border-red-500 shadow-xs transition-all active:scale-95"
+            aria-label={mobileMenuOpen ? 'Close Menu' : 'Open Menu'}
           >
-            {mobileMenuOpen ? <X className="w-6 h-6 text-red-500" /> : <Menu className="w-6 h-6" />}
+            {mobileMenuOpen ? (
+              <X className="w-6 h-6 text-red-600 stroke-[2.5]" />
+            ) : (
+              <Menu className="w-6 h-6 text-blue-950 stroke-[2.5]" />
+            )}
           </button>
         </div>
       </div>
 
-      {/* Mobile Full-Screen Menu Drawer */}
+      {/* Mobile Full-Screen Menu Drawer - positioned directly below the navbar */}
       {mobileMenuOpen && (
-        <div className="lg:hidden fixed inset-0 top-18 bg-white z-50 flex flex-col p-6 overflow-y-auto animate-fade-in border-t border-slate-200">
+        <div className="lg:hidden fixed inset-x-0 top-16 sm:top-20 bottom-0 bg-white z-50 flex flex-col p-6 overflow-y-auto border-t-2 border-red-500 shadow-2xl animate-fade-in">
           <div className="flex flex-col gap-2">
             {navLinks.map((link) => (
               <button
                 key={link.id}
                 onClick={() => handleNavClick(link.id)}
-                className={`h-14 px-4 rounded-xl flex items-center justify-between text-base font-extrabold border transition-all ${
+                className={`h-13 px-4 rounded-xl flex items-center justify-between text-base font-extrabold border transition-all ${
                   currentView === link.id
                     ? 'bg-red-50 text-red-600 border-red-300 shadow-xs'
-                    : 'bg-white text-blue-700 border-slate-200 hover:bg-blue-50'
+                    : 'bg-white text-blue-900 border-slate-200 hover:bg-blue-50'
                 }`}
               >
                 <span>{locale === 'am' ? link.labelAm : link.labelEn}</span>
-                <span className="text-red-500 text-lg">›</span>
+                <span className="text-red-500 text-lg font-bold">›</span>
               </button>
             ))}
           </div>
@@ -267,7 +241,7 @@ export const Header: React.FC = () => {
           <div className="mt-6 pt-6 border-t border-slate-200 space-y-3">
             <button
               onClick={() => handleNavClick('account')}
-              className="w-full h-12 rounded-xl bg-blue-50 border border-blue-200 text-blue-700 font-bold flex items-center justify-center gap-2 hover:bg-blue-100 transition-colors"
+              className="w-full h-12 rounded-xl bg-blue-50 border border-blue-200 text-blue-900 font-bold flex items-center justify-center gap-2 hover:bg-blue-100 transition-colors"
             >
               <UserIcon className="w-4 h-4 text-red-600" />
               <span>{locale === 'am' ? 'የኔ ቀጠሮዎች / መለያ' : 'My Account & Bookings'}</span>
@@ -294,7 +268,7 @@ export const Header: React.FC = () => {
 
             <button
               onClick={() => handleNavClick('book')}
-              className="w-full h-13 rounded-xl bg-red-600 hover:bg-red-700 text-white font-black text-base shadow-md flex items-center justify-center gap-2 mt-2"
+              className="w-full h-13 rounded-xl bg-red-600 hover:bg-red-700 text-white font-black text-base shadow-lg flex items-center justify-center gap-2 mt-2"
             >
               <Calendar className="w-5 h-5 text-white" />
               <span>{locale === 'am' ? 'ቀጠሮ ይያዙ' : 'Book Appointment'}</span>
