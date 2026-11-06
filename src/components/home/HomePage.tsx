@@ -53,10 +53,10 @@ export const HomePage: React.FC = () => {
 
   return (
     <div className="flex flex-col min-h-screen">
-      {/* 7.1 HERO SECTION - Ambient Engineering Video Background with Clean Squares & Frosted Clarity */}
-      <section className="relative overflow-hidden py-12 md:py-20 border-b border-slate-200">
+      {/* 7.1 HERO SECTION - Full Cinematic Video Background covering Topbar, Navbar & Hero */}
+      <section className="relative overflow-hidden -mt-[72px] lg:-mt-[112px] pt-32 sm:pt-40 lg:pt-44 pb-20 sm:pb-28 border-b border-slate-900 bg-slate-950 text-white min-h-[85vh] flex items-center">
         
-        {/* Ambient Video Background Layer */}
+        {/* Ambient 15s High-Clarity Video Background Layer */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <video
             autoPlay
@@ -64,18 +64,20 @@ export const HomePage: React.FC = () => {
             muted
             playsInline
             className="w-full h-full object-cover object-center scale-105"
-            src="https://assets.mixkit.co/videos/preview/mixkit-car-mechanic-working-in-a-garage-43285-large.mp4"
-          />
-          {/* Frosted white overlay + gentle gradient for 100% crystal-clear readability */}
-          <div className="absolute inset-0 bg-white/85 backdrop-blur-[1px]" />
-          <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/85 to-white/70" />
-          <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-transparent to-white" />
+          >
+            <source src="/mechanic-work.webm" type="video/webm" />
+            <source src="/workshop-bg.mp4" type="video/mp4" />
+          </video>
+          {/* Subtle cinematic overlay - video is clear & crisp ("trt blo yitay") while text has 100% contrast */}
+          <div className="absolute inset-0 bg-black/45" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/30 to-slate-950/90" />
+          <div className="absolute inset-0 bg-radial-at-c from-transparent via-black/20 to-black/70" />
         </div>
 
-        {/* Aesthetic Background Grid Squares (clean squares for visual beauty & engineering depth) */}
+        {/* Aesthetic Background Grid Squares */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <svg
-            className="absolute inset-0 h-full w-full stroke-blue-700/15 [mask-image:radial-gradient(100%_100%_at_top_right,white_40%,transparent_100%)]"
+            className="absolute inset-0 h-full w-full stroke-white/10 [mask-image:radial-gradient(100%_100%_at_top,white_40%,transparent_100%)]"
             aria-hidden="true"
           >
             <defs>
@@ -93,162 +95,118 @@ export const HomePage: React.FC = () => {
             <rect width="100%" height="100%" strokeWidth="0" fill="url(#hero-grid-pattern)" />
             
             {/* Elegant Accent Square Highlights */}
-            <svg x="50%" y="-1" className="overflow-visible fill-blue-600/10 stroke-blue-600/25">
+            <svg x="50%" y="-1" className="overflow-visible fill-red-500/15 stroke-red-500/30">
               <path d="M-88 0h44v44h-44z" strokeWidth="1" />
               <path d="M132 88h44v44h-44z" strokeWidth="1" />
-              <path d="M-176 132h44v44h-44z" strokeWidth="1" />
               <path d="M264 44h44v44h-44z" strokeWidth="1" />
-              <path d="M44 176h44v44h-44z" strokeWidth="1" />
               <path d="M-44 264h44v44h-44z" strokeWidth="1" />
             </svg>
-            <svg x="50%" y="-1" className="overflow-visible fill-red-500/10 stroke-red-500/25">
+            <svg x="50%" y="-1" className="overflow-visible fill-blue-500/15 stroke-blue-500/30">
               <path d="M0 44h44v44h-44z" strokeWidth="1" />
-              <path d="M-132 88h44v44h-44z" strokeWidth="1" />
               <path d="M176 176h44v44h-44z" strokeWidth="1" />
-              <path d="M-88 220h44v44h-44z" strokeWidth="1" />
             </svg>
           </svg>
 
-          {/* Ambient Lighting Gradients */}
-          <div className="absolute -top-24 -right-24 w-96 h-96 bg-red-100/40 rounded-full blur-3xl" />
-          <div className="absolute top-32 -left-24 w-80 h-80 bg-blue-100/50 rounded-full blur-3xl" />
+          {/* Ambient Lighting Glows */}
+          <div className="absolute -top-24 -right-24 w-96 h-96 bg-red-600/20 rounded-full blur-3xl" />
+          <div className="absolute top-32 -left-24 w-80 h-80 bg-blue-600/20 rounded-full blur-3xl" />
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            {/* Left Column: Headlines & CTAs */}
-            <div className="lg:col-span-7 space-y-6">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-red-50 border border-red-200 text-red-600 text-xs font-bold shadow-xs">
-                <span className="w-2 h-2 rounded-full bg-red-600 animate-pulse" />
-                <span>{locale === 'am' ? 'ትክክለኛ ምህንድስና · ንጹህ ወርክሾፕ' : 'Precision Automotive Engineering · Clean Bay'}</span>
-              </div>
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full text-center">
+          {/* Engineering Badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-600/25 border border-red-500/40 text-red-300 text-xs sm:text-sm font-bold shadow-lg backdrop-blur-md mb-6">
+            <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+            <span>
+              {locale === 'am' ? 'ትክክለኛ አውቶሞቲቭ ምህንድስና · ቄራ፣ አዲስ አበባ' : 'Precision Automotive Engineering · Kera, Addis Ababa'}
+            </span>
+          </div>
 
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-blue-900 tracking-tight leading-[1.12]">
-                {locale === 'am' ? (
-                  <>
-                    መኪናዎ በባለሙያ እጅ — <br className="hidden sm:inline" />
-                    <span className="text-red-600">
-                      በትክክለኛ ምህንድስና።
-                    </span>
-                  </>
-                ) : (
-                  <>
-                    Expert car care, <br />
-                    <span className="text-red-600">
-                      engineered for peace of mind.
-                    </span>
-                  </>
-                )}
-              </h1>
+          {/* Short Title as requested by user */}
+          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black text-white tracking-tight leading-[1.1] drop-shadow-xl mb-4">
+            {locale === 'am' ? 'አበጋዝ ሞተርስ ኢንጂነሪንግ' : 'Abegaz Motors Engineering'}
+          </h1>
 
-              <p className="text-base sm:text-lg text-slate-700 max-w-2xl leading-relaxed font-medium">
-                {locale === 'am' 
-                  ? 'ቀጠሮዎን በኦንላይን በ 2 ደቂቃ ይያዙ። ጥያቄዎ እንደጸደቀ በኢሜይል ወይም በቴሌግራም ፈጣን ማረጋገጫ ይደርስዎታል።'
-                  : 'Book your workshop service online in 2 minutes. Receive real-time approval notifications via Telegram and Email.'}
-              </p>
+          {/* Short Tagline as requested by user */}
+          <p className="text-xl sm:text-2xl md:text-3xl text-red-400 font-extrabold tracking-wide drop-shadow-md mb-8">
+            {locale === 'am' ? 'ሊተማመኑበት የሚችሉት ጥራት ያለው አገልግሎት' : 'Quality service you can trust'}
+          </p>
 
-              {/* CTAs */}
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
-                <Button
-                  size="lg"
-                  variant="primary"
-                  onClick={() => setCurrentView('book')}
+          {/* Only 2 Buttons: Book Appointment and Services */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
+            <Button
+              size="lg"
+              variant="primary"
+              onClick={() => setCurrentView('book')}
+              className="w-full sm:w-auto h-14 px-8 text-base font-black shadow-xl shadow-red-600/40 hover:shadow-red-600/60"
+            >
+              <Calendar className="w-5 h-5 mr-2" />
+              <span>{locale === 'am' ? 'ቀጠሮ ይያዙ' : 'Book Appointment'}</span>
+            </Button>
+
+            <button
+              type="button"
+              onClick={() => setCurrentView('services')}
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 h-14 px-8 rounded-btn bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border-2 border-white/40 hover:border-white font-extrabold text-base shadow-lg transition-all active:scale-98"
+            >
+              <span>{locale === 'am' ? 'አገልግሎቶች' : 'Services'}</span>
+              <ArrowRight className="w-5 h-5" />
+            </button>
+          </div>
+
+          {/* 3 Trust Chips */}
+          <div className="pt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-xs sm:text-sm text-white/90">
+            <span className="flex items-center gap-2 font-bold drop-shadow">
+              <CheckCircle2 className="w-4 h-4 text-red-500" />
+              <span>{locale === 'am' ? 'ልምድ ያላቸው መሃንዲሶች' : 'Certified Engineers'}</span>
+            </span>
+            <span className="flex items-center gap-2 font-bold drop-shadow">
+              <CheckCircle2 className="w-4 h-4 text-red-500" />
+              <span>{locale === 'am' ? 'ግልጽ ሂደትና ዋጋ' : 'Transparent Pricing'}</span>
+            </span>
+            <span className="flex items-center gap-2 font-bold drop-shadow">
+              <CheckCircle2 className="w-4 h-4 text-red-500" />
+              <span>{locale === 'am' ? 'ፈጣን ማሳወቂያ' : 'Instant Updates'}</span>
+            </span>
+          </div>
+
+          {/* Floating Quick Booking Widget */}
+          <div className="mt-10 max-w-3xl mx-auto w-full bg-white/95 backdrop-blur-md text-slate-800 p-5 sm:p-6 rounded-2xl shadow-2xl border border-white/50 text-left">
+            <form onSubmit={handleQuickBook} className="grid grid-cols-1 sm:grid-cols-3 gap-3 items-end">
+              <div>
+                <label className="block text-xs font-bold text-slate-600 mb-1">
+                  {locale === 'am' ? 'አገልግሎት ይምረጡ' : 'Select Service'}
+                </label>
+                <select
+                  value={quickService}
+                  onChange={(e) => setQuickService(e.target.value)}
+                  className="w-full h-11 px-3 text-xs font-semibold bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none"
                 >
-                  <Calendar className="w-5 h-5 mr-2" />
-                  <span>{locale === 'am' ? 'ቀጠሮ ይያዙ' : 'Book Appointment'}</span>
+                  {services.map(s => (
+                    <option key={s.slug} value={s.slug}>
+                      {locale === 'am' ? s.nameAm : s.nameEn}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold text-slate-600 mb-1">
+                  {locale === 'am' ? 'የቀጠሮ ቀን' : 'Preferred Date'}
+                </label>
+                <input
+                  type="date"
+                  value={quickDate}
+                  onChange={(e) => setQuickDate(e.target.value)}
+                  className="w-full h-11 px-3 text-xs font-semibold bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none"
+                />
+              </div>
+
+              <div>
+                <Button type="submit" variant="primary" size="md" fullWidth className="h-11 text-xs font-black">
+                  {locale === 'am' ? 'ክፍት ሰዓት ፈልግ ›' : 'Find Slot ›'}
                 </Button>
-
-                <Button
-                  size="lg"
-                  variant="secondary"
-                  onClick={() => setCurrentView('services')}
-                >
-                  <span>{locale === 'am' ? 'አገልግሎቶች' : 'Services'}</span>
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </Button>
               </div>
-
-              {/* 3 Trust Chips */}
-              <div className="pt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs sm:text-sm">
-                <span className="flex items-center gap-1.5 text-blue-900 font-bold">
-                  <CheckCircle2 className="w-4 h-4 text-red-600" />
-                  <span>{locale === 'am' ? 'ልምድ ያላቸው መሃንዲሶች' : 'Certified Engineers'}</span>
-                </span>
-                <span className="flex items-center gap-1.5 text-blue-900 font-bold">
-                  <CheckCircle2 className="w-4 h-4 text-red-600" />
-                  <span>{locale === 'am' ? 'ግልጽ ሂደትና ዋጋ' : 'Transparent Pricing'}</span>
-                </span>
-                <span className="flex items-center gap-1.5 text-blue-900 font-bold">
-                  <CheckCircle2 className="w-4 h-4 text-red-600" />
-                  <span>{locale === 'am' ? 'ፈጣን ማሳወቂያ' : 'Instant Updates'}</span>
-                </span>
-              </div>
-            </div>
-
-            {/* Right Column: Hero Visual (Clean Signboard in Engineered Frame) */}
-            <div className="lg:col-span-5 relative">
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl border-2 border-slate-200 bg-white p-2 sm:p-3">
-                <div className="relative rounded-xl overflow-hidden bg-slate-100 border border-slate-200">
-                  <img
-                    src="/hero-banner.png"
-                    alt="አበጋዝ ሞተርስ ኢንጂነሪንግ - Abegaz Motors Engineering Official Signboard"
-                    className="w-full h-auto object-contain hover:scale-[1.01] transition-transform duration-300"
-                  />
-                </div>
-                
-                <div className="mt-2.5 bg-blue-900 p-3 rounded-lg border border-blue-800 text-white flex items-center justify-between gap-2 shadow-sm">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shrink-0" />
-                    <p className="text-xs font-bold text-white">
-                      {locale === 'am' ? 'ኦፊሴላዊ የምህንድስና ወርክሾፕ' : 'Official Engineering Bay'}
-                    </p>
-                  </div>
-                  <span className="text-[11px] font-black text-white bg-red-600 px-2 py-0.5 rounded shadow-xs">
-                    Advanced Care. Absolute Trust.
-                  </span>
-                </div>
-              </div>
-
-              {/* Floating Quick Booking Widget (PC / Tablet) */}
-              <div className="hidden sm:block absolute -bottom-10 -left-6 right-6 bg-white text-navy p-5 rounded-card shadow-lg border border-line z-20">
-                <form onSubmit={handleQuickBook} className="grid grid-cols-1 sm:grid-cols-3 gap-3 items-end">
-                  <div>
-                    <label className="block text-xs font-bold text-muted mb-1">
-                      {locale === 'am' ? 'አገልግሎት ይምረጡ' : 'Select Service'}
-                    </label>
-                    <select
-                      value={quickService}
-                      onChange={(e) => setQuickService(e.target.value)}
-                      className="w-full h-11 px-3 text-xs font-semibold bg-mist border border-line rounded-input focus:ring-2 focus:ring-orange-signal focus:outline-none"
-                    >
-                      {services.map(s => (
-                        <option key={s.slug} value={s.slug}>
-                          {locale === 'am' ? s.nameAm : s.nameEn}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-bold text-muted mb-1">
-                      {locale === 'am' ? 'የቀጠሮ ቀን' : 'Preferred Date'}
-                    </label>
-                    <input
-                      type="date"
-                      value={quickDate}
-                      onChange={(e) => setQuickDate(e.target.value)}
-                      className="w-full h-11 px-3 text-xs font-semibold bg-mist border border-line rounded-input focus:ring-2 focus:ring-orange-signal focus:outline-none"
-                    />
-                  </div>
-
-                  <div>
-                    <Button type="submit" variant="primary" size="md" fullWidth className="h-11 text-xs">
-                      {locale === 'am' ? 'ክፍት ሰዓት ፈልግ ›' : 'Find Slot ›'}
-                    </Button>
-                  </div>
-                </form>
-              </div>
-            </div>
+            </form>
           </div>
         </div>
       </section>
