@@ -56,16 +56,28 @@ export const HomePage: React.FC = () => {
       {/* 7.1 HERO SECTION - Original Ambient Workshop Video Background */}
       <section className="relative overflow-hidden py-16 sm:py-24 border-b border-slate-900 bg-slate-950 text-white min-h-[85vh] flex items-center">
         
-        {/* Ambient Video Background Layer - Original Workshop Video */}
+        {/* Ambient Video Background Layer - Reliable Local Workshop Video */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <video
+            ref={(el) => {
+              if (el) {
+                el.muted = true;
+                el.play().catch(() => {});
+              }
+            }}
+            onCanPlay={(e) => {
+              e.currentTarget.play().catch(() => {});
+            }}
             autoPlay
             loop
             muted
             playsInline
+            preload="auto"
             className="w-full h-full object-cover object-center scale-105"
-            src="https://assets.mixkit.co/videos/preview/mixkit-car-mechanic-working-in-a-garage-43285-large.mp4"
-          />
+          >
+            <source src="/workshop-bg.mp4" type="video/mp4" />
+            <source src="/mechanic-work.webm" type="video/webm" />
+          </video>
           {/* Subtle gradient: video stays 100% clear, vivid & sharp while text is perfectly legible */}
           <div className="absolute inset-0 bg-black/40" />
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/70" />
