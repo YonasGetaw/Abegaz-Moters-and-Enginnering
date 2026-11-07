@@ -21,7 +21,7 @@ import { StaffDashboard } from './components/staff/StaffDashboard';
 import { TrackBookingPage } from './components/booking/TrackBookingPage';
 import { NotificationSimulatorModal } from './components/notifications/NotificationSimulatorModal';
 import { NotFoundPage, ForbiddenPage, EmailPreviewModal, TelegramPreviewModal } from './components/common/SystemPages';
-import { StitchScreenNavigator } from './components/common/StitchScreenNavigator';
+import { FloatingSocialMenu } from './components/common/FloatingSocialMenu';
 
 const AppContent: React.FC = () => {
   const { currentView, toast } = useApp();
@@ -71,8 +71,8 @@ const AppContent: React.FC = () => {
       <EmailPreviewModal />
       <TelegramPreviewModal />
 
-      {/* Prompt Pack Interactive Screen Navigator Dock */}
-      <StitchScreenNavigator />
+      {/* Floating Speed-Dial Social & Contact Channels Widget */}
+      {!['admin', 'staff'].includes(currentView) && <FloatingSocialMenu />}
     </div>
   );
 };

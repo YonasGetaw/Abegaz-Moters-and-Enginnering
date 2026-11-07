@@ -271,11 +271,6 @@ export const GalleryPage: React.FC = () => {
                     ? (locale === 'am' ? currentCategoryObj.nameAm : currentCategoryObj.nameEn)
                     : (locale === 'am' ? 'ሁሉም ተሽከርካሪዎች' : 'All Categories')}
                 </h2>
-                <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
-                  {locale === 'am'
-                    ? `ከ ${VEHICLES_DATA.length} ሞዴሎች ውስጥ ${filteredVehicles.length} ውጤቶች በመታየት ላይ`
-                    : `Showing 1–${filteredVehicles.length} of ${VEHICLES_DATA.length} results`}
-                </p>
               </div>
 
               {searchQuery && (
