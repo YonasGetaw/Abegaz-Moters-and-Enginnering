@@ -56,7 +56,7 @@ export const HomePage: React.FC = () => {
       {/* 7.1 HERO SECTION - Original Ambient Workshop Video Background */}
       <section className="relative overflow-hidden py-16 sm:py-24 border-b border-slate-900 bg-slate-950 text-white min-h-[85vh] flex items-center">
         
-        {/* Ambient Video Background Layer - Reliable Local Workshop Video */}
+        {/* Ambient Video Background Layer - Authentic Mechanic Working Video */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <video
             ref={(el) => {
@@ -75,8 +75,8 @@ export const HomePage: React.FC = () => {
             preload="auto"
             className="w-full h-full object-cover object-center scale-105"
           >
-            <source src="/workshop-bg.mp4" type="video/mp4" />
             <source src="/mechanic-work.webm" type="video/webm" />
+            <source src="/workshop-bg.mp4" type="video/mp4" />
           </video>
           {/* Subtle gradient: video stays 100% clear, vivid & sharp while text is perfectly legible */}
           <div className="absolute inset-0 bg-black/40" />
