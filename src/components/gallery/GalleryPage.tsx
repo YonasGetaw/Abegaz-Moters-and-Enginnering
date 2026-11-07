@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useApp } from '../../context/AppContext';
 import { INITIAL_GALLERY } from '../../lib/constants';
 import { 
@@ -14,9 +14,13 @@ import {
   SlidersHorizontal,
   Car,
   ChevronDown,
+  ChevronUp,
   ArrowRight,
   Maximize2,
-  Search
+  Search,
+  CheckCircle,
+  Wrench,
+  Fuel
 } from 'lucide-react';
 import { Button } from '../common/Button';
 
@@ -80,6 +84,18 @@ export const GalleryPage: React.FC = () => {
   // Modal states
   const [activeLightboxImage, setActiveLightboxImage] = useState<string | null>(null);
   const [activeVideoModal, setActiveVideoModal] = useState<WorkshopVideo | null>(null);
+  const [selectedVehicleModal, setSelectedVehicleModal] = useState<VehicleModel | null>(null);
+
+  // Scroll detection for scroll-to-top button
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 350);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // Filtered & Sorted Vehicles
   const filteredVehicles = useMemo(() => {
@@ -157,7 +173,7 @@ export const GalleryPage: React.FC = () => {
             {/* 1. Vehicle Fleet Tab */}
             <button
               onClick={() => setActiveTab('catalog')}
-              className={`flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all ${
+              className={`btn-click-effect active:scale-95 flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all ${
                 activeTab === 'catalog'
                   ? 'bg-red-600 text-white shadow-sm'
                   : 'text-slate-700 hover:text-red-600 hover:bg-white'
@@ -170,7 +186,7 @@ export const GalleryPage: React.FC = () => {
             {/* 2. Before & After */}
             <button
               onClick={() => setActiveTab('beforeAfter')}
-              className={`flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all ${
+              className={`btn-click-effect active:scale-95 flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all ${
                 activeTab === 'beforeAfter'
                   ? 'bg-red-600 text-white shadow-sm'
                   : 'text-slate-700 hover:text-red-600 hover:bg-white'
@@ -183,7 +199,7 @@ export const GalleryPage: React.FC = () => {
             {/* 3. Videos */}
             <button
               onClick={() => setActiveTab('videos')}
-              className={`flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all ${
+              className={`btn-click-effect active:scale-95 flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all ${
                 activeTab === 'videos'
                   ? 'bg-red-600 text-white shadow-sm'
                   : 'text-slate-700 hover:text-red-600 hover:bg-white'
@@ -199,7 +215,7 @@ export const GalleryPage: React.FC = () => {
             TAB 1: CLEAN WHITE STUDIO VEHICLE FLEET (MATCHING REFERENCE IMAGE UI)
             ========================================================================= */}
         {activeTab === 'catalog' && (
-          <div className="space-y-8">
+          <div className="space-y-8 animate-fade-in-scale">
             
             {/* Category Navigation Bar + Search & Sort Controls (Matching Reference Image) */}
             <div className="border-b border-slate-200 pb-4">
@@ -213,7 +229,7 @@ export const GalleryPage: React.FC = () => {
                       <button
                         key={cat.id}
                         onClick={() => setSelectedCategorySlug(cat.slug)}
-                        className={`text-xs sm:text-[13px] tracking-wider uppercase font-bold transition-all pb-1.5 border-b-2 ${
+                        className={`btn-click-effect active:scale-90 hover:scale-105 text-xs sm:text-[13px] tracking-wider uppercase font-bold transition-all pb-1.5 border-b-2 cursor-pointer ${
                           isSelected
                             ? 'text-blue-950 border-blue-950'
                             : 'text-slate-400 hover:text-slate-800 border-transparent'
@@ -240,7 +256,7 @@ export const GalleryPage: React.FC = () => {
                     {searchQuery && (
                       <button
                         onClick={() => setSearchQuery('')}
-                        className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700"
+                        className="btn-click-effect active:scale-75 absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700"
                         title={locale === 'am' ? 'አጥፋ' : 'Clear'}
                       >
                         <X className="w-3.5 h-3.5" />
@@ -253,7 +269,7 @@ export const GalleryPage: React.FC = () => {
                     <select
                       value={sortBy}
                       onChange={(e) => setSortBy(e.target.value as any)}
-                      className="appearance-none bg-white border border-slate-200 hover:border-slate-300 rounded-full pl-4 pr-8 py-2 text-xs sm:text-sm font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-950 shadow-2xs cursor-pointer"
+                      className="appearance-none bg-white border border-slate-200 hover:border-slate-300 rounded-full pl-4 pr-8 py-2 text-xs sm:text-sm font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-950 shadow-2xs cursor-pointer btn-click-effect active:scale-95"
                     >
                       <option value="default">{locale === 'am' ? 'ነባሪ ቅደም ተከተል' : 'Default sorting'}</option>
                       <option value="nameAsc">{locale === 'am' ? 'በስም: A-Z' : 'Sort by Name (A-Z)'}</option>
@@ -301,19 +317,20 @@ export const GalleryPage: React.FC = () => {
                     setSearchQuery('');
                     setSelectedCategorySlug('all');
                   }}
-                  className="mt-4 px-4 py-2 bg-blue-950 text-white text-xs font-bold rounded-full hover:bg-slate-800 transition-colors shadow-2xs"
+                  className="btn-click-effect active:scale-90 mt-4 px-4 py-2 bg-blue-950 text-white text-xs font-bold rounded-full hover:bg-slate-800 transition-colors shadow-2xs"
                 >
                   {locale === 'am' ? 'ሁሉንም አሳይ' : 'Show All Vehicles'}
                 </button>
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-14 sm:gap-x-12 sm:gap-y-16">
-                {filteredVehicles.map((vehicle) => {
+                {filteredVehicles.map((vehicle, idx) => {
                   return (
                     <div
                       key={vehicle.id}
-                      onClick={() => handleBookVehicle(vehicle)}
-                      className="group cursor-pointer flex flex-col items-center text-center transition-all duration-300"
+                      onClick={() => setSelectedVehicleModal(vehicle)}
+                      style={{ animationDelay: `${(idx % 9) * 45}ms` }}
+                      className="animate-fade-in-up card-click-effect group cursor-pointer flex flex-col items-center text-center transition-all duration-300 hover:-translate-y-2 active:scale-95 select-none"
                     >
                       {/* Vehicle Cutout Image Floating on Pure White Canvas with Ground Shadow */}
                       <div className="relative w-full aspect-[16/10] bg-white flex items-center justify-center p-3 overflow-hidden">
@@ -324,7 +341,7 @@ export const GalleryPage: React.FC = () => {
                         <img
                           src={vehicle.image}
                           alt={vehicle.name}
-                          className="relative max-h-full max-w-full object-contain transform group-hover:scale-105 transition-transform duration-300"
+                          className="relative max-h-full max-w-full object-contain transform group-hover:scale-105 group-hover:-translate-y-1 transition-all duration-300"
                           loading="lazy"
                           onError={(e) => {
                             (e.currentTarget as HTMLImageElement).src = 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=600&q=80';
@@ -337,12 +354,16 @@ export const GalleryPage: React.FC = () => {
                         <h3 className="text-base sm:text-lg font-bold text-slate-900 group-hover:text-red-600 transition-colors">
                           {vehicle.name}
                         </h3>
+                        <span className="text-xs text-slate-400 group-hover:text-blue-900 font-medium transition-colors block mt-0.5">
+                          {vehicle.fuelType} • {vehicle.bodyType}
+                        </span>
                       </div>
                     </div>
                   );
                 })}
               </div>
             )}
+
 
             {/* Bottom Service Prompt */}
             <div className="mt-16 pt-8 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -572,6 +593,105 @@ export const GalleryPage: React.FC = () => {
           </div>
         </div>
       )}
+
+      {/* Interactive Vehicle Detail & Direct Booking Modal (With Smooth Animation) */}
+      {selectedVehicleModal && (
+        <div 
+          onClick={() => setSelectedVehicleModal(null)}
+          className="fixed inset-0 z-50 bg-slate-950/75 backdrop-blur-xs flex items-center justify-center p-4 cursor-pointer"
+        >
+          <div 
+            onClick={(e) => e.stopPropagation()}
+            className="animate-fade-in-scale relative max-w-lg w-full bg-white rounded-3xl p-6 sm:p-7 shadow-2xl border border-slate-100 cursor-default"
+          >
+            {/* Close Button */}
+            <button
+              onClick={() => setSelectedVehicleModal(null)}
+              className="btn-click-effect active:scale-75 absolute top-5 right-5 p-2 rounded-full text-slate-400 hover:text-slate-800 hover:bg-slate-100 transition-colors"
+              title={locale === 'am' ? 'ዝጋ' : 'Close'}
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            {/* Vehicle Preview on Pure White */}
+            <div className="relative w-full aspect-[16/10] bg-white flex items-center justify-center p-4 overflow-hidden mb-4">
+              <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-4/5 h-4 bg-black/15 rounded-full blur-md" />
+              <img 
+                src={selectedVehicleModal.image} 
+                alt={selectedVehicleModal.name} 
+                className="relative max-h-full max-w-full object-contain"
+              />
+            </div>
+
+            {/* Vehicle Info */}
+            <div className="text-center sm:text-left">
+              <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 mb-2">
+                <span className="text-[11px] font-bold tracking-wider uppercase px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-900 border border-blue-200">
+                  {selectedVehicleModal.brand}
+                </span>
+                <span className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700">
+                  {selectedVehicleModal.fuelType}
+                </span>
+                <span className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700">
+                  {selectedVehicleModal.bodyType}
+                </span>
+              </div>
+
+              <h3 className="text-xl sm:text-2xl font-black text-slate-950">
+                {selectedVehicleModal.name}
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-500 font-medium mt-0.5">
+                {selectedVehicleModal.nameAm}
+              </p>
+            </div>
+
+            {/* Certified Services List */}
+            <div className="mt-5 p-3.5 bg-slate-50 rounded-2xl border border-slate-100">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 block mb-2">
+                {locale === 'am' ? 'የተመሰከረላቸው ሰርቪሶች' : 'Certified Workshop Services'}
+              </span>
+              <div className="flex flex-wrap gap-1.5">
+                {selectedVehicleModal.servicesRecommended.map((srv, i) => (
+                  <span key={i} className="inline-flex items-center gap-1 text-xs font-semibold bg-white text-slate-800 px-2.5 py-1 rounded-lg border border-slate-200">
+                    <CheckCircle className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                    <span>{srv}</span>
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Actions: Book Service Button with vibrant pulse & click effect */}
+            <div className="mt-6 flex flex-col sm:flex-row items-center gap-3">
+              <Button
+                variant="primary"
+                fullWidth
+                onClick={() => {
+                  const v = selectedVehicleModal;
+                  setSelectedVehicleModal(null);
+                  handleBookVehicle(v);
+                }}
+                className="btn-click-effect active:scale-95 bg-red-600 hover:bg-red-700 text-white font-black py-3 rounded-xl shadow-md text-sm sm:text-base flex items-center justify-center gap-2"
+              >
+                <Wrench className="w-4 h-4" />
+                <span>{locale === 'am' ? `ለ${selectedVehicleModal.name} ቀጠሮ ያዙ` : `Book Service for ${selectedVehicleModal.name}`}</span>
+                <ArrowRight className="w-4 h-4 ml-1" />
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Floating Scroll to Top Button (Smooth Fade & Bounce) */}
+      {showScrollTop && (
+        <button
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          className="fixed bottom-24 right-6 z-40 p-3 bg-white text-slate-700 hover:text-red-600 hover:bg-slate-50 rounded-full shadow-xl border border-slate-200 btn-click-effect active:scale-75 transition-all duration-200 animate-fade-in-scale flex items-center justify-center group"
+          title={locale === 'am' ? 'ወደ ላይ ውጣ' : 'Scroll to top'}
+        >
+          <ChevronUp className="w-5 h-5 stroke-[2.5] group-hover:-translate-y-0.5 transition-transform" />
+        </button>
+      )}
     </div>
+
   );
 };
