@@ -277,21 +277,16 @@ export const ServicesPage: React.FC = () => {
                 <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-navy via-orange-signal to-navy opacity-0 group-hover:opacity-100 transition-opacity" />
 
                 <div>
-                  {/* Top Bar: Pillar Tag + Price Tag */}
+                  {/* Top Bar: Pillar Tag + Duration Tag */}
                   <div className="flex items-center justify-between gap-2 mb-4">
                     <span className={`text-[11px] font-bold px-2.5 py-1 rounded-full border ${badge.bg}`}>
                       {badge.text}
                     </span>
 
-                    {svc.priceStarting ? (
-                      <span className="text-xs font-black font-mono px-2.5 py-1 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200">
-                        {locale === 'am' ? `ከ ${svc.priceStarting.toLocaleString()} ብር` : `From ${svc.priceStarting.toLocaleString()} ETB`}
-                      </span>
-                    ) : (
-                      <span className="text-[11px] font-bold text-muted bg-mist px-2 py-0.5 rounded">
-                        {locale === 'am' ? 'እንደ ምርመራው' : 'Quote Based'}
-                      </span>
-                    )}
+                    <span className="text-xs font-semibold text-slate-500 bg-slate-50 px-2.5 py-1 rounded-md border border-slate-200 flex items-center gap-1 font-mono">
+                      <Clock className="w-3 h-3 text-slate-400" />
+                      <span>~{svc.durationMin} {locale === 'am' ? 'ደቂቃ' : 'min'}</span>
+                    </span>
                   </div>
 
                   {/* Title & Description */}
@@ -437,17 +432,15 @@ export const ServicesPage: React.FC = () => {
                 </p>
               </div>
 
-              {/* Pricing & Duration Card */}
+              {/* Duration & Quality Card */}
               <div className="p-4 bg-mist rounded-xl border border-line flex items-center justify-between text-xs font-bold">
                 <div className="flex items-center gap-1.5 text-slate-700">
                   <Clock className="w-4 h-4 text-slate-500" />
                   <span>{locale === 'am' ? `ግምታዊ ጊዜ፡ ${activeDrawerService.durationText || `~${activeDrawerService.durationMin} ደቂቃ`}` : `Estimated: ${activeDrawerService.durationText || `~${activeDrawerService.durationMin} min`}`}</span>
                 </div>
-                {activeDrawerService.priceStarting && (
-                  <span className="text-emerald-700 font-mono font-black text-sm">
-                    {locale === 'am' ? `ከ ${activeDrawerService.priceStarting.toLocaleString()} ብር` : `From ${activeDrawerService.priceStarting.toLocaleString()} ETB`}
-                  </span>
-                )}
+                <span className="text-blue-900 font-bold text-xs bg-blue-50 px-2.5 py-1 rounded-md border border-blue-200">
+                  {locale === 'am' ? 'ኦሪጅናል መለዋወጫ' : 'Genuine OEM Parts'}
+                </span>
               </div>
 
               {/* What is Included */}
