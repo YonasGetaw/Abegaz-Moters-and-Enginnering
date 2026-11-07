@@ -68,34 +68,30 @@ export const Header: React.FC = () => {
         ? 'fixed top-0 inset-x-0 z-40 bg-gradient-to-b from-black/70 via-black/25 to-transparent border-b border-white/10 text-white'
         : 'sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b-2 border-slate-200 shadow-md text-slate-800'
     }`}>
-      {/* 1. Top Info Bar */}
-      <div className={`hidden lg:block text-xs py-2 px-6 border-b transition-colors ${
+      {/* 1. Top Info Bar - Sleek Midnight-Navy Gradient with Red Accents */}
+      <div className={`hidden lg:block text-xs py-2 px-6 border-b transition-all duration-300 ${
         isTransparent
-          ? 'bg-black/30 backdrop-blur-xs text-white/90 border-white/10'
-          : 'bg-slate-50 text-slate-700 border-slate-200'
+          ? 'bg-gradient-to-r from-black/60 via-slate-950/50 to-black/60 backdrop-blur-md text-white/90 border-white/10'
+          : 'bg-gradient-to-r from-slate-950 via-blue-950 to-slate-950 text-slate-200 border-slate-800/80 shadow-inner'
       }`}>
         <div className="max-w-7xl mx-auto flex justify-between items-center font-medium">
           <div className="flex items-center gap-6">
             <a 
               href="tel:+251975480808" 
-              className={`flex items-center gap-1.5 font-bold font-mono transition-colors ${
-                isTransparent ? 'text-white hover:text-red-400' : 'text-blue-900 hover:text-red-600'
-              }`}
+              className="flex items-center gap-1.5 font-bold font-mono transition-colors text-white hover:text-red-400"
             >
               <Phone className="w-3.5 h-3.5 text-red-500" />
               <span>0975 48 08 08 / 011 465 1553</span>
             </a>
-            <span className={`flex items-center gap-1.5 ${isTransparent ? 'text-white/80' : 'text-slate-600'}`}>
-              <Clock className={`w-3.5 h-3.5 ${isTransparent ? 'text-red-400' : 'text-blue-700'}`} />
+            <span className="flex items-center gap-1.5 text-slate-300">
+              <Clock className="w-3.5 h-3.5 text-blue-400" />
               <span>{locale === 'am' ? WORKSHOP_INFO.hoursScheduleAm : WORKSHOP_INFO.hoursScheduleEn}</span>
             </span>
             <a 
               href={WORKSHOP_INFO.googleMapsUrl} 
               target="_blank" 
               rel="noreferrer" 
-              className={`flex items-center gap-1.5 transition-colors group ${
-                isTransparent ? 'text-white/80 hover:text-white' : 'text-slate-700 hover:text-blue-900'
-              }`}
+              className="flex items-center gap-1.5 transition-colors group text-slate-300 hover:text-white"
               title="Open Google Maps"
             >
               <MapPin className="w-3.5 h-3.5 text-red-500 group-hover:animate-bounce" />
@@ -108,8 +104,8 @@ export const Header: React.FC = () => {
               onClick={() => handleNavClick('admin')}
               className={`font-bold transition-colors flex items-center gap-1 ${
                 currentView === 'admin' 
-                  ? 'text-red-500' 
-                  : (isTransparent ? 'text-white hover:text-red-400' : 'text-blue-900 hover:text-red-600')
+                  ? 'text-red-400' 
+                  : 'text-slate-200 hover:text-red-400'
               }`}
             >
               <span>Admin Portal</span>
@@ -119,29 +115,25 @@ export const Header: React.FC = () => {
                 </span>
               )}
             </button>
-            <span className={isTransparent ? 'text-white/30' : 'text-slate-300'}>|</span>
+            <span className="text-slate-700">|</span>
             <button 
               onClick={() => handleNavClick('staff')}
               className={`font-bold transition-colors ${
                 currentView === 'staff' 
-                  ? 'text-red-500' 
-                  : (isTransparent ? 'text-white hover:text-red-400' : 'text-blue-900 hover:text-red-600')
+                  ? 'text-red-400' 
+                  : 'text-slate-200 hover:text-red-400'
               }`}
             >
               Staff Portal
             </button>
-            <span className={isTransparent ? 'text-white/30' : 'text-slate-300'}>|</span>
+            <span className="text-slate-700">|</span>
             {/* Live Notification Simulator Trigger */}
             <button
               onClick={toggleNotificationSimulator}
-              className={`flex items-center gap-1.5 px-2 py-0.5 rounded text-[11px] font-bold border transition-colors ${
-                isTransparent
-                  ? 'bg-red-600/30 text-white border-red-500/40 hover:bg-red-600/50'
-                  : 'bg-red-50 hover:bg-red-100 text-red-600 border-red-200'
-              }`}
+              className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold border transition-colors bg-red-500/20 hover:bg-red-500/35 text-red-300 border-red-500/40"
               title="Open Live Telegram & Email Simulator"
             >
-              <Bell className="w-3 h-3 text-red-500 animate-pulse" />
+              <Bell className="w-3 h-3 text-red-400 animate-pulse" />
               <span>Demo Simulator</span>
             </button>
           </div>
