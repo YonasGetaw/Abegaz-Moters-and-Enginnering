@@ -86,10 +86,7 @@ export const TrackBookingPage: React.FC = () => {
         
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-tint text-orange-deep text-xs font-bold mb-3 border border-orange-200">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>{locale === 'am' ? 'የቀጥታ የቀጠሮ መከታተያ' : 'Live Appointment Tracking'}</span>
-          </div>
+
           
           <h1 className="text-3xl sm:text-4xl font-extrabold text-navy tracking-tight">
             {locale === 'am' ? 'የመኪናዎን ቀጠሮ ሁኔታ ይከታተሉ' : 'Track Your Vehicle Repair Status'}

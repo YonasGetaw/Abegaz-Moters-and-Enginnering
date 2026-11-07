@@ -173,10 +173,7 @@ export const ServicesPage: React.FC = () => {
       {/* 1. HERO SECTION - CLEAN, BOLD & DIRECT (White background, Royal Blue text, Brand Red accents) */}
       <section className="bg-gradient-to-b from-blue-50/70 via-white to-white text-slate-800 relative overflow-hidden pt-12 pb-16 sm:py-20 border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-red-50 text-red-600 text-xs font-bold border border-red-200 shadow-xs">
-            <Compass className="w-3.5 h-3.5" />
-            <span>{locale === 'am' ? 'አበጋዝ ሞተርስ ኢንጂነሪንግ' : 'Abegaz Motors Engineering'}</span>
-          </div>
+
 
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-blue-900 tracking-tight leading-tight max-w-4xl mx-auto">
             {locale === 'am' ? (
@@ -415,9 +412,6 @@ export const ServicesPage: React.FC = () => {
                   <div>
                     <span className="text-[10px] font-bold uppercase tracking-wider text-orange-deep block">
                       {locale === 'am' ? 'የአገልግሎት ዝርዝር' : 'Service Breakdown'}
-                    </span>
-                    <span className="text-xs text-muted">
-                      Abegaz Motors Engineering
                     </span>
                   </div>
                 </div>

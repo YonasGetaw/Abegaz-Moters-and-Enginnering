@@ -74,13 +74,7 @@ export const HomePage: React.FC = () => {
         </div>
 
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full text-center">
-          {/* Engineering Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-600/30 border border-red-500/50 text-white text-xs sm:text-sm font-bold shadow-lg backdrop-blur-md mb-6">
-            <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-            <span>
-              {locale === 'am' ? 'ትክክለኛ አውቶሞቲቭ ምህንድስና · ቄራ፣ አዲስ አበባ' : 'Precision Automotive Engineering · Kera, Addis Ababa'}
-            </span>
-          </div>
+
 
           {/* Short Title as requested by user */}
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black text-white tracking-tight leading-[1.1] drop-shadow-2xl mb-4">
@@ -208,10 +202,7 @@ export const HomePage: React.FC = () => {
       <section className="py-16 md:py-24 bg-mist bg-blueprint">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-12">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-tint text-orange-deep border border-orange-200 text-xs font-bold mb-3">
-              <Wrench className="w-3.5 h-3.5" />
-              <span>{locale === 'am' ? 'የምንሰጣቸው አገልግሎቶች' : 'Our Capabilities'}</span>
-            </div>
+
             <h2 className="text-2xl sm:text-4xl font-extrabold text-navy tracking-tight">
               {locale === 'am' ? 'ትክክለኛ የምህንድስና አገልግሎቶች' : 'Precision Engineering Services'}
             </h2>
@@ -362,9 +353,7 @@ export const HomePage: React.FC = () => {
       <section className="py-16 md:py-20 bg-slate-50 border-y border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-12">
-            <span className="text-red-600 text-xs font-black uppercase tracking-wider bg-red-50 border border-red-200 px-3 py-1 rounded-full">
-              {locale === 'am' ? 'ቀላል 4 ደረጃዎች' : 'Simple 4-Step Process'}
-            </span>
+
             <h2 className="text-2xl sm:text-4xl font-extrabold text-blue-900 mt-3">
               {locale === 'am' ? 'ቀጠሮ እንዴት ይሰራል?' : 'How Appointment Booking Works'}
             </h2>
@@ -432,9 +421,7 @@ export const HomePage: React.FC = () => {
       <section className="py-16 md:py-24 bg-white border-b border-line">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-12">
-            <span className="text-orange-deep text-xs font-bold uppercase tracking-wider">
-              {locale === 'am' ? 'ተመጣጣኝ ዋጋዎች' : 'Maintenance Packages'}
-            </span>
+
             <h2 className="text-2xl sm:text-4xl font-extrabold text-navy mt-2">
               {locale === 'am' ? 'የተሟሉ የጥገና ጥቅሎች' : 'Tailored Service Packages'}
             </h2>
@@ -508,9 +495,7 @@ export const HomePage: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
             <div>
-              <span className="text-orange-deep text-xs font-bold uppercase tracking-wider">
-                {locale === 'am' ? 'የስራ ውጤቶቻችን' : 'Our Craftsmanship'}
-              </span>
+
               <h2 className="text-2xl sm:text-4xl font-extrabold text-navy mt-1">
                 {locale === 'am' ? 'በፊት እና በኋላ ማነፃፀሪያ' : 'Before & After Engineering'}
               </h2>
@@ -623,9 +608,7 @@ export const HomePage: React.FC = () => {
       <section className="py-16 md:py-24 bg-white border-b border-line">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-12">
-            <span className="text-orange-deep text-xs font-bold uppercase tracking-wider">
-              {locale === 'am' ? 'የደንበኞች ምስክርነት' : 'Customer Reviews'}
-            </span>
+
             <h2 className="text-2xl sm:text-4xl font-extrabold text-navy mt-1">
               {locale === 'am' ? 'ደንበኞቻችን ስለ እኛ ምን ይላሉ?' : 'What Drivers Say About Us'}
             </h2>
@@ -662,10 +645,7 @@ export const HomePage: React.FC = () => {
       <section id="faq" className="py-16 md:py-24 bg-mist border-b border-line">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-10">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-tint text-orange-deep text-xs font-bold mb-3">
-              <HelpCircle className="w-3.5 h-3.5" />
-              <span>{locale === 'am' ? 'ተደጋጋሚ ጥያቄዎች' : 'Help & Answers'}</span>
-            </div>
+
             <h2 className="text-2xl sm:text-4xl font-extrabold text-navy tracking-tight">
               {locale === 'am' ? 'የተለመዱ ጥያቄዎችና መልሶቻቸው (FAQ)' : 'Frequently Asked Questions'}
             </h2>
@@ -714,11 +694,11 @@ export const HomePage: React.FC = () => {
               {locale === 'am' ? 'ተጨማሪ ጥያቄ አለዎት? በቀጥታ በስልክ ያማክሩን፡' : 'Have a different question? Speak with us directly:'}
             </p>
             <a
-              href="tel:+251114651553"
+              href="tel:+251975480808"
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-navy text-white text-xs font-bold hover:bg-slate-800 transition-colors"
             >
               <Phone className="w-3.5 h-3.5 text-orange-signal" />
-              <span>011 465 1553</span>
+              <span>0975 48 08 08</span>
             </a>
           </div>
         </div>
@@ -727,9 +707,6 @@ export const HomePage: React.FC = () => {
       {/* 7.10 FINAL CTA BAND - White & Royal Blue Theme */}
       <section className="bg-gradient-to-b from-white via-blue-50/50 to-blue-100/60 text-slate-800 py-16 border-t-2 border-slate-200 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6 relative z-10">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-red-50 text-red-600 text-xs font-bold border border-red-200 shadow-xs">
-            <span>🇪🇹 አዲስ አበባ · ነፋስ ስልክ-ላፍቶ · ቄራ</span>
-          </div>
 
           <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-blue-900">
             {locale === 'am' 
@@ -768,7 +745,7 @@ export const HomePage: React.FC = () => {
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 h-13 px-6 rounded-btn border-2 border-blue-600 bg-white text-blue-700 font-extrabold hover:bg-blue-50 transition-all font-mono shadow-xs"
             >
               <Phone className="w-4 h-4 text-red-600" />
-              <span>0975 48 08 08 / 011 465 1553</span>
+              <span>0975 48 08 08</span>
             </a>
           </div>
         </div>

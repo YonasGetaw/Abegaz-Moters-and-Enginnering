@@ -27,9 +27,7 @@ export const PackagesPage: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-10">
-          <span className="text-red-600 text-xs font-black uppercase tracking-wider bg-red-50 border border-red-200 px-3 py-1 rounded-full">
-            {locale === 'am' ? 'የጥገና ጥቅሎች' : 'Service Packages'}
-          </span>
+
           <h1 className="text-3xl sm:text-5xl font-black text-blue-900 mt-3 tracking-tight">
             {locale === 'am' ? 'የተሟሉ የሰርቪስ ጥቅሎች' : 'Comprehensive Care Packages'}
           </h1>
