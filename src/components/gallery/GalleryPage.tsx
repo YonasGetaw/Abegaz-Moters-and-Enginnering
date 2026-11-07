@@ -262,18 +262,11 @@ export const GalleryPage: React.FC = () => {
                       />
                     </div>
 
-                    {/* Vehicle Name ONLY (matching reference image: clean bold text with book CTA) */}
+                    {/* Vehicle Name ONLY */}
                     <div className="mt-4 w-full">
                       <h3 className="text-base sm:text-lg font-bold text-slate-900 group-hover:text-red-600 transition-colors">
                         {vehicle.name}
                       </h3>
-
-                      <div className="mt-3 flex items-center justify-center">
-                        <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-bold text-red-600 bg-red-50 group-hover:bg-red-600 group-hover:text-white transition-all shadow-xs border border-red-200 group-hover:border-red-600">
-                          <span>{locale === 'am' ? 'ቀጠሮ ያዙ' : 'Book Service'}</span>
-                          <ArrowRight className="w-3.5 h-3.5" />
-                        </span>
-                      </div>
                     </div>
                   </div>
                 );
