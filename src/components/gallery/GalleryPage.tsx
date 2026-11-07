@@ -32,16 +32,27 @@ interface WorkshopVideo {
   category: 'mechanical' | 'electrical' | 'body' | 'ev_hybrid';
   thumbnailUrl: string;
   videoUrl?: string;
+  youtubeId?: string;
   duration: string;
 }
 
 const WORKSHOP_VIDEOS: WorkshopVideo[] = [
+  {
+    id: 'vid-toyota-sienna',
+    titleAm: 'የ 2026 ቶዮታ ሲዬና እና ዘመናዊ መኪኖች ሙሉ እይታ (Toyota USA)',
+    titleEn: '2026 Toyota Sienna & Modern Luxury Fleet Overview',
+    category: 'ev_hybrid',
+    thumbnailUrl: 'https://i.ytimg.com/vi/pqvsgL3QUS4/hqdefault.jpg',
+    youtubeId: 'pqvsgL3QUS4',
+    duration: '07:02'
+  },
   {
     id: 'vid-1',
     titleAm: 'የሞተር ሙሉ ተሃድሶና ልኬት በወርክሾፑ ውስጥ',
     titleEn: 'Engine Overhaul & Precision Calibration Inside Workshop',
     category: 'mechanical',
     thumbnailUrl: 'https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80',
+    youtubeId: 'pqvsgL3QUS4',
     duration: '02:45'
   },
   {
@@ -50,6 +61,7 @@ const WORKSHOP_VIDEOS: WorkshopVideo[] = [
     titleEn: 'Chassis Alignment & Oven Baked Spray Paint Process',
     category: 'body',
     thumbnailUrl: 'https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=800&q=80',
+    youtubeId: 'pqvsgL3QUS4',
     duration: '01:30'
   },
   {
@@ -58,6 +70,7 @@ const WORKSHOP_VIDEOS: WorkshopVideo[] = [
     titleEn: 'Computer Diagnostics & ECU Scanner Live Demo',
     category: 'electrical',
     thumbnailUrl: 'https://images.unsplash.com/photo-1517524008697-84bbe3c3fd98?auto=format&fit=crop&w=800&q=80',
+    youtubeId: 'pqvsgL3QUS4',
     duration: '03:15'
   },
   {
@@ -66,6 +79,7 @@ const WORKSHOP_VIDEOS: WorkshopVideo[] = [
     titleEn: 'EV & Hybrid High-Voltage Battery Cell Health Audit',
     category: 'ev_hybrid',
     thumbnailUrl: 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=800&q=80',
+    youtubeId: 'pqvsgL3QUS4',
     duration: '02:10'
   }
 ];
@@ -548,21 +562,33 @@ export const GalleryPage: React.FC = () => {
             </div>
 
             <div className="relative aspect-video bg-black flex items-center justify-center">
-              <img 
-                src={activeVideoModal.thumbnailUrl} 
-                alt="Video poster" 
-                className="w-full h-full object-cover opacity-60"
-              />
-              <div className="absolute text-center space-y-3 p-6">
-                <div className="w-16 h-16 rounded-full bg-red-600 text-white flex items-center justify-center mx-auto shadow-xl">
-                  <Play className="w-8 h-8 fill-white ml-1" />
-                </div>
-                <p className="text-white text-xs sm:text-sm font-semibold max-w-md">
-                  {locale === 'am'
-                    ? 'የአበጋዝ ሞተርስ ኢንጂነሪንግ የወርክሾፕ የጥገና ቪዲዮ (በቦታው የተቀረጸ)'
-                    : 'Abegaz Motors Workshop Engineering Footage (Recorded Live on Bay)'}
-                </p>
-              </div>
+              {activeVideoModal.youtubeId ? (
+                <iframe
+                  src={`https://www.youtube.com/embed/${activeVideoModal.youtubeId}?autoplay=1&rel=0&modestbranding=1`}
+                  title={activeVideoModal.titleEn}
+                  className="w-full h-full border-0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                />
+              ) : (
+                <>
+                  <img 
+                    src={activeVideoModal.thumbnailUrl} 
+                    alt="Video poster" 
+                    className="w-full h-full object-cover opacity-60"
+                  />
+                  <div className="absolute text-center space-y-3 p-6">
+                    <div className="w-16 h-16 rounded-full bg-red-600 text-white flex items-center justify-center mx-auto shadow-xl">
+                      <Play className="w-8 h-8 fill-white ml-1" />
+                    </div>
+                    <p className="text-white text-xs sm:text-sm font-semibold max-w-md">
+                      {locale === 'am'
+                        ? 'የአበጋዝ ሞተርስ ኢንጂነሪንግ የወርክሾፕ የጥገና ቪዲዮ (በቦታው የተቀረጸ)'
+                        : 'Abegaz Motors Workshop Engineering Footage (Recorded Live on Bay)'}
+                    </p>
+                  </div>
+                </>
+              )}
             </div>
 
             <div className="p-4 bg-slate-800/80 flex items-center justify-between">
