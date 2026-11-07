@@ -16,19 +16,8 @@ export const Header: React.FC = () => {
   } = useApp();
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 30);
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const pendingCount = appointments.filter(a => a.status === 'pending').length;
-  const isTransparent = currentView === 'home' && !isScrolled;
 
   // Exact Order: Home -> About -> Services -> Packages -> Gallery -> Track -> FAQ -> Contact
   const navLinks = [
@@ -63,35 +52,27 @@ export const Header: React.FC = () => {
   };
 
   return (
-    <header className={`transition-all duration-300 ${
-      isTransparent
-        ? 'fixed top-0 inset-x-0 z-40 bg-gradient-to-b from-black/70 via-black/25 to-transparent border-b border-white/10 text-white'
-        : 'sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b-2 border-slate-200 shadow-md text-slate-800'
-    }`}>
-      {/* 1. Top Info Bar - Sleek Midnight-Navy Gradient with Red Accents */}
-      <div className={`hidden lg:block text-xs py-2 px-6 border-b transition-all duration-300 ${
-        isTransparent
-          ? 'bg-gradient-to-r from-black/60 via-slate-950/50 to-black/60 backdrop-blur-md text-white/90 border-white/10'
-          : 'bg-gradient-to-r from-slate-950 via-blue-950 to-slate-950 text-slate-200 border-slate-800/80 shadow-inner'
-      }`}>
+    <header className="sticky top-0 z-40 bg-white border-b-2 border-slate-100 shadow-sm text-slate-800">
+      {/* 1. Top Info Bar - Clean Original Slate/White with Red & Blue accents */}
+      <div className="hidden lg:block bg-slate-50 text-slate-700 text-xs py-2 px-6 border-b border-slate-200">
         <div className="max-w-7xl mx-auto flex justify-between items-center font-medium">
           <div className="flex items-center gap-6">
             <a 
               href="tel:+251975480808" 
-              className="flex items-center gap-1.5 font-bold font-mono transition-colors text-white hover:text-red-400"
+              className="flex items-center gap-1.5 font-bold font-mono transition-colors text-blue-900 hover:text-red-600"
             >
               <Phone className="w-3.5 h-3.5 text-red-500" />
               <span>0975 48 08 08 / 011 465 1553</span>
             </a>
-            <span className="flex items-center gap-1.5 text-slate-300">
-              <Clock className="w-3.5 h-3.5 text-blue-400" />
+            <span className="flex items-center gap-1.5 text-slate-600">
+              <Clock className="w-3.5 h-3.5 text-blue-700" />
               <span>{locale === 'am' ? WORKSHOP_INFO.hoursScheduleAm : WORKSHOP_INFO.hoursScheduleEn}</span>
             </span>
             <a 
               href={WORKSHOP_INFO.googleMapsUrl} 
               target="_blank" 
               rel="noreferrer" 
-              className="flex items-center gap-1.5 transition-colors group text-slate-300 hover:text-white"
+              className="flex items-center gap-1.5 transition-colors group text-slate-700 hover:text-blue-900"
               title="Open Google Maps"
             >
               <MapPin className="w-3.5 h-3.5 text-red-500 group-hover:animate-bounce" />
@@ -104,8 +85,8 @@ export const Header: React.FC = () => {
               onClick={() => handleNavClick('admin')}
               className={`font-bold transition-colors flex items-center gap-1 ${
                 currentView === 'admin' 
-                  ? 'text-red-400' 
-                  : 'text-slate-200 hover:text-red-400'
+                  ? 'text-red-600' 
+                  : 'text-blue-900 hover:text-red-600'
               }`}
             >
               <span>Admin Portal</span>
@@ -115,25 +96,25 @@ export const Header: React.FC = () => {
                 </span>
               )}
             </button>
-            <span className="text-slate-700">|</span>
+            <span className="text-slate-300">|</span>
             <button 
               onClick={() => handleNavClick('staff')}
               className={`font-bold transition-colors ${
                 currentView === 'staff' 
-                  ? 'text-red-400' 
-                  : 'text-slate-200 hover:text-red-400'
+                  ? 'text-red-600' 
+                  : 'text-blue-900 hover:text-red-600'
               }`}
             >
               Staff Portal
             </button>
-            <span className="text-slate-700">|</span>
+            <span className="text-slate-300">|</span>
             {/* Live Notification Simulator Trigger */}
             <button
               onClick={toggleNotificationSimulator}
-              className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold border transition-colors bg-red-500/20 hover:bg-red-500/35 text-red-300 border-red-500/40"
+              className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold border transition-colors bg-red-50 hover:bg-red-100 text-red-600 border-red-200"
               title="Open Live Telegram & Email Simulator"
             >
-              <Bell className="w-3 h-3 text-red-400 animate-pulse" />
+              <Bell className="w-3 h-3 text-red-500 animate-pulse" />
               <span>Demo Simulator</span>
             </button>
           </div>
@@ -159,20 +140,16 @@ export const Header: React.FC = () => {
             />
           </div>
           <div className="shrink-0">
-            <div className={`font-black text-sm sm:text-base xl:text-lg tracking-tight leading-none group-hover:text-red-500 transition-colors whitespace-nowrap ${
-              isTransparent ? 'text-white drop-shadow-md' : 'text-blue-950'
-            }`}>
+            <div className="font-black text-sm sm:text-base xl:text-lg tracking-tight leading-none text-blue-950 group-hover:text-red-500 transition-colors whitespace-nowrap">
               አበጋዝ ሞተርስ ኢንጂነሪንግ
             </div>
-            <div className={`text-[8px] sm:text-[10px] font-black tracking-wider uppercase mt-0.5 whitespace-nowrap ${
-              isTransparent ? 'text-red-400 drop-shadow-sm' : 'text-red-600'
-            }`}>
+            <div className="text-[8px] sm:text-[10px] font-black tracking-wider uppercase mt-0.5 text-red-600 whitespace-nowrap">
               Abegaz Motors Engineering
             </div>
           </div>
         </div>
 
-        {/* Desktop Nav Links - Slightly reduced text size and strictly one-line for "About us" */}
+        {/* Desktop Nav Links */}
         <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1.5 shrink-0">
           {navLinks.map((link) => {
             const isActive = currentView === link.id;
@@ -182,8 +159,8 @@ export const Header: React.FC = () => {
                 onClick={() => handleNavClick(link.id)}
                 className={`px-2.5 py-1.5 xl:px-3 xl:py-2 rounded-xl text-xs xl:text-[13px] font-bold whitespace-nowrap transition-all duration-200 ${
                   isActive 
-                    ? (isTransparent ? 'text-white bg-red-600 shadow-md font-extrabold' : 'text-red-600 bg-red-50 border border-red-200 shadow-2xs font-extrabold')
-                    : (isTransparent ? 'text-white/90 hover:text-white hover:bg-white/15' : 'text-blue-950 hover:text-red-600 hover:bg-blue-50/70')
+                    ? 'text-red-600 bg-red-50 border border-red-200 shadow-2xs font-extrabold'
+                    : 'text-blue-950 hover:text-red-600 hover:bg-blue-50/70'
                 }`}
               >
                 {locale === 'am' ? link.labelAm : link.labelEn}
@@ -197,11 +174,7 @@ export const Header: React.FC = () => {
           {/* Language Switcher Pill */}
           <button
             onClick={() => setLocale(locale === 'am' ? 'en' : 'am')}
-            className={`flex items-center gap-1 px-2 sm:px-2.5 py-1.5 rounded-xl border text-xs font-black whitespace-nowrap transition-all shadow-2xs ${
-              isTransparent
-                ? 'border-white/25 text-white bg-white/15 hover:bg-white/25'
-                : 'border-slate-300 hover:border-red-500 text-blue-900 bg-white hover:text-red-600'
-            }`}
+            className="flex items-center gap-1 px-2 sm:px-2.5 py-1.5 rounded-xl border border-slate-300 hover:border-red-500 text-blue-900 bg-white hover:text-red-600 text-xs font-black whitespace-nowrap transition-all shadow-2xs"
             title="ቋንቋ ይቀይሩ / Switch Language"
           >
             <Globe className="w-3.5 h-3.5 text-red-500 shrink-0" />
@@ -212,16 +185,16 @@ export const Header: React.FC = () => {
           <button
             onClick={() => handleNavClick('account')}
             className={`p-2 rounded-xl border transition-all shadow-2xs ${
-              isTransparent
-                ? 'border-white/25 text-white bg-white/15 hover:bg-white/25'
-                : (currentView === 'account' ? 'bg-red-50 border-red-500 text-red-600' : 'border-slate-300 hover:border-red-500 text-blue-900 bg-white hover:text-red-600 hover:bg-red-50')
+              currentView === 'account' 
+                ? 'bg-red-50 border-red-500 text-red-600' 
+                : 'border-slate-300 hover:border-red-500 text-blue-900 bg-white hover:text-red-600 hover:bg-red-50'
             }`}
             title="የደንበኛ መለያ / Customer Account"
           >
             <UserIcon className="w-4 h-4" />
           </button>
 
-          {/* Book Appointment CTA Button - Adjusted compact & responsive */}
+          {/* Book Appointment CTA Button */}
           <button
             onClick={() => handleNavClick('book')}
             className="hidden sm:inline-flex items-center gap-1.5 h-10 px-3.5 xl:px-4 rounded-xl bg-red-600 hover:bg-red-700 text-white font-black text-xs xl:text-sm whitespace-nowrap shadow-md hover:shadow-lg transition-all active:scale-98"
@@ -234,11 +207,7 @@ export const Header: React.FC = () => {
           <button
             type="button"
             onClick={() => setMobileMenuOpen(prev => !prev)}
-            className={`lg:hidden p-2 rounded-xl border-2 transition-all active:scale-95 ${
-              isTransparent
-                ? 'bg-white/20 border-white/40 text-white hover:bg-white/30'
-                : 'bg-white border-slate-300 text-blue-950 hover:text-red-600 hover:border-red-500 shadow-xs'
-            }`}
+            className="lg:hidden p-2 rounded-xl border-2 bg-white border-slate-300 text-blue-950 hover:text-red-600 hover:border-red-500 shadow-xs transition-all active:scale-95"
             aria-label={mobileMenuOpen ? 'Close Menu' : 'Open Menu'}
           >
             {mobileMenuOpen ? (
