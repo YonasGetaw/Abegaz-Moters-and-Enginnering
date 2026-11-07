@@ -221,7 +221,7 @@ export const VEHICLES_DATA: VehicleModel[] = [
     categoryLabelAm: 'ፎርዊል ድራይቭና ዩቲሊቲ',
     bodyType: 'SUV / 4x4',
     fuelType: 'Diesel',
-    image: '/vehicles/toyota-prado.jpg',
+    image: '/vehicles/toyota-prado.png',
     featured: true,
     servicesRecommended: ['KDSS Suspension Calibration', 'Timing Belt & Water Pump', 'Differential Fluid']
   },
@@ -237,7 +237,7 @@ export const VEHICLES_DATA: VehicleModel[] = [
     categoryLabelAm: 'የንግድና ጭነት ተሽከርካሪዎች',
     bodyType: 'Pickup Truck',
     fuelType: 'Diesel',
-    image: '/vehicles/toyota-hilux.jpg',
+    image: '/vehicles/toyota-hilux.png',
     featured: true,
     servicesRecommended: ['Leaf Spring Overhaul', 'Turbo & Intercooler Check', 'Heavy Duty Clutch']
   },
@@ -253,7 +253,7 @@ export const VEHICLES_DATA: VehicleModel[] = [
     categoryLabelAm: 'ፎርዊል ድራይቭና ዩቲሊቲ',
     bodyType: 'Mid-size SUV',
     fuelType: 'Hybrid',
-    image: '/vehicles/toyota-highlander.jpg',
+    image: '/vehicles/toyota-highlander.png',
     featured: false,
     servicesRecommended: ['Hybrid Cooling System', 'CV Axle Replacement', 'Electronic Steering']
   },
@@ -269,7 +269,7 @@ export const VEHICLES_DATA: VehicleModel[] = [
     categoryLabelAm: 'ፎርዊል ድራይቭና ዩቲሊቲ',
     bodyType: 'Off-road 4x4',
     fuelType: 'Petrol',
-    image: '/vehicles/toyota-fj-cruiser.jpg',
+    image: '/vehicles/toyota-fj-cruiser.png',
     featured: false,
     servicesRecommended: ['A-Trac & Diff Lock', 'Underbody Anti-corrosion', 'Suspension Lift Alignment']
   },
@@ -285,7 +285,7 @@ export const VEHICLES_DATA: VehicleModel[] = [
     categoryLabelAm: 'የከተማና ሴዳን መኪኖች',
     bodyType: 'Hatchback',
     fuelType: 'Petrol',
-    image: '/vehicles/toyota-vitz.jpg',
+    image: '/vehicles/toyota-vitz.png',
     featured: false,
     servicesRecommended: ['CVT Fluid Service', 'Fuel Injector Cleaning', 'Brake Caliper Service']
   },
@@ -301,7 +301,7 @@ export const VEHICLES_DATA: VehicleModel[] = [
     categoryLabelAm: 'የንግድና ጭነት ተሽከርካሪዎች',
     bodyType: 'Van / Commercial',
     fuelType: 'Diesel',
-    image: '/vehicles/toyota-hiace.jpg',
+    image: '/vehicles/toyota-hiace.png',
     featured: false,
     servicesRecommended: ['Fleet Engine Overhaul', 'Brake Master Cylinder', 'Differential Rebuild']
   },
@@ -317,7 +317,7 @@ export const VEHICLES_DATA: VehicleModel[] = [
     categoryLabelAm: 'የንግድና ጭነት ተሽከርካሪዎች',
     bodyType: 'MPV / Compact Van',
     fuelType: 'Petrol',
-    image: '/vehicles/toyota-avanza.jpg',
+    image: '/vehicles/toyota-avanza.png',
     featured: false,
     servicesRecommended: ['Drive Belt Tensioner', 'Front Struts & Shocks', 'Air Filter Service']
   },
@@ -333,7 +333,7 @@ export const VEHICLES_DATA: VehicleModel[] = [
     categoryLabelAm: 'ፎርዊል ድራይቭና ዩቲሊቲ',
     bodyType: 'Compact SUV',
     fuelType: 'Petrol',
-    image: '/vehicles/toyota-rush.jpg',
+    image: '/vehicles/toyota-rush.png',
     featured: false,
     servicesRecommended: ['Rear Wheel Drive Fluid', 'Stabilizer Bushings', 'Aircon Cleaning']
   },
@@ -351,7 +351,7 @@ export const VEHICLES_DATA: VehicleModel[] = [
     categoryLabelAm: 'የኤሌክትሪክ ተሽከርካሪዎች - BYD',
     bodyType: 'Electric SUV',
     fuelType: 'Electric',
-    image: '/vehicles/byd-song-plus.jpg',
+    image: '/vehicles/byd-song-plus.png',
     featured: true,
     servicesRecommended: ['Blade Battery SOH Scan', 'Thermal Liquid Loop', 'Software Update']
   },
@@ -367,7 +367,7 @@ export const VEHICLES_DATA: VehicleModel[] = [
     categoryLabelAm: 'የኤሌክትሪክ ተሽከርካሪዎች - BYD',
     bodyType: 'Large Electric SUV',
     fuelType: 'Electric',
-    image: '/vehicles/byd-tang.jpg',
+    image: '/vehicles/byd-tang.png',
     featured: true,
     servicesRecommended: ['Dual Motor Diagnostics', 'Brembo Calipers Bleed', 'Battery Module Balance']
   },
@@ -383,7 +383,7 @@ export const VEHICLES_DATA: VehicleModel[] = [
     categoryLabelAm: 'የኤሌክትሪክ ተሽከርካሪዎች - BYD',
     bodyType: 'City EV',
     fuelType: 'Electric',
-    image: '/vehicles/byd-seagull.jpg',
+    image: '/vehicles/byd-seagull.png',
     featured: true,
     servicesRecommended: ['High-voltage Isolation Test', 'Regenerative Brake Scan', 'BMS Firmware Sync']
   },
@@ -399,7 +399,7 @@ export const VEHICLES_DATA: VehicleModel[] = [
     categoryLabelAm: 'የኤሌክትሪክ ተሽከርካሪዎች - BYD',
     bodyType: 'Compact EV Crossover',
     fuelType: 'Electric',
-    image: '/vehicles/byd-yuan-up.jpg',
+    image: '/vehicles/byd-yuan-up.png',
     featured: false,
     servicesRecommended: ['Heat Pump Diagnostics', 'Battery Cell Balancing', 'Suspension Tuning']
   },
@@ -415,7 +415,7 @@ export const VEHICLES_DATA: VehicleModel[] = [
     categoryLabelAm: 'የኤሌክትሪክ ተሽከርካሪዎች - BYD',
     bodyType: 'Ultra-Luxury EV / 4-Motor',
     fuelType: 'Electric',
-    image: '/vehicles/yangwang-u8.jpg',
+    image: '/vehicles/yangwang-u8.png',
     featured: true,
     servicesRecommended: ['Quad Motor Vectoring Test', 'Hydraulic Suspension DiSus-P', 'High-Amperage Inverter']
   },
@@ -433,7 +433,7 @@ export const VEHICLES_DATA: VehicleModel[] = [
     categoryLabelAm: 'የቅንጦት SUVs',
     bodyType: 'Luxury SUV',
     fuelType: 'Petrol',
-    image: '/vehicles/mercedes-gle.jpg',
+    image: '/vehicles/mercedes-gle.png',
     featured: true,
     servicesRecommended: ['Airmatic Air Suspension', '9G-Tronic Gearbox Cal', 'Mercedes Xentry Diagnosis']
   },
@@ -449,7 +449,7 @@ export const VEHICLES_DATA: VehicleModel[] = [
     categoryLabelAm: 'የቅንጦት SUVs',
     bodyType: 'Luxury SUV',
     fuelType: 'Petrol',
-    image: '/vehicles/bmw-x5.jpg',
+    image: '/vehicles/bmw-x5.png',
     featured: true,
     servicesRecommended: ['xDrive Transfer Case', 'BMW ISTA Scan', 'Turbo Boost Pressure Audit']
   },
@@ -465,7 +465,7 @@ export const VEHICLES_DATA: VehicleModel[] = [
     categoryLabelAm: 'የቅንጦት SUVs',
     bodyType: 'Luxury SUV',
     fuelType: 'Petrol',
-    image: '/vehicles/audi-q7.jpg',
+    image: '/vehicles/audi-q7.png',
     featured: true,
     servicesRecommended: ['Quattro Differential Service', 'Air Struts Recalibration', 'VAG-COM Diagnostic']
   },
@@ -481,7 +481,7 @@ export const VEHICLES_DATA: VehicleModel[] = [
     categoryLabelAm: 'የቅንጦት SUVs',
     bodyType: 'Luxury SUV',
     fuelType: 'Hybrid',
-    image: '/vehicles/lexus-rx.jpg',
+    image: '/vehicles/lexus-rx.png',
     featured: true,
     servicesRecommended: ['Lexus Hybrid Drive Service', 'Mark Levinson Sound System Check', 'Brembo Brake Service']
   },
@@ -499,7 +499,7 @@ export const VEHICLES_DATA: VehicleModel[] = [
     categoryLabelAm: 'ፎርዊል ድራይቭና ዩቲሊቲ',
     bodyType: 'Full-size 4x4',
     fuelType: 'Petrol',
-    image: '/vehicles/nissan-patrol.jpg',
+    image: '/vehicles/nissan-patrol.png',
     featured: true,
     servicesRecommended: ['HBMC Hydraulic Body Motion', 'V8 Valve Timing & Chains', '4x4 Transfer Case']
   },
@@ -517,7 +517,7 @@ export const VEHICLES_DATA: VehicleModel[] = [
     categoryLabelAm: 'የንግድና ጭነት ተሽከርካሪዎች',
     bodyType: 'Pickup Truck',
     fuelType: 'Diesel',
-    image: '/vehicles/ford-ranger.jpg',
+    image: '/vehicles/ford-ranger.png',
     featured: false,
     servicesRecommended: ['Bi-Turbo Diesel Intercooler', '10-Speed Auto Fluid', 'Suspension Grease & Align']
   },
@@ -535,7 +535,7 @@ export const VEHICLES_DATA: VehicleModel[] = [
     categoryLabelAm: 'የከተማና ሴዳን መኪኖች',
     bodyType: 'Sedan',
     fuelType: 'Petrol',
-    image: '/vehicles/hyundai-elantra.jpg',
+    image: '/vehicles/hyundai-elantra.png',
     featured: false,
     servicesRecommended: ['Dual Clutch Transmission', 'Ignition Coil Replacement', 'Electronic Steering Column']
   },
@@ -551,7 +551,7 @@ export const VEHICLES_DATA: VehicleModel[] = [
     categoryLabelAm: 'የከተማና ሴዳን መኪኖች',
     bodyType: 'Hatchback',
     fuelType: 'Petrol',
-    image: '/vehicles/suzuki-swift.jpg',
+    image: '/vehicles/suzuki-swift.png',
     featured: false,
     servicesRecommended: ['Boosterjet Diagnostics', 'Clutch Plate & Flywheel', 'Front Suspension Links']
   },
@@ -567,7 +567,7 @@ export const VEHICLES_DATA: VehicleModel[] = [
     categoryLabelAm: 'የከተማና ሴዳን መኪኖች',
     bodyType: 'Compact Sedan',
     fuelType: 'Petrol',
-    image: '/vehicles/suzuki-dzire.jpg',
+    image: '/vehicles/suzuki-dzire.png',
     featured: false,
     servicesRecommended: ['AGS Automated Gearbox Calibration', 'Routine 5,000km Service', 'Brake Lining Check']
   },
@@ -583,7 +583,7 @@ export const VEHICLES_DATA: VehicleModel[] = [
     categoryLabelAm: 'የከተማና ሴዳን መኪኖች',
     bodyType: 'Compact Sedan',
     fuelType: 'Petrol',
-    image: '/vehicles/mitsubishi-attrage.jpg',
+    image: '/vehicles/mitsubishi-attrage.png',
     featured: false,
     servicesRecommended: ['MIVEC Engine Valve Check', 'CVT Fluid Flush', 'Alternator & Battery Testing']
   }
