@@ -15,7 +15,8 @@ import {
   Car,
   ChevronDown,
   ArrowRight,
-  Maximize2
+  Maximize2,
+  Search
 } from 'lucide-react';
 import { Button } from '../common/Button';
 
@@ -71,21 +72,34 @@ export const GalleryPage: React.FC = () => {
   // 3 Gallery Tabs: Vehicle Fleet, Before & After, Videos
   const [activeTab, setActiveTab] = useState<'catalog' | 'beforeAfter' | 'videos'>('catalog');
   
-  // Category state
+  // Category state, Search & Sort
   const [selectedCategorySlug, setSelectedCategorySlug] = useState<string>('all');
+  const [searchQuery, setSearchQuery] = useState<string>('');
   const [sortBy, setSortBy] = useState<'default' | 'nameAsc' | 'nameDesc' | 'brand'>('default');
   
   // Modal states
   const [activeLightboxImage, setActiveLightboxImage] = useState<string | null>(null);
   const [activeVideoModal, setActiveVideoModal] = useState<WorkshopVideo | null>(null);
 
-  // Filtered & Sorted Vehicles for the Clean Studio White Showcase
+  // Filtered & Sorted Vehicles
   const filteredVehicles = useMemo(() => {
     let result = [...VEHICLES_DATA];
 
     // Filter by Category
     if (selectedCategorySlug !== 'all') {
       result = result.filter(v => v.category === selectedCategorySlug);
+    }
+
+    // Filter by Search Query
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase().trim();
+      result = result.filter(v => 
+        v.name.toLowerCase().includes(q) ||
+        v.nameAm.toLowerCase().includes(q) ||
+        v.brand.toLowerCase().includes(q) ||
+        v.bodyType.toLowerCase().includes(q) ||
+        v.fuelType.toLowerCase().includes(q)
+      );
     }
 
     // Sorting
@@ -98,7 +112,7 @@ export const GalleryPage: React.FC = () => {
     }
 
     return result;
-  }, [selectedCategorySlug, sortBy]);
+  }, [selectedCategorySlug, searchQuery, sortBy]);
 
   // Book service for specific vehicle
   const handleBookVehicle = (vehicle: VehicleModel) => {
@@ -125,8 +139,6 @@ export const GalleryPage: React.FC = () => {
         
         {/* Main Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-10">
-
-
           <h1 className="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight">
             {locale === 'am' ? 'የምንሰራቸው መኪኖችና የስራ ማህደር' : 'Serviced Vehicles & Work Showcase'}
           </h1>
@@ -180,98 +192,158 @@ export const GalleryPage: React.FC = () => {
         </div>
 
         {/* =========================================================================
-            TAB 1: CLEAN WHITE STUDIO VEHICLE FLEET (NO CARDS, PURE WHITE DISPLAY)
+            TAB 1: CLEAN WHITE STUDIO VEHICLE FLEET (MATCHING REFERENCE IMAGE UI)
             ========================================================================= */}
         {activeTab === 'catalog' && (
-          <div className="space-y-10">
+          <div className="space-y-8">
             
-            {/* Setup Category Above - Clean minimalist pills without unwanted text */}
-            <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5">
-              {VEHICLE_CATEGORIES.map((cat) => {
-                const isSelected = selectedCategorySlug === cat.slug;
-                return (
-                  <button
-                    key={cat.id}
-                    onClick={() => setSelectedCategorySlug(cat.slug)}
-                    className={`px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all ${
-                      isSelected
-                        ? 'bg-red-600 text-white shadow-sm'
-                        : 'bg-slate-100 text-slate-700 hover:bg-slate-200 hover:text-slate-900'
-                    }`}
-                  >
-                    <span>{locale === 'am' ? cat.nameAm : cat.nameEn}</span>
-                  </button>
-                );
-              })}
+            {/* Category Navigation Bar + Search & Sort Controls (Matching Reference Image) */}
+            <div className="border-b border-slate-200 pb-4">
+              <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-4">
+                
+                {/* Category Menu with Underline for Active Category (like ALL CATEGORIES in reference image) */}
+                <div className="flex flex-wrap items-center gap-x-6 sm:gap-x-8 gap-y-3">
+                  {VEHICLE_CATEGORIES.map((cat) => {
+                    const isSelected = selectedCategorySlug === cat.slug;
+                    return (
+                      <button
+                        key={cat.id}
+                        onClick={() => setSelectedCategorySlug(cat.slug)}
+                        className={`text-xs sm:text-[13px] tracking-wider uppercase font-bold transition-all pb-1.5 border-b-2 ${
+                          isSelected
+                            ? 'text-blue-950 border-blue-950'
+                            : 'text-slate-400 hover:text-slate-800 border-transparent'
+                        }`}
+                      >
+                        <span>{locale === 'am' ? cat.nameAm : cat.nameEn}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* Sleek Search & Sort Controls (Aesthetic & Easy) */}
+                <div className="flex items-center gap-2.5 shrink-0 self-start xl:self-auto">
+                  {/* Clean Search Input with 🔍 */}
+                  <div className="relative">
+                    <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                    <input
+                      type="text"
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      placeholder={locale === 'am' ? 'ሞዴል ይፈልጉ...' : 'Search model...'}
+                      className="pl-9 pr-8 py-2 text-xs sm:text-sm bg-slate-50 hover:bg-slate-100 focus:bg-white border border-slate-200 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-950 transition-all w-44 sm:w-60 text-slate-900 placeholder:text-slate-400"
+                    />
+                    {searchQuery && (
+                      <button
+                        onClick={() => setSearchQuery('')}
+                        className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700"
+                        title={locale === 'am' ? 'አጥፋ' : 'Clear'}
+                      >
+                        <X className="w-3.5 h-3.5" />
+                      </button>
+                    )}
+                  </div>
+
+                  {/* Clean Sort Dropdown */}
+                  <div className="relative">
+                    <select
+                      value={sortBy}
+                      onChange={(e) => setSortBy(e.target.value as any)}
+                      className="appearance-none bg-white border border-slate-200 hover:border-slate-300 rounded-full pl-4 pr-8 py-2 text-xs sm:text-sm font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-950 shadow-2xs cursor-pointer"
+                    >
+                      <option value="default">{locale === 'am' ? 'ነባሪ ቅደም ተከተል' : 'Default sorting'}</option>
+                      <option value="nameAsc">{locale === 'am' ? 'በስም: A-Z' : 'Sort by Name (A-Z)'}</option>
+                      <option value="nameDesc">{locale === 'am' ? 'በስም: Z-A' : 'Sort by Name (Z-A)'}</option>
+                      <option value="brand">{locale === 'am' ? 'በብራንድ' : 'Sort by Brand'}</option>
+                    </select>
+                    <ChevronDown className="w-4 h-4 text-slate-400 pointer-events-none absolute right-3 top-1/2 -translate-y-1/2" />
+                  </div>
+                </div>
+
+              </div>
             </div>
 
-            {/* Sub-header Bar (Matching Reference Screenshot 2 & 3: Brand/Category Heading + Results Count + Sorting) */}
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-4 pb-3 border-b border-slate-200">
+            {/* Sub-header Bar: Active Category Title + Results Count */}
+            <div className="flex items-center justify-between pt-1">
               <div>
-                <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+                <h2 className="text-xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
                   {selectedCategorySlug !== 'all' 
                     ? (locale === 'am' ? currentCategoryObj.nameAm : currentCategoryObj.nameEn)
-                    : (locale === 'am' ? 'ሁሉም ተሽከርካሪዎች' : 'All Serviced Vehicles')}
+                    : (locale === 'am' ? 'ሁሉም ተሽከርካሪዎች' : 'All Categories')}
                 </h2>
-                <p className="text-xs sm:text-sm text-slate-500 mt-1">
+                <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
                   {locale === 'am'
                     ? `ከ ${VEHICLES_DATA.length} ሞዴሎች ውስጥ ${filteredVehicles.length} ውጤቶች በመታየት ላይ`
                     : `Showing 1–${filteredVehicles.length} of ${VEHICLES_DATA.length} results`}
                 </p>
               </div>
 
-              {/* Sorting Dropdown (matching 'Default sorting' from screenshot) */}
-              <div className="relative shrink-0">
-                <select
-                  value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value as any)}
-                  className="appearance-none bg-white border border-slate-300 hover:border-slate-400 rounded-xl px-4 py-2 pr-9 text-xs sm:text-sm font-medium text-slate-700 focus:outline-none focus:ring-2 focus:ring-red-500 shadow-xs cursor-pointer"
-                >
-                  <option value="default">{locale === 'am' ? 'ነባሪ ቅደም ተከተል (Default sorting)' : 'Default sorting'}</option>
-                  <option value="nameAsc">{locale === 'am' ? 'በስም: ከሀ - ፐ (Sort by Name A-Z)' : 'Sort by Name (A-Z)'}</option>
-                  <option value="nameDesc">{locale === 'am' ? 'በስም: ከፐ - ሀ (Sort by Name Z-A)' : 'Sort by Name (Z-A)'}</option>
-                  <option value="brand">{locale === 'am' ? 'በብራንድ ቅደም ተከተል (Sort by Brand)' : 'Sort by Brand'}</option>
-                </select>
-                <ChevronDown className="w-4 h-4 text-slate-400 pointer-events-none absolute right-3 top-1/2 -translate-y-1/2" />
-              </div>
+              {searchQuery && (
+                <span className="text-xs text-blue-900 font-semibold bg-blue-50 px-3 py-1 rounded-full border border-blue-100">
+                  {locale === 'am' ? `ፍተሻ፦ "${searchQuery}"` : `Search: "${searchQuery}"`}
+                </span>
+              )}
             </div>
 
             {/* Pure White Studio Vehicle Grid: 3 COLUMNS, NO CARDS, PURE WHITE BACKGROUND */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-14 sm:gap-x-12 sm:gap-y-16">
-              {filteredVehicles.map((vehicle) => {
-                return (
-                  <div
-                    key={vehicle.id}
-                    onClick={() => handleBookVehicle(vehicle)}
-                    className="group cursor-pointer flex flex-col items-center text-center transition-all duration-300"
-                  >
-                    {/* Vehicle Cutout Image Floating on Pure White Canvas with Ground Shadow */}
-                    <div className="relative w-full aspect-[16/10] bg-white flex items-center justify-center p-3 overflow-hidden">
-                      {/* Studio Ground Shadow */}
-                      <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-4/5 h-3.5 bg-black/15 rounded-full blur-md group-hover:blur-lg group-hover:scale-105 transition-all duration-300" />
+            {filteredVehicles.length === 0 ? (
+              <div className="text-center py-20 bg-slate-50/60 rounded-2xl border border-dashed border-slate-200 p-8">
+                <Car className="w-12 h-12 text-slate-300 mx-auto mb-3" />
+                <h3 className="text-base sm:text-lg font-bold text-slate-800">
+                  {locale === 'am' ? 'ምንም የተገኘ መኪና የለም' : 'No vehicles found matching your criteria'}
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-500 mt-1 max-w-md mx-auto">
+                  {locale === 'am' 
+                    ? 'እባክዎ የተየቡትን ፍተሻ ያጽዱ ወይም ሌላ ምድብ ይምረጡ።' 
+                    : 'Try clearing your search query or selecting another category.'}
+                </p>
+                <button
+                  onClick={() => {
+                    setSearchQuery('');
+                    setSelectedCategorySlug('all');
+                  }}
+                  className="mt-4 px-4 py-2 bg-blue-950 text-white text-xs font-bold rounded-full hover:bg-slate-800 transition-colors shadow-2xs"
+                >
+                  {locale === 'am' ? 'ሁሉንም አሳይ' : 'Show All Vehicles'}
+                </button>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-14 sm:gap-x-12 sm:gap-y-16">
+                {filteredVehicles.map((vehicle) => {
+                  return (
+                    <div
+                      key={vehicle.id}
+                      onClick={() => handleBookVehicle(vehicle)}
+                      className="group cursor-pointer flex flex-col items-center text-center transition-all duration-300"
+                    >
+                      {/* Vehicle Cutout Image Floating on Pure White Canvas with Ground Shadow */}
+                      <div className="relative w-full aspect-[16/10] bg-white flex items-center justify-center p-3 overflow-hidden">
+                        {/* Studio Ground Shadow */}
+                        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-4/5 h-3.5 bg-black/15 rounded-full blur-md group-hover:blur-lg group-hover:scale-105 transition-all duration-300" />
 
-                      {/* Cutout Vehicle */}
-                      <img
-                        src={vehicle.image}
-                        alt={vehicle.name}
-                        className="relative max-h-full max-w-full object-contain transform group-hover:scale-105 transition-transform duration-300"
-                        loading="lazy"
-                        onError={(e) => {
-                          (e.currentTarget as HTMLImageElement).src = 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=600&q=80';
-                        }}
-                      />
-                    </div>
+                        {/* Cutout Vehicle */}
+                        <img
+                          src={vehicle.image}
+                          alt={vehicle.name}
+                          className="relative max-h-full max-w-full object-contain transform group-hover:scale-105 transition-transform duration-300"
+                          loading="lazy"
+                          onError={(e) => {
+                            (e.currentTarget as HTMLImageElement).src = 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=600&q=80';
+                          }}
+                        />
+                      </div>
 
-                    {/* Vehicle Name ONLY */}
-                    <div className="mt-4 w-full">
-                      <h3 className="text-base sm:text-lg font-bold text-slate-900 group-hover:text-red-600 transition-colors">
-                        {vehicle.name}
-                      </h3>
+                      {/* Vehicle Name ONLY (matching reference image: clean bold text) */}
+                      <div className="mt-4 w-full">
+                        <h3 className="text-base sm:text-lg font-bold text-slate-900 group-hover:text-red-600 transition-colors">
+                          {vehicle.name}
+                        </h3>
+                      </div>
                     </div>
-                  </div>
-                );
-              })}
-            </div>
+                  );
+                })}
+              </div>
+            )}
 
             {/* Bottom Service Prompt */}
             <div className="mt-16 pt-8 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
