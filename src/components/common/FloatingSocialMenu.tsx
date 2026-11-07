@@ -55,16 +55,20 @@ export const FloatingSocialMenu: React.FC = () => {
       bg: 'bg-[#FF3377] hover:bg-[#E60055]',
       icon: (
         <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z" opacity="0.95" />
+          <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M3 4.5A2.5 2.5 0 015.5 2h13A2.5 2.5 0 0121 4.5v9a2.5 2.5 0 01-2.5 2.5h-4.2l-3.3 2.5a.6.6 0 01-.96-.48V16H5.5A2.5 2.5 0 013 13.5v-9z"
+          />
           <text
             x="12"
-            y="13"
+            y="11.8"
             textAnchor="middle"
             fill="#FF3377"
             fontWeight="900"
-            fontSize="7"
-            fontFamily="Arial, sans-serif"
-            letterSpacing="-0.5"
+            fontSize="6.5"
+            fontFamily="system-ui, -apple-system, Arial, sans-serif"
+            letterSpacing="-0.2"
           >
             SMS
           </text>
@@ -252,10 +256,19 @@ export const FloatingSocialMenu: React.FC = () => {
             <line x1="6" y1="6" x2="18" y2="18" />
           </svg>
         ) : (
-          /* Dual Speech Bubble Icon when Closed (Matching Reference Image) */
-          <svg className="w-7 h-7 text-white fill-current" viewBox="0 0 24 24">
+          /* Dual Rounded Chat Bubbles matching reference image */
+          <svg className="w-7 h-7 text-white" viewBox="0 0 32 32" fill="none">
+            {/* Back speech bubble */}
             <path
-              d="M7 3C4.24 3 2 5.24 2 8c0 1.62.77 3.06 1.96 3.99L3.4 15.6a.6.6 0 00.86.64l3.14-1.57c.5.11 1.03.17 1.6.17 2.76 0 5-2.24 5-5s-2.24-5-5-5zm8 4c-.31 0-.61.03-.91.08 1.13.9 1.91 2.29 1.91 3.92 0 1.05-.33 2.02-.89 2.81.42.12.87.19 1.89.19.46 0 .89-.05 1.28-.14l2.51 1.26a.5.5 0 00.72-.53l-.44-2.96C21.36 14.88 22 13.68 22 12.3c0-2.38-1.92-4.3-4.5-4.3-.17 0-.33.01-.5.03z"
+              d="M13 5h10a4 4 0 0 1 4 4v7a4 4 0 0 1-4 4h-1v2.5a.75.75 0 0 1-1.25.55L17.5 20H13a4 4 0 0 1-4-4V9a4 4 0 0 1 4-4z"
+              fill="white"
+            />
+            {/* Front speech bubble with clean knockout separator border */}
+            <path
+              d="M6 10h11a4 4 0 0 1 4 4v7a4 4 0 0 1-4 4h-3.8l-3.6 2.7a.75.75 0 0 1-1.2-.6V25H6a4 4 0 0 1-4-4v-7a4 4 0 0 1 4-4z"
+              fill="white"
+              stroke="#FF5B5B"
+              strokeWidth="2.5"
             />
           </svg>
         )}

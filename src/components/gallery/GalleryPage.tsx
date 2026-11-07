@@ -139,8 +139,12 @@ export const GalleryPage: React.FC = () => {
         
         {/* Main Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-10">
-          <h1 className="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight">
-            {locale === 'am' ? 'የምንሰራቸው መኪኖችና የስራ ማህደር' : 'Serviced Vehicles & Work Showcase'}
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-blue-900 tracking-tight leading-tight max-w-4xl mx-auto">
+            {locale === 'am' ? (
+              <>የምንሰራቸው መኪኖችና <span className="text-red-600">የስራ ማህደር</span></>
+            ) : (
+              <>Serviced Vehicles & <span className="text-red-600">Work Showcase</span></>
+            )}
           </h1>
           <p className="text-slate-600 text-sm sm:text-base mt-2.5 max-w-2xl mx-auto">
             {locale === 'am' 
