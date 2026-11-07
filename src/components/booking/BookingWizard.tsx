@@ -133,10 +133,21 @@ export const BookingWizard: React.FC = () => {
   // Time slot selection
   const [selectedSlotId, setSelectedSlotId] = useState<string>('morning');
 
-  // Contact fields (Empty for user input)
+  // Contact fields (Empty for user input, or pre-filled from Gallery vehicle selection)
   const [fullName, setFullName] = useState<string>('');
   const [phoneNumber, setPhoneNumber] = useState<string>('');
-  const [vehicleMakeModel, setVehicleMakeModel] = useState<string>('');
+  const [vehicleMakeModel, setVehicleMakeModel] = useState<string>(() => {
+    try {
+      const savedCar = sessionStorage.getItem('selected_vehicle_for_booking');
+      if (savedCar) {
+        sessionStorage.removeItem('selected_vehicle_for_booking');
+        return savedCar;
+      }
+    } catch (e) {
+      // ignore
+    }
+    return '';
+  });
   const [licensePlate, setLicensePlate] = useState<string>('');
   const [preferredContact, setPreferredContact] = useState<'telegram' | 'phone'>('telegram');
 
