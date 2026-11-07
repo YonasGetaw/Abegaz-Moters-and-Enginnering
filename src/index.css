@@ -69,6 +69,21 @@
 }
 
 /* Scroll and Click Animation Classes */
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-page-enter {
+  animation: pageEnter 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -115,6 +130,53 @@
   animation: clickPop 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
+/* Global Scroll-Reveal Transitions */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.scroll-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Smooth reveal for page sections */
+section {
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Universal Tactile Touch & Click Feedback Across All Pages ("sneku animation") */
+button,
+a,
+[role="button"],
+.clickable {
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+}
+
+button:active:not(:disabled),
+a:active,
+[role="button"]:active:not([aria-disabled="true"]),
+.clickable:active {
+  transform: scale(0.95) !important;
+}
+
+/* Interactive Touch Cards Across All Pages */
+.card-hover-effect {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.card-hover-effect:hover {
+  transform: translateY(-4px);
+}
+
+.card-hover-effect:active {
+  transform: scale(0.97) !important;
+}
+
 .btn-click-effect {
   transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
 }
@@ -130,4 +192,5 @@
 .card-click-effect:active {
   transform: scale(0.96) !important;
 }
+
 

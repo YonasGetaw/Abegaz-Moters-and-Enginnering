@@ -86,17 +86,6 @@ export const GalleryPage: React.FC = () => {
   const [activeVideoModal, setActiveVideoModal] = useState<WorkshopVideo | null>(null);
   const [selectedVehicleModal, setSelectedVehicleModal] = useState<VehicleModel | null>(null);
 
-  // Scroll detection for scroll-to-top button
-  const [showScrollTop, setShowScrollTop] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setShowScrollTop(window.scrollY > 350);
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   // Filtered & Sorted Vehicles
   const filteredVehicles = useMemo(() => {
     let result = [...VEHICLES_DATA];
@@ -680,18 +669,8 @@ export const GalleryPage: React.FC = () => {
           </div>
         </div>
       )}
-
-      {/* Floating Scroll to Top Button (Smooth Fade & Bounce) */}
-      {showScrollTop && (
-        <button
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="fixed bottom-24 right-6 z-40 p-3 bg-white text-slate-700 hover:text-red-600 hover:bg-slate-50 rounded-full shadow-xl border border-slate-200 btn-click-effect active:scale-75 transition-all duration-200 animate-fade-in-scale flex items-center justify-center group"
-          title={locale === 'am' ? 'ወደ ላይ ውጣ' : 'Scroll to top'}
-        >
-          <ChevronUp className="w-5 h-5 stroke-[2.5] group-hover:-translate-y-0.5 transition-transform" />
-        </button>
-      )}
     </div>
+
 
   );
 };

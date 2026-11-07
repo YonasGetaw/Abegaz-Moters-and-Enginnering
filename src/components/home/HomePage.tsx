@@ -227,7 +227,7 @@ export const HomePage: React.FC = () => {
             {featuredServices.map((svc) => (
               <div
                 key={svc.id}
-                className="bg-white rounded-card p-6 border border-line shadow-sm hover:shadow-md hover:-translate-y-1 transition-all flex flex-col justify-between"
+                className="bg-white rounded-card p-6 border border-line shadow-sm card-hover-effect flex flex-col justify-between cursor-pointer"
               >
                 <div>
                   <div className="w-12 h-12 rounded-full bg-orange-tint flex items-center justify-center text-orange-deep mb-4">
@@ -400,7 +400,7 @@ export const HomePage: React.FC = () => {
                 descEn: 'Receive real-time confirmation via Telegram and Email.'
               }
             ].map((s, idx) => (
-              <div key={idx} className="bg-white p-6 rounded-card border-2 border-slate-200 hover:border-blue-600 shadow-sm transition-all relative">
+              <div key={idx} className="bg-white p-6 rounded-card border-2 border-slate-200 hover:border-blue-600 shadow-sm card-hover-effect relative">
                 <div className="text-3xl font-black text-red-600 mb-3 font-mono">
                   {s.step}
                 </div>
@@ -443,7 +443,7 @@ export const HomePage: React.FC = () => {
               return (
                 <div
                   key={pkg.id}
-                  className={`rounded-card p-6 flex flex-col justify-between transition-all ${
+                  className={`rounded-card p-6 flex flex-col justify-between card-hover-effect cursor-pointer ${
                     isFav
                       ? 'border-2 border-orange-signal bg-white shadow-xl relative scale-100 lg:scale-105 z-10'
                       : 'border border-line bg-mist shadow-sm hover:shadow'
