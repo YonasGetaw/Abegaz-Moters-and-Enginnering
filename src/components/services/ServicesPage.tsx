@@ -1,41 +1,25 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 import { 
-  Wrench, 
-  Cog, 
-  Disc, 
-  Car, 
-  Zap, 
-  ShieldCheck, 
-  Clock, 
   CheckCircle2, 
-  Calendar, 
-  PhoneCall, 
+  ChevronDown, 
+  ChevronUp, 
+  MapPin, 
+  Mail, 
   Send, 
-  SlidersHorizontal,
-  ChevronDown,
-  ChevronUp,
-  MapPin,
-  Mail,
-  Layers,
-  Sparkles
+  PhoneCall,
+  Layers
 } from 'lucide-react';
-import { Button } from '../common/Button';
 import { WORKSHOP_INFO } from '../../lib/constants';
 
 interface ServiceCategory {
   id: string;
-  sectionNumber: string;
   imagePosition: 'right' | 'left';
   nameEn: string;
   nameAm: string;
-  taglineEn: string;
-  taglineAm: string;
   descriptionEn: string;
   descriptionAm: string;
   image: string;
-  badgeEn: string;
-  badgeAm: string;
   keyHighlightsEn: string[];
   keyHighlightsAm: string[];
   itemizedRepairsEn: string[];
@@ -43,24 +27,18 @@ interface ServiceCategory {
 }
 
 export const ServicesPage: React.FC = () => {
-  const { locale, setCurrentView, setSelectedServiceSlug } = useApp();
-  const [selectedFilter, setSelectedFilter] = useState<string>('all');
+  const { locale } = useApp();
   const [expandedCategoryId, setExpandedCategoryId] = useState<string | null>(null);
 
   const servicesData: ServiceCategory[] = [
     {
       id: 'engine',
-      sectionNumber: '01',
       imagePosition: 'right', // 1st: Image in Right (as requested)
       nameEn: 'Engine & Mechanical System Repairs',
       nameAm: 'የሞተርና የሜካኒካል ሲስተም ሙሉ ጥገና',
-      taglineEn: 'Precision Overhaul & Component Reconstruction',
-      taglineAm: 'የሞተር ሙሉ እድሳትና ትክክለኛ የሜካኒካል ጥገና',
-      descriptionEn: 'Accuracy and quality service bases not only on technicians expertise but also availability and usage of up-to-date diagnostic tools and modern equipment for complete engine overhauling.',
+      descriptionEn: 'Accuracy and quality service bases not only on technicians expertise but also availability and usage of up to date diagnostic tools and modern equipment for complete engine overhauling.',
       descriptionAm: 'የአበጋዝ ሞተርስ ኢንጂነሪንግ አገልግሎት በባለሙያዎች ጥልቅ ልምድ ላይ ብቻ ሳይሆን በዘመናዊ የዲያግኖስቲክስ መሳሪያዎችና የሞተር መፈተሻ ቴክኖሎጂዎች ላይ የተመሰረተ ነው።',
       image: '/services/engine-repairs.jpg',
-      badgeEn: 'Full & Top Overhaul',
-      badgeAm: 'ሙሉና ከፊል የሞተር እድሳት',
       keyHighlightsEn: [
         'Complete engine block & cylinder head overhaul',
         'Fuel injection pump, nozzles & carburetor rebuild',
@@ -122,17 +100,12 @@ export const ServicesPage: React.FC = () => {
     },
     {
       id: 'transmission',
-      sectionNumber: '02',
       imagePosition: 'left', // 2nd: Image in Left (as requested)
       nameEn: 'Transmission & Gearbox Engineering',
       nameAm: 'የማርሽ ቦክስና ትራንስሚሽን ምህንድስና',
-      taglineEn: 'Smooth Gear Selection & Power Delivery',
-      taglineAm: 'ለስላሳ የማርሽ ሽግግርና የተሟላ የሃይል ማስተላለፊያ',
-      descriptionEn: 'Factory-standard transmission disassembly, gear teeth wear analysis, synchronous mesh replacement, and hydraulic clutch master/release rehabilitation.',
+      descriptionEn: 'MOENCO-level factory transmission standards. Disassembly, gear teeth wear analysis, synchronous mesh replacement, and hydraulic clutch master/release rehabilitation.',
       descriptionAm: 'የማርሽ ቦክስ ሙሉ መፍታት፣ የማርሽ ጥርሶች ፍተሻ፣ የሲንክሮናይዘር ቅየራ እና የሃይድሮሊክ ክላች ሲሊንደሮች ጥገና በከፍተኛ ጥንቃቄ ይከናወናል።',
       image: '/services/transmission-gearbox.jpg',
-      badgeEn: 'Manual & Transfer Box',
-      badgeAm: 'ማኑዋልና 4x4 ትራንስፈር ቦክስ',
       keyHighlightsEn: [
         'Complete gearbox overhaul & synchro mesh renewal',
         'Transfer case 4x4 engagement & flange seal replacement',
@@ -184,17 +157,12 @@ export const ServicesPage: React.FC = () => {
     },
     {
       id: 'brakes',
-      sectionNumber: '03',
       imagePosition: 'right', // 3rd: Image in Right (as requested)
       nameEn: 'Hydraulic Brake System Overhaul',
       nameAm: 'የሃይድሮሊክ ፍሬን ሲስተም ሙሉ ጥገና',
-      taglineEn: 'Maximum Stopping Power & Safety Assurance',
-      taglineAm: 'አስተማማኝ የማቆም ብቃትና የተረጋገጠ ደህንነት',
-      descriptionEn: 'High-precision brake disc machining, master cylinder pressure profiling, ABS hydraulic bleeding, and vacuum booster load testing.',
+      descriptionEn: 'High-precision brake disc machining, master cylinder pressure profiling, ABS hydraulic bleeding, and vacuum booster load testing for optimal road safety.',
       descriptionAm: 'የፍሬን ዲስኮች ልኬትና ማስተካከል፣ የማስተር ሲሊንደር ግፊት ፍተሻ፣ የኤቢኤስ መስመሮችና የቫኪዩም ቡስተር ጥገና ለተሟላ የጉዞ ደህንነት።',
       image: '/services/brake-repairs.jpg',
-      badgeEn: 'Brakes & Hubs',
-      badgeAm: 'ፍሬንና የዊል ሃብ ጥገና',
       keyHighlightsEn: [
         'Brake master cylinder & vacuum booster overhaul',
         'Disc run-out machining & drum lining renewal',
@@ -254,17 +222,12 @@ export const ServicesPage: React.FC = () => {
     },
     {
       id: 'suspension',
-      sectionNumber: '04',
       imagePosition: 'left', // 4th: Image in Left (as requested)
       nameEn: 'Suspension, Steering & Chassis Alignment',
       nameAm: 'የሰስፔንሽን፣ ስቲሪንግና ሻሲ ጥገና',
-      taglineEn: 'Stability, Comfort & Off-Road Durability',
-      taglineAm: 'የተሽከርካሪ መረጋጋት፣ ምቾትና የሻሲ ጥንካሬ',
       descriptionEn: 'Heavy-duty suspension rebuilds for Toyota Hilux, Land Cruiser and Prado. Leaf spring bundle rebuilding, coil spring replacement, and steering linkage play elimination.',
       descriptionAm: 'ለToyota Hilux፣ Land Cruiser እና Prado የተዘጋጀ የባለ ሸበካ (Leaf Spring) እድሳት፣ የሾክ አምፖርሳዶር ቅየራ፣ የስቲሪንግ ቡሾችና የሻሲ ማስተካከል ስራ።',
       image: '/services/suspension-steering.jpg',
-      badgeEn: '4x4 & Heavy Duty',
-      badgeAm: 'ለ 4x4 እና ከባድ ተሽከርካሪዎች',
       keyHighlightsEn: [
         'Coil springs & gas-charged shock absorbers replacement',
         'Leaf spring bundles rebuilding, re-arching & new U-bolts',
@@ -316,17 +279,12 @@ export const ServicesPage: React.FC = () => {
     },
     {
       id: 'electrical',
-      sectionNumber: '05',
       imagePosition: 'right', // 5th: Image in Right (as requested)
-      nameEn: 'Electrical, Electronics & Computer Diagnostics',
-      nameAm: 'የኤሌክትሪክ፣ ኤሌክትሮኒክስና ኮምፒውተር ዲያግኖስቲክስ',
-      taglineEn: 'Advanced Multiplex Wiring & Component Testing',
-      taglineAm: 'ዘመናዊ የመኪና ሽቦ፣ ዳሳሾችና የኮምፒውተር ምርመራ',
-      descriptionEn: 'Toyota-trained specialists utilizing advanced scan tools for powertrain, charging system alternators, high-torque starter motors, and multiplex body electronics.',
+      nameEn: 'Toyota Trained Electrical & Diagnostic Experts',
+      nameAm: 'በToyota የሰለጠኑ የኤሌክትሪክና ዲያግኖስቲክስ ባለሙያዎች',
+      descriptionEn: 'MOENCO-standard training and Toyota programs enable us to diagnose electronic modules, charging systems, high-torque starter motors, and vehicle multiplex wiring.',
       descriptionAm: 'በToyota የሰለጠኑ ባለሙያዎች በዘመናዊ የዲያግኖስቲክስ ኮምፒውተሮች በመታገዝ የቻርጅ ሲስተም፣ ስታርተር ሞተር፣ ሴንሰሮችና ኤሌክትሮኒክስን ይመረምራሉ።',
       image: '/services/electrical-diagnostics.jpg',
-      badgeEn: 'Computer Diagnostics',
-      badgeAm: 'ዘመናዊ ኮምፒውተር ዲያግኖስቲክስ',
       keyHighlightsEn: [
         'Heavy-duty starter motor & solenoid overhaul',
         'High-output alternator diode pack & regulator service',
@@ -378,17 +336,12 @@ export const ServicesPage: React.FC = () => {
     },
     {
       id: 'body_maintenance',
-      sectionNumber: '06',
       imagePosition: 'left', // 6th: Image in Left (as requested)
       nameEn: 'Body Hardware, Accessories & General Care',
       nameAm: 'የቦዲ እቃዎች፣ መለዋወጫዎችና አጠቃላይ እንክብካቤ',
-      taglineEn: 'Cabin Comfort, Structural Hardware & Finishing',
-      taglineAm: 'የተሟላ የበር እቃዎች፣ የጭስ ማውጫና አጠቃላይ እንክብካቤ',
       descriptionEn: 'Comprehensive exterior hardware servicing including power window regulators, door locks, hood cable dampers, structural exhaust welding, and high-pressure steam wash.',
       descriptionAm: 'የመስታወት ማንሻ ሞተሮች፣ የበር እጀታዎችና ቁልፎች፣ የካፖርት ድጋፎች፣ የጭስ ማውጫ ብየዳና የከፍተኛ ግፊት እጥበት አገልግሎት።',
       image: '/services/body-maintenance.jpg',
-      badgeEn: 'Body & Maintenance',
-      badgeAm: 'የቦዲና አጠቃላይ ሰርቪስ',
       keyHighlightsEn: [
         'Electric power window regulator & motor overhaul',
         'Door lock actuators, internal & external handles',
@@ -442,291 +395,166 @@ export const ServicesPage: React.FC = () => {
     }
   ];
 
-  // Filtering
-  const filteredServices = useMemo(() => {
-    if (selectedFilter === 'all') return servicesData;
-    return servicesData.filter(s => s.id === selectedFilter);
-  }, [selectedFilter]);
-
-  const handleBookService = (service: ServiceCategory) => {
-    setSelectedServiceSlug(service.nameEn);
-    setCurrentView('book');
-  };
-
   return (
-    <div className="py-12 md:py-20 bg-slate-900/10 min-h-screen text-slate-900">
+    <div className="bg-white min-h-screen text-slate-900 py-12 md:py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        {/* Hero Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-red-100 border border-red-200 text-red-700 text-xs font-bold mb-4 shadow-xs">
-            <Sparkles className="w-4 h-4 text-red-600" />
-            <span>{locale === 'am' ? 'የአበጋዝ ሞተርስ ይፋዊ የጥገና አገልግሎቶች' : 'Official Abegaz Motors Engineering Services'}</span>
-          </div>
-
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-950 tracking-tight mb-4">
-            {locale === 'am' ? 'የተሟሉ የሜካኒካልና ኤሌክትሪክ ጥገናዎች' : 'Mechanical & Electrical Overhaul Services'}
+        {/* Clean Editorial Title Section on Pure White Background (Two-Tone Blue & Red) */}
+        <div className="max-w-4xl mb-16 sm:mb-20">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight mb-4 leading-tight">
+            {locale === 'am' ? (
+              <>
+                <span className="text-blue-950">የተሟሉ የሜካኒካል</span>{' '}
+                <span className="text-red-600">እና ኤሌክትሪክ ጥገናዎች</span>
+              </>
+            ) : (
+              <>
+                <span className="text-blue-950">Mechanical &</span>{' '}
+                <span className="text-red-600">Electrical Overhaul Services</span>
+              </>
+            )}
           </h1>
 
-          <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
+          <p className="text-lg sm:text-xl text-slate-600 font-normal leading-relaxed">
             {locale === 'am'
-              ? 'ከሞተር ሙሉ እድሳት እስከ ማርሽ ቦክስ፣ ፍሬን፣ ሰስፔንሽንና ኤሌክትሪክ ድረስ በወረቀቱ ላይ የተመለከቱትን እያንዳንዱን ዝርዝር ጥገናዎች በዘመናዊ መሳሪያዎች እንፈጽማለን።'
-              : 'From complete engine rebuilds and transmission overhauls to precision brakes, heavy-duty suspension, and computer diagnostics — engineered to factory tolerances.'}
+              ? 'ከሞተር ሙሉ እድሳት እስከ ማርሽ ቦክስ፣ ፍሬን፣ ሰስፔንሽንና ኤሌክትሪክ ድረስ በፋብሪካው መመሪያ መሰረት በዘመናዊ መመርመሪያ ማሽኖች የሚከናወኑ አገልግሎቶች።'
+              : 'Factory-standard engineering procedures for complete engine rebuilding, transmission overhaul, brake precision, and computerized diagnostics.'}
           </p>
-
-          {/* Category Filter Pills */}
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-2 sm:gap-3">
-            {[
-              { id: 'all', labelAm: 'ሁሉም አገልግሎቶች', labelEn: 'All Services' },
-              { id: 'engine', labelAm: 'ሞተር (Engine)', labelEn: 'Engine' },
-              { id: 'transmission', labelAm: 'ማርሽ ቦክስ (Gearbox)', labelEn: 'Transmission' },
-              { id: 'brakes', labelAm: 'ፍሬን (Brakes)', labelEn: 'Brakes' },
-              { id: 'suspension', labelAm: 'ሰስፔንሽን (Suspension)', labelEn: 'Suspension' },
-              { id: 'electrical', labelAm: 'ኤሌክትሪክ (Electrical)', labelEn: 'Electrical' },
-              { id: 'body_maintenance', labelAm: 'ቦዲና አጠቃላይ (Body & Care)', labelEn: 'Body & Care' },
-            ].map(tab => (
-              <button
-                key={tab.id}
-                onClick={() => setSelectedFilter(tab.id)}
-                className={`px-4 py-2 rounded-full text-xs font-extrabold transition-all border ${
-                  selectedFilter === tab.id
-                    ? 'bg-red-600 text-white border-red-600 shadow-md shadow-red-600/30'
-                    : 'bg-white text-slate-700 border-slate-200 hover:border-red-300 hover:text-red-600'
-                }`}
-              >
-                {locale === 'am' ? tab.labelAm : tab.labelEn}
-              </button>
-            ))}
-          </div>
         </div>
 
-        {/* ALTERNATING DUAL-STYLE SHOWCASE SECTIONS */}
-        <div className="space-y-12 sm:space-y-16 mb-20">
-          {filteredServices.map((service, index) => {
+        {/* OPEN EDITORIAL SECTIONS — NO CARDS, PURE CLEAN WHITE BACKGROUND, EXACT ALTERNATING ORDER */}
+        <div className="divide-y divide-slate-100 space-y-16 md:space-y-24">
+          {servicesData.map((service) => {
             const isImageRight = service.imagePosition === 'right';
             const isExpanded = expandedCategoryId === service.id;
 
             return (
-              <div
+              <section
                 key={service.id}
-                className="bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden transition-all duration-300 hover:shadow-2xl hover:border-slate-300"
+                className="pt-16 md:pt-24 first:pt-0"
               >
-                <div className={`grid grid-cols-1 lg:grid-cols-12 items-stretch ${
-                  isImageRight ? '' : 'lg:flex-row-reverse'
-                }`}>
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
 
-                  {/* 1. CONTENT BLOCK (Takes 7 cols on desktop) */}
-                  <div className={`lg:col-span-7 p-6 sm:p-10 lg:p-12 flex flex-col justify-between ${
+                  {/* CONTENT COLUMN (7 Columns on Large Screens) */}
+                  <div className={`lg:col-span-7 flex flex-col justify-center ${
                     isImageRight ? 'order-1' : 'order-2'
                   }`}>
-                    <div>
-                      {/* Top Badges & Section Number */}
-                      <div className="flex items-center justify-between mb-4">
-                        <div className="flex items-center gap-2">
-                          <span className="w-8 h-8 rounded-xl bg-red-600 text-white font-black text-xs flex items-center justify-center shadow-md shadow-red-600/30">
-                            {service.sectionNumber}
-                          </span>
-                          <span className="px-3 py-1 rounded-full bg-slate-100 text-slate-800 text-xs font-extrabold uppercase tracking-wider border border-slate-200">
-                            {locale === 'am' ? service.badgeAm : service.badgeEn}
-                          </span>
+                    
+                    {/* Red Bold Headline (matching sample "Toyota Trained Experts" / "Latest Equipment") */}
+                    <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-red-600 tracking-tight leading-tight mb-4">
+                      {locale === 'am' ? service.nameAm : service.nameEn}
+                    </h2>
+
+                    {/* Editorial Description Paragraph */}
+                    <p className="text-lg sm:text-xl text-slate-600 font-normal leading-relaxed mb-6">
+                      {locale === 'am' ? service.descriptionAm : service.descriptionEn}
+                    </p>
+
+                    {/* Clean Feature Checklist */}
+                    <div className="space-y-2.5 mb-8">
+                      {(locale === 'am' ? service.keyHighlightsAm : service.keyHighlightsEn).map((point, idx) => (
+                        <div key={idx} className="flex items-start gap-3 text-sm sm:text-base text-slate-700">
+                          <CheckCircle2 className="w-5 h-5 text-red-600 shrink-0 mt-0.5" />
+                          <span className="font-medium leading-relaxed">{point}</span>
                         </div>
+                      ))}
+                    </div>
 
-                        <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200">
-                          {locale === 'am' ? 'የነጻ ግምትና ፍተሻ' : 'Free Estimate'}
-                        </span>
-                      </div>
-
-                      {/* Main Title (Red Bold as requested from samples) */}
-                      <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-red-600 tracking-tight mb-2 leading-tight">
-                        {locale === 'am' ? service.nameAm : service.nameEn}
-                      </h2>
-
-                      {/* Tagline */}
-                      <p className="text-xs sm:text-sm font-bold text-slate-800 mb-4 tracking-wide">
-                        {locale === 'am' ? service.taglineAm : service.taglineEn}
-                      </p>
-
-                      {/* Description */}
-                      <p className="text-sm sm:text-base text-slate-600 leading-relaxed mb-6">
-                        {locale === 'am' ? service.descriptionAm : service.descriptionEn}
-                      </p>
-
-                      {/* Key Highlights Checklist */}
-                      <div className="space-y-2.5 mb-6 bg-slate-50 p-4 sm:p-5 rounded-2xl border border-slate-200/80">
-                        <p className="text-xs font-black uppercase tracking-wider text-slate-900 mb-2">
-                          {locale === 'am' ? 'ዋና ዋና የጥገና ነጥቦች፦' : 'Service Capabilities:'}
+                    {/* Expandable Full Checklist from Workshop Sheets */}
+                    {isExpanded && (
+                      <div className="mb-8 p-6 bg-slate-50 rounded-2xl border border-slate-100 animate-fadeIn">
+                        <p className="text-xs font-black uppercase tracking-wider text-slate-900 mb-4 flex items-center gap-2">
+                          <Layers className="w-4 h-4 text-red-600" />
+                          <span>
+                            {locale === 'am'
+                              ? `የወረቀቱ ሙሉ ዝርዝር (${service.itemizedRepairsAm.length} ጥገናዎች)፦`
+                              : `Complete Itemized Service List (${service.itemizedRepairsEn.length} operations):`}
+                          </span>
                         </p>
-                        {(locale === 'am' ? service.keyHighlightsAm : service.keyHighlightsEn).map((point, idx) => (
-                          <div key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700">
-                            <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                            <span className="font-medium leading-relaxed">{point}</span>
-                          </div>
-                        ))}
-                      </div>
-
-                      {/* Expandable Itemized Checklist from Paper Sheets */}
-                      {isExpanded && (
-                        <div className="mb-6 pt-4 border-t border-slate-200 space-y-2 bg-red-50/50 p-4 sm:p-5 rounded-2xl border border-red-100 animate-fadeIn">
-                          <p className="text-xs font-black uppercase tracking-wider text-red-900 mb-3 flex items-center gap-2">
-                            <Layers className="w-4 h-4 text-red-600" />
-                            <span>
-                              {locale === 'am'
-                                ? `የወረቀቱ ሙሉ ዝርዝር (${service.itemizedRepairsAm.length} ጥገናዎች)፦`
-                                : `Complete Itemized Service List (${service.itemizedRepairsEn.length} operations):`}
-                            </span>
-                          </p>
-                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                            {(locale === 'am' ? service.itemizedRepairsAm : service.itemizedRepairsEn).map((item, idx) => (
-                              <div key={idx} className="flex items-start gap-2 text-xs text-slate-800">
-                                <span className="w-4 h-4 rounded-full bg-red-200 text-red-800 text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">
-                                  {idx + 1}
-                                </span>
-                                <span className="leading-snug">{item}</span>
-                              </div>
-                            ))}
-                          </div>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                          {(locale === 'am' ? service.itemizedRepairsAm : service.itemizedRepairsEn).map((item, idx) => (
+                            <div key={idx} className="flex items-start gap-2 text-xs sm:text-sm text-slate-750">
+                              <span className="w-4 h-4 rounded-full bg-red-100 text-red-700 text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">
+                                {idx + 1}
+                              </span>
+                              <span className="leading-snug">{item}</span>
+                            </div>
+                          ))}
                         </div>
-                      )}
-
-                      {/* Expand/Collapse Checklist Button */}
-                      <button
-                        onClick={() => setExpandedCategoryId(isExpanded ? null : service.id)}
-                        className="text-xs font-extrabold text-red-600 hover:text-red-700 inline-flex items-center gap-1.5 transition-colors mb-6"
-                      >
-                        <span>
-                          {isExpanded
-                            ? (locale === 'am' ? 'ዝርዝር ጥገናዎችን ሰብስብ' : 'Collapse Itemized List')
-                            : (locale === 'am' ? `ሁሉንም ዝርዝር ጥገናዎች ይመልከቱ (${service.itemizedRepairsAm.length} እቃዎች)` : `View All Itemized Repairs (${service.itemizedRepairsEn.length} items)`)}
-                        </span>
-                        {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-                      </button>
-                    </div>
-
-                    {/* Bottom Action Row with Social Contact Badges (matching Image 1 sample) */}
-                    <div className="pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4">
-                      {/* Social & Contact Pills (Facebook, Map, Email, Telegram) */}
-                      <div className="flex items-center gap-2 self-start sm:self-auto">
-                        <a
-                          href="https://facebook.com"
-                          target="_blank"
-                          rel="noreferrer"
-                          title="Facebook"
-                          className="w-9 h-9 rounded-xl bg-red-600 text-white flex items-center justify-center hover:bg-red-700 transition-colors shadow-xs"
-                        >
-                          <span className="font-black text-sm">f</span>
-                        </a>
-
-                        <a
-                          href={`tel:${WORKSHOP_INFO.phone}`}
-                          title="Call Us"
-                          className="w-9 h-9 rounded-xl bg-red-600 text-white flex items-center justify-center hover:bg-red-700 transition-colors shadow-xs"
-                        >
-                          <PhoneCall className="w-4 h-4" />
-                        </a>
-
-                        <a
-                          href={`mailto:${WORKSHOP_INFO.email}`}
-                          title="Email Us"
-                          className="w-9 h-9 rounded-xl bg-red-600 text-white flex items-center justify-center hover:bg-red-700 transition-colors shadow-xs"
-                        >
-                          <Mail className="w-4 h-4" />
-                        </a>
-
-                        <a
-                          href="https://t.me/AbegazMotors"
-                          target="_blank"
-                          rel="noreferrer"
-                          title="Telegram / WhatsApp"
-                          className="w-9 h-9 rounded-xl bg-red-600 text-white flex items-center justify-center hover:bg-red-700 transition-colors shadow-xs"
-                        >
-                          <Send className="w-4 h-4" />
-                        </a>
                       </div>
+                    )}
 
-                      {/* Direct Booking Button */}
-                      <Button
-                        variant="primary"
-                        size="md"
-                        onClick={() => handleBookService(service)}
-                        className="w-full sm:w-auto h-12 px-6 font-black text-xs sm:text-sm shadow-md shadow-red-600/30 hover:shadow-red-600/50"
+                    {/* Toggle Checklist Link */}
+                    <button
+                      onClick={() => setExpandedCategoryId(isExpanded ? null : service.id)}
+                      className="text-xs sm:text-sm font-extrabold text-red-600 hover:text-red-700 inline-flex items-center gap-1.5 transition-colors mb-8 self-start"
+                    >
+                      <span>
+                        {isExpanded
+                          ? (locale === 'am' ? 'ዝርዝር ጥገናዎችን ሰብስብ' : 'Collapse Itemized List')
+                          : (locale === 'am' ? `ሁሉንም ዝርዝር ጥገናዎች ይመልከቱ (${service.itemizedRepairsAm.length} እቃዎች)` : `View All Itemized Repairs (${service.itemizedRepairsEn.length} items)`)}
+                      </span>
+                      {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                    </button>
+
+                    {/* Red Pill Social Contact Bar (Exact Replica of MOENCO / Sample Design) */}
+                    <div className="inline-flex items-center bg-red-600 text-white rounded-xl px-4 py-2.5 gap-4 shadow-sm self-start">
+                      <a
+                        href="https://facebook.com"
+                        target="_blank"
+                        rel="noreferrer"
+                        title="Facebook"
+                        className="hover:opacity-80 transition-opacity"
                       >
-                        <Calendar className="w-4 h-4 mr-2" />
-                        <span>{locale === 'am' ? 'ይህንን አገልግሎት ያስይዙ' : 'Book This Service'}</span>
-                      </Button>
+                        <span className="font-black text-lg leading-none">f</span>
+                      </a>
+
+                      <a
+                        href={`https://maps.google.com/?q=${encodeURIComponent('Abegaz Motors, Addis Ababa')}`}
+                        target="_blank"
+                        rel="noreferrer"
+                        title="Location"
+                        className="hover:opacity-80 transition-opacity"
+                      >
+                        <MapPin className="w-5 h-5" />
+                      </a>
+
+                      <a
+                        href={`mailto:${WORKSHOP_INFO.email}`}
+                        title="Email"
+                        className="hover:opacity-80 transition-opacity"
+                      >
+                        <Mail className="w-5 h-5" />
+                      </a>
+
+                      <a
+                        href="https://t.me/AbegazMotors"
+                        target="_blank"
+                        rel="noreferrer"
+                        title="Telegram / WhatsApp"
+                        className="hover:opacity-80 transition-opacity"
+                      >
+                        <Send className="w-5 h-5" />
+                      </a>
                     </div>
+
                   </div>
 
-                  {/* 2. IMAGE BLOCK (Takes 5 cols on desktop) */}
-                  <div className={`lg:col-span-5 relative min-h-[300px] lg:min-h-full overflow-hidden bg-slate-950 group ${
+                  {/* IMAGE COLUMN (5 Columns on Large Screens) */}
+                  <div className={`lg:col-span-5 relative overflow-hidden rounded-2xl ${
                     isImageRight ? 'order-2' : 'order-1'
                   }`}>
                     <img
                       src={service.image}
                       alt={locale === 'am' ? service.nameAm : service.nameEn}
-                      className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                      className="w-full h-auto max-h-[480px] object-cover object-center rounded-2xl shadow-md"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-slate-950/20" />
-
-                    {/* Bottom floating chip */}
-                    <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-white text-xs">
-                      <span className="font-extrabold bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-xl border border-white/10 flex items-center gap-1.5">
-                        <Wrench className="w-3.5 h-3.5 text-red-400" />
-                        <span>{locale === 'am' ? 'የአበጋዝ ሞተርስ ወርክሾፕ' : 'Abegaz Certified Bay'}</span>
-                      </span>
-
-                      <span className="font-bold bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-xl border border-white/10 text-emerald-400">
-                        {locale === 'am' ? 'ኦሪጅናል መለዋወጫዎች' : 'Genuine Parts'}
-                      </span>
-                    </div>
                   </div>
 
                 </div>
-              </div>
+              </section>
             );
           })}
-        </div>
-
-        {/* Bottom Booking Guarantee Banner */}
-        <div className="bg-slate-950 text-white rounded-3xl p-8 sm:p-12 border border-slate-800 shadow-2xl relative overflow-hidden">
-          <div className="absolute right-0 top-0 bottom-0 w-1/3 bg-radial from-red-600/20 via-transparent to-transparent pointer-events-none" />
-
-          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
-            <div className="lg:col-span-2">
-              <span className="text-red-400 font-extrabold text-xs tracking-wider uppercase block mb-2">
-                {locale === 'am' ? 'ፈጣን የምክርና የጥገና ቀጠሮ' : 'Fast Diagnostic & Service Booking'}
-              </span>
-              <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight mb-3">
-                {locale === 'am'
-                  ? 'ተሽከርካሪዎን ዛሬውኑ ወደ አበጋዝ ሞተርስ ይዘው ይምጡ'
-                  : 'Bring Your Vehicle to Abegaz Motors Today'}
-              </h2>
-              <p className="text-sm text-slate-300 leading-relaxed max-w-2xl">
-                {locale === 'am'
-                  ? 'የተሟላ የኮምፒውተር ዲያግኖስቲክስ ምርመራ፣ የነጻ የጥገና ግምትና በባለሙያዎች የተደገፈ አስተማማኝ አገልግሎት ያገኛሉ።'
-                  : 'Get a full multi-point diagnostic check, transparent repair estimates, and factory-certified workmanship backed by warranty.'}
-              </p>
-            </div>
-
-            <div className="flex flex-col sm:flex-row lg:flex-col gap-3 justify-center">
-              <Button
-                variant="primary"
-                size="lg"
-                onClick={() => setCurrentView('book')}
-                className="w-full h-13 font-black text-sm shadow-xl shadow-red-600/40"
-              >
-                <Calendar className="w-4 h-4 mr-2" />
-                <span>{locale === 'am' ? 'የቀጠሮ ቅጽ ይሙሉ' : 'Schedule Service'}</span>
-              </Button>
-
-              <a
-                href={`tel:${WORKSHOP_INFO.phone}`}
-                className="h-13 px-6 rounded-btn bg-slate-900 hover:bg-slate-800 text-white border border-slate-700 text-xs font-bold inline-flex items-center justify-center gap-2 transition-all"
-              >
-                <PhoneCall className="w-4 h-4 text-emerald-400" />
-                <span>{locale === 'am' ? `በስልክ ይደውሉ፡ ${WORKSHOP_INFO.phone}` : `Direct Call: ${WORKSHOP_INFO.phone}`}</span>
-              </a>
-            </div>
-          </div>
         </div>
 
       </div>
