@@ -59,6 +59,7 @@ import {
   MoreHorizontal
 } from 'lucide-react';
 import { Button } from '../common/Button';
+import { normalizeVehiclePlate } from '../../lib/vehicle';
 
 export const AdminDashboard: React.FC = () => {
   const { 
@@ -195,9 +196,10 @@ export const AdminDashboard: React.FC = () => {
     return true;
   }).filter(a => {
     const q = searchQuery.toLowerCase();
+    const plateQuery = normalizeVehiclePlate(searchQuery);
     return a.ref.toLowerCase().includes(q) || 
       a.customerName.toLowerCase().includes(q) || 
-      a.vehiclePlate.toLowerCase().includes(q);
+      normalizeVehiclePlate(a.vehiclePlate || '').includes(plateQuery);
   });
 
   return (
@@ -447,7 +449,7 @@ export const AdminDashboard: React.FC = () => {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search appointments, customers, plates…"
+              placeholder="Search by plate, customer, or ref…"
               className="w-full pl-9 pr-14 py-1.5 bg-mist rounded-full border border-line text-xs font-medium text-navy outline-hidden focus:border-orange-signal focus:bg-white transition-all shadow-2xs"
             />
             <span className="absolute right-2.5 top-2 bg-white px-1.5 py-0.5 rounded border border-line text-[10px] font-mono text-muted shadow-2xs">
@@ -4087,7 +4089,7 @@ export const AdminDashboard: React.FC = () => {
                     <Zap className="w-3.5 h-3.5 fill-white" />
                   </div>
                   <span className="font-medium">
-                    The customer will be notified automatically via configured channels once approved.
+                    The customer will be notified after approval and can check progress using the vehicle plate.
                   </span>
                 </div>
 
@@ -4174,7 +4176,7 @@ export const AdminDashboard: React.FC = () => {
                         ✉ Email & ✈ Telegram Payload Preview:
                       </div>
                       <p className="leading-relaxed">
-                        "ሰላም {approveModalApt.customerName}፣ ለአበጋዝ ሞተርስ ኢንጂነሪንግ የጠየቁት ቀጠሮ ({approveModalApt.ref} · {approveModalApt.serviceName}) ጸድቋል! ቀን፡ {approveModalApt.requestedDate} {approveModalApt.requestedSlot}። {modalCustomNote}"
+                        "ሰላም {approveModalApt.customerName}፣ ለአበጋዝ ሞተርስ ኢንጂነሪንግ የጠየቁት ቀጠሮ ({approveModalApt.serviceName}) ጸድቋል! ቀን፡ {approveModalApt.requestedDate} {approveModalApt.requestedSlot}። ሁኔታውን በሰሌዳ ቁጥር {approveModalApt.vehiclePlate} በTrack ገጽ ይከታተሉ። {modalCustomNote}"
                       </p>
                     </div>
                   )}

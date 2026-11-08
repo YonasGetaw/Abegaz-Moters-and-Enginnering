@@ -29,6 +29,7 @@ import {
 } from 'lucide-react';
 import { Button } from '../common/Button';
 import { Appointment, AppointmentStatus } from '../../types';
+import { normalizeVehiclePlate } from '../../lib/vehicle';
 
 export const StaffDashboard: React.FC = () => {
   const { 
@@ -92,9 +93,10 @@ export const StaffDashboard: React.FC = () => {
     return true;
   }).filter(a => {
     const q = searchQuery.toLowerCase();
+    const plateQuery = normalizeVehiclePlate(searchQuery);
     return a.ref.toLowerCase().includes(q) || 
       a.customerName.toLowerCase().includes(q) || 
-      a.vehiclePlate.toLowerCase().includes(q);
+      normalizeVehiclePlate(a.vehiclePlate || '').includes(plateQuery);
   });
 
   return (
@@ -576,7 +578,7 @@ export const StaffDashboard: React.FC = () => {
                     type="text"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder={locale === 'am' ? 'በሰሌዳ ወይም በስም ፈልግ...' : 'Search plate, name, ref...'}
+                    placeholder={locale === 'am' ? 'በሰሌዳ ቁጥር፣ ስም ወይም መለያ ፈልግ...' : 'Search plate, name, or ref...'}
                     className="pl-9 pr-3 py-2 bg-white rounded-card border border-line text-xs font-bold text-navy outline-hidden focus:border-orange-signal w-64 shadow-2xs"
                   />
                 </div>
@@ -1026,6 +1028,11 @@ export const StaffDashboard: React.FC = () => {
                     {approveSheetApt.serviceName} • {approveSheetApt.requestedDate} @ {approveSheetApt.requestedSlot}
                   </p>
                 </div>
+                <p className="rounded-lg bg-blue-50 px-3 py-2 text-xs font-medium text-blue-900">
+                  {locale === 'am'
+                    ? `ደንበኛው ${approveSheetApt.vehiclePlate} በሚለው የሰሌዳ ቁጥር የጥገና ሁኔታውን ማየት ይችላል።`
+                    : `Customer can check repair status using plate ${approveSheetApt.vehiclePlate}.`}
+                </p>
 
                 {/* Toggles */}
                 <div className="space-y-2.5 pt-1 text-xs">
@@ -1073,6 +1080,11 @@ export const StaffDashboard: React.FC = () => {
                   <h3 className="text-lg font-black text-navy">
                     {locale === 'am' ? 'ጸድቋል — ለደንበኛው ማሳወቂያ ተልኳል' : 'Approved — customer notified'}
                   </h3>
+                  <p className="mt-2 text-sm text-slate-600">
+                    {locale === 'am'
+                      ? `የጥገና ሁኔታውን በሰሌዳ ቁጥር ${approveSheetApt.vehiclePlate} ማየት ይችላሉ።`
+                      : `They can track repair progress using plate ${approveSheetApt.vehiclePlate}.`}
+                  </p>
                   <div className="flex items-center justify-center gap-4 text-xs text-emerald-700 font-bold mt-2">
                     <span>✔ Email Sent</span>
                     <span>•</span>

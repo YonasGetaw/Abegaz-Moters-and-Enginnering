@@ -216,12 +216,12 @@ export const PackagesPage: React.FC = () => {
             {locale === 'am' ? (
               <>
                 <span className="text-[#0f2c59]">የተሟሉ የሰርቪስ</span>{' '}
-                <span className="text-red-600">ጥቅሎች (A - D)</span>
+                <span className="text-red-600">ጥቅሎች </span>
               </>
             ) : (
               <>
                 <span className="text-[#0f2c59]">Complete Service</span>{' '}
-                <span className="text-red-600">Packages (A - D)</span>
+                <span className="text-red-600">Packages </span>
               </>
             )}
           </h1>

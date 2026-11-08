@@ -1,63 +1,57 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useApp } from '../../context/AppContext';
 import { StatusBadge } from '../common/Badge';
-import { 
-  Search, 
+import {
   Car, 
-  Clock, 
+  Clock,
   MapPin, 
-  ShieldCheck, 
   Phone, 
   Send, 
-  Calendar, 
-  CheckCircle2, 
+  Calendar,
   AlertTriangle,
-  ArrowRight,
-  Sparkles,
-  Check,
-  User,
-  Wrench,
   CalendarPlus
 } from 'lucide-react';
 import { Button } from '../common/Button';
 import { Appointment } from '../../types';
 import { WORKSHOP_INFO } from '../../lib/constants';
+import { normalizeVehiclePlate } from '../../lib/vehicle';
 
 export const TrackBookingPage: React.FC = () => {
-  const { locale, appointments, setCurrentView, showToast, connectTelegram } = useApp();
+  const { locale, appointments, setCurrentView, showToast, plateToTrack, setPlateToTrack } = useApp();
 
-  const [searchQuery, setSearchQuery] = useState('ABG-2026-0042');
-  const [matchedAppointment, setMatchedAppointment] = useState<Appointment | null>(
-    appointments.find(a => a.ref === 'ABG-2026-0042') || appointments[0] || null
-  );
-  const [hasSearched, setHasSearched] = useState(true);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [matchedAppointment, setMatchedAppointment] = useState<Appointment | null>(null);
+  const [hasSearched, setHasSearched] = useState(false);
+
+  useEffect(() => {
+    if (!plateToTrack) return;
+
+    const normalizedPlate = normalizeVehiclePlate(plateToTrack);
+    const found = appointments.find(a => normalizeVehiclePlate(a.vehiclePlate || '') === normalizedPlate);
+    setSearchQuery(plateToTrack);
+    setMatchedAppointment(found || null);
+    setHasSearched(true);
+    setPlateToTrack('');
+  }, [appointments, plateToTrack, setPlateToTrack]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    const query = searchQuery.trim().toLowerCase();
-    if (!query) return;
+    const query = normalizeVehiclePlate(searchQuery);
+    if (!query) {
+      showToast(locale === 'am' ? 'የሰሌዳ ቁጥርዎን ያስገቡ' : 'Enter your vehicle plate number', 'error');
+      return;
+    }
 
-    const found = appointments.find(a => 
-      a.ref.toLowerCase().includes(query) ||
-      a.customerPhone.toLowerCase().includes(query) ||
-      a.vehiclePlate.toLowerCase().includes(query)
-    );
+    const found = appointments.find(a => normalizeVehiclePlate(a.vehiclePlate || '') === query);
 
     setMatchedAppointment(found || null);
     setHasSearched(true);
 
     if (found) {
-      showToast(locale === 'am' ? 'የቀጠሮ መረጃ ተገኝቷል' : 'Appointment found', 'success');
+      showToast(locale === 'am' ? 'የመኪና ሁኔታ ተገኝቷል' : 'Vehicle status found', 'success');
     } else {
-      showToast(locale === 'am' ? 'የተጠየቀው ቀጠሮ አልተገኘም' : 'No appointment found with that reference', 'error');
+      showToast(locale === 'am' ? 'በዚህ ሰሌዳ ቁጥር ቀጠሮ አልተገኘም' : 'No repair request found for this plate number', 'error');
     }
-  };
-
-  const selectSample = (ref: string) => {
-    setSearchQuery(ref);
-    const found = appointments.find(a => a.ref === ref);
-    setMatchedAppointment(found || null);
-    setHasSearched(true);
   };
 
   const trackerSteps = [
@@ -68,12 +62,13 @@ export const TrackBookingPage: React.FC = () => {
     { key: 'completed', labelAm: 'ተጠናቋል', labelEn: 'Ready for Pickup', descAm: 'ለመረከብ ዝግጁ ነው', descEn: 'Ready for handover' }
   ];
 
-  const getStepIndex = (status: string) => {
+  const getStepIndex = (status: Appointment['status']) => {
     switch (status) {
       case 'pending': return 1;
       case 'approved': return 2;
       case 'in_progress': return 3;
       case 'completed': return 4;
+      case 'rejected': return 0;
       default: return 0;
     }
   };
@@ -88,26 +83,26 @@ export const TrackBookingPage: React.FC = () => {
         <div className="text-center max-w-2xl mx-auto mb-10">
 
           
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-navy tracking-tight">
+          <h1 className="font-display text-3xl sm:text-4xl font-extrabold text-blue-950 tracking-tight">
             {locale === 'am' ? 'የመኪናዎን ቀጠሮ ሁኔታ ይከታተሉ' : 'Track Your Vehicle Repair Status'}
           </h1>
           
           <p className="text-muted text-sm mt-3">
             {locale === 'am'
-              ? 'መለያ መክፈት ሳያስፈልግ የቀጠሮ ቁጥርዎን (ለምሳሌ ABG-2026-0042) ወይም ስልክዎን በማስገባት የመኪናዎን የጥገና ደረጃ ይወቁ።'
-              : 'Enter your Booking Reference or Phone number to check review status, allocated workshop bay, and completion timeline.'}
+              ? 'የቀጠሮ መለያ ወይም ስልክ ሳያስፈልግ የመኪናዎን ሰሌዳ ቁጥር በማስገባት የጥገና ሁኔታውን ይመልከቱ።'
+              : 'Enter your vehicle plate number to check the latest repair status—no tracking code or account needed.'}
           </p>
 
           {/* Search Form */}
           <form onSubmit={handleSearch} className="mt-6 flex flex-col sm:flex-row items-center gap-2 max-w-lg mx-auto">
             <div className="relative flex-1 w-full">
-              <Search className="w-4 h-4 absolute left-3.5 top-3.5 text-slate-400" />
+              <Car className="w-4 h-4 absolute left-3.5 top-3.5 text-blue-700" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder={locale === 'am' ? 'የቀጠሮ ቁጥር፣ ስልክ ወይም ሰሌዳ...' : 'e.g. ABG-2026-0042 or AA-12345'}
-                className="w-full pl-10 pr-4 py-3 bg-white rounded-btn border border-line text-sm font-bold text-navy outline-hidden focus:border-orange-signal shadow-sm font-mono"
+                placeholder={locale === 'am' ? 'የመኪናዎን ሰሌዳ (ለምሳሌ AA-12345)' : 'Enter your plate, e.g. AA-12345'}
+                className="w-full pl-10 pr-4 py-3 bg-white rounded-btn border border-line text-sm font-bold text-blue-950 outline-hidden focus:border-blue-600 focus:ring-2 focus:ring-blue-100 shadow-sm font-mono uppercase tracking-wider"
                 required
               />
             </div>
@@ -117,35 +112,9 @@ export const TrackBookingPage: React.FC = () => {
               size="md"
               className="w-full sm:w-auto h-12 px-6 text-xs font-black shadow-md shrink-0"
             >
-              <span>{locale === 'am' ? 'ፈልግ (Track)' : 'Track Booking'}</span>
+              <span>{locale === 'am' ? 'ሁኔታውን ይመልከቱ' : 'Check Status'}</span>
             </Button>
           </form>
-
-          {/* Quick Sample Ref Chips */}
-          <div className="flex flex-wrap items-center justify-center gap-2 mt-3 text-[11px]">
-            <span className="text-muted">{locale === 'am' ? 'የሙከራ ምሳሌዎች:' : 'Try samples:'}</span>
-            <button
-              type="button"
-              onClick={() => selectSample('ABG-2026-0042')}
-              className="font-mono font-bold text-orange-deep bg-white border border-line px-2 py-0.5 rounded hover:border-orange-signal"
-            >
-              ABG-2026-0042 (Approved)
-            </button>
-            <button
-              type="button"
-              onClick={() => selectSample('ABG-2026-0041')}
-              className="font-mono font-bold text-slate-700 bg-white border border-line px-2 py-0.5 rounded hover:border-orange-signal"
-            >
-              ABG-2026-0041 (Pending)
-            </button>
-            <button
-              type="button"
-              onClick={() => selectSample('ABG-2026-0038')}
-              className="font-mono font-bold text-slate-700 bg-white border border-line px-2 py-0.5 rounded hover:border-orange-signal"
-            >
-              ABG-2026-0038 (Completed)
-            </button>
-          </div>
         </div>
 
         {/* Results Workspace */}
@@ -157,31 +126,38 @@ export const TrackBookingPage: React.FC = () => {
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-line">
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-mono font-bold text-orange-deep bg-orange-tint px-2.5 py-0.5 rounded-full">
-                      Ref: {matchedAppointment.ref}
-                    </span>
                     <StatusBadge status={matchedAppointment.status} locale={locale} />
                   </div>
-                  <h2 className="text-xl sm:text-2xl font-black text-navy mt-1">
+                  <h2 className="font-display text-xl sm:text-2xl font-extrabold text-blue-950 mt-2">
                     {matchedAppointment.serviceName}
                   </h2>
-                  <p className="text-xs text-muted mt-0.5">
-                    {locale === 'am' ? 'ባለቤት:' : 'Owner:'} {matchedAppointment.customerName} • {matchedAppointment.customerPhone}
-                  </p>
                 </div>
 
                 {/* Ethiopian License Plate badge */}
                 <div className="flex items-center gap-3">
-                  <div className="bg-white text-navy font-mono font-black text-sm px-3 py-1 rounded border-2 border-slate-700 shadow-2xs">
+                  <div className="bg-white text-blue-950 font-mono font-black text-sm px-4 py-2 rounded-lg border-2 border-blue-900 shadow-sm tracking-wider">
                     🇪🇹 {matchedAppointment.vehiclePlate}
                   </div>
-                  <span className="text-xs font-bold text-slate-700">
+                  <span className="text-sm font-semibold text-slate-700">
                     {matchedAppointment.vehicleMake} {matchedAppointment.vehicleModel} ({matchedAppointment.vehicleYear})
                   </span>
                 </div>
               </div>
 
               {/* 5-STAGE STATUS TRACKER */}
+              {matchedAppointment.status === 'rejected' ? (
+                <div className="my-5 flex items-start gap-3 rounded-xl border border-red-200 bg-red-50 p-4 text-left">
+                  <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-red-600" />
+                  <div>
+                    <p className="font-bold text-red-900">
+                      {locale === 'am' ? 'ይህን ጥያቄ መቀበል አልተቻለም' : 'This request could not be accepted'}
+                    </p>
+                    <p className="mt-1 text-sm leading-relaxed text-red-800">
+                      {locale === 'am' ? 'ተጨማሪ መረጃ ለማግኘት ከቡድናችን ጋር ይገናኙ።' : 'Please contact our team for more information or to choose another time.'}
+                    </p>
+                  </div>
+                </div>
+              ) : (
               <div className="py-6">
                 <div className="grid grid-cols-5 gap-1 sm:gap-2 text-center">
                   {trackerSteps.map((s, idx) => {
@@ -220,9 +196,10 @@ export const TrackBookingPage: React.FC = () => {
                   })}
                 </div>
               </div>
+              )}
 
               {/* Bay Allocation & Timetable Specs */}
-              <div className="p-4 rounded-btn bg-mist border border-line grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
+              <div className="p-4 rounded-btn bg-mist border border-line grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
                 <div className="flex items-start gap-2.5">
                   <div className="w-7 h-7 rounded-lg bg-white border border-line flex items-center justify-center text-orange-deep shrink-0">
                     <Calendar className="w-3.5 h-3.5" />
@@ -245,26 +222,6 @@ export const TrackBookingPage: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="flex items-start gap-2.5">
-                  <div className="w-7 h-7 rounded-lg bg-white border border-line flex items-center justify-center text-orange-deep shrink-0">
-                    <User className="w-3.5 h-3.5" />
-                  </div>
-                  <div>
-                    <span className="text-muted block font-semibold">{locale === 'am' ? 'የተመደበ መሐንዲስ:' : 'Assigned Engineer:'}</span>
-                    <strong className="text-navy">{matchedAppointment.assignedTo || 'ሳሙኤል በቀለ (Lead Master)'}</strong>
-                    <span className="block text-[11px] text-slate-500 mt-0.5">ባለሙያ መሐንዲስ</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Problem Description */}
-              <div className="mt-4 pt-4 border-t border-line text-xs">
-                <span className="font-extrabold text-navy uppercase tracking-wider text-[11px] block mb-1">
-                  {locale === 'am' ? 'የተገለጸው ችግር (Fault Note):' : 'Customer Fault Note:'}
-                </span>
-                <p className="text-slate-700 bg-slate-50 p-3 rounded-btn border border-line italic leading-relaxed">
-                  "{matchedAppointment.problemDescription}"
-                </p>
               </div>
 
               {/* Action Buttons */}
@@ -317,8 +274,8 @@ export const TrackBookingPage: React.FC = () => {
           </div>
         ) : hasSearched && !matchedAppointment ? (
           <div className="bg-white rounded-card p-10 border border-line shadow-sm text-center max-w-md mx-auto space-y-4">
-            <div className="w-14 h-14 rounded-full bg-red-50 text-red-600 flex items-center justify-center mx-auto text-xl font-bold">
-              ✕
+            <div className="w-14 h-14 rounded-full bg-red-50 text-red-600 flex items-center justify-center mx-auto">
+              <AlertTriangle className="w-6 h-6" />
             </div>
             <div>
               <h3 className="font-extrabold text-navy text-base">
@@ -326,8 +283,8 @@ export const TrackBookingPage: React.FC = () => {
               </h3>
               <p className="text-xs text-muted mt-1 leading-relaxed">
                 {locale === 'am'
-                  ? 'ያስገቡት የቀጠሮ ቁጥር ወይም ስልክ በሲስተማችን ውስጥ የለም። እባክዎ ቁጥሩን አስተካክለው ይሞክሩ ወይም አዲስ ቀጠሮ ይያዙ።'
-                  : 'We could not locate an appointment matching that reference. Please verify your reference or book a new appointment.'}
+                  ? 'እባክዎ የመኪናውን ሰሌዳ ቁጥር ያረጋግጡና እንደገና ይሞክሩ። ቀጠሮዎን አሁን ከላኩ፣ ትንሽ ጊዜ ጠብቀው ይመልከቱ።'
+                  : 'Check the plate number and try again. If you just submitted your request, please allow a moment for it to appear.'}
               </p>
             </div>
             <Button

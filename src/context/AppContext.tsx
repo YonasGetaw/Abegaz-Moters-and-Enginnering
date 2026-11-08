@@ -31,6 +31,8 @@ interface AppContextType {
   setActiveServiceDrawer: (svc: Service | null) => void;
   successBookingRef: string | null;
   setSuccessBookingRef: (ref: string | null) => void;
+  plateToTrack: string;
+  setPlateToTrack: (plate: string) => void;
   user: User;
   setUser: (u: User) => void;
   isAuthenticated: boolean;
@@ -87,6 +89,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [selectedServiceSlug, setSelectedServiceSlug] = useState<string | null>(null);
   const [activeServiceDrawer, setActiveServiceDrawer] = useState<Service | null>(null);
   const [successBookingRef, setSuccessBookingRef] = useState<string | null>('ABG-2026-0042');
+  const [plateToTrack, setPlateToTrack] = useState('');
   
   const [user, setUser] = useState<User>(() => {
     const saved = localStorage.getItem('abegaz_current_user');
@@ -424,6 +427,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       setActiveServiceDrawer,
       successBookingRef,
       setSuccessBookingRef,
+      plateToTrack,
+      setPlateToTrack,
       user,
       setUser,
       isAuthenticated,

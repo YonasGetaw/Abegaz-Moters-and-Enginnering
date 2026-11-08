@@ -105,9 +105,9 @@ export const PartnersSection: React.FC = () => {
     <section className="bg-white py-12 sm:py-16 border-b border-slate-100 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8 sm:mb-10">
         
-        {/* Title styled with bold red heading as requested by user */}
+        {/* Title styled with brand deep blue as requested by user */}
         <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-red-600 tracking-tight leading-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#0f2c59] tracking-tight leading-tight">
             {locale === 'am' ? 'ታማኝ ደንበኞቻችንና አጋሮቻችን' : 'Our Emblematic Clients'}
           </h2>
           <p className="text-xs sm:text-sm text-slate-500 font-medium">

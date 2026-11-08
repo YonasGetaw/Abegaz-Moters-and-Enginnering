@@ -18,9 +18,11 @@ import {
   ChevronRight,
   ArrowRight,
   Info,
-  CalendarCheck
+  CalendarCheck,
+  Search
 } from 'lucide-react';
 import { Button } from '../common/Button';
+import { normalizeVehiclePlate } from '../../lib/vehicle';
 
 // Real clean engineering services with professional Lucide SVGs (no emoji icons)
 const SERVICES_DATA = [
@@ -118,6 +120,7 @@ export const BookingWizard: React.FC = () => {
   const { 
     locale, 
     setCurrentView, 
+    setPlateToTrack,
     createAppointment, 
     showToast 
   } = useApp();
@@ -154,7 +157,6 @@ export const BookingWizard: React.FC = () => {
   // Submission state
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isDone, setIsDone] = useState(false);
-  const [createdRef, setCreatedRef] = useState('');
 
   const activeServiceObj = SERVICES_DATA.find(s => s.id === selectedService) || SERVICES_DATA[0];
   const activeSlotObj = TIME_OPTIONS.find(t => t.id === selectedSlotId) || TIME_OPTIONS[0];
@@ -172,6 +174,11 @@ export const BookingWizard: React.FC = () => {
       return;
     }
 
+    if (!normalizeVehiclePlate(licensePlate)) {
+      showToast(locale === 'am' ? 'እባክዎ የመኪናዎን ሰሌዳ ቁጥር ያስገቡ' : 'Please enter your vehicle plate number', 'error');
+      return;
+    }
+
     setIsSubmitting(true);
 
     const calculatedDayStr = 
@@ -182,14 +189,14 @@ export const BookingWizard: React.FC = () => {
         : (customDate || 'Upcoming');
 
     try {
-      const generatedRef = await createAppointment({
+      await createAppointment({
         customerType: 'individual',
         customerName: fullName.trim(),
         customerPhone: phoneNumber.trim(),
         customerEmail: 'abiyme@gmail.com',
         vehicleMake: vehicleMakeModel.trim() || 'Unspecified',
         vehicleModel: vehicleMakeModel.trim() || 'Vehicle',
-        vehiclePlate: licensePlate.trim().toUpperCase() || 'AA-ET',
+        vehiclePlate: licensePlate.trim().toUpperCase(),
         vehicleYear: 2020,
         problemDescription: problemDetail.trim() || (locale === 'am' ? 'ምርመራ' : 'Inspection'),
         problemTags: [activeServiceObj.nameEn],
@@ -204,14 +211,13 @@ export const BookingWizard: React.FC = () => {
         }
       });
 
-      setCreatedRef(generatedRef || 'ABG-2026-0042');
       setIsSubmitting(false);
       setIsDone(true);
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    } catch (err) {
+    } catch (error) {
       setIsSubmitting(false);
-      setCreatedRef('ABG-2026-0042');
-      setIsDone(true);
+      console.error('Appointment submission failed', error);
+      showToast(locale === 'am' ? 'ቀጠሮውን ማስገባት አልተሳካም። እባክዎ እንደገና ይሞክሩ።' : 'Could not submit your request. Please try again.', 'error');
     }
   };
 
@@ -237,11 +243,16 @@ export const BookingWizard: React.FC = () => {
             </p>
           </div>
 
-          <div className="p-3 bg-mist rounded-card border border-line flex items-center justify-between text-xs">
-            <span className="text-muted font-bold">
-              {locale === 'am' ? 'የቀጠሮ መለያ ቁጥር፦' : 'Reference Number:'}
-            </span>
-            <span className="font-mono font-black text-navy text-sm">{createdRef}</span>
+          <div className="p-4 bg-blue-50 rounded-card border border-blue-100 flex items-center gap-3 text-left">
+            <div className="w-10 h-10 rounded-xl bg-white text-blue-800 flex items-center justify-center shadow-sm shrink-0">
+              <Car className="w-5 h-5" />
+            </div>
+            <div className="min-w-0">
+              <span className="text-[11px] text-blue-700 font-bold block">
+                {locale === 'am' ? 'የጥገና ሁኔታዎን በሰሌዳ ቁጥር ይመልከቱ' : 'Use your plate to check repair status'}
+              </span>
+              <span className="font-mono font-black text-blue-950 text-lg tracking-wider">{licensePlate.trim().toUpperCase()}</span>
+            </div>
           </div>
 
           <div className="p-4 bg-orange-tint/40 rounded-card border border-orange-200/80 text-left text-xs space-y-2">
@@ -259,15 +270,16 @@ export const BookingWizard: React.FC = () => {
           </div>
 
           <div className="space-y-2 pt-2">
-            <a
-              href="https://t.me/AbegazMotors"
-              target="_blank"
-              rel="noreferrer"
-              className="w-full h-11 rounded-btn bg-[#229ED9] hover:bg-[#1e8bc0] text-white font-bold text-xs flex items-center justify-center gap-2 shadow-2xs transition-all"
+            <button
+              onClick={() => {
+                setPlateToTrack(licensePlate.trim().toUpperCase());
+                setCurrentView('track');
+              }}
+              className="w-full h-12 rounded-btn bg-blue-900 hover:bg-blue-950 text-white font-bold text-sm flex items-center justify-center gap-2 shadow-sm transition-all"
             >
-              <Send className="w-4 h-4" />
-              <span>{locale === 'am' ? 'በቴሌግራም ይከታተሉ' : 'Track on Telegram (@AbegazMotors)'}</span>
-            </a>
+              <Search className="w-4 h-4" />
+              <span>{locale === 'am' ? 'ሁኔታውን በሰሌዳ ቁጥር ይመልከቱ' : 'Track status by plate number'}</span>
+            </button>
 
             <button
               onClick={() => setCurrentView('home')}
@@ -573,18 +585,30 @@ export const BookingWizard: React.FC = () => {
                   />
                 </div>
 
-                {/* License Plate (Optional) */}
-                <div className="sm:col-span-2">
-                  <label className="font-bold text-navy block mb-1">
-                    {locale === 'am' ? 'የሰሌዳ ቁጥር (አማራጭ)' : 'License Plate (Optional)'}
+                {/* Required license plate is the customer's status lookup key. */}
+                <div className="sm:col-span-2 rounded-2xl border border-blue-100 bg-gradient-to-br from-blue-50/80 to-white p-4">
+                  <label htmlFor="booking-license-plate" className="flex items-center gap-2 font-bold text-navy mb-1.5">
+                    <Car className="w-4 h-4 text-blue-700" />
+                    <span>{locale === 'am' ? 'የሰሌዳ ቁጥር *' : 'License Plate Number *'}</span>
+                    <span className="ml-auto rounded-full bg-red-50 px-2 py-0.5 text-[10px] font-bold text-red-700">
+                      {locale === 'am' ? 'አስፈላጊ' : 'Required'}
+                    </span>
                   </label>
                   <input
+                    id="booking-license-plate"
                     type="text"
+                    required
+                    maxLength={20}
+                    autoComplete="off"
                     value={licensePlate}
                     onChange={(e) => setLicensePlate(e.target.value.toUpperCase())}
-                    placeholder="AA-12345"
-                    className="w-full h-11 px-3.5 bg-mist border border-line rounded-input font-mono font-bold uppercase text-navy focus:border-orange-signal outline-hidden"
+                    placeholder="e.g. AA-12345"
+                    className="w-full h-12 px-3.5 bg-white border border-blue-200 rounded-input font-mono font-bold uppercase tracking-wider text-blue-950 placeholder:normal-case placeholder:tracking-normal focus:border-blue-600 focus:ring-2 focus:ring-blue-100 outline-hidden transition-shadow"
                   />
+                  <p className="mt-2 flex items-start gap-1.5 text-[11px] leading-relaxed text-slate-600">
+                    <Info className="w-3.5 h-3.5 mt-0.5 text-blue-600 shrink-0" />
+                    <span>{locale === 'am' ? 'ይህን የሰሌዳ ቁጥር የቀጠሮዎን ሁኔታ ለማየት ይጠቀሙ።' : 'You can use this plate number to look up your appointment status.'}</span>
+                  </p>
                 </div>
               </div>
 
