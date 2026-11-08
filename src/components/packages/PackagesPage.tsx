@@ -3,7 +3,7 @@ import { useApp } from '../../context/AppContext';
 import { 
   CheckCircle2, 
   Clock, 
-  ChevronDown, 
+  ArrowRight,
   ChevronUp, 
   Layers
 } from 'lucide-react';
@@ -11,6 +11,8 @@ import {
 interface PackageItem {
   id: string;
   code: string;
+  codeBadge: string;
+  codeBadgeAm: string;
   nameEn: string;
   nameAm: string;
   interval: string;
@@ -20,6 +22,8 @@ interface PackageItem {
   image: string;
   descEn: string;
   descAm: string;
+  featurePillsEn: string[];
+  featurePillsAm: string[];
   highlightPointsEn: string[];
   highlightPointsAm: string[];
   fullChecklistEn: string[];
@@ -34,6 +38,8 @@ export const PackagesPage: React.FC = () => {
     {
       id: 'pkg-a',
       code: 'A-Service',
+      codeBadge: 'PACKAGE A',
+      codeBadgeAm: 'ፓኬጅ A',
       nameEn: 'A-Service: Preventive Care Package',
       nameAm: 'A-ሰርቪስ: መሰረታዊ የቅድመ-መከላከል ጥገና',
       interval: 'Every 5,000 KM',
@@ -43,6 +49,8 @@ export const PackagesPage: React.FC = () => {
       image: '/packages/package-a.jpg',
       descEn: 'Essential routine maintenance to maintain engine vitality, brake responsiveness, and safe driving reliability for Toyota Hilux & Land Cruiser.',
       descAm: 'የሞተር ጤንነትን፣ የፍሬን ቅልጥፍናንና አስተማማኝ ጉዞን ለማረጋገጥ የሚደረግ መሰረታዊ የቅድመ-መከላከል ጥገና።',
+      featurePillsEn: ['OIL & FILTER', 'BRAKE CHECK', 'STEERING GREASE', '5,000 KM'],
+      featurePillsAm: ['ዘይትና ፊልተር', 'የፍሬን ፍተሻ', 'የስቲሪንግ ግሪስ', '5,000 ኪ.ሜ'],
       highlightPointsEn: [
         'Brake pad & disc inspection & cleaning',
         'Engine oil & genuine filter replacement',
@@ -87,6 +95,8 @@ export const PackagesPage: React.FC = () => {
     {
       id: 'pkg-b',
       code: 'B-Service',
+      codeBadge: 'PACKAGE B',
+      codeBadgeAm: 'ፓኬጅ B',
       nameEn: 'B-Service: Intermediate Protection Package',
       nameAm: 'B-ሰርቪስ: መካከለኛ የጥገና ፓኬጅ',
       interval: 'Every 10,000 - 15,000 KM',
@@ -96,6 +106,8 @@ export const PackagesPage: React.FC = () => {
       image: '/packages/package-b.jpg',
       descEn: 'Comprehensive multi-point service extending beyond basic fluid changes into drivetrain, hydraulic fluids, and suspension integrity.',
       descAm: 'ከመሰረታዊ ቅየራ ባለፈ የድራይቭ ሻፍት፣ የሃይድሮሊክ ፈሳሾችና የሻሲ ጥንካሬን የሚያረጋግጥ የተሟላ የፍተሻ ፓኬጅ።',
+      featurePillsEn: ['ALL A-SERVICE', 'DRIVE SHAFT', 'HYDRAULIC FLUIDS', '10,000 KM'],
+      featurePillsAm: ['የA ሙሉ ሰርቪስ', 'ድራይቭ ሻፍት', 'የሃይድሮሊክ ፈሳሾች', '10,000 ኪ.ሜ'],
       highlightPointsEn: [
         'Complete A-Service checklist included',
         'Brake disc run-out, drum & pad inspection',
@@ -148,6 +160,8 @@ export const PackagesPage: React.FC = () => {
     {
       id: 'pkg-c',
       code: 'C-Service',
+      codeBadge: 'PACKAGE C',
+      codeBadgeAm: 'ፓኬጅ C',
       nameEn: 'C-Service: Advanced Heavy Duty Package',
       nameAm: 'C-ሰርቪስ: የላቀ የጥገና ፓኬጅ',
       interval: 'Every 25,000 - 30,000 KM',
@@ -157,6 +171,8 @@ export const PackagesPage: React.FC = () => {
       image: '/packages/package-c.jpg',
       descEn: 'Heavy-duty maintenance for high-mileage, commercial, or off-road vehicles requiring powertrain and drivetrain service.',
       descAm: 'በረጅም ርቀት፣ አስቸጋሪ መንገዶች ወይም ለድርጅት ተሽከርካሪዎች የተዘጋጀ የድራይቭ ቤልት፣ ቤሪንግና ዲፈረንሺያል ጥገና።',
+      featurePillsEn: ['ALL B-SERVICE', 'DRIVE BELTS', 'WHEEL BEARINGS', '25,000 KM'],
+      featurePillsAm: ['የB ሙሉ ሰርቪስ', 'ድራይቭ ቤልት', 'የዊል ቤሪንግ', '25,000 ኪ.ሜ'],
       highlightPointsEn: [
         'Complete B-Service checklist included',
         'Drive belt tensioning & condition analysis',
@@ -197,6 +213,8 @@ export const PackagesPage: React.FC = () => {
     {
       id: 'pkg-d',
       code: 'D-Service',
+      codeBadge: 'PACKAGE D',
+      codeBadgeAm: 'ፓኬጅ D',
       nameEn: 'D-Service: Major Overhaul & Recommission',
       nameAm: 'D-ሰርቪስ: ሙሉ ሜጀር ሰርቪስ',
       interval: 'Every 40,000 - 50,000 KM',
@@ -206,6 +224,8 @@ export const PackagesPage: React.FC = () => {
       image: '/packages/package-d.jpg',
       descEn: 'The ultimate bumper-to-bumper engineering inspection including valve clearance, manual transmission & transfer case oil, and AC refrigerant.',
       descAm: 'የቫልቭ ክሊራንስ፣ የማኑዋል ማስተላለፊያና ትራንስፈር ዘይት፣ ኤሲ ጋዝና የኮምፒውተር ዲያግኖስቲክስ የሚያካትት ከፍተኛው ሜጀር ሰርቪስ።',
+      featurePillsEn: ['MAJOR OVERHAUL', 'VALVE CLEARANCE', 'GEARBOX OIL', '50,000 KM'],
+      featurePillsAm: ['ሜጀር ሰርቪስ', 'ቫልቭ ክሊራንስ', 'የማርሽ ዘይት', '50,000 ኪ.ሜ'],
       highlightPointsEn: [
         'Complete C-Service checklist included',
         'Valve clearance measurement & adjustment',
@@ -253,12 +273,12 @@ export const PackagesPage: React.FC = () => {
             {locale === 'am' ? (
               <>
                 <span className="text-blue-950">የተሟሉ የሰርቪስ</span>{' '}
-                <span className="text-red-600">ጥቅሎች (A - D)</span>
+                <span className="text-red-600 font-serif">ጥቅሎች (A - D)</span>
               </>
             ) : (
               <>
                 <span className="text-blue-950">Complete Service</span>{' '}
-                <span className="text-red-600">Packages (A - D)</span>
+                <span className="text-red-600 font-serif">Packages (A - D)</span>
               </>
             )}
           </h1>
@@ -281,41 +301,61 @@ export const PackagesPage: React.FC = () => {
                 className="flex flex-col justify-between"
               >
                 <div>
-                  {/* Clean Package Rectangular Image */}
-                  <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl mb-6 shadow-sm border border-slate-100">
+                  {/* Clean Package Rectangular Image with Top-Left Badge & Geometric Corner Fold */}
+                  <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-slate-200 shadow-md bg-slate-100 group mb-6">
+                    {/* Rectangular Dark Navy Badge in Top-Left (Exact replica of Image 1 "STANDARD") */}
+                    <div className="absolute top-5 left-5 z-10 bg-[#1e3a8a] text-white px-3.5 py-1.5 font-mono text-xs font-black tracking-widest uppercase shadow-md rounded-xs">
+                      {locale === 'am' ? pkg.codeBadgeAm : pkg.codeBadge}
+                    </div>
+
+                    {/* Geometric Triangle Fold in Top-Right Corner */}
+                    <div className="absolute top-0 right-0 z-10 w-8 h-8 pointer-events-none">
+                      <div className="w-0 h-0 border-t-[32px] border-t-[#1e3a8a] border-l-[32px] border-l-transparent" />
+                    </div>
+
                     <img
                       src={pkg.image}
                       alt={locale === 'am' ? pkg.nameAm : pkg.nameEn}
-                      className="w-full h-full object-cover object-center"
+                      className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
                     />
                   </div>
 
-                  {/* Red Bold Headline (matching sample "Toyota Trained Experts") */}
-                  <h2 className="text-2xl sm:text-3xl font-black text-red-600 tracking-tight leading-tight mb-2">
+                  {/* Serif Bold Headline (Exact Font Style like Image 2 "Single Standard") */}
+                  <h2 className="text-2xl sm:text-3xl font-serif font-black text-[#0f2c59] tracking-tight leading-tight mb-2">
                     {locale === 'am' ? pkg.nameAm : pkg.nameEn}
                   </h2>
 
                   {/* Interval & Duration line */}
-                  <div className="flex items-center gap-4 text-xs sm:text-sm font-bold text-slate-700 mb-4">
-                    <span className="text-red-600 font-black">
+                  <div className="flex items-center gap-3 text-xs sm:text-sm font-bold text-slate-700 mb-3">
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-black bg-red-50 text-red-700 border border-red-200/60">
                       {locale === 'am' ? pkg.intervalAm : pkg.interval}
                     </span>
-                    <span>•</span>
-                    <span className="flex items-center gap-1.5 text-slate-600">
-                      <Clock className="w-4 h-4 text-slate-500" />
+                    <span className="text-slate-300">•</span>
+                    <span className="flex items-center gap-1.5 text-slate-500 font-medium">
+                      <Clock className="w-3.5 h-3.5 text-slate-400" />
                       <span>{locale === 'am' ? pkg.durationAm : pkg.duration}</span>
                     </span>
                   </div>
 
+                  {/* Feature Pills Line with Dark Squares (Image 2 style: ▪ ITEM ▪ ITEM ▪ ITEM) */}
+                  <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs font-black uppercase tracking-wider text-slate-750 mb-4">
+                    {(locale === 'am' ? pkg.featurePillsAm : pkg.featurePillsEn).map((pill, idx) => (
+                      <span key={idx} className="inline-flex items-center gap-1.5">
+                        <span className="w-1.5 h-1.5 bg-[#0f2c59] rounded-xs inline-block" />
+                        <span className="text-[#0f2c59]">{pill}</span>
+                      </span>
+                    ))}
+                  </div>
+
                   {/* Editorial Description */}
-                  <p className="text-base text-slate-600 font-normal leading-relaxed mb-6">
+                  <p className="text-sm sm:text-base text-slate-600 font-normal leading-relaxed mb-5">
                     {locale === 'am' ? pkg.descAm : pkg.descEn}
                   </p>
 
                   {/* Key Highlights Checklist */}
                   <div className="space-y-2 mb-6">
                     {(locale === 'am' ? pkg.highlightPointsAm : pkg.highlightPointsEn).map((point, idx) => (
-                      <div key={idx} className="flex items-start gap-2.5 text-sm text-slate-700">
+                      <div key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700">
                         <CheckCircle2 className="w-4 h-4 text-red-600 shrink-0 mt-0.5" />
                         <span className="font-medium leading-relaxed">{point}</span>
                       </div>
@@ -324,8 +364,8 @@ export const PackagesPage: React.FC = () => {
 
                   {/* Expandable Full Checklist from Workshop Sheets */}
                   {isExpanded && (
-                    <div className="mb-6 p-5 bg-slate-50 rounded-2xl border border-slate-100 animate-fadeIn">
-                      <p className="text-xs font-black uppercase tracking-wider text-slate-900 mb-3 flex items-center gap-2">
+                    <div className="mb-6 p-5 bg-slate-50 rounded-xl border border-slate-200/80 animate-fadeIn">
+                      <p className="text-xs font-black uppercase tracking-wider text-[#0f2c59] mb-3 flex items-center gap-2">
                         <Layers className="w-4 h-4 text-red-600" />
                         <span>
                           {locale === 'am' 
@@ -336,7 +376,7 @@ export const PackagesPage: React.FC = () => {
                       <div className="space-y-1.5">
                         {(locale === 'am' ? pkg.fullChecklistAm : pkg.fullChecklistEn).map((item, idx) => (
                           <div key={idx} className="flex items-start gap-2 text-xs sm:text-sm text-slate-800">
-                            <span className="w-4 h-4 rounded-full bg-red-100 text-red-700 text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">
+                            <span className="w-4 h-4 rounded-full bg-blue-100 text-blue-900 text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">
                               {idx + 1}
                             </span>
                             <span className="leading-snug">{item}</span>
@@ -346,18 +386,24 @@ export const PackagesPage: React.FC = () => {
                     </div>
                   )}
 
-                  {/* Toggle Checklist Link */}
-                  <button
-                    onClick={() => setExpandedPackageId(isExpanded ? null : pkg.id)}
-                    className="text-xs sm:text-sm font-extrabold text-red-600 hover:text-red-700 inline-flex items-center gap-1.5 transition-colors mb-6"
-                  >
-                    <span>
-                      {isExpanded 
-                        ? (locale === 'am' ? 'ዝርዝር ቼክሊስትን ሰብስብ' : 'Collapse Checklist') 
-                        : (locale === 'am' ? `ሁሉንም ዝርዝር ፍተሻዎች ይመልከቱ (${pkg.fullChecklistAm.length} ነጥቦች)` : `View Full Checklist (${pkg.fullChecklistEn.length} items)`)}
-                    </span>
-                    {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-                  </button>
+                  {/* Bottom Action: "VIEW DETAILS →" (Exact Replica of Sample 2) */}
+                  <div className="pt-2">
+                    <button
+                      onClick={() => setExpandedPackageId(isExpanded ? null : pkg.id)}
+                      className="text-xs sm:text-sm font-black uppercase tracking-widest text-[#0f2c59] hover:text-red-600 inline-flex items-center gap-2 transition-colors group"
+                    >
+                      <span>
+                        {isExpanded 
+                          ? (locale === 'am' ? 'ዝርዝር ሰብስብ' : 'HIDE DETAILS') 
+                          : (locale === 'am' ? `ዝርዝር ፍተሻ ይመልከቱ (${pkg.fullChecklistAm.length})` : `VIEW DETAILS (${pkg.fullChecklistEn.length})`)}
+                      </span>
+                      {isExpanded ? (
+                        <ChevronUp className="w-4 h-4 text-red-600" />
+                      ) : (
+                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                      )}
+                    </button>
+                  </div>
                 </div>
               </div>
             );

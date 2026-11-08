@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 import { 
-  CheckCircle2, 
+  ArrowRight,
   ChevronDown, 
   ChevronUp, 
   Layers
@@ -10,13 +10,15 @@ import {
 interface ServiceCategory {
   id: string;
   imagePosition: 'right' | 'left';
+  codeBadge: string;
+  codeBadgeAm: string;
   nameEn: string;
   nameAm: string;
   descriptionEn: string;
   descriptionAm: string;
   image: string;
-  keyHighlightsEn: string[];
-  keyHighlightsAm: string[];
+  featurePillsEn: string[];
+  featurePillsAm: string[];
   itemizedRepairsEn: string[];
   itemizedRepairsAm: string[];
 }
@@ -28,26 +30,16 @@ export const ServicesPage: React.FC = () => {
   const servicesData: ServiceCategory[] = [
     {
       id: 'engine',
-      imagePosition: 'right', // 1st: Image in Right (as requested)
-      nameEn: 'Engine & Mechanical System Repairs',
+      imagePosition: 'right', // 1st: Image in Right
+      codeBadge: 'ENGINE REPAIR',
+      codeBadgeAm: 'የሞተር ጥገና',
+      nameEn: 'Engine & Mechanical Overhaul',
       nameAm: 'የሞተርና የሜካኒካል ሲስተም ሙሉ ጥገና',
-      descriptionEn: 'Accuracy and quality service bases not only on technicians expertise but also availability and usage of up to date diagnostic tools and modern equipment for complete engine overhauling.',
-      descriptionAm: 'የአበጋዝ ሞተርስ ኢንጂነሪንግ አገልግሎት በባለሙያዎች ጥልቅ ልምድ ላይ ብቻ ሳይሆን በዘመናዊ የዲያግኖስቲክስ መሳሪያዎችና የሞተር መፈተሻ ቴክኖሎጂዎች ላይ የተመሰረተ ነው።',
+      descriptionEn: 'Essential precision engineering with all modern diagnostic equipment for complete engine block and cylinder head rebuilds.',
+      descriptionAm: 'የአበጋዝ ሞተርስ ኢንጂነሪንግ አገልግሎት በባለሙያዎች ጥልቅ ልምድና በዘመናዊ የዲያግኖስቲክስ መሳሪያዎች የተደገፈ የሞተር ሙሉ እድሳት ነው።',
       image: '/services/engine-repairs.jpg',
-      keyHighlightsEn: [
-        'Complete engine block & cylinder head overhaul',
-        'Fuel injection pump, nozzles & carburetor rebuild',
-        'Timing belt, V-belts & AC belt precision tensioning',
-        'Valve clearance measurement & camshaft balancing',
-        'Turbocharger overhaul, gaskets & engine remounting'
-      ],
-      keyHighlightsAm: [
-        'የሞተር ብሎክና ሲሊንደር ሄድ ሙሉ እድሳት (Overhauling)',
-        'የነዳጅ ኢንጄክሽን ፓምፕ፣ ኖዝሎችና ካርቡሬተር ሰርቪስ',
-        'የታይሚንግ ቤልት፣ ቪ-ቤልትና ኤሲ ቤልት ማስተካከል',
-        'የቫልቭ ክሊራንስ መለካትና የካምሻፍት ሚዛን ማስተካከል',
-        'ተርቦ ቻርጀር፣ ጋስኬቶችና የሞተር ሳፖርት ቅየራ'
-      ],
+      featurePillsEn: ['OVERHAUL', 'INJECTION PUMP', 'TIMING BELT', 'TURBOCHARGER', '+20 More'],
+      featurePillsAm: ['ሙሉ እድሳት', 'ኢንጄክሽን ፓምፕ', 'ታይሚንግ ቤልት', 'ተርቦቻርጀር', '+20 ተጨማሪ'],
       itemizedRepairsEn: [
         'Engine overhauling (Complete Block & Head)',
         'Engine top overhauling & decarbonization',
@@ -95,26 +87,16 @@ export const ServicesPage: React.FC = () => {
     },
     {
       id: 'transmission',
-      imagePosition: 'left', // 2nd: Image in Left (as requested)
-      nameEn: 'Transmission & Gearbox Engineering',
+      imagePosition: 'left', // 2nd: Image in Left
+      codeBadge: 'TRANSMISSION',
+      codeBadgeAm: 'ትራንስሚሽን',
+      nameEn: 'Gearbox & Drivetrain Engineering',
       nameAm: 'የማርሽ ቦክስና ትራንስሚሽን ምህንድስና',
-      descriptionEn: 'Factory-standard transmission procedures. Disassembly, gear teeth wear analysis, synchronous mesh replacement, and hydraulic clutch master/release rehabilitation.',
+      descriptionEn: 'Factory transmission standards with modern necessities for smooth gear shifting, clutch hydraulics, and 4WD transfer integrity.',
       descriptionAm: 'የማርሽ ቦክስ ሙሉ መፍታት፣ የማርሽ ጥርሶች ፍተሻ፣ የሲንክሮናይዘር ቅየራ እና የሃይድሮሊክ ክላች ሲሊንደሮች ጥገና በከፍተኛ ጥንቃቄ ይከናወናል።',
       image: '/services/transmission-gearbox.jpg',
-      keyHighlightsEn: [
-        'Complete gearbox overhaul & synchro mesh renewal',
-        'Transfer case 4x4 engagement & flange seal replacement',
-        'Clutch master & slave release cylinder overhaul',
-        'Clutch pressure plate & friction disc replacement',
-        'Propeller shaft balance, U-joints & center bearing'
-      ],
-      keyHighlightsAm: [
-        'የማርሽ ቦክስ ሙሉ ጥገናና ሲንክሮናይዘር ቅየራ',
-        'የ 4x4 ትራንስፈር ጊርቦክስና የፍላንጅ ኦይል ሲል',
-        'የክላች ማስተርና ሪሊዝ ሲሊንደር ጥገና',
-        'የክላች ዲስክ፣ ፕሬሸር ፕሌትና ቤሪንግ ቅየራ',
-        'የፕሮፔለር ሻፍት ሚዛን፣ ዩኒቨርሳል ጆይንት (Yoke)'
-      ],
+      featurePillsEn: ['GEARBOX OVERHAUL', 'TRANSFER 4X4', 'CLUTCH MASTER', 'U-JOINTS', '+12 More'],
+      featurePillsAm: ['ጊርቦክስ ጥገና', 'ትራንስፈር 4x4', 'ክላች ማስተር', 'ዩኒቨርሳል ጆይንት', '+12 ተጨማሪ'],
       itemizedRepairsEn: [
         'Gearbox comprehensive overhaul & rebuild',
         'Transfer gear box service (4WD High/Low)',
@@ -152,26 +134,16 @@ export const ServicesPage: React.FC = () => {
     },
     {
       id: 'brakes',
-      imagePosition: 'right', // 3rd: Image in Right (as requested)
-      nameEn: 'Hydraulic Brake System Overhaul',
+      imagePosition: 'right', // 3rd: Image in Right
+      codeBadge: 'BRAKE SYSTEM',
+      codeBadgeAm: 'የፍሬን ሲስተም',
+      nameEn: 'Hydraulic Brake System Precision',
       nameAm: 'የሃይድሮሊክ ፍሬን ሲስተም ሙሉ ጥገና',
-      descriptionEn: 'High-precision brake disc machining, master cylinder pressure profiling, ABS hydraulic bleeding, and vacuum booster load testing for optimal road safety.',
+      descriptionEn: 'High-precision brake disc machining, master cylinder profiling, and ABS hydraulic bleeding for dependable stopping power.',
       descriptionAm: 'የፍሬን ዲስኮች ልኬትና ማስተካከል፣ የማስተር ሲሊንደር ግፊት ፍተሻ፣ የኤቢኤስ መስመሮችና የቫኪዩም ቡስተር ጥገና ለተሟላ የጉዞ ደህንነት።',
       image: '/services/brake-repairs.jpg',
-      keyHighlightsEn: [
-        'Brake master cylinder & vacuum booster overhaul',
-        'Disc run-out machining & drum lining renewal',
-        'Front & rear brake calipers hydraulic rebuild',
-        'Emergency handbrake cable primer & secondary adjustment',
-        'Load sensing proportioning valve & brake pipe replacement'
-      ],
-      keyHighlightsAm: [
-        'የፍሬን ማስተር ሲሊንደርና ቫኪዩም ቡስተር ጥገና',
-        'የፍሬን ዲስክ ሩን-አውት ማስተካከልና ድራም ፍተሻ',
-        'የፊትና የኋላ ካሊፐሮች ሃይድሮሊክ እድሳት',
-        'የእጅ ፍሬን ገመድ ማስተካከል (Parking Brake Cable)',
-        'የሎድ ሴንሲንግ ቫልቭና የብሬክ ቧንቧዎች ቅየራ'
-      ],
+      featurePillsEn: ['MASTER CYLINDER', 'DISCS & DRUMS', 'BRAKE CALIPERS', 'VACUUM PUMP', '+15 More'],
+      featurePillsAm: ['ማስተር ሲሊንደር', 'ዲስክና ድራም', 'ብሬክ ካሊፐር', 'ቫኪዩም ፓምፕ', '+15 ተጨማሪ'],
       itemizedRepairsEn: [
         'Brake booster vacuum diaphragm & valve service',
         'Brake master cylinder piston & seals renewal',
@@ -217,26 +189,16 @@ export const ServicesPage: React.FC = () => {
     },
     {
       id: 'suspension',
-      imagePosition: 'left', // 4th: Image in Left (as requested)
-      nameEn: 'Suspension, Steering & Chassis Alignment',
+      imagePosition: 'left', // 4th: Image in Left
+      codeBadge: 'SUSPENSION',
+      codeBadgeAm: 'ሰስፔንሽን',
+      nameEn: 'Suspension & Chassis Alignment',
       nameAm: 'የሰስፔንሽን፣ ስቲሪንግና ሻሲ ጥገና',
-      descriptionEn: 'Heavy-duty suspension rebuilds for Toyota Hilux, Land Cruiser and Prado. Leaf spring bundle rebuilding, coil spring replacement, and steering linkage play elimination.',
+      descriptionEn: 'Heavy-duty suspension rebuilds for Toyota Hilux and Land Cruiser. Leaf spring bundle rebuilding and 3D computerized alignment.',
       descriptionAm: 'ለToyota Hilux፣ Land Cruiser እና Prado የተዘጋጀ የባለ ሸበካ (Leaf Spring) እድሳት፣ የሾክ አምፖርሳዶር ቅየራ፣ የስቲሪንግ ቡሾችና የሻሲ ማስተካከል ስራ።',
       image: '/services/suspension-steering.jpg',
-      keyHighlightsEn: [
-        'Coil springs & gas-charged shock absorbers replacement',
-        'Leaf spring bundles rebuilding, re-arching & new U-bolts',
-        'Stabilizer bar front & rear polyurethane/rubber bushings',
-        'Lead arm bushings, torsion bars & suspension cushions',
-        'Computerized 3D steering alignment & camber/toe tuning'
-      ],
-      keyHighlightsAm: [
-        'የኮይል ስፕሪንግና ጋዝ ሾክ አምፖርሳዶሮች ቅየራ',
-        'የባለ ሸበካ ስፕሪንግ (Leaf Spring) ማደስና U-Bolt',
-        'የፊትና የኋላ ስታቢላይዘር ቡሾች ቅየራ',
-        'የሊድ አርም ቡሾች፣ ቶርሽን ባርና የሰስፔንሽን ኩሽኖች',
-        'የኮምፒውተር ስቲሪንግ አላይንመንት (Alignment & Toe)'
-      ],
+      featurePillsEn: ['COIL SPRINGS', 'LEAF SPRINGS', 'SHOCK ABSORBERS', 'U-BOLTS', '+10 More'],
+      featurePillsAm: ['ኮይል ስፕሪንግ', 'ሊፍ ስፕሪንግ', 'ሾክ አምፖርሳዶር', 'ዩ-ቦልት', '+10 ተጨማሪ'],
       itemizedRepairsEn: [
         'Coil spring front replacement (left/right)',
         'Coil spring rear heavy duty replacement',
@@ -274,26 +236,16 @@ export const ServicesPage: React.FC = () => {
     },
     {
       id: 'electrical',
-      imagePosition: 'right', // 5th: Image in Right (as requested)
-      nameEn: 'Toyota Trained Electrical & Diagnostic Experts',
+      imagePosition: 'right', // 5th: Image in Right
+      codeBadge: 'ELECTRICAL',
+      codeBadgeAm: 'ኤሌክትሪክ',
+      nameEn: 'Toyota Electrical & Diagnostics',
       nameAm: 'በToyota የሰለጠኑ የኤሌክትሪክና ዲያግኖስቲክስ ባለሙያዎች',
-      descriptionEn: 'MOENCO-standard training and Toyota programs enable us to diagnose electronic modules, charging systems, high-torque starter motors, and vehicle multiplex wiring.',
+      descriptionEn: 'Certified specialists utilizing advanced scan tools for charging systems, high-torque starter motors, and multiplex body electronics.',
       descriptionAm: 'በToyota የሰለጠኑ ባለሙያዎች በዘመናዊ የዲያግኖስቲክስ ኮምፒውተሮች በመታገዝ የቻርጅ ሲስተም፣ ስታርተር ሞተር፣ ሴንሰሮችና ኤሌክትሮኒክስን ይመረምራሉ።',
       image: '/services/electrical-diagnostics.jpg',
-      keyHighlightsEn: [
-        'Heavy-duty starter motor & solenoid overhaul',
-        'High-output alternator diode pack & regulator service',
-        'OBD-II live telemetry scan & ECU trouble code clearing',
-        'Diesel glow plug heating circuit & relay diagnostics',
-        'Complete vehicle lighting, wiper motor & ignition barrel'
-      ],
-      keyHighlightsAm: [
-        'የስታርተር ሞተርና ሶሌኖይድ ሙሉ ጥገና',
-        'የአልተርኔተር ዳዮድ፣ ሬጉሌተርና ቻርጅ ፍተሻ',
-        'የኮምፒውተር OBD-II ዲያግኖስቲክስ ስካንና ዳሳሾች',
-        'የዲሴል ግሎው ፕላግ (ካንዴላ) መስመር ፍተሻ',
-        'የመብራቶች፣ ዋይፐር ሞተርና ኢግኒሽን ሲሊንደር ጥገና'
-      ],
+      featurePillsEn: ['STARTER MOTOR', 'ALTERNATOR', 'OBD-II SCAN', 'GLOW PLUGS', '+11 More'],
+      featurePillsAm: ['ስታርተር ሞተር', 'አልተርኔተር', 'ኮምፒውተር ስካን', 'ግሎው ፕላግ', '+11 ተጨማሪ'],
       itemizedRepairsEn: [
         'Starter motor armature, brushes & solenoid rebuild',
         'Alternator rotor, stator & voltage regulator overhaul',
@@ -331,26 +283,16 @@ export const ServicesPage: React.FC = () => {
     },
     {
       id: 'body_maintenance',
-      imagePosition: 'left', // 6th: Image in Left (as requested)
+      imagePosition: 'left', // 6th: Image in Left
+      codeBadge: 'BODY & CARE',
+      codeBadgeAm: 'ቦዲና ሰርቪስ',
       nameEn: 'Body Hardware, Accessories & General Care',
       nameAm: 'የቦዲ እቃዎች፣ መለዋወጫዎችና አጠቃላይ እንክብካቤ',
-      descriptionEn: 'Comprehensive exterior hardware servicing including power window regulators, door locks, hood cable dampers, structural exhaust welding, and high-pressure steam wash.',
+      descriptionEn: 'Essential exterior hardware servicing including power window regulators, door locks, hood dampers, exhaust welding, and steam wash.',
       descriptionAm: 'የመስታወት ማንሻ ሞተሮች፣ የበር እጀታዎችና ቁልፎች፣ የካፖርት ድጋፎች፣ የጭስ ማውጫ ብየዳና የከፍተኛ ግፊት እጥበት አገልግሎት።',
       image: '/services/body-maintenance.jpg',
-      keyHighlightsEn: [
-        'Electric power window regulator & motor overhaul',
-        'Door lock actuators, internal & external handles',
-        'Rear tailgate glass, gas struts & rubber seals',
-        'Front radiator grill, mudguards & side step running boards',
-        'Exhaust pipe welding, structural silencer & chassis steam wash'
-      ],
-      keyHighlightsAm: [
-        'የኤሌክትሪክ መስታወት ማንሻ ሞተር ጥገና (Power Window)',
-        'የበር መቆለፊያዎች፣ የውስጥና የውጭ እጀታዎች',
-        'የኋላ በር መስታወትና የካፖርት ድጋፍ ጋዝ ስትረቶች',
-        'የፊት ራዲያተር ግሪል፣ የጭቃ መከላከያና የእግር መርገጫ',
-        'የጭስ ማውጫ ብየዳ፣ ሳለንሰርና ከፍተኛ የሻሲ እጥበት'
-      ],
+      featurePillsEn: ['POWER WINDOW', 'DOOR LOCKS', 'EXHAUST WELDING', 'PRESSURE WASH', '+12 More'],
+      featurePillsAm: ['መስታወት ማንሻ', 'የበር ሎክ', 'የጭስ ማውጫ ብየዳ', 'የሻሲ እጥበት', '+12 ተጨማሪ'],
       itemizedRepairsEn: [
         'Electric power window regulator mechanism & switches',
         'Door lock central locking actuator replacement',
@@ -399,13 +341,13 @@ export const ServicesPage: React.FC = () => {
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight mb-4 leading-tight">
             {locale === 'am' ? (
               <>
-                <span className="text-blue-950">የተሟሉ የሜካኒካል</span>{' '}
-                <span className="text-red-600">እና ኤሌክትሪክ ጥገናዎች</span>
+                <span className="text-blue-950 font-serif">የተሟሉ የሜካኒካል</span>{' '}
+                <span className="text-red-600 font-serif">እና ኤሌክትሪክ ጥገናዎች</span>
               </>
             ) : (
               <>
-                <span className="text-blue-950">Mechanical &</span>{' '}
-                <span className="text-red-600">Electrical Overhaul Services</span>
+                <span className="text-blue-950 font-serif">Mechanical &</span>{' '}
+                <span className="text-red-600 font-serif">Electrical Overhaul Services</span>
               </>
             )}
           </h1>
@@ -419,127 +361,109 @@ export const ServicesPage: React.FC = () => {
 
         {/* OPEN EDITORIAL SECTIONS — NO CARDS, PURE CLEAN WHITE BACKGROUND, EXACT ALTERNATING ORDER */}
         <div className="divide-y divide-slate-100 space-y-16 md:space-y-24">
-          {servicesData.map((service, index) => {
+          {servicesData.map((service) => {
             const isImageRight = service.imagePosition === 'right';
             const isExpanded = expandedCategoryId === service.id;
 
             return (
-              <React.Fragment key={service.id}>
-                <section className="pt-16 md:pt-24 first:pt-0">
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+              <section
+                key={service.id}
+                className="pt-16 md:pt-24 first:pt-0"
+              >
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
 
-                    {/* CONTENT COLUMN (7 Columns on Large Screens) */}
-                    <div className={`lg:col-span-7 flex flex-col justify-center ${
-                      isImageRight ? 'order-1' : 'order-2'
-                    }`}>
-                      
-                      {/* Red Bold Headline (matching sample "Toyota Trained Experts" / "Latest Equipment") */}
-                      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-red-600 tracking-tight leading-tight mb-4">
-                        {locale === 'am' ? service.nameAm : service.nameEn}
-                      </h2>
+                  {/* CONTENT COLUMN (7 Columns on Large Screens) - Styled like Sample 2 ("Single Standard") */}
+                  <div className={`lg:col-span-7 flex flex-col justify-center ${
+                    isImageRight ? 'order-1' : 'order-2'
+                  }`}>
+                    
+                    {/* Serif Bold Headline (Exact Font Style like Image 2 "Single Standard") */}
+                    <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-black text-[#0f2c59] tracking-tight leading-tight mb-4">
+                      {locale === 'am' ? service.nameAm : service.nameEn}
+                    </h2>
 
-                      {/* Editorial Description Paragraph */}
-                      <p className="text-lg sm:text-xl text-slate-600 font-normal leading-relaxed mb-6">
-                        {locale === 'am' ? service.descriptionAm : service.descriptionEn}
-                      </p>
+                    {/* Editorial Description Paragraph */}
+                    <p className="text-base sm:text-lg text-slate-700 font-normal leading-relaxed mb-6">
+                      {locale === 'am' ? service.descriptionAm : service.descriptionEn}
+                    </p>
 
-                      {/* Clean Feature Checklist */}
-                      <div className="space-y-2.5 mb-8">
-                        {(locale === 'am' ? service.keyHighlightsAm : service.keyHighlightsEn).map((point, idx) => (
-                          <div key={idx} className="flex items-start gap-3 text-sm sm:text-base text-slate-700">
-                            <CheckCircle2 className="w-5 h-5 text-red-600 shrink-0 mt-0.5" />
-                            <span className="font-medium leading-relaxed">{point}</span>
-                          </div>
-                        ))}
-                      </div>
+                    {/* Feature Pills Line with Dark Squares (Exact Replica of Sample 2: ▪ WI-FI ▪ SHOWER ...) */}
+                    <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-black uppercase tracking-wider text-slate-750 mb-8">
+                      {(locale === 'am' ? service.featurePillsAm : service.featurePillsEn).map((pill, idx) => (
+                        <span key={idx} className="inline-flex items-center gap-2">
+                          <span className="w-1.5 h-1.5 bg-[#0f2c59] rounded-xs inline-block" />
+                          <span className="text-[#0f2c59]">{pill}</span>
+                        </span>
+                      ))}
+                    </div>
 
-                      {/* Expandable Full Checklist from Workshop Sheets */}
-                      {isExpanded && (
-                        <div className="mb-8 p-6 bg-slate-50 rounded-2xl border border-slate-100 animate-fadeIn">
-                          <p className="text-xs font-black uppercase tracking-wider text-slate-900 mb-4 flex items-center gap-2">
-                            <Layers className="w-4 h-4 text-red-600" />
-                            <span>
-                              {locale === 'am'
-                                ? `የወረቀቱ ሙሉ ዝርዝር (${service.itemizedRepairsAm.length} ጥገናዎች)፦`
-                                : `Complete Itemized Service List (${service.itemizedRepairsEn.length} operations):`}
-                            </span>
-                          </p>
-                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                            {(locale === 'am' ? service.itemizedRepairsAm : service.itemizedRepairsEn).map((item, idx) => (
-                              <div key={idx} className="flex items-start gap-2 text-xs sm:text-sm text-slate-750">
-                                <span className="w-4 h-4 rounded-full bg-red-100 text-red-700 text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">
-                                  {idx + 1}
-                                </span>
-                                <span className="leading-snug">{item}</span>
-                              </div>
-                            ))}
-                          </div>
+                    {/* Expandable Full Checklist from Workshop Sheets */}
+                    {isExpanded && (
+                      <div className="mb-8 p-6 bg-slate-50 rounded-xl border border-slate-200/80 animate-fadeIn">
+                        <p className="text-xs font-black uppercase tracking-wider text-[#0f2c59] mb-4 flex items-center gap-2">
+                          <Layers className="w-4 h-4 text-red-600" />
+                          <span>
+                            {locale === 'am'
+                              ? `የወረቀቱ ሙሉ ዝርዝር (${service.itemizedRepairsAm.length} ጥገናዎች)፦`
+                              : `Complete Itemized Service List (${service.itemizedRepairsEn.length} operations):`}
+                          </span>
+                        </p>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                          {(locale === 'am' ? service.itemizedRepairsAm : service.itemizedRepairsEn).map((item, idx) => (
+                            <div key={idx} className="flex items-start gap-2 text-xs sm:text-sm text-slate-800">
+                              <span className="w-4 h-4 rounded-full bg-blue-100 text-blue-900 text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">
+                                {idx + 1}
+                              </span>
+                              <span className="leading-snug">{item}</span>
+                            </div>
+                          ))}
                         </div>
-                      )}
+                      </div>
+                    )}
 
-                      {/* Toggle Checklist Link */}
+                    {/* Bottom Action: "VIEW DETAILS →" (Exact Replica of Sample 2) */}
+                    <div className="pt-2 flex items-center justify-between">
                       <button
                         onClick={() => setExpandedCategoryId(isExpanded ? null : service.id)}
-                        className="text-xs sm:text-sm font-extrabold text-red-600 hover:text-red-700 inline-flex items-center gap-1.5 transition-colors self-start"
+                        className="text-xs sm:text-sm font-black uppercase tracking-widest text-[#0f2c59] hover:text-red-600 inline-flex items-center gap-2.5 transition-colors group"
                       >
                         <span>
                           {isExpanded
-                            ? (locale === 'am' ? 'ዝርዝር ጥገናዎችን ሰብስብ' : 'Collapse Itemized List')
-                            : (locale === 'am' ? `ሁሉንም ዝርዝር ጥገናዎች ይመልከቱ (${service.itemizedRepairsAm.length} እቃዎች)` : `View All Itemized Repairs (${service.itemizedRepairsEn.length} items)`)}
+                            ? (locale === 'am' ? 'ዝርዝር ሰብስብ' : 'HIDE DETAILS')
+                            : (locale === 'am' ? 'ዝርዝር ይመልከቱ' : 'VIEW DETAILS')}
                         </span>
-                        {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                       </button>
-
                     </div>
 
-                    {/* IMAGE COLUMN (5 Columns on Large Screens) - Clean Rectangle Frame */}
-                    <div className={`lg:col-span-5 relative overflow-hidden rounded-2xl ${
-                      isImageRight ? 'order-2' : 'order-1'
-                    }`}>
-                      <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-md border border-slate-100">
-                        <img
-                          src={service.image}
-                          alt={locale === 'am' ? service.nameAm : service.nameEn}
-                          className="w-full h-full object-cover object-center"
-                        />
+                  </div>
+
+                  {/* IMAGE COLUMN (5 Columns on Large Screens) - Styled like Sample 1 ("STANDARD" Badge + Geometric Corner Fold) */}
+                  <div className={`lg:col-span-5 relative ${
+                    isImageRight ? 'order-2' : 'order-1'
+                  }`}>
+                    <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-slate-200 shadow-md bg-slate-100 group">
+                      
+                      {/* Rectangular Dark Navy Badge in Top-Left (Exact replica of Image 1 "STANDARD") */}
+                      <div className="absolute top-5 left-5 z-10 bg-[#1e3a8a] text-white px-3.5 py-1.5 font-mono text-xs font-black tracking-widest uppercase shadow-md rounded-xs">
+                        {locale === 'am' ? service.codeBadgeAm : service.codeBadge}
                       </div>
-                    </div>
 
-                  </div>
-                </section>
+                      {/* Geometric Diamond/Triangle Fold in Top-Right Corner (Exact replica of Image 1 corner accent) */}
+                      <div className="absolute top-0 right-0 z-10 w-8 h-8 pointer-events-none">
+                        <div className="w-0 h-0 border-t-[32px] border-t-[#1e3a8a] border-l-[32px] border-l-transparent" />
+                      </div>
 
-                {/* FULL-WIDTH BACKGROUND SECTION (Customer Care / Engineering Philosophy - Exact Replica of Section 2 in Sample) */}
-                {index === 2 && (
-                  <div className="relative my-20 py-24 sm:py-32 overflow-hidden rounded-3xl -mx-4 sm:-mx-6 lg:-mx-8">
-                    {/* Background Image with Dark Contrast Overlay */}
-                    <img
-                      src="/services/customer-care-bg.jpg"
-                      alt="Customer Care"
-                      className="absolute inset-0 w-full h-full object-cover object-center filter brightness-[0.35] contrast-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-950/80 to-slate-950/60" />
-
-                    {/* Text Layer over Background (Customer Care style) */}
-                    <div className="relative z-10 max-w-4xl mx-auto px-6 sm:px-10 lg:px-12 text-white">
-                      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight mb-5 leading-tight">
-                        {locale === 'am' ? 'የደንበኞች እንክብካቤ እና አገልግሎት ዋስትና' : 'Customer Care & Engineering Commitment'}
-                      </h2>
-
-                      <p className="text-lg sm:text-xl text-slate-200 font-normal leading-relaxed mb-5">
-                        {locale === 'am'
-                          ? 'በToyota እና በአበጋዝ ሞተርስ የደንበኞች አገልግሎት ፍልስፍና መሰረት ለተሽከርካሪዎ ከልብ እንጠነቀቃለን። በወርክሾፓችን የሚከናወኑ ሁሉም ጥገናዎች ከፍተኛ ደረጃቸውን የጠበቁ፣ የዋስትና ሰነድ ያላቸውና ተሽከርካሪዎ ያለምንም ስጋት ለረጅም ዘመናት እንዲያገለግልዎ የሚያደርጉ ናቸው።'
-                          : 'Based on the Toyota Customer Service philosophy, we care for you from our heart. Through our specialized engineering workshop, we endeavor to provide you with craftsmanship and hospitality that exceeds your expectations.'}
-                      </p>
-
-                      <p className="text-xs sm:text-sm text-slate-300/80 leading-relaxed max-w-3xl">
-                        {locale === 'am'
-                          ? 'በዘመናዊ የዲያግኖስቲክስ ቴክኖሎጂዎች፣ ኦሪጅናል መለዋወጫዎች እና በሰለጠኑ ማስተር ቴክኒሻኖች አማካኝነት እያንዳንዱን ብልሽት ከመጀመሪያውኑ በትክክለኛ መንገድ በመጠገን ሰላማዊና አስተማማኝ ጉዞዎን እናረጋግጣለን።'
-                          : 'Our highly skilled master technicians coupled with the latest diagnostic equipment and authentic parts ensure every fault is resolved accurately the first time to retain original vehicle condition.'}
-                      </p>
+                      <img
+                        src={service.image}
+                        alt={locale === 'am' ? service.nameAm : service.nameEn}
+                        className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                      />
                     </div>
                   </div>
-                )}
-              </React.Fragment>
+
+                </div>
+              </section>
             );
           })}
         </div>
