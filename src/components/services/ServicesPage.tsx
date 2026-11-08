@@ -6,7 +6,6 @@ import {
   ChevronUp, 
   Layers
 } from 'lucide-react';
-import { ScrollReveal } from '../common/ScrollReveal';
 
 interface ServiceCategory {
   id: string;
@@ -334,153 +333,137 @@ export const ServicesPage: React.FC = () => {
   ];
 
   return (
-    <div className="bg-white min-h-screen text-slate-900 pb-20">
-      
-      {/* 1. HERO BANNER WITH AMBIENT WORKSHOP BACKGROUND */}
-      <section className="relative overflow-hidden pt-12 pb-16 sm:py-20 border-b border-slate-200 mb-12 sm:mb-16">
-        {/* Subtle Ambient Workshop Background Image */}
-        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-          <img
-            src="/services/engine-repairs.jpg"
-            alt="Abegaz Motors Precision Service Bay"
-            className="w-full h-full object-cover object-center opacity-15 filter saturate-60"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-blue-900/10 via-white/85 to-white" />
-          <div className="absolute inset-0 bg-blueprint opacity-25 mix-blend-multiply" />
-        </div>
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center max-w-3xl">
-          <ScrollReveal direction="down">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight mb-4 leading-tight">
-              {locale === 'am' ? (
-                <>
-                  <span className="text-blue-950 font-serif">የተሟሉ የሜካኒካል</span>{' '}
-                  <span className="text-red-600 font-serif">እና ኤሌክትሪክ ጥገናዎች</span>
-                </>
-              ) : (
-                <>
-                  <span className="text-blue-950 font-serif">Mechanical &</span>{' '}
-                  <span className="text-red-600 font-serif">Electrical Overhaul Services</span>
-                </>
-              )}
-            </h1>
-          </ScrollReveal>
-
-          <ScrollReveal delayMs={100}>
-            <p className="text-base sm:text-lg text-slate-600 font-normal leading-relaxed max-w-2xl mx-auto">
-              {locale === 'am'
-                ? 'ከሞተር ሙሉ እድሳት እስከ ማርሽ ቦክስ፣ ፍሬን፣ ሰስፔንሽንና ኤሌክትሪክ ድረስ በፋብሪካው መመሪያ መሰረት በዘመናዊ መመርመሪያ ማሽኖች የሚከናወኑ አገልግሎቶች።'
-                : 'Factory-standard engineering procedures for complete engine rebuilding, transmission overhaul, brake precision, and computerized diagnostics.'}
-            </p>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      {/* 2. OPEN EDITORIAL SECTIONS — NO CARDS, PURE CLEAN WHITE BACKGROUND, EXACT ALTERNATING ORDER */}
+    <div className="bg-white min-h-screen text-slate-900 py-12 md:py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        {/* Clean Editorial Title Section on Pure White Background (Two-Tone Blue & Red, Centered) */}
+        <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight mb-4 leading-tight">
+            {locale === 'am' ? (
+              <>
+                <span className="text-blue-950 font-serif">የተሟሉ የሜካኒካል</span>{' '}
+                <span className="text-red-600 font-serif">እና ኤሌክትሪክ ጥገናዎች</span>
+              </>
+            ) : (
+              <>
+                <span className="text-blue-950 font-serif">Mechanical &</span>{' '}
+                <span className="text-red-600 font-serif">Electrical Overhaul Services</span>
+              </>
+            )}
+          </h1>
+
+          <p className="text-base sm:text-lg text-slate-600 font-normal leading-relaxed max-w-2xl mx-auto">
+            {locale === 'am'
+              ? 'ከሞተር ሙሉ እድሳት እስከ ማርሽ ቦክስ፣ ፍሬን፣ ሰስፔንሽንና ኤሌክትሪክ ድረስ በፋብሪካው መመሪያ መሰረት በዘመናዊ መመርመሪያ ማሽኖች የሚከናወኑ አገልግሎቶች።'
+              : 'Factory-standard engineering procedures for complete engine rebuilding, transmission overhaul, brake precision, and computerized diagnostics.'}
+          </p>
+        </div>
+
+        {/* OPEN EDITORIAL SECTIONS — NO CARDS, PURE CLEAN WHITE BACKGROUND, EXACT ALTERNATING ORDER */}
         <div className="divide-y divide-slate-100 space-y-16 md:space-y-24">
-          {servicesData.map((service, sIndex) => {
+          {servicesData.map((service) => {
             const isImageRight = service.imagePosition === 'right';
             const isExpanded = expandedCategoryId === service.id;
 
             return (
-              <ScrollReveal key={service.id} delayMs={50}>
-                <section className="pt-16 md:pt-24 first:pt-0">
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+              <section
+                key={service.id}
+                className="pt-16 md:pt-24 first:pt-0"
+              >
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
 
-                    {/* CONTENT COLUMN (7 Columns on Large Screens) - Styled like Sample 2 ("Single Standard") */}
-                    <div className={`lg:col-span-7 flex flex-col justify-center ${
-                      isImageRight ? 'order-1' : 'order-2'
-                    }`}>
-                      
-                      {/* Serif Bold Headline (Exact Font Style like Image 2 "Single Standard") */}
-                      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-black text-[#0f2c59] tracking-tight leading-tight mb-4">
-                        {locale === 'am' ? service.nameAm : service.nameEn}
-                      </h2>
+                  {/* CONTENT COLUMN (7 Columns on Large Screens) - Styled like Sample 2 ("Single Standard") */}
+                  <div className={`lg:col-span-7 flex flex-col justify-center ${
+                    isImageRight ? 'order-1' : 'order-2'
+                  }`}>
+                    
+                    {/* Serif Bold Headline (Exact Font Style like Image 2 "Single Standard") */}
+                    <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-black text-[#0f2c59] tracking-tight leading-tight mb-4">
+                      {locale === 'am' ? service.nameAm : service.nameEn}
+                    </h2>
 
-                      {/* Editorial Description Paragraph */}
-                      <p className="text-base sm:text-lg text-slate-700 font-normal leading-relaxed mb-6">
-                        {locale === 'am' ? service.descriptionAm : service.descriptionEn}
-                      </p>
+                    {/* Editorial Description Paragraph */}
+                    <p className="text-base sm:text-lg text-slate-700 font-normal leading-relaxed mb-6">
+                      {locale === 'am' ? service.descriptionAm : service.descriptionEn}
+                    </p>
 
-                      {/* Feature Pills Line with Dark Squares (Exact Replica of Sample 2: ▪ WI-FI ▪ SHOWER ...) */}
-                      <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-black uppercase tracking-wider text-slate-750 mb-8">
-                        {(locale === 'am' ? service.featurePillsAm : service.featurePillsEn).map((pill, idx) => (
-                          <span key={idx} className="inline-flex items-center gap-2">
-                            <span className="w-1.5 h-1.5 bg-[#0f2c59] rounded-xs inline-block" />
-                            <span className="text-[#0f2c59]">{pill}</span>
-                          </span>
-                        ))}
-                      </div>
-
-                      {/* Expandable Full Checklist from Workshop Sheets */}
-                      {isExpanded && (
-                        <div className="mb-8 p-6 bg-slate-50 rounded-xl border border-slate-200/80 animate-fadeIn">
-                          <p className="text-xs font-black uppercase tracking-wider text-[#0f2c59] mb-4 flex items-center gap-2">
-                            <Layers className="w-4 h-4 text-red-600" />
-                            <span>
-                              {locale === 'am'
-                                ? `የወረቀቱ ሙሉ ዝርዝር (${service.itemizedRepairsAm.length} ጥገናዎች)፦`
-                                : `Complete Itemized Service List (${service.itemizedRepairsEn.length} operations):`}
-                            </span>
-                          </p>
-                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                            {(locale === 'am' ? service.itemizedRepairsAm : service.itemizedRepairsEn).map((item, idx) => (
-                              <div key={idx} className="flex items-start gap-2 text-xs sm:text-sm text-slate-800">
-                                <span className="w-4 h-4 rounded-full bg-blue-100 text-blue-900 text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">
-                                  {idx + 1}
-                                </span>
-                                <span className="leading-snug">{item}</span>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-
-                      {/* Bottom Action: "VIEW DETAILS →" (Exact Replica of Sample 2) */}
-                      <div className="pt-2 flex items-center justify-between">
-                        <button
-                          onClick={() => setExpandedCategoryId(isExpanded ? null : service.id)}
-                          className="text-xs sm:text-sm font-black uppercase tracking-widest text-[#0f2c59] hover:text-red-600 inline-flex items-center gap-2.5 transition-colors group cursor-pointer"
-                        >
-                          <span>
-                            {isExpanded
-                              ? (locale === 'am' ? 'ዝርዝር ሰብስብ' : 'HIDE DETAILS')
-                              : (locale === 'am' ? 'ዝርዝር ይመልከቱ' : 'VIEW DETAILS')}
-                          </span>
-                          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                        </button>
-                      </div>
-
+                    {/* Feature Pills Line with Dark Squares (Exact Replica of Sample 2: ▪ WI-FI ▪ SHOWER ...) */}
+                    <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-black uppercase tracking-wider text-slate-750 mb-8">
+                      {(locale === 'am' ? service.featurePillsAm : service.featurePillsEn).map((pill, idx) => (
+                        <span key={idx} className="inline-flex items-center gap-2">
+                          <span className="w-1.5 h-1.5 bg-[#0f2c59] rounded-xs inline-block" />
+                          <span className="text-[#0f2c59]">{pill}</span>
+                        </span>
+                      ))}
                     </div>
 
-                    {/* IMAGE COLUMN (5 Columns on Large Screens) - Styled like Sample 1 ("STANDARD" Badge + Geometric Corner Fold) */}
-                    <div className={`lg:col-span-5 relative ${
-                      isImageRight ? 'order-2' : 'order-1'
-                    }`}>
-                      <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-slate-200 shadow-md bg-slate-100 group">
-                        
-                        {/* Rectangular Dark Navy Badge in Top-Left (Exact replica of Image 1 "STANDARD") */}
-                        <div className="absolute top-5 left-5 z-10 bg-[#1e3a8a] text-white px-3.5 py-1.5 font-mono text-xs font-black tracking-widest uppercase shadow-md rounded-xs">
-                          {locale === 'am' ? service.codeBadgeAm : service.codeBadge}
+                    {/* Expandable Full Checklist from Workshop Sheets */}
+                    {isExpanded && (
+                      <div className="mb-8 p-6 bg-slate-50 rounded-xl border border-slate-200/80 animate-fadeIn">
+                        <p className="text-xs font-black uppercase tracking-wider text-[#0f2c59] mb-4 flex items-center gap-2">
+                          <Layers className="w-4 h-4 text-red-600" />
+                          <span>
+                            {locale === 'am'
+                              ? `የወረቀቱ ሙሉ ዝርዝር (${service.itemizedRepairsAm.length} ጥገናዎች)፦`
+                              : `Complete Itemized Service List (${service.itemizedRepairsEn.length} operations):`}
+                          </span>
+                        </p>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                          {(locale === 'am' ? service.itemizedRepairsAm : service.itemizedRepairsEn).map((item, idx) => (
+                            <div key={idx} className="flex items-start gap-2 text-xs sm:text-sm text-slate-800">
+                              <span className="w-4 h-4 rounded-full bg-blue-100 text-blue-900 text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">
+                                {idx + 1}
+                              </span>
+                              <span className="leading-snug">{item}</span>
+                            </div>
+                          ))}
                         </div>
-
-                        {/* Geometric Diamond/Triangle Fold in Top-Right Corner (Exact replica of Image 1 corner accent) */}
-                        <div className="absolute top-0 right-0 z-10 w-8 h-8 pointer-events-none">
-                          <div className="w-0 h-0 border-t-[32px] border-t-[#1e3a8a] border-l-[32px] border-l-transparent" />
-                        </div>
-
-                        <img
-                          src={service.image}
-                          alt={locale === 'am' ? service.nameAm : service.nameEn}
-                          className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
-                        />
                       </div>
+                    )}
+
+                    {/* Bottom Action: "VIEW DETAILS →" (Exact Replica of Sample 2) */}
+                    <div className="pt-2 flex items-center justify-between">
+                      <button
+                        onClick={() => setExpandedCategoryId(isExpanded ? null : service.id)}
+                        className="text-xs sm:text-sm font-black uppercase tracking-widest text-[#0f2c59] hover:text-red-600 inline-flex items-center gap-2.5 transition-colors group"
+                      >
+                        <span>
+                          {isExpanded
+                            ? (locale === 'am' ? 'ዝርዝር ሰብስብ' : 'HIDE DETAILS')
+                            : (locale === 'am' ? 'ዝርዝር ይመልከቱ' : 'VIEW DETAILS')}
+                        </span>
+                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                      </button>
                     </div>
 
                   </div>
-                </section>
-              </ScrollReveal>
+
+                  {/* IMAGE COLUMN (5 Columns on Large Screens) - Styled like Sample 1 ("STANDARD" Badge + Geometric Corner Fold) */}
+                  <div className={`lg:col-span-5 relative ${
+                    isImageRight ? 'order-2' : 'order-1'
+                  }`}>
+                    <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-slate-200 shadow-md bg-slate-100 group">
+                      
+                      {/* Rectangular Dark Navy Badge in Top-Left (Exact replica of Image 1 "STANDARD") */}
+                      <div className="absolute top-5 left-5 z-10 bg-[#1e3a8a] text-white px-3.5 py-1.5 font-mono text-xs font-black tracking-widest uppercase shadow-md rounded-xs">
+                        {locale === 'am' ? service.codeBadgeAm : service.codeBadge}
+                      </div>
+
+                      {/* Geometric Diamond/Triangle Fold in Top-Right Corner (Exact replica of Image 1 corner accent) */}
+                      <div className="absolute top-0 right-0 z-10 w-8 h-8 pointer-events-none">
+                        <div className="w-0 h-0 border-t-[32px] border-t-[#1e3a8a] border-l-[32px] border-l-transparent" />
+                      </div>
+
+                      <img
+                        src={service.image}
+                        alt={locale === 'am' ? service.nameAm : service.nameEn}
+                        className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                      />
+                    </div>
+                  </div>
+
+                </div>
+              </section>
             );
           })}
         </div>

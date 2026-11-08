@@ -149,24 +149,21 @@ export const Header: React.FC = () => {
           </div>
         </div>
 
-        {/* Desktop Nav Links - Clean Text Color Change, NO curved background pill */}
-        <nav className="hidden lg:flex items-center gap-1 xl:gap-3 shrink-0">
+        {/* Desktop Nav Links */}
+        <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1.5 shrink-0">
           {navLinks.map((link) => {
             const isActive = currentView === link.id;
             return (
               <button
                 key={link.id}
                 onClick={() => handleNavClick(link.id)}
-                className={`relative py-2 px-1.5 xl:px-2.5 text-xs xl:text-[13.5px] font-black whitespace-nowrap transition-colors duration-200 bg-transparent cursor-pointer ${
+                className={`px-2.5 py-1.5 xl:px-3 xl:py-2 rounded-xl text-xs xl:text-[13px] font-bold whitespace-nowrap transition-all duration-200 ${
                   isActive 
-                    ? 'text-red-600 font-black' 
-                    : 'text-blue-950 hover:text-red-600 font-extrabold'
+                    ? 'text-red-600 bg-red-50 border border-red-200 shadow-2xs font-extrabold'
+                    : 'text-blue-950 hover:text-red-600 hover:bg-blue-50/70'
                 }`}
               >
-                <span>{locale === 'am' ? link.labelAm : link.labelEn}</span>
-                {isActive && (
-                  <span className="absolute bottom-0.5 left-1.5 right-1.5 h-[2.5px] bg-red-600 rounded-full animate-fadeIn" />
-                )}
+                {locale === 'am' ? link.labelAm : link.labelEn}
               </button>
             );
           })}
@@ -253,20 +250,20 @@ export const Header: React.FC = () => {
               </button>
             </div>
 
-            {/* Nav list - Clean Text Color Change, NO background boxes */}
-            <div className="flex flex-col divide-y divide-slate-100">
+            {/* Nav list */}
+            <div className="flex flex-col gap-2">
               {navLinks.map((link) => (
                 <button
                   key={link.id}
                   onClick={() => handleNavClick(link.id)}
-                  className={`py-3.5 px-3 flex items-center justify-between text-base font-black transition-colors bg-transparent ${
+                  className={`h-13 px-4 rounded-xl flex items-center justify-between text-base font-extrabold border transition-all ${
                     currentView === link.id
-                      ? 'text-red-600'
-                      : 'text-blue-950 hover:text-red-600'
+                      ? 'bg-red-50 text-red-600 border-red-300 shadow-xs'
+                      : 'bg-white text-blue-950 border-slate-200 hover:bg-blue-50'
                   }`}
                 >
                   <span>{locale === 'am' ? link.labelAm : link.labelEn}</span>
-                  <span className={`text-lg font-bold ${currentView === link.id ? 'text-red-600' : 'text-slate-300'}`}>›</span>
+                  <span className="text-red-500 text-lg font-bold">›</span>
                 </button>
               ))}
             </div>
