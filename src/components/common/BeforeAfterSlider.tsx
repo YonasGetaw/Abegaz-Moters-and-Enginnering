@@ -60,6 +60,7 @@ export const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
         alt="After repair"
         className="absolute inset-0 w-full h-full object-cover"
         draggable={false}
+        data-no-scroll-reveal
       />
       <div className="absolute top-4 right-4 bg-navy/80 text-white text-xs font-bold px-3 py-1 rounded-full backdrop-blur-sm shadow z-10 border border-slate-700">
         {afterLabel}
@@ -76,6 +77,7 @@ export const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
           className="absolute inset-0 w-full h-full object-cover max-w-none"
           style={{ width: containerRef.current ? `${containerRef.current.clientWidth}px` : '100%' }}
           draggable={false}
+          data-no-scroll-reveal
         />
         <div className="absolute top-4 left-4 bg-orange-signal text-navy text-xs font-bold px-3 py-1 rounded-full shadow z-10">
           {beforeLabel}

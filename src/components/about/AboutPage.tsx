@@ -21,6 +21,7 @@ import {
   Sparkles
 } from 'lucide-react';
 import { Button } from '../common/Button';
+import { CountUp } from '../common/CountUp';
 import { WORKSHOP_INFO } from '../../lib/constants';
 
 export const AboutPage: React.FC = () => {
@@ -140,7 +141,7 @@ export const AboutPage: React.FC = () => {
             <div key={i} className="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-red-200 hover:shadow-lg text-center sm:text-left">
               <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-blue-900 via-red-600 to-red-400" />
               <div className="font-display text-3xl sm:text-4xl font-extrabold tracking-tight text-blue-950">
-                {st.num}
+                <CountUp value={st.num} />
               </div>
               <p className="text-sm text-slate-600 font-semibold mt-2 leading-relaxed">
                 {locale === 'am' ? st.labelAm : st.labelEn}
@@ -154,7 +155,7 @@ export const AboutPage: React.FC = () => {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 sm:pt-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           
-          <div className="lg:col-span-7 space-y-5">
+          <div className="lg:col-span-7 space-y-5" data-scroll-reveal="left">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-red-50 text-red-700 text-xs sm:text-sm font-bold tracking-wide">
               <span>{locale === 'am' ? 'የእኛ ማንነት' : 'Our Identity & Purpose'}</span>
             </div>
@@ -196,12 +197,13 @@ export const AboutPage: React.FC = () => {
           </div>
 
           {/* Right Image: Workshop Team Photo */}
-          <div className="lg:col-span-5 relative">
+          <div className="lg:col-span-5 relative" data-scroll-reveal="right">
             <div className="rounded-3xl overflow-hidden border-4 border-white bg-white p-2 shadow-2xl ring-1 ring-slate-200">
               <img
                 src="/team/team-photo.jpg"
                 alt="Abegaz Motors workshop team"
                 className="aspect-[2/1] w-full rounded-2xl object-cover object-center"
+                data-no-scroll-reveal
               />
             </div>
             <div className="mt-3 text-center">

@@ -137,6 +137,7 @@ export const PartnersSection: React.FC = () => {
                 alt={locale === 'am' ? partner.nameAm : partner.name}
                 className={`${partner.heightClass} w-auto max-w-[200px] object-contain`}
                 loading="lazy"
+                data-no-scroll-reveal
               />
             </div>
           ))}

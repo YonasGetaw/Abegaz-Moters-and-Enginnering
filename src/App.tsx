@@ -67,14 +67,27 @@ const AppContent: React.FC = () => {
       : null;
 
     const revealElements = (root: ParentNode) => {
-      const selector = 'section, .scroll-reveal, .card-hover-effect, [data-scroll-reveal]';
+      const selector = 'section, .scroll-reveal, .card-hover-effect, img:not([data-no-scroll-reveal]), [data-scroll-reveal]';
       const elements = Array.from(root.querySelectorAll(selector));
       if (root instanceof Element && root.matches(selector)) elements.unshift(root);
+      let sectionIndex = 0;
+      let imageIndex = 0;
 
       elements.forEach((element) => {
         if (targets.has(element)) return;
         targets.add(element);
-        element.classList.add('scroll-reveal');
+        const isImage = element instanceof HTMLImageElement;
+        const requestedDirection = element.getAttribute('data-scroll-reveal');
+        const direction = requestedDirection === 'left' || requestedDirection === 'right'
+          ? requestedDirection
+          : isImage
+            ? imageIndex++ % 2 === 0 ? 'left' : 'right'
+            : element.tagName === 'SECTION'
+              ? sectionIndex++ % 2 === 0 ? 'left' : 'right'
+              : null;
+
+        element.classList.add(isImage ? 'scroll-reveal-media' : 'scroll-reveal');
+        if (direction) element.classList.add(`scroll-reveal-from-${direction}`);
         if (observer) {
           observer.observe(element);
         } else {
@@ -98,7 +111,13 @@ const AppContent: React.FC = () => {
     return () => {
       contentObserver?.disconnect();
       observer?.disconnect();
-      targets.forEach((element) => element.classList.remove('scroll-reveal', 'is-visible'));
+      targets.forEach((element) => element.classList.remove(
+        'scroll-reveal',
+        'scroll-reveal-media',
+        'scroll-reveal-from-left',
+        'scroll-reveal-from-right',
+        'is-visible'
+      ));
     };
   }, [currentView]);
 

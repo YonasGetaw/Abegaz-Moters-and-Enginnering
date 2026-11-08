@@ -20,6 +20,7 @@ import {
 } from 'lucide-react';
 import { Button } from '../common/Button';
 import { BeforeAfterSlider } from '../common/BeforeAfterSlider';
+import { CountUp } from '../common/CountUp';
 import { INITIAL_TESTIMONIALS, INITIAL_FAQS } from '../../lib/constants';
 import { PartnersSection } from './PartnersSection';
 
@@ -182,25 +183,25 @@ export const HomePage: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             <div className="p-4 bg-mist rounded-card border border-line hover:border-orange-signal transition-colors">
-              <div className="text-3xl sm:text-4xl font-black text-navy font-mono">12+</div>
+              <div className="text-3xl sm:text-4xl font-black text-navy font-mono"><CountUp value="12+" /></div>
               <p className="text-xs sm:text-sm text-muted font-medium mt-1">
                 {locale === 'am' ? 'ዓመት የምህንድስና ልምድ' : 'Years Experience'}
               </p>
             </div>
             <div className="p-4 bg-mist rounded-card border border-line hover:border-orange-signal transition-colors">
-              <div className="text-3xl sm:text-4xl font-black text-navy font-mono">6,500+</div>
+              <div className="text-3xl sm:text-4xl font-black text-navy font-mono"><CountUp value="6,500+" /></div>
               <p className="text-xs sm:text-sm text-muted font-medium mt-1">
                 {locale === 'am' ? 'የተጠገኑ ተሽከርካሪዎች' : 'Repaired Vehicles'}
               </p>
             </div>
             <div className="p-4 bg-mist rounded-card border border-line hover:border-orange-signal transition-colors">
-              <div className="text-3xl sm:text-4xl font-black text-navy font-mono">15+</div>
+              <div className="text-3xl sm:text-4xl font-black text-navy font-mono"><CountUp value="15+" /></div>
               <p className="text-xs sm:text-sm text-muted font-medium mt-1">
                 {locale === 'am' ? 'ባለሙያ መሃንዲሶች' : 'Certified Engineers'}
               </p>
             </div>
             <div className="p-4 bg-mist rounded-card border border-line hover:border-orange-signal transition-colors">
-              <div className="text-3xl sm:text-4xl font-black text-emerald-600 font-mono">99.4%</div>
+              <div className="text-3xl sm:text-4xl font-black text-emerald-600 font-mono"><CountUp value="99.4%" /></div>
               <p className="text-xs sm:text-sm text-muted font-medium mt-1">
                 {locale === 'am' ? 'ደስተኛ ደንበኞች' : 'Client Satisfaction'}
               </p>

@@ -157,10 +157,60 @@
   will-change: opacity, transform;
 }
 
+.scroll-reveal-media {
+  opacity: 0;
+  transform: translateY(18px) scale(0.99);
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.scroll-reveal-from-left {
+  transform: translateX(-36px);
+}
+
+.scroll-reveal-from-right {
+  transform: translateX(36px);
+}
+
+.scroll-reveal-media.scroll-reveal-from-left {
+  transform: translateX(-24px) scale(0.99);
+}
+
+.scroll-reveal-media.scroll-reveal-from-right {
+  transform: translateX(24px) scale(0.99);
+}
+
 .scroll-reveal.is-visible {
   opacity: 1;
   transform: translateY(0);
 }
+
+.scroll-reveal.is-visible.scroll-reveal-from-left,
+.scroll-reveal.is-visible.scroll-reveal-from-right {
+  transform: translateX(0);
+}
+
+.scroll-reveal-media.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.scroll-reveal-media.is-visible.scroll-reveal-from-left,
+.scroll-reveal-media.is-visible.scroll-reveal-from-right {
+  transform: translateX(0) scale(1);
+}
+
+.card-hover-effect.scroll-reveal {
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+/* Stagger cards within grids without delaying the section itself. */
+.card-hover-effect.scroll-reveal:nth-child(2) { transition-delay: 70ms; }
+.card-hover-effect.scroll-reveal:nth-child(3) { transition-delay: 140ms; }
+.card-hover-effect.scroll-reveal:nth-child(4) { transition-delay: 210ms; }
+.card-hover-effect.scroll-reveal:nth-child(5) { transition-delay: 280ms; }
+.card-hover-effect.scroll-reveal:nth-child(6) { transition-delay: 350ms; }
+.card-hover-effect.scroll-reveal:hover { transition-delay: 0ms; }
 
 /* Smooth reveal for page sections */
 section {
@@ -231,5 +281,3 @@ a:active,
 .animate-marquee-scroll:hover {
   animation-play-state: paused;
 }
-
-
