@@ -74,9 +74,9 @@ export const HomePage: React.FC = () => {
             muted
             playsInline
             preload="auto"
-            className="w-full h-full object-cover object-center scale-105"
+            className="w-full h-full object-cover object-center scale-110"
           >
-            <source src="/real-cars-bg.mp4" type="video/mp4" />
+            <source src="/red-car-bg.mp4" type="video/mp4" />
           </video>
           {/* Subtle contrast gradient: keeps real car footage rich, dynamic & vivid while headline & CTA buttons remain 100% sharp */}
           <div className="absolute inset-0 bg-slate-950/40" />
