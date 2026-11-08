@@ -39,41 +39,101 @@ const AppContent: React.FC = () => {
     return () => window.removeEventListener('scroll', handleWindowScroll);
   }, []);
 
-  // Global Scroll-Reveal IntersectionObserver: smoothly reveals sections as they scroll into view
+  // Reveal page sections and cards as they enter the viewport, including dynamically added content.
   useEffect(() => {
-    // Scroll to top on page navigation
     window.scrollTo({ top: 0, behavior: 'instant' });
 
-    // Setup intersection observer for scroll reveal
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-          }
-        });
-      },
-      {
-        threshold: 0.06,
-        rootMargin: '0px 0px -40px 0px'
-      }
-    );
+    const page = document.querySelector('main');
+    if (!page) return;
 
-    // Observe all sections and scroll-reveal elements on the current page
-    const elements = document.querySelectorAll('section, .scroll-reveal, .card-hover-effect');
-    elements.forEach((el) => {
-      // Mark as scroll-reveal if not already
-      if (!el.classList.contains('scroll-reveal')) {
-        el.classList.add('scroll-reveal');
-      }
-      observer.observe(el);
-    });
+    const targets = new Set<Element>();
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const canObserve = 'IntersectionObserver' in window && !prefersReducedMotion;
+    const observer = canObserve
+      ? new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          {
+            threshold: 0.08,
+            rootMargin: '0px 0px -8% 0px'
+          }
+        )
+      : null;
+
+    const revealElements = (root: ParentNode) => {
+      const selector = 'section, .scroll-reveal, .card-hover-effect, [data-scroll-reveal]';
+      const elements = Array.from(root.querySelectorAll(selector));
+      if (root instanceof Element && root.matches(selector)) elements.unshift(root);
+
+      elements.forEach((element) => {
+        if (targets.has(element)) return;
+        targets.add(element);
+        element.classList.add('scroll-reveal');
+        if (observer) {
+          observer.observe(element);
+        } else {
+          element.classList.add('is-visible');
+        }
+      });
+    };
+
+    revealElements(page);
+    const contentObserver = 'MutationObserver' in window
+      ? new MutationObserver((mutations) => {
+          mutations.forEach((mutation) => {
+            mutation.addedNodes.forEach((node) => {
+              if (node instanceof HTMLElement) revealElements(node);
+            });
+          });
+        })
+      : null;
+    contentObserver?.observe(page, { childList: true, subtree: true });
 
     return () => {
-      elements.forEach((el) => observer.unobserve(el));
-      observer.disconnect();
+      contentObserver?.disconnect();
+      observer?.disconnect();
+      targets.forEach((element) => element.classList.remove('scroll-reveal', 'is-visible'));
     };
   }, [currentView]);
+
+  // Give every pointer or keyboard activation a visible, repeatable press animation.
+  useEffect(() => {
+    const timers = new Map<HTMLElement, number>();
+    const animateControl = (target: EventTarget | null) => {
+      if (!(target instanceof Element)) return;
+      const control = target.closest<HTMLElement>('button, a[href], [role="button"], .clickable');
+      if (!control || ('disabled' in control && Boolean((control as HTMLButtonElement).disabled))) return;
+
+      const previousTimer = timers.get(control);
+      if (previousTimer) window.clearTimeout(previousTimer);
+      control.classList.remove('interaction-pulse');
+      void control.offsetWidth;
+      control.classList.add('interaction-pulse');
+      timers.set(control, window.setTimeout(() => {
+        control.classList.remove('interaction-pulse');
+        timers.delete(control);
+      }, 320));
+    };
+
+    const handlePointerDown = (event: PointerEvent) => animateControl(event.target);
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (!event.repeat && (event.key === 'Enter' || event.key === ' ')) animateControl(event.target);
+    };
+
+    document.addEventListener('pointerdown', handlePointerDown, true);
+    document.addEventListener('keydown', handleKeyDown, true);
+    return () => {
+      document.removeEventListener('pointerdown', handlePointerDown, true);
+      document.removeEventListener('keydown', handleKeyDown, true);
+      timers.forEach((timer) => window.clearTimeout(timer));
+    };
+  }, []);
 
   return (
     <div className="flex flex-col min-h-screen bg-white">

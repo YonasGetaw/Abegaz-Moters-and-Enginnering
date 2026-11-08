@@ -118,6 +118,25 @@
   100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
 }
 
+@keyframes interactionPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(29, 78, 216, 0.28);
+  }
+  45% {
+    transform: scale(0.94);
+    box-shadow: 0 0 0 5px rgba(29, 78, 216, 0.12);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(29, 78, 216, 0);
+  }
+}
+
+.interaction-pulse {
+  animation: interactionPulse 280ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
 .animate-fade-in-up {
   animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
@@ -161,7 +180,7 @@ button:active:not(:disabled),
 a:active,
 [role="button"]:active:not([aria-disabled="true"]),
 .clickable:active {
-  transform: scale(0.95) !important;
+  animation: interactionPulse 280ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 /* Interactive Touch Cards Across All Pages */
@@ -174,7 +193,7 @@ a:active,
 }
 
 .card-hover-effect:active {
-  transform: scale(0.97) !important;
+  animation: interactionPulse 280ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .btn-click-effect {
@@ -182,7 +201,7 @@ a:active,
 }
 
 .btn-click-effect:active {
-  transform: scale(0.93) !important;
+  animation: interactionPulse 280ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .card-click-effect {
@@ -190,7 +209,7 @@ a:active,
 }
 
 .card-click-effect:active {
-  transform: scale(0.96) !important;
+  animation: interactionPulse 280ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 /* Horizontal Infinite Marquee for Partners & Clients */
@@ -212,6 +231,5 @@ a:active,
 .animate-marquee-scroll:hover {
   animation-play-state: paused;
 }
-
 
 
