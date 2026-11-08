@@ -74,13 +74,14 @@ export const HomePage: React.FC = () => {
             muted
             playsInline
             preload="auto"
-            className="w-full h-full object-cover object-center scale-110"
+            className="w-full h-full object-cover object-center scale-105"
+            style={{ filter: 'blur(1.5px)' }}
           >
             <source src="/red-car-bg.mp4" type="video/mp4" />
           </video>
-          {/* Subtle contrast gradient: keeps real car footage rich, dynamic & vivid while headline & CTA buttons remain 100% sharp */}
-          <div className="absolute inset-0 bg-slate-950/40" />
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/70 via-transparent to-slate-950/90" />
+          {/* Clean, bright overlay: subtle tint and soft blur ensures red car is clearly visible while text stays 100% sharp */}
+          <div className="absolute inset-0 bg-slate-950/20 backdrop-blur-[1px]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/40 via-transparent to-slate-950/70" />
         </div>
 
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full text-center">
