@@ -21,6 +21,7 @@ import {
 import { Button } from '../common/Button';
 import { BeforeAfterSlider } from '../common/BeforeAfterSlider';
 import { INITIAL_TESTIMONIALS, INITIAL_FAQS } from '../../lib/constants';
+import { PartnersSection } from './PartnersSection';
 
 export const HomePage: React.FC = () => {
   const { locale, setCurrentView, setSelectedServiceSlug, services, packages } = useApp();
@@ -207,6 +208,9 @@ export const HomePage: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* 7.2B OUR PARTNERS (NO BACKGROUND, PURE CLEAN LOGOS) */}
+      <PartnersSection />
 
       {/* 7.3 FEATURED SERVICES */}
       <section className="py-16 md:py-24 bg-mist bg-blueprint">
