@@ -94,7 +94,8 @@ export const AboutPage: React.FC = () => {
       bioAm: 'የወርክሾፕ ስራዎችን፣ የቴክኒክ ጥራት ቁጥጥርና የደንበኞች አያያዝን በላቀ ብቃት የሚመሩ።',
       bioEn: 'Directing daily workshop operations, engineering quality assurance, and seamless service delivery.',
       badge: 'General Manager',
-      initials: 'MT'
+      initials: 'MT',
+      image: '/team/mikiyas-tsegaye.png'
     }
   ];
 
