@@ -247,8 +247,8 @@ export const PackagesPage: React.FC = () => {
     <div className="bg-white min-h-screen text-slate-900 py-12 md:py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Clean Editorial Title Section on Pure White Background (Two-Tone Blue & Red) */}
-        <div className="max-w-4xl mb-16 sm:mb-20">
+        {/* Clean Editorial Title Section on Pure White Background (Two-Tone Blue & Red, Centered) */}
+        <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight mb-4 leading-tight">
             {locale === 'am' ? (
               <>
@@ -263,7 +263,7 @@ export const PackagesPage: React.FC = () => {
             )}
           </h1>
 
-          <p className="text-lg sm:text-xl text-slate-600 font-normal leading-relaxed">
+          <p className="text-base sm:text-lg text-slate-600 font-normal leading-relaxed max-w-2xl mx-auto">
             {locale === 'am'
               ? 'ለToyota Hilux፣ Land Cruiser፣ Prado እና ለሁሉም ተሽከርካሪዎች የተዘጋጁ ደረጃቸውን የጠበቁ የፋብሪካ ጥገና ፓኬጆች። እንደ መኪናዎ የኪሎሜትር ጉዞ የሚስማማውን ይምረጡ።'
               : 'Standardized factory-grade preventive maintenance packages engineered for Toyota Hilux, Land Cruiser, Prado and all passenger & commercial vehicles.'}
