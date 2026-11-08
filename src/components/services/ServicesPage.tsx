@@ -4,13 +4,8 @@ import {
   CheckCircle2, 
   ChevronDown, 
   ChevronUp, 
-  MapPin, 
-  Mail, 
-  Send, 
-  PhoneCall,
   Layers
 } from 'lucide-react';
-import { WORKSHOP_INFO } from '../../lib/constants';
 
 interface ServiceCategory {
   id: string;
@@ -487,7 +482,7 @@ export const ServicesPage: React.FC = () => {
                     {/* Toggle Checklist Link */}
                     <button
                       onClick={() => setExpandedCategoryId(isExpanded ? null : service.id)}
-                      className="text-xs sm:text-sm font-extrabold text-red-600 hover:text-red-700 inline-flex items-center gap-1.5 transition-colors mb-8 self-start"
+                      className="text-xs sm:text-sm font-extrabold text-red-600 hover:text-red-700 inline-flex items-center gap-1.5 transition-colors self-start"
                     >
                       <span>
                         {isExpanded
@@ -496,48 +491,6 @@ export const ServicesPage: React.FC = () => {
                       </span>
                       {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
                     </button>
-
-                    {/* Red Pill Social Contact Bar (Exact Replica of MOENCO / Sample Design) */}
-                    <div className="inline-flex items-center bg-red-600 text-white rounded-xl px-4 py-2.5 gap-4 shadow-sm self-start">
-                      <a
-                        href="https://facebook.com"
-                        target="_blank"
-                        rel="noreferrer"
-                        title="Facebook"
-                        className="hover:opacity-80 transition-opacity"
-                      >
-                        <span className="font-black text-lg leading-none">f</span>
-                      </a>
-
-                      <a
-                        href={`https://maps.google.com/?q=${encodeURIComponent('Abegaz Motors, Addis Ababa')}`}
-                        target="_blank"
-                        rel="noreferrer"
-                        title="Location"
-                        className="hover:opacity-80 transition-opacity"
-                      >
-                        <MapPin className="w-5 h-5" />
-                      </a>
-
-                      <a
-                        href={`mailto:${WORKSHOP_INFO.email}`}
-                        title="Email"
-                        className="hover:opacity-80 transition-opacity"
-                      >
-                        <Mail className="w-5 h-5" />
-                      </a>
-
-                      <a
-                        href="https://t.me/AbegazMotors"
-                        target="_blank"
-                        rel="noreferrer"
-                        title="Telegram / WhatsApp"
-                        className="hover:opacity-80 transition-opacity"
-                      >
-                        <Send className="w-5 h-5" />
-                      </a>
-                    </div>
-
                   </div>
 
                   {/* IMAGE COLUMN (5 Columns on Large Screens) */}

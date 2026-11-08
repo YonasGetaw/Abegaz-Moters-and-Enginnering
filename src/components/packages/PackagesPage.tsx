@@ -5,13 +5,8 @@ import {
   Clock, 
   ChevronDown, 
   ChevronUp, 
-  Layers,
-  MapPin,
-  Mail,
-  Send,
-  PhoneCall
+  Layers
 } from 'lucide-react';
-import { WORKSHOP_INFO } from '../../lib/constants';
 
 interface PackageItem {
   id: string;
@@ -364,50 +359,6 @@ export const PackagesPage: React.FC = () => {
                     {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
                   </button>
                 </div>
-
-                {/* Red Pill Social Contact Bar (Exact Replica of MOENCO / Sample Design) */}
-                <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
-                  <div className="inline-flex items-center bg-red-600 text-white rounded-xl px-4 py-2 gap-3.5 shadow-sm">
-                    <a
-                      href="https://facebook.com"
-                      target="_blank"
-                      rel="noreferrer"
-                      title="Facebook"
-                      className="hover:opacity-80 transition-opacity"
-                    >
-                      <span className="font-black text-base leading-none">f</span>
-                    </a>
-
-                    <a
-                      href={`https://maps.google.com/?q=${encodeURIComponent('Abegaz Motors, Addis Ababa')}`}
-                      target="_blank"
-                      rel="noreferrer"
-                      title="Location"
-                      className="hover:opacity-80 transition-opacity"
-                    >
-                      <MapPin className="w-4 h-4" />
-                    </a>
-
-                    <a
-                      href={`mailto:${WORKSHOP_INFO.email}`}
-                      title="Email"
-                      className="hover:opacity-80 transition-opacity"
-                    >
-                      <Mail className="w-4 h-4" />
-                    </a>
-
-                    <a
-                      href="https://t.me/AbegazMotors"
-                      target="_blank"
-                      rel="noreferrer"
-                      title="Telegram / WhatsApp"
-                      className="hover:opacity-80 transition-opacity"
-                    >
-                      <Send className="w-4 h-4" />
-                    </a>
-                  </div>
-                </div>
-
               </div>
             );
           })}
