@@ -87,14 +87,14 @@ export const PartnersSection: React.FC = () => {
       name: 'iDE',
       nameAm: 'አይ ዲ ኢ (iDE)',
       logo: '/partners/ide.svg',
-      heightClass: 'h-10 sm:h-12'
+      heightClass: 'h-11 sm:h-13'
     },
     {
       id: 'lampros',
       name: 'Lampros Trading',
       nameAm: 'ላምፕሮስ ትሬዲንግ',
       logo: '/partners/lampros-trading.png',
-      heightClass: 'h-11 sm:h-13'
+      heightClass: 'h-13 sm:h-16'
     }
   ];
 
@@ -105,9 +105,9 @@ export const PartnersSection: React.FC = () => {
     <section className="bg-white py-12 sm:py-16 border-b border-slate-100 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8 sm:mb-10">
         
-        {/* Title styled like the sample image: bold green heading with pure clean presentation */}
+        {/* Title styled with bold red heading as requested by user */}
         <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#008744] tracking-tight leading-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-red-600 tracking-tight leading-tight">
             {locale === 'am' ? 'ታማኝ ደንበኞቻችንና አጋሮቻችን' : 'Our Emblematic Clients'}
           </h2>
           <p className="text-xs sm:text-sm text-slate-500 font-medium">
@@ -125,7 +125,7 @@ export const PartnersSection: React.FC = () => {
         <div className="pointer-events-none absolute inset-y-0 left-0 w-16 sm:w-28 bg-gradient-to-r from-white via-white/80 to-transparent z-10" />
         <div className="pointer-events-none absolute inset-y-0 right-0 w-16 sm:w-28 bg-gradient-to-l from-white via-white/80 to-transparent z-10" />
 
-        <div className="animate-marquee-scroll items-center gap-14 sm:gap-20 md:gap-24 px-8">
+        <div className="animate-marquee-scroll items-center gap-12 sm:gap-16 md:gap-20 px-8">
           {marqueeItems.map((partner, index) => (
             <div
               key={`${partner.id}-${index}`}
