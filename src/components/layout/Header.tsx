@@ -53,29 +53,29 @@ export const Header: React.FC = () => {
 
   return (
     <header className="sticky top-0 z-40 bg-white border-b-2 border-slate-100 shadow-sm text-slate-800">
-      {/* 1. Top Info Bar - Vibrant Red Background as requested by user */}
+      {/* 1. Top Info Bar */}
       <div className="hidden lg:block bg-red-600 text-white text-xs py-2.5 px-6 border-b border-red-700 shadow-xs">
         <div className="max-w-7xl mx-auto flex justify-between items-center font-medium">
-          <div className="flex items-center gap-6 text-white/95">
+          <div className="flex items-center gap-6 text-blue-50">
             <a 
               href="tel:+251975480808" 
-              className="flex items-center gap-1.5 font-bold font-mono transition-colors text-white hover:text-red-100"
+              className="flex items-center gap-1.5 font-bold font-mono transition-colors text-blue-50 hover:text-blue-100"
             >
-              <Phone className="w-3.5 h-3.5 text-white" />
+              <Phone className="w-3.5 h-3.5 text-blue-100" />
               <span>0975 48 08 08 / 011 465 1553</span>
             </a>
-            <span className="flex items-center gap-1.5 text-white/90">
-              <Clock className="w-3.5 h-3.5 text-white/90" />
+            <span className="flex items-center gap-1.5 text-blue-50">
+              <Clock className="w-3.5 h-3.5 text-blue-100" />
               <span>{locale === 'am' ? WORKSHOP_INFO.hoursScheduleAm : WORKSHOP_INFO.hoursScheduleEn}</span>
             </span>
             <a 
               href={WORKSHOP_INFO.googleMapsUrl} 
               target="_blank" 
               rel="noreferrer" 
-              className="flex items-center gap-1.5 transition-colors group text-white/90 hover:text-white"
+              className="flex items-center gap-1.5 transition-colors group text-blue-50 hover:text-white"
               title="Open Google Maps"
             >
-              <MapPin className="w-3.5 h-3.5 text-white group-hover:animate-bounce" />
+              <MapPin className="w-3.5 h-3.5 text-blue-100 group-hover:animate-bounce" />
               <span>{locale === 'am' ? 'አሌክሳንደር ፑሽኪን መንገድ፣ ቄራ፣ አዲስ አበባ' : WORKSHOP_INFO.addressEn} ({WORKSHOP_INFO.plusCode})</span>
             </a>
           </div>
@@ -83,38 +83,38 @@ export const Header: React.FC = () => {
           <div className="flex items-center gap-3">
             <button 
               onClick={() => handleNavClick('admin')}
-              className={`font-bold transition-colors flex items-center gap-1 text-white hover:text-red-100 ${
+              className={`font-bold transition-colors flex items-center gap-1 text-blue-50 hover:text-white ${
                 currentView === 'admin' 
-                  ? 'underline' 
+                  ? 'text-white underline'
                   : ''
               }`}
             >
               <span>Admin Portal</span>
               {pendingCount > 0 && (
-                <span className="bg-white text-red-600 text-[10px] font-black px-1.5 py-0.2 rounded-full">
+                <span className="bg-blue-950 text-white text-[10px] font-black px-1.5 py-0.2 rounded-full shadow-xs">
                   {pendingCount}
                 </span>
               )}
             </button>
-            <span className="text-white/40">|</span>
+            <span className="text-blue-100/60">|</span>
             <button 
               onClick={() => handleNavClick('staff')}
-              className={`font-bold transition-colors text-white hover:text-red-100 ${
+              className={`font-bold transition-colors text-blue-50 hover:text-white ${
                 currentView === 'staff' 
-                  ? 'underline' 
+                  ? 'text-white underline'
                   : ''
               }`}
             >
               Staff Portal
             </button>
-            <span className="text-white/40">|</span>
+            <span className="text-blue-100/60">|</span>
             {/* Live Notification Simulator Trigger */}
             <button
               onClick={toggleNotificationSimulator}
-              className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold border transition-colors bg-white/20 hover:bg-white/30 text-white border-white/40"
+              className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold border transition-colors bg-blue-950/15 hover:bg-blue-950/25 text-blue-50 border-blue-100/40 shadow-2xs"
               title="Open Live Telegram & Email Simulator"
             >
-              <Bell className="w-3 h-3 text-white animate-pulse" />
+              <Bell className="w-3 h-3 text-blue-100 animate-pulse" />
               <span>Demo Simulator</span>
             </button>
           </div>

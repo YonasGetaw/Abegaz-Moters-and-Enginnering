@@ -82,7 +82,8 @@ export const AboutPage: React.FC = () => {
       bioAm: 'በአውቶሞቲቭ ኢንጂነሪንግና በወርክሾፕ ከፍተኛ አመራር ከ 15+ ዓመታት በላይ የካበተ ልምድ ያካበቱ መሃንዲስ።',
       bioEn: 'Over 15+ years spearheading precision automotive engineering and executive workshop operations.',
       badge: 'CEO & GM',
-      initials: 'AA'
+      initials: 'AA',
+      image: '/team/abiy-abegaz.png'
     },
     {
       name: 'ሚኪያስ ፀጋዬ (Mikiyas Tsegaye)',
@@ -104,7 +105,7 @@ export const AboutPage: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-4">
 
 
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-blue-900 tracking-tight leading-tight max-w-4xl mx-auto">
+          <h1 className="font-display text-3xl sm:text-5xl lg:text-6xl font-extrabold text-blue-950 tracking-tight leading-tight max-w-4xl mx-auto">
             {locale === 'am' ? (
               <>ስለ <span className="text-red-600">አበጋዝ ሞተርስ ኢንጂነሪንግ</span></>
             ) : (
@@ -112,18 +113,18 @@ export const AboutPage: React.FC = () => {
             )}
           </h1>
 
-          <p className="text-slate-700 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+          <p className="text-slate-600 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
             {locale === 'am'
               ? 'በአዲስ አበባ፣ ነፋስ ስልክ-ላፍቶ (ቄራ አካባቢ) የሚገኝ ዘመናዊ የምህንድስና ደረጃዎችን የጠበቀ አስተማማኝ የመኪና ጥገና ማዕከል ነው።'
               : 'Addis Ababa’s benchmark automotive engineering center located at Nefas Silk-Lafto, Alexander Pushkin Street near Kera.'}
           </p>
 
-          <div className="flex flex-wrap items-center justify-center gap-4 text-xs font-bold text-blue-900 pt-2">
-            <span className="flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-full border border-slate-200 shadow-2xs">
+          <div className="flex flex-wrap items-center justify-center gap-3 text-sm font-semibold text-blue-950 pt-3">
+            <span className="flex items-center gap-2 bg-white/90 px-4 py-2.5 rounded-full border border-slate-200 shadow-sm">
               <MapPin className="w-4 h-4 text-red-600" />
               <span>{WORKSHOP_INFO.addressEn} ({WORKSHOP_INFO.plusCode})</span>
             </span>
-            <span className="flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-full border border-slate-200 shadow-2xs">
+            <span className="flex items-center gap-2 bg-white/90 px-4 py-2.5 rounded-full border border-slate-200 shadow-sm">
               <PhoneCall className="w-4 h-4 text-red-600" />
               <span>{WORKSHOP_INFO.customerServicePhoneMobile} / {WORKSHOP_INFO.customerServicePhoneOffice}</span>
             </span>
@@ -135,11 +136,12 @@ export const AboutPage: React.FC = () => {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-20">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           {workshopStats.map((st, i) => (
-            <div key={i} className="bg-white p-5 rounded-2xl border border-line shadow-sm hover:shadow-md transition-all text-center sm:text-left">
-              <div className="text-2xl sm:text-3xl font-black text-navy font-mono">
+            <div key={i} className="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-red-200 hover:shadow-lg text-center sm:text-left">
+              <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-blue-900 via-red-600 to-red-400" />
+              <div className="font-display text-3xl sm:text-4xl font-extrabold tracking-tight text-blue-950">
                 {st.num}
               </div>
-              <p className="text-xs text-muted font-bold mt-1">
+              <p className="text-sm text-slate-600 font-semibold mt-2 leading-relaxed">
                 {locale === 'am' ? st.labelAm : st.labelEn}
               </p>
             </div>
@@ -152,17 +154,17 @@ export const AboutPage: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           
           <div className="lg:col-span-7 space-y-5">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-tint text-orange-deep text-xs font-bold">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-red-50 text-red-700 text-xs sm:text-sm font-bold tracking-wide">
               <span>{locale === 'am' ? 'የእኛ ማንነት' : 'Our Identity & Purpose'}</span>
             </div>
 
-            <h2 className="text-2xl sm:text-4xl font-black text-navy tracking-tight leading-tight">
+            <h2 className="font-display text-2xl sm:text-4xl font-extrabold text-blue-950 tracking-tight leading-tight">
               {locale === 'am'
                 ? 'በግምት ሳይሆን በሳይንሳዊ ምህንድስና የሚሰጥ እውነተኛ አገልግሎት'
                 : 'Driven by Rigorous Engineering Integrity, Not Guesswork'}
             </h2>
 
-            <div className="space-y-4 text-slate-700 text-sm leading-relaxed">
+            <div className="space-y-4 text-slate-600 text-base leading-7">
               <p>
                 {locale === 'am'
                   ? 'አበጋዝ ሞተርስ ኢንጂነሪንግ (Abegaz Motors Engineering) በአዲስ አበባ ከተማ ውስጥ አሽከርካሪዎች ለመኪናቸው የሚያገኙትን የእንክብካቤ ደረጃ ወደ ላቀ ምህንድስና ለማሸጋገር ተቋቁሟል። አብዛኛው የከተማዋ ጋራዦች በባህላዊ ግምት ላይ በሚደገፉበት ወቅት፣ እኛ ኦሪጅናል OEM የዲያግኖስቲክስ ስካነሮችን፣ የሻሲ ሌዘር መለኪያዎችንና ትክክለኛ የፋብሪካ አሰራርን መሰረት አድርገን ስራ ጀመርን።'
@@ -176,29 +178,29 @@ export const AboutPage: React.FC = () => {
               </p>
             </div>
 
-            <div className="pt-2 flex flex-wrap gap-4 text-xs font-bold text-navy">
-              <div className="flex items-center gap-2 bg-white px-3.5 py-2 rounded-xl border border-line shadow-2xs">
+            <div className="pt-2 flex flex-wrap gap-3 text-sm font-semibold text-blue-950">
+              <div className="flex items-center gap-2.5 bg-white px-4 py-2.5 rounded-xl border border-slate-200 shadow-sm">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600" />
                 <span>{locale === 'am' ? 'ግልጽ የቅድመ-ዋጋ ግምት' : 'Upfront Transparent Estimates'}</span>
               </div>
-              <div className="flex items-center gap-2 bg-white px-3.5 py-2 rounded-xl border border-line shadow-2xs">
+              <div className="flex items-center gap-2.5 bg-white px-4 py-2.5 rounded-xl border border-slate-200 shadow-sm">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600" />
                 <span>{locale === 'am' ? 'የ 35 ነጥብ ጥብቅ ፍተሻ' : '35-Point Safety Inspection'}</span>
               </div>
-              <div className="flex items-center gap-2 bg-white px-3.5 py-2 rounded-xl border border-line shadow-2xs">
+              <div className="flex items-center gap-2.5 bg-white px-4 py-2.5 rounded-xl border border-slate-200 shadow-sm">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600" />
                 <span>{locale === 'am' ? 'በሰዓቱ የተከበረ ርክክብ' : 'Punctual Bay Handover'}</span>
               </div>
             </div>
           </div>
 
-          {/* Right Image: Official Signboard Photo */}
+          {/* Right Image: Workshop Team Photo */}
           <div className="lg:col-span-5 relative">
-            <div className="rounded-3xl overflow-hidden shadow-2xl border-2 border-slate-700 bg-white p-2">
+            <div className="rounded-3xl overflow-hidden border-4 border-white bg-white p-2 shadow-2xl ring-1 ring-slate-200">
               <img
-                src="/hero-banner.png"
-                alt="Abegaz Motors Official Signboard"
-                className="w-full h-auto object-contain rounded-2xl"
+                src="/team/team-photo.jpg"
+                alt="Abegaz Motors workshop team"
+                className="aspect-[2/1] w-full rounded-2xl object-cover object-center"
               />
             </div>
             <div className="mt-3 text-center">
@@ -214,10 +216,10 @@ export const AboutPage: React.FC = () => {
       {/* 4. THE 4 PILLARS OF EXCELLENCE */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 sm:pt-24">
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <span className="text-orange-deep text-xs font-bold uppercase tracking-wider">
+        <span className="text-red-700 text-xs sm:text-sm font-bold uppercase tracking-[0.16em]">
             {locale === 'am' ? 'የስራችን መሠረቶች' : 'Engineering Capabilities'}
           </span>
-          <h2 className="text-2xl sm:text-4xl font-black text-navy tracking-tight mt-1">
+          <h2 className="font-display text-2xl sm:text-4xl font-extrabold text-blue-950 tracking-tight mt-2">
             {locale === 'am' ? '4ቱ የወርክሾፓችን ዋና ዘርፎች' : 'The 4 Core Engineering Pillars'}
           </h2>
         </div>
@@ -228,23 +230,24 @@ export const AboutPage: React.FC = () => {
             return (
               <div 
                 key={idx}
-                className="bg-white rounded-2xl p-6 border border-line shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
+                className="group relative overflow-hidden bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:border-red-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
               >
+                <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-blue-900 to-red-500 opacity-80" />
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <div className="w-12 h-12 rounded-xl bg-mist flex items-center justify-center text-navy">
-                      <IconComp className="w-6 h-6 text-orange-deep" />
+                    <div className="w-12 h-12 rounded-2xl bg-red-50 flex items-center justify-center text-red-700 ring-1 ring-red-100 transition-colors group-hover:bg-red-600 group-hover:text-white">
+                      <IconComp className="w-6 h-6" />
                     </div>
                     <span className="text-xs font-black font-mono text-muted bg-slate-100 px-2 py-0.5 rounded">
                       #{p.num}
                     </span>
                   </div>
 
-                  <h3 className="text-base font-black text-navy mb-2 leading-snug">
+                  <h3 className="font-display text-lg font-bold text-blue-950 mb-2 leading-snug">
                     {locale === 'am' ? p.titleAm : p.titleEn}
                   </h3>
 
-                  <p className="text-xs text-slate-600 leading-relaxed">
+                  <p className="text-sm text-slate-600 leading-relaxed">
                     {locale === 'am' ? p.descAm : p.descEn}
                   </p>
                 </div>
@@ -264,13 +267,13 @@ export const AboutPage: React.FC = () => {
       {/* 5. LEADERSHIP TEAM */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 sm:pt-24">
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <span className="text-orange-deep text-xs font-bold uppercase tracking-wider">
+          <span className="text-red-700 text-xs sm:text-sm font-bold uppercase tracking-[0.16em]">
             {locale === 'am' ? 'የአመራር ቡድን' : 'Workshop Leadership'}
           </span>
-          <h2 className="text-2xl sm:text-4xl font-black text-navy tracking-tight mt-1">
+          <h2 className="font-display text-2xl sm:text-4xl font-extrabold text-blue-950 tracking-tight mt-2">
             {locale === 'am' ? 'የወርክሾፓችን መሃንዲሶችና አስተዳዳሪዎች' : 'Meet Our Workshop Leaders'}
           </h2>
-          <p className="text-muted text-xs sm:text-sm mt-2">
+          <p className="text-slate-600 text-sm sm:text-base mt-3 leading-relaxed">
             {locale === 'am' 
               ? 'መኪናዎን በኃላፊነትና በሙያዊ ብቃት የሚያስተናግዱ ባለሙያዎች'
               : 'Passionate automotive professionals dedicated to vehicle reliability.'}
@@ -281,24 +284,35 @@ export const AboutPage: React.FC = () => {
           {leadership.map((leader, idx) => (
             <div 
               key={idx}
-              className="bg-white rounded-3xl p-8 border-2 border-slate-200 hover:border-blue-600 shadow-sm hover:shadow-xl transition-all text-center space-y-4 flex flex-col justify-between"
+              className="group relative overflow-hidden bg-white rounded-3xl p-7 sm:p-8 border border-slate-200 hover:border-red-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 text-center space-y-5 flex flex-col justify-between"
             >
+              <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-blue-900 via-blue-700 to-red-500" />
               <div className="space-y-4">
-                <div className="w-24 h-24 rounded-full bg-blue-900 text-white mx-auto flex items-center justify-center font-black text-2xl border-4 border-red-600 shadow-lg">
-                  {leader.initials}
-                </div>
+                {leader.image ? (
+                  <div className="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-white ring-2 ring-red-500 shadow-lg bg-slate-100">
+                    <img
+                      src={leader.image}
+                      alt={leader.name}
+                      className="w-full h-full object-cover object-top"
+                    />
+                  </div>
+                ) : (
+                  <div className="w-32 h-32 rounded-full bg-blue-900 text-white mx-auto flex items-center justify-center font-display font-extrabold text-3xl border-4 border-white ring-2 ring-red-500 shadow-lg">
+                    {leader.initials}
+                  </div>
+                )}
 
                 <div>
-                  <span className="text-[11px] font-black uppercase tracking-wider bg-red-50 text-red-600 border border-red-200 px-3 py-1 rounded-full">
+                  <span className="text-xs font-bold uppercase tracking-wider bg-red-50 text-red-700 border border-red-100 px-3.5 py-1.5 rounded-full">
                     {leader.badge}
                   </span>
-                  <h3 className="text-xl font-black text-blue-900 mt-3">
+                  <h3 className="font-display text-xl font-extrabold text-blue-950 mt-4">
                     {leader.name}
                   </h3>
-                  <p className="text-xs font-bold text-red-600 mt-1">
+                  <p className="text-sm font-bold text-red-700 mt-1">
                     {locale === 'am' ? leader.roleAm : leader.roleEn}
                   </p>
-                  <p className="text-xs text-slate-600 mt-3 leading-relaxed">
+                  <p className="text-sm text-slate-600 mt-3 leading-relaxed">
                     {locale === 'am' ? leader.bioAm : leader.bioEn}
                   </p>
                 </div>
@@ -307,7 +321,7 @@ export const AboutPage: React.FC = () => {
               <div className="pt-4 border-t border-slate-100 flex items-center justify-center">
                 <a
                   href={`tel:${leader.phoneRaw}`}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-50 hover:bg-red-50 text-blue-800 hover:text-red-600 border border-blue-200 hover:border-red-300 text-xs font-black transition-all font-mono shadow-xs"
+                  className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-blue-50 hover:bg-red-50 text-blue-900 hover:text-red-700 border border-blue-100 hover:border-red-200 text-sm font-bold transition-all font-mono shadow-sm"
                 >
                   <PhoneCall className="w-4 h-4 text-red-600" />
                   <span>{leader.phone}</span>
@@ -323,15 +337,15 @@ export const AboutPage: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           
           {/* Individual Owners */}
-          <div className="bg-white p-8 rounded-3xl border border-line shadow-sm space-y-4 flex flex-col justify-between">
+          <div className="group bg-white p-7 sm:p-8 rounded-3xl border border-slate-200 shadow-sm space-y-5 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:border-red-200 hover:shadow-xl">
             <div className="space-y-3">
-              <div className="w-12 h-12 rounded-2xl bg-orange-tint text-orange-deep flex items-center justify-center">
+              <div className="w-12 h-12 rounded-2xl bg-red-50 text-red-700 flex items-center justify-center ring-1 ring-red-100">
                 <User className="w-6 h-6" />
               </div>
-              <h3 className="text-xl sm:text-2xl font-black text-navy">
+              <h3 className="font-display text-xl sm:text-2xl font-extrabold text-blue-950">
                 {locale === 'am' ? 'የግል መኪና ባለቤቶች' : 'Private Vehicle Owners'}
               </h3>
-              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
                 {locale === 'am'
                   ? 'ለከተማ አሽከርካሪዎች መደበኛ ሰርቪስ፣ ፈጣን ምርመራ፣ የብሬክና ዘይት ቅየራ ከግልጽ የዋጋ ዝርዝር ጋር። በ 2 ደቂቃ ቀጠሮ ይያዙ።'
                   : 'Transparent diagnostics, periodic oil service, brakes, and air conditioning maintenance with fast online booking.'}
@@ -353,15 +367,15 @@ export const AboutPage: React.FC = () => {
           </div>
 
           {/* Corporate Fleets */}
-          <div className="bg-white p-8 rounded-3xl border-2 border-blue-200 shadow-sm space-y-4 flex flex-col justify-between hover:border-blue-600 transition-all">
+          <div className="group bg-white p-7 sm:p-8 rounded-3xl border border-blue-100 shadow-sm space-y-5 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:border-blue-300 hover:shadow-xl">
             <div className="space-y-3">
-              <div className="w-12 h-12 rounded-2xl bg-red-50 text-red-600 flex items-center justify-center">
+              <div className="w-12 h-12 rounded-2xl bg-blue-50 text-blue-800 flex items-center justify-center ring-1 ring-blue-100">
                 <Building2 className="w-6 h-6" />
               </div>
-              <h3 className="text-xl sm:text-2xl font-black text-blue-900">
+              <h3 className="font-display text-xl sm:text-2xl font-extrabold text-blue-950">
                 {locale === 'am' ? 'ድርጅቶችና የንግድ ተሽከርካሪዎች' : 'Corporate & Commercial Fleets'}
               </h3>
-              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
                 {locale === 'am'
                   ? 'ለኩባንያዎች፣ ኤምባሲዎችና ለከባድ ትራንስፖርት ተሽከርካሪዎች የተመደበ ቅድሚያ ቤይ፣ ወርሃዊ ፍተሻና የተሟላ ህጋዊ የታክስ ደረሰኝ።'
                   : 'Dedicated priority turnaround, scheduled preventive telemetry, and itemized invoicing for commercial accounts.'}
@@ -387,16 +401,17 @@ export const AboutPage: React.FC = () => {
 
       {/* 7. BOTTOM CTA */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20">
-        <div className="bg-white rounded-3xl p-8 sm:p-12 border border-line shadow-sm text-center max-w-3xl mx-auto space-y-5">
-          <div className="w-14 h-14 rounded-full bg-orange-tint text-orange-deep flex items-center justify-center mx-auto">
+        <div className="relative isolate overflow-hidden bg-gradient-to-br from-blue-950 via-blue-900 to-slate-900 rounded-3xl p-8 sm:p-12 border border-blue-800 shadow-xl text-center max-w-3xl mx-auto space-y-5">
+          <div className="pointer-events-none absolute right-0 top-0 w-64 h-64 rounded-full bg-red-600/20 blur-3xl" />
+          <div className="w-14 h-14 rounded-2xl bg-white/10 text-red-300 flex items-center justify-center mx-auto ring-1 ring-white/15">
             <Award className="w-7 h-7" />
           </div>
 
-          <h3 className="text-2xl sm:text-3xl font-black text-navy">
+          <h3 className="font-display text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
             {locale === 'am' ? 'ለመኪናዎ ዛሬውኑ አስተማማኝ እንክብካቤ ያግኙ' : 'Experience Precision Automotive Engineering'}
           </h3>
 
-          <p className="text-xs sm:text-sm text-slate-600 max-w-lg mx-auto leading-relaxed">
+          <p className="text-sm sm:text-base text-blue-100 max-w-lg mx-auto leading-relaxed">
             {locale === 'am'
               ? 'በድረ-ገጻችን በቀጥታ ቀጠሮ ይያዙ ወይም በደንበኞች አገልግሎት ስልኮቻችን 0975 48 08 08 / 011 465 1553 ደውለው ያማክሩን።'
               : 'Reserve your verified bay appointment online or reach our customer service desk at 0975 48 08 08 / 011 465 1553.'}
@@ -417,7 +432,7 @@ export const AboutPage: React.FC = () => {
 
             <a
               href={`tel:${WORKSHOP_INFO.phoneRaw}`}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-black text-sm bg-blue-50 hover:bg-blue-100 text-blue-900 border border-blue-200 transition-colors font-mono"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm bg-white/10 hover:bg-white/15 text-white border border-white/20 transition-colors font-mono"
             >
               <PhoneCall className="w-4 h-4 text-red-600" />
               <span>0975 48 08 08 / 011 465 1553</span>
