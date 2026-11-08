@@ -281,8 +281,8 @@ export const PackagesPage: React.FC = () => {
                 className="flex flex-col justify-between"
               >
                 <div>
-                  {/* Clean Package Image */}
-                  <div className="relative h-64 sm:h-72 w-full overflow-hidden rounded-2xl mb-6">
+                  {/* Clean Package Rectangular Image */}
+                  <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl mb-6 shadow-sm border border-slate-100">
                     <img
                       src={pkg.image}
                       alt={locale === 'am' ? pkg.nameAm : pkg.nameEn}

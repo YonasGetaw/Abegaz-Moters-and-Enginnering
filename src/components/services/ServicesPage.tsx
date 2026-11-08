@@ -98,7 +98,7 @@ export const ServicesPage: React.FC = () => {
       imagePosition: 'left', // 2nd: Image in Left (as requested)
       nameEn: 'Transmission & Gearbox Engineering',
       nameAm: 'የማርሽ ቦክስና ትራንስሚሽን ምህንድስና',
-      descriptionEn: 'MOENCO-level factory transmission standards. Disassembly, gear teeth wear analysis, synchronous mesh replacement, and hydraulic clutch master/release rehabilitation.',
+      descriptionEn: 'Factory-standard transmission procedures. Disassembly, gear teeth wear analysis, synchronous mesh replacement, and hydraulic clutch master/release rehabilitation.',
       descriptionAm: 'የማርሽ ቦክስ ሙሉ መፍታት፣ የማርሽ ጥርሶች ፍተሻ፣ የሲንክሮናይዘር ቅየራ እና የሃይድሮሊክ ክላች ሲሊንደሮች ጥገና በከፍተኛ ጥንቃቄ ይከናወናል።',
       image: '/services/transmission-gearbox.jpg',
       keyHighlightsEn: [
@@ -419,93 +419,127 @@ export const ServicesPage: React.FC = () => {
 
         {/* OPEN EDITORIAL SECTIONS — NO CARDS, PURE CLEAN WHITE BACKGROUND, EXACT ALTERNATING ORDER */}
         <div className="divide-y divide-slate-100 space-y-16 md:space-y-24">
-          {servicesData.map((service) => {
+          {servicesData.map((service, index) => {
             const isImageRight = service.imagePosition === 'right';
             const isExpanded = expandedCategoryId === service.id;
 
             return (
-              <section
-                key={service.id}
-                className="pt-16 md:pt-24 first:pt-0"
-              >
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+              <React.Fragment key={service.id}>
+                <section className="pt-16 md:pt-24 first:pt-0">
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
 
-                  {/* CONTENT COLUMN (7 Columns on Large Screens) */}
-                  <div className={`lg:col-span-7 flex flex-col justify-center ${
-                    isImageRight ? 'order-1' : 'order-2'
-                  }`}>
-                    
-                    {/* Red Bold Headline (matching sample "Toyota Trained Experts" / "Latest Equipment") */}
-                    <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-red-600 tracking-tight leading-tight mb-4">
-                      {locale === 'am' ? service.nameAm : service.nameEn}
-                    </h2>
+                    {/* CONTENT COLUMN (7 Columns on Large Screens) */}
+                    <div className={`lg:col-span-7 flex flex-col justify-center ${
+                      isImageRight ? 'order-1' : 'order-2'
+                    }`}>
+                      
+                      {/* Red Bold Headline (matching sample "Toyota Trained Experts" / "Latest Equipment") */}
+                      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-red-600 tracking-tight leading-tight mb-4">
+                        {locale === 'am' ? service.nameAm : service.nameEn}
+                      </h2>
 
-                    {/* Editorial Description Paragraph */}
-                    <p className="text-lg sm:text-xl text-slate-600 font-normal leading-relaxed mb-6">
-                      {locale === 'am' ? service.descriptionAm : service.descriptionEn}
-                    </p>
+                      {/* Editorial Description Paragraph */}
+                      <p className="text-lg sm:text-xl text-slate-600 font-normal leading-relaxed mb-6">
+                        {locale === 'am' ? service.descriptionAm : service.descriptionEn}
+                      </p>
 
-                    {/* Clean Feature Checklist */}
-                    <div className="space-y-2.5 mb-8">
-                      {(locale === 'am' ? service.keyHighlightsAm : service.keyHighlightsEn).map((point, idx) => (
-                        <div key={idx} className="flex items-start gap-3 text-sm sm:text-base text-slate-700">
-                          <CheckCircle2 className="w-5 h-5 text-red-600 shrink-0 mt-0.5" />
-                          <span className="font-medium leading-relaxed">{point}</span>
+                      {/* Clean Feature Checklist */}
+                      <div className="space-y-2.5 mb-8">
+                        {(locale === 'am' ? service.keyHighlightsAm : service.keyHighlightsEn).map((point, idx) => (
+                          <div key={idx} className="flex items-start gap-3 text-sm sm:text-base text-slate-700">
+                            <CheckCircle2 className="w-5 h-5 text-red-600 shrink-0 mt-0.5" />
+                            <span className="font-medium leading-relaxed">{point}</span>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Expandable Full Checklist from Workshop Sheets */}
+                      {isExpanded && (
+                        <div className="mb-8 p-6 bg-slate-50 rounded-2xl border border-slate-100 animate-fadeIn">
+                          <p className="text-xs font-black uppercase tracking-wider text-slate-900 mb-4 flex items-center gap-2">
+                            <Layers className="w-4 h-4 text-red-600" />
+                            <span>
+                              {locale === 'am'
+                                ? `የወረቀቱ ሙሉ ዝርዝር (${service.itemizedRepairsAm.length} ጥገናዎች)፦`
+                                : `Complete Itemized Service List (${service.itemizedRepairsEn.length} operations):`}
+                            </span>
+                          </p>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                            {(locale === 'am' ? service.itemizedRepairsAm : service.itemizedRepairsEn).map((item, idx) => (
+                              <div key={idx} className="flex items-start gap-2 text-xs sm:text-sm text-slate-750">
+                                <span className="w-4 h-4 rounded-full bg-red-100 text-red-700 text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">
+                                  {idx + 1}
+                                </span>
+                                <span className="leading-snug">{item}</span>
+                              </div>
+                            ))}
+                          </div>
                         </div>
-                      ))}
+                      )}
+
+                      {/* Toggle Checklist Link */}
+                      <button
+                        onClick={() => setExpandedCategoryId(isExpanded ? null : service.id)}
+                        className="text-xs sm:text-sm font-extrabold text-red-600 hover:text-red-700 inline-flex items-center gap-1.5 transition-colors self-start"
+                      >
+                        <span>
+                          {isExpanded
+                            ? (locale === 'am' ? 'ዝርዝር ጥገናዎችን ሰብስብ' : 'Collapse Itemized List')
+                            : (locale === 'am' ? `ሁሉንም ዝርዝር ጥገናዎች ይመልከቱ (${service.itemizedRepairsAm.length} እቃዎች)` : `View All Itemized Repairs (${service.itemizedRepairsEn.length} items)`)}
+                        </span>
+                        {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                      </button>
+
                     </div>
 
-                    {/* Expandable Full Checklist from Workshop Sheets */}
-                    {isExpanded && (
-                      <div className="mb-8 p-6 bg-slate-50 rounded-2xl border border-slate-100 animate-fadeIn">
-                        <p className="text-xs font-black uppercase tracking-wider text-slate-900 mb-4 flex items-center gap-2">
-                          <Layers className="w-4 h-4 text-red-600" />
-                          <span>
-                            {locale === 'am'
-                              ? `የወረቀቱ ሙሉ ዝርዝር (${service.itemizedRepairsAm.length} ጥገናዎች)፦`
-                              : `Complete Itemized Service List (${service.itemizedRepairsEn.length} operations):`}
-                          </span>
-                        </p>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                          {(locale === 'am' ? service.itemizedRepairsAm : service.itemizedRepairsEn).map((item, idx) => (
-                            <div key={idx} className="flex items-start gap-2 text-xs sm:text-sm text-slate-750">
-                              <span className="w-4 h-4 rounded-full bg-red-100 text-red-700 text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">
-                                {idx + 1}
-                              </span>
-                              <span className="leading-snug">{item}</span>
-                            </div>
-                          ))}
-                        </div>
+                    {/* IMAGE COLUMN (5 Columns on Large Screens) - Clean Rectangle Frame */}
+                    <div className={`lg:col-span-5 relative overflow-hidden rounded-2xl ${
+                      isImageRight ? 'order-2' : 'order-1'
+                    }`}>
+                      <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-md border border-slate-100">
+                        <img
+                          src={service.image}
+                          alt={locale === 'am' ? service.nameAm : service.nameEn}
+                          className="w-full h-full object-cover object-center"
+                        />
                       </div>
-                    )}
+                    </div>
 
-                    {/* Toggle Checklist Link */}
-                    <button
-                      onClick={() => setExpandedCategoryId(isExpanded ? null : service.id)}
-                      className="text-xs sm:text-sm font-extrabold text-red-600 hover:text-red-700 inline-flex items-center gap-1.5 transition-colors self-start"
-                    >
-                      <span>
-                        {isExpanded
-                          ? (locale === 'am' ? 'ዝርዝር ጥገናዎችን ሰብስብ' : 'Collapse Itemized List')
-                          : (locale === 'am' ? `ሁሉንም ዝርዝር ጥገናዎች ይመልከቱ (${service.itemizedRepairsAm.length} እቃዎች)` : `View All Itemized Repairs (${service.itemizedRepairsEn.length} items)`)}
-                      </span>
-                      {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-                    </button>
                   </div>
+                </section>
 
-                  {/* IMAGE COLUMN (5 Columns on Large Screens) */}
-                  <div className={`lg:col-span-5 relative overflow-hidden rounded-2xl ${
-                    isImageRight ? 'order-2' : 'order-1'
-                  }`}>
+                {/* FULL-WIDTH BACKGROUND SECTION (Customer Care / Engineering Philosophy - Exact Replica of Section 2 in Sample) */}
+                {index === 2 && (
+                  <div className="relative my-20 py-24 sm:py-32 overflow-hidden rounded-3xl -mx-4 sm:-mx-6 lg:-mx-8">
+                    {/* Background Image with Dark Contrast Overlay */}
                     <img
-                      src={service.image}
-                      alt={locale === 'am' ? service.nameAm : service.nameEn}
-                      className="w-full h-auto max-h-[480px] object-cover object-center rounded-2xl shadow-md"
+                      src="/services/customer-care-bg.jpg"
+                      alt="Customer Care"
+                      className="absolute inset-0 w-full h-full object-cover object-center filter brightness-[0.35] contrast-105"
                     />
-                  </div>
+                    <div className="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-950/80 to-slate-950/60" />
 
-                </div>
-              </section>
+                    {/* Text Layer over Background (Customer Care style) */}
+                    <div className="relative z-10 max-w-4xl mx-auto px-6 sm:px-10 lg:px-12 text-white">
+                      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight mb-5 leading-tight">
+                        {locale === 'am' ? 'የደንበኞች እንክብካቤ እና አገልግሎት ዋስትና' : 'Customer Care & Engineering Commitment'}
+                      </h2>
+
+                      <p className="text-lg sm:text-xl text-slate-200 font-normal leading-relaxed mb-5">
+                        {locale === 'am'
+                          ? 'በToyota እና በአበጋዝ ሞተርስ የደንበኞች አገልግሎት ፍልስፍና መሰረት ለተሽከርካሪዎ ከልብ እንጠነቀቃለን። በወርክሾፓችን የሚከናወኑ ሁሉም ጥገናዎች ከፍተኛ ደረጃቸውን የጠበቁ፣ የዋስትና ሰነድ ያላቸውና ተሽከርካሪዎ ያለምንም ስጋት ለረጅም ዘመናት እንዲያገለግልዎ የሚያደርጉ ናቸው።'
+                          : 'Based on the Toyota Customer Service philosophy, we care for you from our heart. Through our specialized engineering workshop, we endeavor to provide you with craftsmanship and hospitality that exceeds your expectations.'}
+                      </p>
+
+                      <p className="text-xs sm:text-sm text-slate-300/80 leading-relaxed max-w-3xl">
+                        {locale === 'am'
+                          ? 'በዘመናዊ የዲያግኖስቲክስ ቴክኖሎጂዎች፣ ኦሪጅናል መለዋወጫዎች እና በሰለጠኑ ማስተር ቴክኒሻኖች አማካኝነት እያንዳንዱን ብልሽት ከመጀመሪያውኑ በትክክለኛ መንገድ በመጠገን ሰላማዊና አስተማማኝ ጉዞዎን እናረጋግጣለን።'
+                          : 'Our highly skilled master technicians coupled with the latest diagnostic equipment and authentic parts ensure every fault is resolved accurately the first time to retain original vehicle condition.'}
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </React.Fragment>
             );
           })}
         </div>
