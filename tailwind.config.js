@@ -33,6 +33,7 @@ export default {
       fontFamily: {
         sans: ['Inter', 'Noto Sans Ethiopic', 'Nyala', 'system-ui', 'sans-serif'],
         display: ['"Plus Jakarta Sans"', 'Noto Sans Ethiopic', 'sans-serif'],
+        serif: ['"Playfair Display"', 'Georgia', 'Cambria', 'serif'],
       },
       boxShadow: {
         sm: '0 1px 2px rgba(11,25,44,0.06)',

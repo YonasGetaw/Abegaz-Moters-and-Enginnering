@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 import { 
-  CheckCircle2, 
-  Clock, 
   ArrowRight,
-  ChevronUp, 
   Layers
 } from 'lucide-react';
 
@@ -24,14 +21,12 @@ interface PackageItem {
   descAm: string;
   featurePillsEn: string[];
   featurePillsAm: string[];
-  highlightPointsEn: string[];
-  highlightPointsAm: string[];
   fullChecklistEn: string[];
   fullChecklistAm: string[];
 }
 
 export const PackagesPage: React.FC = () => {
-  const { locale } = useApp();
+  const { locale, setCurrentView } = useApp();
   const [expandedPackageId, setExpandedPackageId] = useState<string | null>(null);
 
   const packagesData: PackageItem[] = [
@@ -51,20 +46,6 @@ export const PackagesPage: React.FC = () => {
       descAm: 'የሞተር ጤንነትን፣ የፍሬን ቅልጥፍናንና አስተማማኝ ጉዞን ለማረጋገጥ የሚደረግ መሰረታዊ የቅድመ-መከላከል ጥገና።',
       featurePillsEn: ['OIL & FILTER', 'BRAKE CHECK', 'STEERING GREASE', '5,000 KM'],
       featurePillsAm: ['ዘይትና ፊልተር', 'የፍሬን ፍተሻ', 'የስቲሪንግ ግሪስ', '5,000 ኪ.ሜ'],
-      highlightPointsEn: [
-        'Brake pad & disc inspection & cleaning',
-        'Engine oil & genuine filter replacement',
-        'Fuel element & air cleaner check',
-        'Propeller shafts grease & bolt tightening',
-        'Battery health & steering linkage check'
-      ],
-      highlightPointsAm: [
-        'የፍሬን ፓድና ዲስክ ፍተሻና ማጽዳት',
-        'የሞተር ዘይትና ኦሪጅናል ፊልተር ቅየራ',
-        'የነዳጅ ኤለመንትና የአየር ማጣሪያ ፍተሻ',
-        'የፕሮፔለር ሻፍት ግሪስና ቦልቶች ማሰር',
-        'የባትሪ ጤንነትና የስቲሪንግ ሊንኬጅ ፍተሻ'
-      ],
       fullChecklistEn: [
         'Brake pad & Discs inspection',
         'Steering knuckle, Drag link, King pin, Centre Arm & Steering Linkage Grease',
@@ -108,20 +89,6 @@ export const PackagesPage: React.FC = () => {
       descAm: 'ከመሰረታዊ ቅየራ ባለፈ የድራይቭ ሻፍት፣ የሃይድሮሊክ ፈሳሾችና የሻሲ ጥንካሬን የሚያረጋግጥ የተሟላ የፍተሻ ፓኬጅ።',
       featurePillsEn: ['ALL A-SERVICE', 'DRIVE SHAFT', 'HYDRAULIC FLUIDS', '10,000 KM'],
       featurePillsAm: ['የA ሙሉ ሰርቪስ', 'ድራይቭ ሻፍት', 'የሃይድሮሊክ ፈሳሾች', '10,000 ኪ.ሜ'],
-      highlightPointsEn: [
-        'Complete A-Service checklist included',
-        'Brake disc run-out, drum & pad inspection',
-        'Drive shaft boots, bolts & ball joint dust covers',
-        'Brake, clutch & power steering fluid checks',
-        'Water sedimenter, all lights, wipers & chassis bolts'
-      ],
-      highlightPointsAm: [
-        'የA-Service ሙሉ ፍተሻዎች ተካተዋል',
-        'የፍሬን ዲስክ ሩን-አውት፣ ድራም እና ፓዶች ፍተሻ',
-        'የድራይቭ ሻፍት ቦትስ፣ ቦልቶችና ቦል ጆይንት',
-        'የፍሬን፣ ክላችና ፓወር ስቲሪንግ ፈሳሾች ቅየራ/ፍተሻ',
-        'የውሃ ሴዲመንተር፣ መብራቶች፣ ዋይፐርና የሻሲ ቦልቶች'
-      ],
       fullChecklistEn: [
         'All A-Service inspection points included',
         'Brake pads, Discs & Drums comprehensive check',
@@ -173,20 +140,6 @@ export const PackagesPage: React.FC = () => {
       descAm: 'በረጅም ርቀት፣ አስቸጋሪ መንገዶች ወይም ለድርጅት ተሽከርካሪዎች የተዘጋጀ የድራይቭ ቤልት፣ ቤሪንግና ዲፈረንሺያል ጥገና።',
       featurePillsEn: ['ALL B-SERVICE', 'DRIVE BELTS', 'WHEEL BEARINGS', '25,000 KM'],
       featurePillsAm: ['የB ሙሉ ሰርቪስ', 'ድራይቭ ቤልት', 'የዊል ቤሪንግ', '25,000 ኪ.ሜ'],
-      highlightPointsEn: [
-        'Complete B-Service checklist included',
-        'Drive belt tensioning & condition analysis',
-        'Vacuum pump oil hoses & idler speed calibration',
-        'Wheel bearing repacking & high-temp grease',
-        'Differential gear oil drain & fresh refill'
-      ],
-      highlightPointsAm: [
-        'የB-Service ሙሉ ፍተሻዎች ተካተዋል',
-        'የድራይቭ ቤልት ውጥረትና ሁኔታ ምርመራ',
-        'የቫኪዩም ፓምፕ ዘይት ሆሶችና የአይድለር ፍጥነት',
-        'የዊል ቤሪንግ ፍተሻና ከፍተኛ ሙቀት መቋቋሚ ግሪስ',
-        'የዲፈረንሺያል ጊርቦክስ ዘይት ቅየራና ፍተሻ'
-      ],
       fullChecklistEn: [
         'All A & B-Service inspection points included',
         'Drive Belt wear inspection & tension adjustment',
@@ -226,20 +179,6 @@ export const PackagesPage: React.FC = () => {
       descAm: 'የቫልቭ ክሊራንስ፣ የማኑዋል ማስተላለፊያና ትራንስፈር ዘይት፣ ኤሲ ጋዝና የኮምፒውተር ዲያግኖስቲክስ የሚያካትት ከፍተኛው ሜጀር ሰርቪስ።',
       featurePillsEn: ['MAJOR OVERHAUL', 'VALVE CLEARANCE', 'GEARBOX OIL', '50,000 KM'],
       featurePillsAm: ['ሜጀር ሰርቪስ', 'ቫልቭ ክሊራንስ', 'የማርሽ ዘይት', '50,000 ኪ.ሜ'],
-      highlightPointsEn: [
-        'Complete C-Service checklist included',
-        'Valve clearance measurement & adjustment',
-        'Manual transmission & transfer case oil replacement',
-        'AC cooler refrigerant level & pressure test',
-        'Fuel tank cap, lines & evaporative connections'
-      ],
-      highlightPointsAm: [
-        'የC-Service ሙሉ ፍተሻዎች ተካተዋል',
-        'የቫልቭ ክሊራንስ መለካትና ማስተካከል',
-        'የማኑዋል ትራንስሚሽንና ትራንስፈር ዘይት ቅየራ',
-        'የኤርኮንዲሽነር (AC) ጋዝና ማቀዝቀዣ ፍተሻ',
-        'የነዳጅ ታንከር ክዳን፣ መስመሮችና መገናኛዎች'
-      ],
       fullChecklistEn: [
         'All A, B & C-Service inspection points included',
         'Valve clearance precision measurement & adjustment',
@@ -264,145 +203,144 @@ export const PackagesPage: React.FC = () => {
   ];
 
   return (
-    <div className="bg-white min-h-screen text-slate-900 py-12 md:py-20">
+    <div className="bg-[#fcfdfd] min-h-screen text-slate-900 py-12 md:py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Clean Editorial Title Section on Pure White Background (Two-Tone Blue & Red, Centered) */}
-        <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight mb-4 leading-tight">
+        {/* Centered Editorial Page Header */}
+        <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-18">
+          <p className="text-xs font-black uppercase tracking-widest text-red-600 mb-2">
+            {locale === 'am' ? 'ደረጃቸውን የጠበቁ የጥገና ፓኬጆች' : 'Factory Standard Maintenance'}
+          </p>
+
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-black tracking-tight mb-4 leading-tight">
             {locale === 'am' ? (
               <>
-                <span className="text-blue-950">የተሟሉ የሰርቪስ</span>{' '}
-                <span className="text-red-600 font-serif">ጥቅሎች (A - D)</span>
+                <span className="text-[#0f2c59]">የተሟሉ የሰርቪስ</span>{' '}
+                <span className="text-red-600">ጥቅሎች (A - D)</span>
               </>
             ) : (
               <>
-                <span className="text-blue-950">Complete Service</span>{' '}
-                <span className="text-red-600 font-serif">Packages (A - D)</span>
+                <span className="text-[#0f2c59]">Complete Service</span>{' '}
+                <span className="text-red-600">Packages (A - D)</span>
               </>
             )}
           </h1>
 
           <p className="text-base sm:text-lg text-slate-600 font-normal leading-relaxed max-w-2xl mx-auto">
             {locale === 'am'
-              ? 'ለToyota Hilux፣ Land Cruiser፣ Prado እና ለሁሉም ተሽከርካሪዎች የተዘጋጁ ደረጃቸውን የጠበቁ የፋብሪካ ጥገና ፓኬጆች። እንደ መኪናዎ የኪሎሜትር ጉዞ የሚስማማውን ይምረጡ።'
+              ? 'ለToyota Hilux፣ Land Cruiser፣ Prado እና ለሁሉም ተሽከርካሪዎች የተዘጋጁ ደረጃቸውን የጠበቁ የፋብሪካ ጥገና ፓኬጆች።'
               : 'Standardized factory-grade preventive maintenance packages engineered for Toyota Hilux, Land Cruiser, Prado and all passenger & commercial vehicles.'}
           </p>
         </div>
 
-        {/* 2 COLUMN × 2 ROW OPEN GRID (4 BALANCED PACKAGES ON PURE WHITE BACKGROUND, NO CARDS) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16">
+        {/* 2 COLUMN × 2 ROW CARD GRID (Exact Card Layout & Typography from the sample image) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 items-stretch">
           {packagesData.map((pkg) => {
             const isExpanded = expandedPackageId === pkg.id;
 
             return (
               <div
                 key={pkg.id}
-                className="flex flex-col justify-between"
+                className="bg-white rounded-2xl border border-slate-200/90 shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_16px_36px_rgba(15,44,89,0.09)] transition-all duration-300 overflow-hidden flex flex-col justify-between group"
               >
-                <div>
-                  {/* Clean Package Rectangular Image with Top-Left Badge & Geometric Corner Fold */}
-                  <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-slate-200 shadow-md bg-slate-100 group mb-6">
-                    {/* Rectangular Dark Navy Badge in Top-Left (Exact replica of Image 1 "STANDARD") */}
-                    <div className="absolute top-5 left-5 z-10 bg-[#1e3a8a] text-white px-3.5 py-1.5 font-mono text-xs font-black tracking-widest uppercase shadow-md rounded-xs">
-                      {locale === 'am' ? pkg.codeBadgeAm : pkg.codeBadge}
-                    </div>
-
-                    {/* Geometric Triangle Fold in Top-Right Corner */}
-                    <div className="absolute top-0 right-0 z-10 w-8 h-8 pointer-events-none">
-                      <div className="w-0 h-0 border-t-[32px] border-t-[#1e3a8a] border-l-[32px] border-l-transparent" />
-                    </div>
-
-                    <img
-                      src={pkg.image}
-                      alt={locale === 'am' ? pkg.nameAm : pkg.nameEn}
-                      className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
-                    />
+                {/* 1. TOP IMAGE (With Top-Left Navy Badge & Top-Right Rotated Diamond Accent) */}
+                <div className="relative w-full aspect-[16/10] overflow-hidden bg-slate-100">
+                  {/* Top-Left Dark Navy Badge (Exact match with Image 2 "STANDARD") */}
+                  <div className="absolute top-4 left-4 z-10 bg-[#1e3a8a] text-white px-3.5 py-1 text-[11px] font-bold tracking-widest uppercase shadow-sm">
+                    {locale === 'am' ? pkg.codeBadgeAm : pkg.codeBadge}
                   </div>
 
-                  {/* Serif Bold Headline (Exact Font Style like Image 2 "Single Standard") */}
-                  <h2 className="text-2xl sm:text-3xl font-serif font-black text-[#0f2c59] tracking-tight leading-tight mb-2">
-                    {locale === 'am' ? pkg.nameAm : pkg.nameEn}
-                  </h2>
+                  {/* Top-Right Navy Rotated Diamond Accent (Exact match with Image 2) */}
+                  <div className="absolute -top-3.5 -right-3.5 z-10 w-8 h-8 bg-[#1e3a8a] rotate-45 shadow-sm pointer-events-none" />
 
-                  {/* Interval & Duration line */}
-                  <div className="flex items-center gap-3 text-xs sm:text-sm font-bold text-slate-700 mb-3">
-                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-black bg-red-50 text-red-700 border border-red-200/60">
-                      {locale === 'am' ? pkg.intervalAm : pkg.interval}
-                    </span>
-                    <span className="text-slate-300">•</span>
-                    <span className="flex items-center gap-1.5 text-slate-500 font-medium">
-                      <Clock className="w-3.5 h-3.5 text-slate-400" />
-                      <span>{locale === 'am' ? pkg.durationAm : pkg.duration}</span>
-                    </span>
-                  </div>
+                  <img
+                    src={pkg.image}
+                    alt={locale === 'am' ? pkg.nameAm : pkg.nameEn}
+                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                  />
+                </div>
 
-                  {/* Feature Pills Line with Dark Squares (Image 2 style: ▪ ITEM ▪ ITEM ▪ ITEM) */}
-                  <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs font-black uppercase tracking-wider text-slate-750 mb-4">
-                    {(locale === 'am' ? pkg.featurePillsAm : pkg.featurePillsEn).map((pill, idx) => (
-                      <span key={idx} className="inline-flex items-center gap-1.5">
-                        <span className="w-1.5 h-1.5 bg-[#0f2c59] rounded-xs inline-block" />
-                        <span className="text-[#0f2c59]">{pill}</span>
-                      </span>
-                    ))}
-                  </div>
+                {/* 2. CARD BODY (Exact match with Image 1 "Single Standard") */}
+                <div className="p-6 sm:p-8 flex flex-col flex-1 justify-between">
+                  <div>
+                    {/* Title: Classic High-Contrast Bold Serif (Playfair Display) */}
+                    <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#144272] tracking-tight leading-snug mb-3">
+                      {locale === 'am' ? pkg.nameAm : pkg.nameEn}
+                    </h2>
 
-                  {/* Editorial Description */}
-                  <p className="text-sm sm:text-base text-slate-600 font-normal leading-relaxed mb-5">
-                    {locale === 'am' ? pkg.descAm : pkg.descEn}
-                  </p>
+                    {/* Description: Clean Slate Gray */}
+                    <p className="text-slate-600 text-sm sm:text-base leading-relaxed mb-5 font-normal">
+                      {locale === 'am' ? pkg.descAm : pkg.descEn}
+                    </p>
 
-                  {/* Key Highlights Checklist */}
-                  <div className="space-y-2 mb-6">
-                    {(locale === 'am' ? pkg.highlightPointsAm : pkg.highlightPointsEn).map((point, idx) => (
-                      <div key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700">
-                        <CheckCircle2 className="w-4 h-4 text-red-600 shrink-0 mt-0.5" />
-                        <span className="font-medium leading-relaxed">{point}</span>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Expandable Full Checklist from Workshop Sheets */}
-                  {isExpanded && (
-                    <div className="mb-6 p-5 bg-slate-50 rounded-xl border border-slate-200/80 animate-fadeIn">
-                      <p className="text-xs font-black uppercase tracking-wider text-[#0f2c59] mb-3 flex items-center gap-2">
-                        <Layers className="w-4 h-4 text-red-600" />
-                        <span>
-                          {locale === 'am' 
-                            ? `የወረቀቱ ሙሉ ፍተሻ ዝርዝር (${pkg.fullChecklistAm.length} ነጥቦች)፦` 
-                            : `Complete Inspection Checklist (${pkg.fullChecklistEn.length} items):`}
+                    {/* Feature Pills with Square Bullets (Exact match with Image 1: ▪ WI-FI ▪ SHOWER ...) */}
+                    <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs font-bold uppercase tracking-wider text-slate-500 mb-6">
+                      {(locale === 'am' ? pkg.featurePillsAm : pkg.featurePillsEn).map((pill, idx) => (
+                        <span key={idx} className="inline-flex items-center gap-1.5">
+                          <span className="w-1.5 h-1.5 bg-slate-400 rounded-xs inline-block" />
+                          <span>{pill}</span>
                         </span>
-                      </p>
-                      <div className="space-y-1.5">
-                        {(locale === 'am' ? pkg.fullChecklistAm : pkg.fullChecklistEn).map((item, idx) => (
-                          <div key={idx} className="flex items-start gap-2 text-xs sm:text-sm text-slate-800">
-                            <span className="w-4 h-4 rounded-full bg-blue-100 text-blue-900 text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">
-                              {idx + 1}
-                            </span>
-                            <span className="leading-snug">{item}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Bottom Action: "VIEW DETAILS →" (Exact Replica of Sample 2) */}
-                  <div className="pt-2">
-                    <button
-                      onClick={() => setExpandedPackageId(isExpanded ? null : pkg.id)}
-                      className="text-xs sm:text-sm font-black uppercase tracking-widest text-[#0f2c59] hover:text-red-600 inline-flex items-center gap-2 transition-colors group"
-                    >
-                      <span>
-                        {isExpanded 
-                          ? (locale === 'am' ? 'ዝርዝር ሰብስብ' : 'HIDE DETAILS') 
-                          : (locale === 'am' ? `ዝርዝር ፍተሻ ይመልከቱ (${pkg.fullChecklistAm.length})` : `VIEW DETAILS (${pkg.fullChecklistEn.length})`)}
+                      ))}
+                      <span className="text-slate-400 font-semibold lowercase">
+                        {locale === 'am' ? '+ተጨማሪ' : '+1 More'}
                       </span>
-                      {isExpanded ? (
-                        <ChevronUp className="w-4 h-4 text-red-600" />
-                      ) : (
-                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                      )}
-                    </button>
+                    </div>
+
+                    {/* Expandable Full Checklist from Workshop Sheets */}
+                    {isExpanded && (
+                      <div className="mb-6 p-5 bg-slate-50 rounded-xl border border-slate-200/80 animate-fadeIn text-xs sm:text-sm">
+                        <p className="font-bold text-[#144272] uppercase tracking-wider mb-3 flex items-center gap-2">
+                          <Layers className="w-4 h-4 text-red-600" />
+                          <span>
+                            {locale === 'am' 
+                              ? `የወረቀቱ ሙሉ ፍተሻ ዝርዝር (${pkg.fullChecklistAm.length} ነጥቦች)፦` 
+                              : `Complete Inspection Checklist (${pkg.fullChecklistEn.length} items):`}
+                          </span>
+                        </p>
+                        <div className="space-y-1.5">
+                          {(locale === 'am' ? pkg.fullChecklistAm : pkg.fullChecklistEn).map((item, idx) => (
+                            <div key={idx} className="flex items-start gap-2 text-slate-800">
+                              <span className="w-4 h-4 rounded-full bg-blue-100 text-blue-900 text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">
+                                {idx + 1}
+                              </span>
+                              <span className="leading-snug">{item}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  <div>
+                    {/* Horizontal Divider Line (Exact match with Image 1 line) */}
+                    <div className="border-t border-slate-150 pt-5 mt-2" />
+
+                    {/* 3. BOTTOM ACTION BAR (Left: VIEW DETAILS →, Right: RESERVE Button) */}
+                    <div className="flex items-center justify-between">
+                      <button
+                        type="button"
+                        onClick={() => setExpandedPackageId(isExpanded ? null : pkg.id)}
+                        className="text-xs font-black uppercase tracking-widest text-[#144272] hover:text-red-600 inline-flex items-center gap-2 transition-colors group/btn"
+                      >
+                        <span>
+                          {isExpanded 
+                            ? (locale === 'am' ? 'ዝርዝር ሰብስብ' : 'HIDE DETAILS') 
+                            : (locale === 'am' ? 'ዝርዝር ይመልከቱ' : 'VIEW DETAILS')}
+                        </span>
+                        <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform" />
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setCurrentView('book');
+                          window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }}
+                        className="px-5 py-2 text-xs font-bold uppercase tracking-wider text-[#144272] border border-slate-200 bg-slate-50/50 hover:bg-[#144272] hover:text-white hover:border-[#144272] rounded-xs transition-all shadow-xs"
+                      >
+                        {locale === 'am' ? 'ቀጠሮ' : 'RESERVE'}
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
