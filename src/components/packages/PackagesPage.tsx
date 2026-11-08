@@ -4,6 +4,7 @@ import {
   ArrowRight,
   Layers
 } from 'lucide-react';
+import { ScrollReveal } from '../common/ScrollReveal';
 
 interface PackageItem {
   id: string;
@@ -203,50 +204,67 @@ export const PackagesPage: React.FC = () => {
   ];
 
   return (
-    <div className="bg-[#fcfdfd] min-h-screen text-slate-900 py-12 md:py-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Centered Editorial Page Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-18">
-          <p className="text-xs font-black uppercase tracking-widest text-red-600 mb-2">
-            {locale === 'am' ? 'ደረጃቸውን የጠበቁ የጥገና ፓኬጆች' : 'Factory Standard Maintenance'}
-          </p>
-
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-black tracking-tight mb-4 leading-tight">
-            {locale === 'am' ? (
-              <>
-                <span className="text-[#0f2c59]">የተሟሉ የሰርቪስ</span>{' '}
-                <span className="text-red-600">ጥቅሎች (A - D)</span>
-              </>
-            ) : (
-              <>
-                <span className="text-[#0f2c59]">Complete Service</span>{' '}
-                <span className="text-red-600">Packages (A - D)</span>
-              </>
-            )}
-          </h1>
-
-          <p className="text-base sm:text-lg text-slate-600 font-normal leading-relaxed max-w-2xl mx-auto">
-            {locale === 'am'
-              ? 'ለToyota Hilux፣ Land Cruiser፣ Prado እና ለሁሉም ተሽከርካሪዎች የተዘጋጁ ደረጃቸውን የጠበቁ የፋብሪካ ጥገና ፓኬጆች።'
-              : 'Standardized factory-grade preventive maintenance packages engineered for Toyota Hilux, Land Cruiser, Prado and all passenger & commercial vehicles.'}
-          </p>
+    <div className="bg-[#fcfdfd] min-h-screen text-slate-900 pb-20">
+      
+      {/* 1. HERO BANNER WITH AMBIENT WORKSHOP BACKGROUND */}
+      <section className="relative overflow-hidden pt-12 pb-16 sm:py-20 border-b border-slate-200 mb-12 sm:mb-16">
+        {/* Subtle Ambient Workshop Background Image */}
+        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+          <img
+            src="/packages/package-d.jpg"
+            alt="Abegaz Motors Standardized Packages"
+            className="w-full h-full object-cover object-center opacity-15 filter saturate-60"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-blue-900/10 via-white/85 to-[#fcfdfd]" />
+          <div className="absolute inset-0 bg-blueprint opacity-25 mix-blend-multiply" />
         </div>
 
-        {/* 2 COLUMN × 2 ROW CARD GRID (Exact Card Layout & Typography from the sample image) */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center max-w-3xl">
+          <ScrollReveal direction="down">
+            <p className="text-xs font-black uppercase tracking-widest text-red-600 mb-2">
+              {locale === 'am' ? 'ደረጃቸውን የጠበቁ የጥገና ፓኬጆች' : 'Factory Standard Maintenance'}
+            </p>
+
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-black tracking-tight mb-4 leading-tight">
+              {locale === 'am' ? (
+                <>
+                  <span className="text-[#0f2c59]">የተሟሉ የሰርቪስ</span>{' '}
+                  <span className="text-red-600">ጥቅሎች (A - D)</span>
+                </>
+              ) : (
+                <>
+                  <span className="text-[#0f2c59]">Complete Service</span>{' '}
+                  <span className="text-red-600">Packages (A - D)</span>
+                </>
+              )}
+            </h1>
+          </ScrollReveal>
+
+          <ScrollReveal delayMs={100}>
+            <p className="text-base sm:text-lg text-slate-600 font-normal leading-relaxed max-w-2xl mx-auto">
+              {locale === 'am'
+                ? 'ለToyota Hilux፣ Land Cruiser፣ Prado እና ለሁሉም ተሽከርካሪዎች የተዘጋጁ ደረጃቸውን የጠበቁ የፋብሪካ ጥገና ፓኬጆች።'
+                : 'Standardized factory-grade preventive maintenance packages engineered for Toyota Hilux, Land Cruiser, Prado and all passenger & commercial vehicles.'}
+            </p>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* 2. 2 COLUMN × 2 ROW CARD GRID */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 items-stretch">
-          {packagesData.map((pkg) => {
+          {packagesData.map((pkg, pIndex) => {
             const isExpanded = expandedPackageId === pkg.id;
 
             return (
-              <div
-                key={pkg.id}
-                className="bg-white rounded-2xl border border-slate-200/90 shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_16px_36px_rgba(15,44,89,0.09)] transition-all duration-300 overflow-hidden flex flex-col justify-between group"
-              >
-                {/* 1. TOP IMAGE (With Top-Left Navy Badge & Top-Right Rotated Diamond Accent) */}
-                <div className="relative w-full aspect-[16/10] overflow-hidden bg-slate-100">
-                  {/* Top-Left Dark Navy Badge (Exact match with Image 2 "STANDARD") */}
-                  <div className="absolute top-4 left-4 z-10 bg-[#1e3a8a] text-white px-3.5 py-1 text-[11px] font-bold tracking-widest uppercase shadow-sm">
+              <ScrollReveal key={pkg.id} delayMs={pIndex * 100}>
+                <div
+                  className="bg-white rounded-2xl border border-slate-200/90 shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_16px_36px_rgba(15,44,89,0.09)] transition-all duration-300 overflow-hidden flex flex-col justify-between group h-full"
+                >
+                  {/* 1. TOP IMAGE (With Top-Left Navy Badge & Top-Right Rotated Diamond Accent) */}
+                  <div className="relative w-full aspect-[16/10] overflow-hidden bg-slate-100">
+                    {/* Top-Left Dark Navy Badge (Exact match with Image 2 "STANDARD") */}
+                    <div className="absolute top-4 left-4 z-10 bg-[#1e3a8a] text-white px-3.5 py-1 text-[11px] font-bold tracking-widest uppercase shadow-sm">
                     {locale === 'am' ? pkg.codeBadgeAm : pkg.codeBadge}
                   </div>
 
@@ -344,7 +362,8 @@ export const PackagesPage: React.FC = () => {
                   </div>
                 </div>
               </div>
-            );
+            </ScrollReveal>
+          );
           })}
         </div>
 
